@@ -1,0 +1,33 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html">
+  <style type="text/css">
+    #container {
+      margin: 10px auto;
+      width: 800px;
+    }
+    #message_headers {
+      background: #fff;
+      font-size: 12px;
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      border-bottom: 1px solid #dedede;
+      margin-bottom: 10px;
+      overflow: auto;
+    }
+    pre#message_variables {
+      padding: 4px;
+      white-space: pre-wrap;
+      border: 1px solid #eee;
+      background-color: #fcfcfc;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <div id="message_headers">
+    <h1>Params to Mandrill</h1>
+  </div>
+  <pre id="message_variables"><%= JSON.pretty_generate(message) %></pre>
+</div>
+</body>
+</html>
