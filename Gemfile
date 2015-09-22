@@ -13,6 +13,7 @@ gem 'spa_rails', github: 'Rezonans/spa_rails'
 
 gem 'jwt_authentication', github: 'Rezonans/jwt_authentication'
 gem 'cancancan', '~> 1.10'
+gem 'devise'
 
 gem 'uglifier'
 gem 'autoprefixer-rails'

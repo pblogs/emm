@@ -35,6 +35,8 @@ JwtAuthentication.configure do |config|
   # #    acts_as_jwt_authenticatable key_fields: [:email, :id]
   config.key_fields = [:id]
 
+  config.models = { user: { sign_in: :simplified } }
+
   # # Configure response http-status at fail. If true - status at error will be 422, if false - 200
   config.status_error_in_response = true
 end

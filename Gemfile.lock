@@ -417,6 +417,7 @@ DEPENDENCIES
   carrierwave
   cucumber-rails
   database_cleaner
+  devise
   dotenv-rails
   factory_girl_rails
   faker
