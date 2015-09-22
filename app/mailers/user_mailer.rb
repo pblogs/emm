@@ -5,8 +5,8 @@ class UserMailer < BaseMailer
       subject: 'Confirmation instructions',
       to: opts[:to] || record.email,
       vars: {
-          EMAIL: opts[:to] || record.email,
-          CONFIRMATION_URL: frontend_url(path: "users/confirm/#{token}")
+          email: opts[:to] || record.email,
+          confirmation_url: frontend_url(path: "users/confirm/#{token}")
       }
     )
   end
@@ -17,8 +17,8 @@ class UserMailer < BaseMailer
       subject: 'Reset password instructions',
       to: opts[:to] || record.email,
       vars: {
-          RESET_TOKEN: token,
-          RESET_URL: frontend_url(path: "recovery/#{token}")
+          reset_token: token,
+          reset_url: frontend_url(path: "recovery/#{token}")
       }
     )
   end
@@ -29,7 +29,7 @@ class UserMailer < BaseMailer
       subject: 'Unlock instructions',
       to: opts[:to] || record.email,
       vars: {
-          RESET_URL: ''
+        reset_url: ''
       }
     )
   end
