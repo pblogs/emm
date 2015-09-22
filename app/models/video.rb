@@ -1,5 +1,7 @@
 class Video < ActiveRecord::Base
 
+  include AlbumRecord
+
   # Relations
   belongs_to :album, inverse_of: :videos
   has_one :record, as: :content, dependent: :destroy
@@ -8,4 +10,7 @@ class Video < ActiveRecord::Base
 
   # Validations
   validates :album, :video_id, :preview, presence: true
+
+  # Uploaders
+  mount_uploader :preview, PhotoUploader
 end

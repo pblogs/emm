@@ -1,5 +1,7 @@
 class Text < ActiveRecord::Base
 
+  include AlbumRecord
+
   # Relations
   belongs_to :album, inverse_of: :texts
   has_one :record, as: :content, dependent: :destroy

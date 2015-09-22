@@ -11,15 +11,28 @@ class Album < ActiveRecord::Base
 
   # Validations
   validates :user, :title, presence: true
+  validate :only_one_default_album, if: :default?
 
   # Callbacks
+  after_create :create_tile_on_user_page, unless: :default?
   before_destroy :check_for_default
 
   private
 
+  def only_one_default_album
+    if self.user.default_album.present? && self.id != self.user.default_album.id
+      errors.add(:default, I18n.t('activerecord.errors.models.album.default_album.only_one_allowed'))
+      false
+    end
+  end
+
+  def create_tile_on_user_page
+    self.create_tile(user: self.user)
+  end
+
   def check_for_default
     if self.default? && !self.destroyed_by_association
-      errors.add(:base, 'Cannot delete default album')
+      errors.add(:base, I18n.t('activerecord.errors.models.album.default_album.unable_to_destroy'))
       false
     end
   end

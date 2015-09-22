@@ -1,5 +1,7 @@
 class Photo < ActiveRecord::Base
 
+  include AlbumRecord
+
   # Relations
   belongs_to :album, inverse_of: :photos
   has_one :record, as: :content, dependent: :destroy
@@ -8,4 +10,7 @@ class Photo < ActiveRecord::Base
 
   # Validations
   validates :album, :image, presence: true
+
+  # Uploaders
+  mount_uploader :image, PhotoUploader
 end
