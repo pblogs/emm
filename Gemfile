@@ -48,7 +48,7 @@ source 'https://rails-assets.org' do
   # Styling and components
   gem 'rails-assets-angular-bootstrap'
   gem 'rails-assets-bootstrap'
-  gem 'rails-assets-font-awesome'
+  gem 'rails-assets-font-awesome', '~>4.3.0'
   gem 'rails-assets-animate.css'
   gem 'rails-assets-angular-animate'
   gem 'rails-assets-angular-loading-bar'
