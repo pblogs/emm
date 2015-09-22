@@ -1,0 +1,38 @@
+@import "variables";
+
+.e-modal {
+
+  .modal-dialog {
+    margin-top: 50px;
+  }
+
+  .modal-body {
+    padding: 15px 30px;
+  }
+
+  .modal-content {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    position: relative;
+
+    .e-close-modal {
+      display: inline-block;
+      position: absolute;
+      right: -25px;
+      color: $e-white;
+      font-size: 24px;
+      top: -8px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+
+    .modal-header {
+      border-bottom: 0;
+      color: $e-brown;
+    }
+  }
+}

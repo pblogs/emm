@@ -10,6 +10,7 @@
  *= require angular-loading-bar
  *= require angular-rails-templates
  *= require angular-animate
+ *= require angular-notify
  *= require ../module
  *= require_tree ../
  */

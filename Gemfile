@@ -41,8 +41,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-ui-utils'
   gem 'rails-assets-ui-router'
   gem 'rails-assets-angular-permission'
-  gem 'rails-assets-restangular', '1.5.1'
-  gem 'rails-assets-satellizer', '0.9.4'
+  gem 'rails-assets-restangular'
+  gem 'rails-assets-angular-notify'
+  gem 'rails-assets-satellizer', '0.12.5'
   # Styling and components
   gem 'rails-assets-angular-bootstrap'
   gem 'rails-assets-bootstrap'

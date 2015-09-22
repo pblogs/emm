@@ -1,0 +1,25 @@
+@import "variables";
+
+.dropdown.e-dropdown {
+  .dropdown-menu {
+    margin-top: 15px;
+    background: $e-black-a;
+    border: none;
+    border-radius: 3px;
+    li a {
+      font-size: 14px;
+    }
+
+    &:before {
+      position: absolute;
+      display: inline-block;
+      content: '';
+      border-bottom: 10px solid $e-black-a;
+      border-right: 10px solid transparent;
+      border-left: 10px solid transparent;
+      top: 0;
+      right: 10px;
+      margin-top: -10px;
+    }
+  }
+}
