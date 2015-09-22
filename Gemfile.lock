@@ -287,7 +287,7 @@ GEM
     rails-assets-animate.css (3.4.0)
     rails-assets-bootstrap (3.3.5)
       rails-assets-jquery (>= 1.9.1)
-    rails-assets-font-awesome (4.4.0)
+    rails-assets-font-awesome (4.3.0)
     rails-assets-jquery (2.1.4)
     rails-assets-lodash (3.10.1)
     rails-assets-restangular (1.5.1)
@@ -440,7 +440,7 @@ DEPENDENCIES
   rails-assets-angular-permission!
   rails-assets-animate.css!
   rails-assets-bootstrap!
-  rails-assets-font-awesome!
+  rails-assets-font-awesome (~> 4.3.0)!
   rails-assets-lodash!
   rails-assets-restangular (= 1.5.1)!
   rails-assets-satellizer (= 0.9.4)!

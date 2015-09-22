@@ -16,6 +16,6 @@ html(lang="en" data-ng-app="app")
     = stylesheet_link_tag 'manifests/application'
 
   body
-    #app.app(ui-view="")
+    #app(ui-view="")
 
     = javascript_include_tag 'manifests/application'
