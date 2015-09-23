@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
     self.albums.find_by_default(true)
   end
 
+  # Uploaders
+  mount_uploader :avatar, PhotoUploader
+
   private
 
   def create_default_album

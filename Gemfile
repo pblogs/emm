@@ -6,7 +6,7 @@ gem 'pg'
 gem 'dotenv-rails'
 
 gem 'rails-api'
-gem 'active_model_serializers'
+gem 'active_model_serializers', '0.8.3'
 
 gem 'angular-rails-templates'
 gem 'spa_rails', github: 'Rezonans/spa_rails'
