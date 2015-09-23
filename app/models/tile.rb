@@ -11,7 +11,7 @@ class Tile < ActiveRecord::Base
   validates :user, :weight, :size, presence: true
 
   # Scopes
-  default_scope { order(weight: :desc).order(created_at: :desc) } # Tiles with bigger weight appears first (within same weight the most recent will be first)
+  default_scope { order(weight: :desc).order(created_at: :desc) } # Tiles with bigger weight (and most recent) appears first
 
   # Callbacks
   before_create :set_weight
@@ -19,7 +19,7 @@ class Tile < ActiveRecord::Base
   private
 
   def set_weight
-    # TODO not correct - weight should be set based on user's tiles, not all tiles
-    self.weight = Tile.first.weight.next if Tile.exists?
+    top_tile = self.user.tiles.first
+    self.weight = top_tile.present? ? top_tile.weight.next : 0
   end
 end
