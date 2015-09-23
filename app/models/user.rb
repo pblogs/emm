@@ -12,4 +12,18 @@ class User < ActiveRecord::Base
   
   # Enums
   enum role: { member: 0, admin: 1 }
+
+  # Callbacks
+  after_create :create_default_album
+
+  # Methods
+  def default_album
+    self.albums.find_by_default(true)
+  end
+
+  private
+
+  def create_default_album
+    self.albums.create title: I18n.t('default_album.name'), description: I18n.t('default_album.description'), default: true
+  end
 end

@@ -19,6 +19,7 @@ class Tile < ActiveRecord::Base
   private
 
   def set_weight
+    # TODO not correct - weight should be set based on user's tiles, not all tiles
     self.weight = Tile.first.weight.next if Tile.exists?
   end
 end

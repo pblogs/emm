@@ -28,8 +28,6 @@ gem 'launchy'
 gem 'factory_girl_rails'
 # populating database with real-looking test data
 gem 'faker'
-# generating image thumbnails from a given URL
-gem 'link_thumbnailer'
 # a set of strategies for cleaning your database
 gem 'database_cleaner'
 

@@ -1,23 +1,27 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  default_album:
+    name: My chronicles
+    description: Here will be all your uncategorized records
+
+  activerecord:
+#    attributes:
+#      user:
+#        email: E-mail
+
+    errors:
+      messages:
+        blank: 'Required'
+        invalid: 'Is invalid'
+        taken: 'Already in use'
+        too_short:
+          one: Should be at least one character length
+          other: Should be at least %{count} characters length
+
+      models:
+        album:
+          default_album:
+            only_one_allowed: User can have only one default album
+            unable_to_destroy: Cannot delete default album
+#          attributes:
+#            name:
+#              title: "You need to specify something"
