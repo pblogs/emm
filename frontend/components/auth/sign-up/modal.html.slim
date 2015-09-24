@@ -26,3 +26,6 @@ form name="signUpForm" ng-submit="submit()" novalidate="novalidate"
       a.e-link< href="javascript:;" Terms and conditions
   .modal-footer.text-center
     button.btn.e-btn.btn-primary type="submit" ng-disabled="signUpForm.$invalid" Sign Up
+    p.m-t-md
+      | Already have an account? Please,
+      a.e-link< href="javascript:;" ng-click="$dismiss('signIn')" Sign In
