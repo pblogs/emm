@@ -6,6 +6,7 @@ form name="signInForm" ng-submit="submit()" novalidate="novalidate"
   .modal-body
     form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
     form-field type="password" placeholder="Password" ng-required="true" ng-model="user.password" errors="errors.password"
+    a.e-link href="javascript:;" ng-click="$dismiss('recovery')" Forgot password?
   .modal-footer.text-right
     button.btn.e-btn.btn-primary type="submit" ng-disabled="signInForm.$invalid" Sign In
     .text-center.m-t-md

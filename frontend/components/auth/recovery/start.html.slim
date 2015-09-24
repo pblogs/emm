@@ -1,0 +1,10 @@
+.e-close-modal ng-click="$dismiss(close)"
+  .fa.fa-close
+form name="recoveryStartForm" ng-submit="submit()" novalidate="novalidate"
+  .modal-header
+    h3.modal-title.text-center Recovery password
+  .modal-body
+    form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
+    a.e-link href="javascript:;" ng-click="$dismiss('signIn')" Back
+  .modal-footer.text-right
+    button.btn.e-btn.btn-primary type="submit" ng-disabled="recoveryStartForm.$invalid" Recovery
