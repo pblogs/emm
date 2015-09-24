@@ -10,6 +10,7 @@ module ControllerMacros
   def login_admin(type = :each)
     before(type) do
       @user = FactoryGirl.create(:user, role: :admin)
+      @user.confirm
       @user_token = @user.jwt_token
     end
   end

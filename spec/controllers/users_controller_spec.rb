@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
 
   login_user
-  let(:new_user) { create(:user) }
+  let(:new_user) { create(:user,  :confirmed) }
 
   context 'accessing user data' do
     describe 'show private data' do
@@ -51,23 +51,24 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  #todo tests
-  # describe "#destroy" do
-  #   let(:admin) { create(:user, role: :admin) }
-  #
-  #   it "returns http success" do
-  #     delete :destroy, id: @user.id, user_token: admin.jwt_token
-  #     expect(response).to be_success
-  #   end
-  #
-  #   it "access denied" do
-  #     delete :destroy, id: @user.id
-  #     expect(response).to be_forbidden
-  #   end
-  #
-  #   it "should not delete another user address" do
-  #     delete :destroy, id: @user.id, user_token: admin.jwt_token
-  #     expect(response).to be_forbidden
-  #   end
-  # end
+  describe '#destroy' do
+    let(:admin) { create(:user,  :confirmed, role: :admin) }
+
+    it 'returns http success' do
+      delete :destroy, id: @user.id, user_token: admin.jwt_token
+      expect(response).to be_success
+    end
+
+    it 'access denied without token' do
+      expect {
+        delete :destroy, id: @user.id
+      }.to raise_error(CanCan::AccessDenied)
+    end
+
+    it 'should not delete another user' do
+      expect {
+        delete :destroy, id: @user.id, user_token: new_user.jwt_token
+      }.to raise_error(CanCan::AccessDenied)
+    end
+  end
 end
