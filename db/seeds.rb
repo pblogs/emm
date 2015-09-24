@@ -48,15 +48,15 @@ puts 'Admin created'
 
 ### Create example user
 
-user = FactoryGirl.create :user, :confirmed, email: 'user@example.com', password: 'password', first_name: 'John', last_name: 'Snow'
+user = FactoryGirl.create :user, :confirmed, :with_avatar, email: 'user1@example.com', password: 'password', first_name: 'John', last_name: 'Snow'
 create_stuff_for_user(user, create_big_album: true)
 puts 'Example user created'
 
 
 ### Create more users
 
-10.times do |i|
-  user = FactoryGirl.create :user, :confirmed, email: "user#{i+1}@example.com", password: 'password'
+(2..9).each do |i|
+  user = FactoryGirl.create :user, :confirmed, :with_avatar, email: "user#{i}@example.com", password: 'password'
   create_stuff_for_user(user)
-  puts "User #{i+1} created"
+  puts "User #{i} created"
 end

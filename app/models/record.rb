@@ -16,7 +16,7 @@ class Record < ActiveRecord::Base
   private
 
   def set_weight
-    top_record = self.album.records.first
+    top_record = self.album.records.last
     self.weight = top_record.present? ? top_record.weight.next : 0
   end
 end

@@ -7,13 +7,17 @@ class PhotoUploader < CarrierWave::Uploader::Base
   process convert: 'jpg'
   process resize_to_limit: [900, 600]
 
-  version :large do
-    process resize_to_fill: [300, 200]
-  end
-
-  version :middle do
-    process resize_to_fill: [300, 100]
-  end
+  # version :large do
+  #   process resize_to_fill: [300, 200]
+  # end
+  #
+  # version :middle do
+  #   process resize_to_fill: [300, 100]
+  # end
+  #
+  # version :small do
+  #   process resize_to_fill: [150, 100]
+  # end
 
   version :small do
     process resize_to_fill: [150, 100]
