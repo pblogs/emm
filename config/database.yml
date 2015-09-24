@@ -14,6 +14,10 @@ test:
   <<: *default
   database: emmortal_test
 
+staging:
+  <<: *default
+  database: emmortal
+
 production:
   <<: *default
   database: emmortal

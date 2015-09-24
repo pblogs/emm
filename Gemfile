@@ -59,14 +59,12 @@ group :development do
   gem 'quiet_assets'
   gem 'guard-livereload', '~> 2.4', require: false
   gem 'capistrano',  '~> 3.1'
-  # Allow assets manifest backup with folder "manifests" (https://github.com/capistrano/rails/pull/92)
-  # bundle exec cap deploy !
-  gem 'capistrano-rails', github: 'capistrano/rails'
+  gem 'capistrano-rails', '1.1.2'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rvm'
 end
 
-group :production do
+group :production, :staging do
   gem 'unicorn'
 end
 
