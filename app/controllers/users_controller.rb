@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def show
-    serializer = (user_signed_in? && current_user.id) == params[:id].to_i ? PrivateUserSerializer : UserSerializer
+    serializer = user_signed_in? && current_user.id == @user.id ? PrivateUserSerializer : UserSerializer
     render_resource_data(@user, serializer: serializer)
   end
 

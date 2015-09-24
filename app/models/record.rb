@@ -8,5 +8,15 @@ class Record < ActiveRecord::Base
   validates :album, :content, :weight, presence: true
 
   # Scopes
-  default_scope { order(weight: :desc).order(created_at: :asc) }  # Tiles with bigger weight appears first (within same weight the most recent will be last)
+  default_scope { order(weight: :asc).order(created_at: :asc) }  # Tiles with lower weight (and the oldest) appears first
+
+  # Callbacks
+  before_create :set_weight
+
+  private
+
+  def set_weight
+    top_record = self.album.records.last
+    self.weight = top_record.present? ? top_record.weight.next : 0
+  end
 end

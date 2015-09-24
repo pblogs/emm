@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
   # Enums
   enum role: { member: 0, admin: 1 }
 
+  # Validations
+  validates :first_name, :last_name, :birthday, presence: true
+
   # Callbacks
   after_create :create_default_album
 
@@ -22,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   # Uploaders
-  mount_uploader :avatar, PhotoUploader
+  mount_uploader :avatar, AvatarUploader
 
   private
 
