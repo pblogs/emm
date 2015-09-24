@@ -5,10 +5,6 @@ FactoryGirl.define do
     description { Faker::Lorem.sentence(3, false, 20) }
   end
 
-  trait :default do
-    default true
-  end
-
   trait :with_dates do
     start_date { Faker::Date.between(10.years.ago, Date.today) }
     end_date { Faker::Date.between(start_date, Date.today) }
