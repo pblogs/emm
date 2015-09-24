@@ -29,6 +29,12 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def render_resources(resources, options = {})
+    total = resources.respond_to?(:total_count) ? resources.total_count : resources.length
+    default = { root: :resources, meta: { total: total } }
+    render({ json: resources }.merge(default).merge(options))
+  end
+
   def render_resource_data(resource, options = {})
     render options.merge({ json: resource, root: :resource })
   end
@@ -43,5 +49,9 @@ class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound do |exception|
     render json: { errors: exception.message }, status: :not_found
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render json: { errors: exception.message }, status: :forbidden
   end
 end
