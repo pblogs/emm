@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get     'confirmation', to: 'jwt_authentication/confirmations#show'
       post    'resend_confirmation', to: 'jwt_authentication/confirmations#create'
     end
+    resources :users, only: [:show, :update, :destroy]
   end
 
   match '/(*path)', via: :all, to: frontend_page('index.htm')
