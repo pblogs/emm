@@ -1,10 +1,28 @@
 'use strict';
 
 angular.module('app')
-  .controller('AppCtrl', function($scope, $modal) {
+  .controller('AppCtrl', function($scope, $modal, CurrentUser, $auth, $state) {
     $scope.signUpModal = signUpModal;
     $scope.signInModal = signInModal;
     $scope.startRecoveryModal = startRecoveryModal;
+    $scope.logout = logout;
+
+    $scope.$watch($auth.isAuthenticated, function(newVal, oldVal) {
+        if (newVal) {
+          CurrentUser.get().then(function(user) {
+            $scope.currentUser = user;
+          });
+        } else {
+          delete $scope.currentUser;
+          CurrentUser.reset();
+        }
+      }
+    );
+
+    function logout() {
+      $auth.logout();
+      $state.go('app.main');
+    }
 
     function signUpModal() {
       $modal.open({

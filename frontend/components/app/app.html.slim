@@ -12,9 +12,13 @@
           a href="javascript:;" dropdown-toggle=""
             .fa.fa-bars
           ul.dropdown-menu.transparent aria-labelledby="single-button" role="menu"
-            li 
+            li ng-if="!currentUser"
               a href="javascript:;" ng-click="signUpModal()" Sign Up
-            li
+            li ng-if="!currentUser"
               a href="javascript:;" ng-click="signInModal()" Sign In
+            li ng-if="currentUser"
+              a href="javascript:;" ui-sref="app.authorized.profile" My profile
+            li ng-if="currentUser"
+              a href="javascript:;" ng-click="logout()" Logout
 
   .container ui-view=""
