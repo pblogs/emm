@@ -1,0 +1,13 @@
+.e-close-modal ng-click="$dismiss(close)"
+  .fa.fa-close
+form name="signInForm" ng-submit="submit()" novalidate="novalidate"
+  .modal-header
+    h3.modal-title.text-center Sign In
+  .modal-body
+    form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
+    form-field type="password" placeholder="Password" ng-required="true" ng-model="user.password" errors="errors.password"
+  .modal-footer.text-right
+    button.btn.e-btn.btn-primary type="submit" ng-disabled="signInForm.$invalid" Sign In
+    .text-center.m-t-md
+      | Don't have an account? Please,
+      a.e-link< href="javascript:;" ng-click="$dismiss('signUp')" Sign Up
