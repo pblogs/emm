@@ -1,0 +1,31 @@
+@import "variables";
+
+.cg-notify-message.e-notify {
+  border-radius: 3px;
+  border: none;
+  border-bottom: 10px solid;
+  background: $e-black-aa;
+  color: $e-white;
+  top: 125px !important;
+
+  .cg-notify-close {
+    opacity: 1;
+    color: $e-white;
+  }
+
+  &.alert-success {
+    border-color: $e-green;
+  }
+
+  &.alert-danger {
+    border-color: $e-red;
+  }
+
+  &.alert-info {
+    border-color: $e-blue;
+  }
+
+  &.alert-warning {
+    border-color: $e-yellow;
+  }
+}

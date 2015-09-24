@@ -1,6 +1,7 @@
 /*
  *= require bootstrap
  *= require font-awesome
+ *= require angular-notify
  *= require animate.css
  *= require angular-loading-bar
  *= require_tree ../

@@ -9,5 +9,6 @@ angular.module('app', [
   'ui.bootstrap',
   'ui.bootstrap.datepicker',
   'angular-loading-bar',
-  'ngAnimate'
+  'ngAnimate',
+  'cgNotify'
 ]);

@@ -17,5 +17,10 @@ angular.module('app')
         url: '/',
         templateUrl: 'components/main/main.html',
         controller: 'MainCtrl'
-      });
+      })
+      .state('app.registration', {
+        url: '/users/confirm/{token:[a-zA-Z0-9-_]+}',
+        controller: 'SignUpConfirmationCtrl'
+      })
+
   });
