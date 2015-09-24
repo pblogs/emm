@@ -1,0 +1,10 @@
+.e-close-modal ng-click="$dismiss(close)"
+  .fa.fa-close
+form name="recoveryFinishForm" ng-submit="submit()" novalidate="novalidate"
+  .modal-header
+    h3.modal-title.text-center Recovery password
+  .modal-body
+    form-field type="password" placeholder="Password" ng-required="true" ng-model="user.password" errors="errors.password"
+    form-field type="password" placeholder="Confirm password" ng-required="true" ng-model="user.password_confirmation" errors="errors.password_confirmation"
+  .modal-footer.text-right
+    button.btn.e-btn.btn-primary type="submit" ng-disabled="recoveryFinishForm.$invalid" Save

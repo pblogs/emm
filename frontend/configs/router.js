@@ -18,9 +18,12 @@ angular.module('app')
         templateUrl: 'components/main/main.html',
         controller: 'MainCtrl'
       })
+      .state('app.recovery', {
+        url: '/recovery/{token:[a-zA-Z0-9-_]+}',
+        controller: 'FinishRecoveryCtrl'
+      })
       .state('app.registration', {
         url: '/users/confirm/{token:[a-zA-Z0-9-_]+}',
         controller: 'SignUpConfirmationCtrl'
-      })
-
+      });
   });
