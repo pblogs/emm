@@ -66,6 +66,7 @@ GEM
       railties (>= 3.1)
       sprockets (~> 2)
       tilt
+    angularjs-file-upload-rails (1.1.6)
     arel (6.0.3)
     autoprefixer-rails (6.0.3)
       execjs
@@ -370,6 +371,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (= 0.8.3)
   angular-rails-templates
+  angularjs-file-upload-rails
   autoprefixer-rails
   cancancan (~> 1.10)
   capistrano (~> 3.1)

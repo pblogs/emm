@@ -11,6 +11,7 @@
  *= require angular-rails-templates
  *= require angular-animate
  *= require angular-notify
+ *= require angularjs-file-upload
  *= require ../module
  *= require_tree ../
  */
