@@ -20,6 +20,15 @@ module CarrierWave
       end
     end
   end
+
+  module Uploader
+    module Serialization
+      extend ActiveSupport::Concern
+      def as_json(options=nil)
+        serializable_hash
+      end
+    end
+  end
 end
 
 if Rails.env.test?
