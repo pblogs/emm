@@ -3,12 +3,12 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('SignUpConfirmationCtrl', function($scope, $auth, $stateParams, $state, $http, Notification) {
+  .controller('ConfirmationCtrl', function ($scope, $auth, $stateParams, $state, $http, Notification) {
 
     $http.get('api/confirmation', {params: {confirmation_token: $stateParams.token}})
-      .then(function(response) {
+      .then(function (response) {
         $auth.setToken(response.data.auth_token);
-        Notification.show('Your account was successfully confirmed!', 'success');
+        Notification.show('Your email was successfully confirmed!', 'success');
         $state.go('app.main');
       })
   });

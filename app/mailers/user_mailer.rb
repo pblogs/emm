@@ -6,7 +6,7 @@ class UserMailer < BaseMailer
       to: opts[:to] || record.email,
       vars: {
           email: opts[:to] || record.email,
-          confirmation_url: frontend_url(path: "users/confirm/#{token}")
+          confirmation_url: frontend_url(path: "users/confirmation/#{token}")
       }
     )
   end
