@@ -8,6 +8,7 @@ class Ability
     elsif user.persisted?
       can :update, User, id: user.id
       can :show, User
+      can :manage, Album, user_id: user.id
     end
   end
 end

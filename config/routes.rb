@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post    'resend_confirmation', to: 'jwt_authentication/confirmations#create'
     end
     resources :users, only: [:show, :update, :destroy]
+    resources :albums, except: [:new, :edit]
   end
 
   match '/(*path)', via: :all, to: frontend_page('index.htm')

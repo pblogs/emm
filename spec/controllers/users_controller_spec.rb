@@ -45,9 +45,8 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'access denied' do
-      expect {
-        put :update, id: new_user.id, user_token: @user_token, resource: { first_name: Faker::Name.first_name }
-      }.to raise_error(CanCan::AccessDenied)
+      put :update, id: new_user.id, user_token: @user_token, resource: { first_name: Faker::Name.first_name }
+      expect(response).to be_forbidden
     end
   end
 
@@ -60,15 +59,13 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'access denied without token' do
-      expect {
-        delete :destroy, id: @user.id
-      }.to raise_error(CanCan::AccessDenied)
+      delete :destroy, id: @user.id
+      expect(response).to be_forbidden
     end
 
     it 'should not delete another user' do
-      expect {
-        delete :destroy, id: @user.id, user_token: new_user.jwt_token
-      }.to raise_error(CanCan::AccessDenied)
+      delete :destroy, id: @user.id, user_token: new_user.jwt_token
+      expect(response).to be_forbidden
     end
   end
 end

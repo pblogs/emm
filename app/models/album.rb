@@ -17,6 +17,9 @@ class Album < ActiveRecord::Base
   after_create :create_tile_on_user_page, unless: :default?
   before_destroy :check_for_default
 
+  # Uploaders
+  mount_uploader :cover, AlbumUploader
+
   private
 
   def only_one_default_album
