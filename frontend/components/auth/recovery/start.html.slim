@@ -5,6 +5,6 @@ form name="recoveryStartForm" ng-submit="submit()" novalidate="novalidate"
     h3.modal-title.text-center Recovery password
   .modal-body
     form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
-    a.e-link href="javascript:;" ng-click="$dismiss('signIn')" Back
+    a.e-link href="#" ng-click="$dismiss('signIn')" Back
   .modal-footer.text-right
     button.btn.e-btn.btn-primary type="submit" ng-disabled="recoveryStartForm.$invalid" Recovery

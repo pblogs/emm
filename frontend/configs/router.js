@@ -24,13 +24,16 @@ angular.module('app')
         controller: 'MainCtrl'
       })
 
-      .state('app.recovery', {
-        url: '/recovery/{token:[a-zA-Z0-9-_]+}',
-        controller: 'FinishRecoveryCtrl'
-      })
       .state('app.confirmation', {
         url: '/users/confirmation/{token:[a-zA-Z0-9-_]+}',
         controller: 'ConfirmationCtrl'
+      })
+      .state('app.recovery', {
+        url: '/recovery/{token:[a-zA-Z0-9-_]+}',
+        controller: function ($scope, $state, AuthModal) {
+          $state.go('app.main');
+          AuthModal('finishRecovery');
+        }
       })
 
       .state('app.authorized', {

@@ -6,7 +6,7 @@ class UserMailer < BaseMailer
       to: opts[:to] || record.email,
       vars: {
           email: opts[:to] || record.email,
-          confirmation_url: frontend_url(path: "users/confirmation/#{token}")
+          confirmation_url: frontend_url("/users/confirmation/#{token}")
       }
     )
   end
@@ -18,7 +18,7 @@ class UserMailer < BaseMailer
       to: opts[:to] || record.email,
       vars: {
           reset_token: token,
-          reset_url: frontend_url(path: "recovery/#{token}")
+          reset_url: frontend_url("/recovery/#{token}")
       }
     )
   end

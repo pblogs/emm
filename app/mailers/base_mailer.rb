@@ -6,7 +6,7 @@ class BaseMailer < MandrillMailer::DebuggableMailer
 
   def mandrill_mail(args)
     args[:vars] ||= {}
-    args[:vars][:root_url] = frontend_url('')
+    args[:vars][:root_url] = frontend_url('/')
     args[:merge_language] = 'handlebars'
     super(args)
   end

@@ -44,7 +44,7 @@ angular.module('app')
     }
 
     function resetCurrentUser() {
-      _.each(currentUser, function (val, key, obj) {
+      _.forEach(currentUser, function (val, key, obj) {
         !_.isFunction(val) && delete obj[key];
       });
     }

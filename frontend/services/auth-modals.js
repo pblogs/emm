@@ -17,6 +17,10 @@ angular.module('app')
       startRecovery: {
         templateUrl: 'components/auth/recovery/start.html',
         controller: 'StartRecoveryModalCtrl'
+      },
+      finishRecovery: {
+        templateUrl: 'components/auth/recovery/finish.html',
+        controller: 'FinishRecoveryModalCtrl'
       }
     };
 
@@ -32,6 +36,7 @@ angular.module('app')
           if (reason === 'signIn') showModal('signIn');
           if (reason === 'signUp') showModal('signUp');
           if (reason === 'startRecovery') showModal('startRecovery');
+          if (reason === 'finishRecovery') showModal('finishRecovery');
         });
     }
 
