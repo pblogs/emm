@@ -45,5 +45,11 @@ angular.module('app')
         url: '/profile',
         templateUrl: 'components/user/profile.html',
         controller: 'ProfileCtrl'
+      })
+      .state('app.authorized.settings', {
+        abstract: true,
+        url: '/settings',
+        templateUrl: 'components/user/settings/layout.html',
+        controller: 'SettingsCtrl'
       });
   });

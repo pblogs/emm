@@ -1,5 +1,9 @@
 @import "variables";
 
+* {
+  font-family: 'Oxygen', sans-serif;
+}
+
 .e-black-a {
   color: $e-black-a
 }
@@ -47,6 +51,10 @@
   margin-top: 15px;
 }
 
+.m-t-lg {
+  margin-top: 20px;
+}
+
 .text-center {
   text-align: center;
 }
@@ -85,4 +93,10 @@ textarea.form-control {
   &:hover, &:active,&:focus {
     color: $e-brown;
   }
+}
+
+.e-container {
+  padding: 50px 35px;
+  color: $e-brown;
+  background: $e-white;
 }
