@@ -5,6 +5,8 @@
  */
 angular.module('app').config(function($httpProvider) {
   $httpProvider.defaults.withCredentials = true;
+  $httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
+
   $httpProvider.interceptors.push(function($injector) {
     var $auth;
     return {

@@ -3,22 +3,22 @@
     .container
       ul.nav.navbar-nav.navbar-right.e-menu
         li
-          a href="javascript:;"
+          a href="#"
             .fa.fa-search
         li
-          a href="javascript:;"
+          a href="#"
             .fa.fa-plus
         li.e-dropdown.dropdown dropdown=""
-          a href="javascript:;" dropdown-toggle=""
+          a href="#" dropdown-toggle=""
             .fa.fa-bars
           ul.dropdown-menu.transparent aria-labelledby="single-button" role="menu"
-            li ng-if="!currentUser"
-              a href="javascript:;" ng-click="signUpModal()" Sign Up
-            li ng-if="!currentUser"
-              a href="javascript:;" ng-click="signInModal()" Sign In
-            li ng-if="currentUser"
-              a href="javascript:;" ui-sref="app.authorized.profile" My profile
-            li ng-if="currentUser"
-              a href="javascript:;" ng-click="logout()" Logout
+            li ng-if="!currentUser.exists()"
+              a href="#" ng-click="AuthModal('signUp')" Sign Up
+            li ng-if="!currentUser.exists()"
+              a href="#" ng-click="AuthModal('signIn')" Sign In
+            li ng-if="currentUser.exists()"
+              a href="#" ui-sref="app.authorized.profile" My profile
+            li ng-if="currentUser.exists()"
+              a href="#" ng-click="logout()" Logout
 
   .container.m-t-lg ui-view=""
