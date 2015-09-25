@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :albums, except: [:new, :edit] do
       resources :records, only: [:index, :update]
       resources :photos, except: [:edit, :new, :index]
+      resources :texts, except: [:edit, :new, :index]
     end
   end
 

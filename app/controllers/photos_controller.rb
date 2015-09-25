@@ -3,7 +3,6 @@ class PhotosController < ApplicationController
   load_resource :photo, through: :album
   authorize_resource
 
-
   def show
     render_resource_data(@photo)
   end
