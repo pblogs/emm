@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     resources :users, only: [:show, :update, :destroy]
     resources :albums, except: [:new, :edit] do
+      resources :records, only: [:index, :update]
       resources :photos, except: [:edit, :new, :index]
     end
   end

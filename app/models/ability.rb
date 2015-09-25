@@ -14,6 +14,9 @@ class Ability
         photo.album.user_id == user.id
       end
       can :manage, Album, user_id: user.id
+      can [:index, :update], Record do |record|
+        record.album.user_id == user.id
+      end
     end
   end
 end

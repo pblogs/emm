@@ -41,7 +41,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'should change fields' do
       put :update, id: @user.id, user_token: @user_token, resource: { remote_avatar_url: Faker::Avatar.image }
-      expect(json_response['resource']['avatar_url']).to eq(@user.reload.avatar_url)
+      expect(json_response['resource']['avatar']['url']).to eq(@user.reload.avatar_url)
     end
 
     it 'access denied' do
