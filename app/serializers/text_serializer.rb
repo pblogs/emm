@@ -1,0 +1,1 @@
+class TextSerializer < ContentSerializer; end
