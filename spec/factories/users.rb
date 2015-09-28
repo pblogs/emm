@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   trait :with_avatar do
-    remote_avatar_url { 'http://lorempixel.com/640/480/people' }
+    avatar { File.open(File.join(Rails.root, 'spec', 'fixtures' , 'avatars', "#{rand(1..4)}.png")) }
   end
 
   trait :confirmed do

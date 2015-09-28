@@ -25,6 +25,6 @@ class VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:resource).permit(:title, :description, :remote_preview_url, :video_id)
+    params.require(:resource).permit(:title, :description, :preview, :video_id)
   end
 end

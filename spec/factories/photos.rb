@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :photo do
     association :album
-    remote_image_url { 'http://lorempixel.com/640/480' }
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures' , 'images', "#{rand(1..4)}.jpeg")) }
   end
 
   trait :with_text do
