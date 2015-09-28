@@ -20,6 +20,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:resource).permit(:email, :first_name, :last_name, :birthday, :remote_avatar_url)
+    params.require(:resource).permit(:email, :first_name, :last_name, :birthday, :avatar)
   end
 end
