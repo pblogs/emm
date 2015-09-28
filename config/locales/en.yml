@@ -13,15 +13,17 @@ en:
         blank: 'Required'
         invalid: 'Is invalid'
         taken: 'Already in use'
+        exclusion: 'Is reserved'
         too_short:
           one: Should be at least one character length
           other: Should be at least %{count} characters length
 
       models:
+        user:
+          attributes:
+            page_alias:
+              invalid: 'Only small latin letters, digits, dashes, dots or underscores are allowed'
         album:
           default_album:
             only_one_allowed: User can have only one default album
             unable_to_destroy: Cannot delete default album
-#          attributes:
-#            name:
-#              title: "You need to specify something"

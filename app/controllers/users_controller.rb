@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def show
+    @user = params[:page_alias] ? User.find_by_page_alias(params[:page_alias]) : User.find(params[:id])
     serializer = user_signed_in? && current_user.id == @user.id ? PrivateUserSerializer : UserSerializer
     render_resource_data(@user, serializer: serializer)
   end
