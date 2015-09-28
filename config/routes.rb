@@ -10,7 +10,9 @@ Rails.application.routes.draw do
       get     'confirmation', to: 'jwt_authentication/confirmations#show'
       post    'resend_confirmation', to: 'jwt_authentication/confirmations#create'
     end
-    resources :users, only: [:show, :update, :destroy]
+    resources :users, only: [:show, :update, :destroy] do
+      get :by_alias, on: :collection, to: 'users#show'
+    end
     resources :albums, except: [:new, :edit] do
       resources :records, only: [:index, :update]
       resources :photos, except: [:edit, :new, :index]
