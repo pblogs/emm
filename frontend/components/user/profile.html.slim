@@ -1,1 +1,11 @@
-h1.e-brown ng-bind="currentUser.first_name"
+.row
+  .col-md-4
+    .e-block
+      img.img-responsive.e-profile-photo ng-src="{{user.avatar.url | imageFilter:'avatar'}}"
+
+  .col-md-4
+    .e-block.e-profile-info
+      h4.e-title
+        | ( {{user.birthday | date : 'yyyy'}} -   )
+      h3.e-title
+        | {{user.first_name + ' ' + user.last_name}}

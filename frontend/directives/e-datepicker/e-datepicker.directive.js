@@ -11,7 +11,8 @@ angular.module('app')
       templateUrl: "directives/e-datepicker/e-datepicker.html" ,
       scope: {
         ngModel: "=",
-        ngRequired: '='
+        ngRequired: '=',
+        datepickerMode: "="
       }
     };
   });
