@@ -32,16 +32,23 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-set :keep_releases, 5
+set :keep_releases, 3
+
+desc 'Invoke a rake command on the remote server'
+task :invoke, [:command] => 'deploy:set_rails_env' do |task, args|
+  on primary(:app) do
+    within current_path do
+      with :rails_env => fetch(:rails_env) do
+        rake args[:command]
+      end
+    end
+  end
+end
 
 namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
+  after :restart, :clear_cache do
     invoke 'unicorn:reload'
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
     end
   end
 
@@ -49,14 +56,19 @@ namespace :deploy do
   after :finishing, :cleanup
   before :finishing, :restart
   after :rollback, :restart
+end
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+namespace :rails do
+  desc 'Open the rails console on each of the remote servers'
+  task console: 'rvm:hook' do
+    on roles(:app), primary: true do |host|
+      execute_interactively host, 'console production'
     end
   end
+end
 
+def execute_interactively(host, command)
+  command = "cd #{fetch(:deploy_to)}/current && #{SSHKit.config.command_map[:bundle]} exec rails #{command}"
+  puts command if fetch(:log_level) == :debug
+  exec "ssh -l #{host.user} #{host.hostname} -p #{host.port || 22} -t '#{command}'"
 end

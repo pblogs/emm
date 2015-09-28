@@ -4,9 +4,9 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{emmortal@104.0.0.1}
-role :web, %w{emmortal@104.0.0.1}
-role :db,  %w{emmortal@104.0.0.1}
+role :app, %w{emmortal@159.203.81.203}
+role :web, %w{emmortal@159.203.81.203}
+role :db,  %w{emmortal@159.203.81.203}
 
 set :rvm_ruby_version, '2.2.2@emmortal'
 set :rvm_type, :user
@@ -26,7 +26,7 @@ set :deploy_to, '/home/emmortal/www/emmortal'
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server '104.0.0.1', user: 'emmortal', roles: %w{web}
+server '159.203.81.203', user: 'emmortal', roles: %w{web}
 
 # Custom SSH Options
 # ==================
