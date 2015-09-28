@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   trait :with_avatar do
-    avatar { File.open(File.join(Rails.root, 'spec', 'fixtures' , 'avatars', "#{rand(1..4)}.png")) }
+    avatar { File.open(File.join(Rails.root, 'spec', 'fixtures' , 'avatars', "#{rand(1..10)}.jpg")) }
   end
 
   trait :confirmed do

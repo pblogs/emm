@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       get     'confirmation', to: 'jwt_authentication/confirmations#show'
       post    'resend_confirmation', to: 'jwt_authentication/confirmations#create'
     end
-    resources :users, only: [:show, :update, :destroy] do
+    resources :users, only: [:index, :show, :update, :destroy] do
       get :by_alias, on: :collection, to: 'users#show'
       resource :password, only: :update, controller: 'users/passwords'
     end

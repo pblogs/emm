@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :photo do
     association :album
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures' , 'images', "#{rand(1..4)}.jpeg")) }
+    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures' , 'images', "#{rand(1..10)}.jpeg")) }
   end
 
   trait :with_text do

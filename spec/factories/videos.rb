@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :video do
     association :album
-    preview { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures' , 'images', "#{rand(5..8)}.jpeg")) }
+    preview { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures' , 'images', "#{rand(1..10)}.jpeg")) }
     video_id { Faker::Number.number(10) }
   end
 
