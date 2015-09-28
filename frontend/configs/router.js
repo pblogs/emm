@@ -36,7 +36,7 @@ angular.module('app')
         }
       })
       .state('app.profile', {
-        url: '/profile',
+        url: '/user/{id:[a-zA-Z0-9-_]+}',
         templateUrl: 'components/user/profile.html',
         controller: 'ProfileCtrl'
       })

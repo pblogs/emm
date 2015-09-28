@@ -8,7 +8,7 @@ h3.e-title Personal information
         .col-sm-6
           form-field type="text" placeholder="Last name" ng-required="true" ng-model="user.last_name" errors="errors.second_name"
       form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
-      e-datepicker ng-model="user.birthday" ng-required="true"
+      e-datepicker ng-model="user.birthday" ng-required="true" datepicker-mode="'year'"
       .text-right
         button.btn.e-btn.btn-primary type="submit" ng-disabled="userInfoForm.$invalid" Save
 

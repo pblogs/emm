@@ -14,7 +14,7 @@ form name="signUpForm" ng-submit="submit()" novalidate="novalidate"
     form-field type="password" placeholder="Password" ng-required="true" ng-model="user.password" errors="errors.password"
     form-field type="password" placeholder="Confirm password" ng-required="true" ng-model="user.password_confirmation" errors="errors.password_confirmation"
 
-    e-datepicker ng-model="user.birthday" ng-required="true"
+    e-datepicker ng-model="user.birthday" ng-required="true" datepicker-mode="'year'"
 
     .m-t-sm.text-center
       | By clicking Sign Up, you agree to our
