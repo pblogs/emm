@@ -35,31 +35,25 @@ angular.module('app')
           AuthModal('finishRecovery');
         }
       })
-
-      .state('app.authorized', {
+      .state('app.profile', {
+        url: '/profile',
+        templateUrl: 'components/user/profile.html',
+        controller: 'ProfileCtrl'
+      })
+      .state('app.settings', {
         abstract: true,
-        templateUrl: 'components/layouts/empty.html',
+        url: '/settings',
+        templateUrl: 'components/user/settings/layout.html',
         data: {
           permissions: {
             except: ['anonymous'],
             redirectTo: 'app.main'
           }
-        },
-        resolve: {
-          currentUser: function (CurrentUser) {
-            return CurrentUser.get();
-          }
         }
       })
-      .state('app.authorized.profile', {
-        url: '/profile',
-        templateUrl: 'components/user/profile.html',
-        controller: 'ProfileCtrl'
-      })
-      .state('app.authorized.settings', {
-        abstract: true,
-        url: '/settings',
-        templateUrl: 'components/user/settings/layout.html',
-        controller: 'SettingsCtrl'
+      .state('app.settings.security', {
+        url: '/security',
+        templateUrl: 'components/user/settings/security.html',
+        controller: 'SettingsSecurityCtrl'
       });
   });

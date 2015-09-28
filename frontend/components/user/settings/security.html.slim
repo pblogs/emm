@@ -1,0 +1,20 @@
+h3.e-title Personal information
+.row.m-t-lg
+  .col-md-9
+    form.m-l-md.m-r-md name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
+      .row
+        .col-sm-6
+          form-field type="text" placeholder="First name" ng-required="true" ng-model="user.first_name" errors="errors.first_name"
+        .col-sm-6
+          form-field type="text" placeholder="Last name" ng-required="true" ng-model="user.last_name" errors="errors.second_name"
+      form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
+      e-datepicker ng-model="user.birthday" ng-required="true"
+      .text-right
+        button.btn.e-btn.btn-primary type="submit" ng-disabled="userInfoForm.$invalid" Save
+
+    form.m-t-lg.m-l-md.m-r-md name="userPasswordForm" ng-submit="submit('password')" novalidate="novalidate"
+      form-field type="password" placeholder="Current password" ng-required="true" ng-model="user.current_password" errors="errors.current_password"
+      form-field type="password" placeholder="New password" ng-required="true" ng-model="user.password" errors="errors.password"
+      form-field type="password" placeholder="New password confirmation" ng-required="true" ng-model="user.password_confirmation" errors="errors.password_confirmation"
+      .text-right
+        button.btn.e-btn.btn-primary type="submit" ng-disabled="userPasswordForm.$invalid" Save

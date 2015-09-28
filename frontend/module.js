@@ -10,5 +10,6 @@ angular.module('app', [
   'ui.bootstrap.datepicker',
   'angular-loading-bar',
   'ngAnimate',
-  'cgNotify'
+  'cgNotify',
+  'angularFileUpload'
 ]);

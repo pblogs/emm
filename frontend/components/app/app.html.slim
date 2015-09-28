@@ -17,7 +17,9 @@
             li ng-if="!currentUser.exists()"
               a href="#" ng-click="AuthModal('signIn')" Sign In
             li ng-if="currentUser.exists()"
-              a href="#" ui-sref="app.authorized.profile" My profile
+              a href="#" ui-sref="app.profile" My profile
+            li ng-if="currentUser.exists()"
+              a href="#" ui-sref="app.settings.security" Settings
             li ng-if="currentUser.exists()"
               a href="#" ng-click="logout()" Logout
 

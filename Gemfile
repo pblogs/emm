@@ -31,6 +31,8 @@ gem 'faker'
 # a set of strategies for cleaning your database
 gem 'database_cleaner'
 
+gem 'angularjs-file-upload-rails'
+
 gem 'kaminari'
 
 source 'https://rails-assets.org' do
