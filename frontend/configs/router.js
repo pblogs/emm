@@ -24,6 +24,8 @@ angular.module('app')
         controller: 'MainCtrl'
       })
 
+      // Authorization states
+
       .state('app.confirmation', {
         url: '/users/confirmation/{token:[a-zA-Z0-9-_]+}',
         controller: 'ConfirmationCtrl'
@@ -35,15 +37,21 @@ angular.module('app')
           AuthModal('finishRecovery');
         }
       })
-      .state('app.profile', {
-        url: '/user/{id:[a-zA-Z0-9-_]+}',
-        templateUrl: 'components/user/profile.html',
-        controller: 'ProfileCtrl'
+
+      // User states
+
+      .state('app.user', {
+        url: '/users/{id:[0-9]+}',
+        templateUrl: 'components/users/show/show.html',
+        controller: 'UsersShowCtrl',
+        resolve: {
+          user: loadResource('users')
+        }
       })
-      .state('app.settings', {
+      .state('app.userEdit', {
         abstract: true,
         url: '/settings',
-        templateUrl: 'components/user/settings/layout.html',
+        templateUrl: 'components/users/edit/edit.html',
         data: {
           permissions: {
             except: ['anonymous'],
@@ -51,9 +59,24 @@ angular.module('app')
           }
         }
       })
-      .state('app.settings.security', {
+      .state('app.userEdit.general', {
         url: '/security',
-        templateUrl: 'components/user/settings/security.html',
-        controller: 'SettingsSecurityCtrl'
+        templateUrl: 'components/users/edit/general/general.html',
+        controller: 'UsersEditGeneralCtrl'
       });
+
+    // Page not found
+
+    $urlRouterProvider.otherwise(function ($injector) {
+      $injector.get('Handle404')();
+    });
+
+    // Helpers
+
+    function loadResource(resource) {
+      return /*@ngInject*/ function (Restangular, $stateParams, Handle404) {
+        return Restangular.one(resource, $stateParams.id).get()
+          .catch(Handle404);
+      }
+    }
   });

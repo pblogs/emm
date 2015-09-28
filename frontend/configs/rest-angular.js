@@ -9,7 +9,9 @@ angular.module('app')
 
     RestangularProvider.addResponseInterceptor(function (response, operation, what) {
       if (operation === 'getList') {
-        if (response['resources']) response['resources'].count = response.count;
+        if (response.resources) {
+          response.resources.total = _.result(response.meta, 'total');
+        }
         return response['resources'];
       }
       if (['get', 'post', 'put'].indexOf(operation) !== -1) {
@@ -68,6 +70,9 @@ angular.module('app')
         result.nextPagePromise = toRequest.getList(params);
         result.nextPagePromise.then(function (collectionData) {
           result.items = result.items.concat(collectionData);
+
+          console.log('result.items', result.items.length, result.items);
+
           if (result.items.length >= collectionData.total || collectionData.length === 0)
             result.allReceived = true;
           else

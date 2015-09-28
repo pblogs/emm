@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('SettingsSecurityCtrl', function ($scope, $http, Notification, CurrentUser) {
+  .controller('UsersEditGeneralCtrl', function ($scope, $http, Notification, CurrentUser) {
     $scope.user = $scope.currentUser.clone();
     $scope.submit = submit;
 

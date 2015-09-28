@@ -5,6 +5,8 @@ class Ability
     user ||= User.new
 
     can [:index, :show], User
+    can [:index], Tile
+    can [:index], Record
 
     if user.admin?
       can :manage, :all
@@ -14,9 +16,10 @@ class Ability
         content.album.user_id == user.id
       end
       can :manage, Album, user_id: user.id
-      can [:index, :update], Record do |record|
+      can :update, Record do |record|
         record.album.user_id == user.id
       end
+      can :update, Tile, user_id: user.id
     end
   end
 end

@@ -9,3 +9,9 @@
         | ( {{user.birthday | date : 'yyyy'}} -   )
       h3.e-title
         | {{user.first_name + ' ' + user.last_name}}
+
+  .col-md-4
+    div ng-repeat="tile in tilesLoader.items"
+      span {{ tile.content_type }}
+
+    collection-next-page-btn collection="tilesLoader"
