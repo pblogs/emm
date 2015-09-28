@@ -58,8 +58,8 @@ group :development do
   gem 'spring'
   gem 'quiet_assets'
   gem 'guard-livereload', '~> 2.4', require: false
-  gem 'capistrano',  '~> 3.1'
-  gem 'capistrano-rails', '1.1.2'
+  gem 'capistrano', '3.4.0'
+  gem 'capistrano-rails', '1.1.3'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rvm'
 end
