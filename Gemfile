@@ -52,6 +52,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-animate.css'
   gem 'rails-assets-angular-animate'
   gem 'rails-assets-angular-loading-bar'
+  gem 'rails-assets-angular-gridster'
 end
 
 # File uploading front-end

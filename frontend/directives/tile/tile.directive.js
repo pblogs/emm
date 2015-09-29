@@ -4,19 +4,18 @@
  * Directive for displaying Tile
  */
 angular.module('app')
-  .directive('tile', function (Restangular) {
-
-    function controller($scope) {
-      $scope.content = $scope.tile.content;
-    }
-
+  .directive('tile', function () {
     return {
       restrict: 'E',
+      transclude: true,
       replace: true,
-      controller: controller,
-      templateUrl: 'directives/tile/tile.html',
+      templateUrl:  'directives/tile/tile.html',
       scope: {
         tile: '='
+      },
+      controller: function($scope) {
+        $scope.content = $scope.tile.content;
+        $scope.getTemplate = 'directives/tile/templates/' + $scope.tile.content_type + '.html'
       }
     };
   });
