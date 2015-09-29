@@ -70,9 +70,6 @@ angular.module('app')
         result.nextPagePromise = toRequest.getList(params);
         result.nextPagePromise.then(function (collectionData) {
           result.items = result.items.concat(collectionData);
-
-          console.log('result.items', result.items.length, result.items);
-
           if (result.items.length >= collectionData.total || collectionData.length === 0)
             result.allReceived = true;
           else

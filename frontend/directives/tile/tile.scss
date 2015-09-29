@@ -1,0 +1,23 @@
+@import "../../vendor/variables";
+
+.tile {
+  background: $e-white;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  &.Video {
+    .preview {
+      &:after {
+        display: inline-block;
+        content: "\f144";
+        font: normal normal normal 14px/1 FontAwesome;
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        margin-left: -21px;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 50px;
+      }
+    }
+  }
+}

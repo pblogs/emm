@@ -1,17 +1,16 @@
 .row
-  .col-md-3
-    .e-block
+  .col-sm-6.col-md-6.col-lg-4
+    .tile
       img.img-responsive.e-profile-photo ng-src="{{user.avatar.url | imageFilter:'avatar'}}"
 
-  .col-md-3
-    .e-block.e-profile-info
+  .col-sm-6.col-md-6.col-lg-4
+    .tile.e-profile-info
       h4.e-title
-        | ( {{user.birthday | date : 'yyyy'}} -   )
+        | ({{user.birthday | date : 'yyyy'}} - )
       h3.e-title
         | {{user.first_name + ' ' + user.last_name}}
 
-  .col-md-4
-    div ng-repeat="tile in tilesLoader.items"
-      span {{ tile.content_type }}
+  .col-sm-4.col-md-3.col-lg-2 ng-repeat="tile in tilesLoader.items"
+    tile tile="tile"
 
-    collection-next-page-btn collection="tilesLoader"
+collection-next-page-btn collection="tilesLoader"

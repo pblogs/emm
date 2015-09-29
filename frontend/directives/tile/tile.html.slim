@@ -1,0 +1,7 @@
+.tile.thumbnail class="{{ tile.content_type }}"
+  .preview
+    img ng-src="{{ content.image.small.url }}" ng-if="tile.content_type == 'Photo'"
+    img ng-src="{{ content.preview.small.url }}" ng-if="tile.content_type == 'Video'"
+  .caption
+    h4 {{ content.title }}
+    p {{ content.description }}
