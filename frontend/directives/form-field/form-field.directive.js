@@ -7,17 +7,19 @@ angular.module('app')
   .directive('formField', function() {
     return {
       restrict: 'E',
-      transclude: true,
+      replace: true,
       templateUrl: function(elem, attr) {
-        var template = attr.type ? 'input' : 'textarea';
-        return 'directives/form-field/' + template + '.html';
+        var templateName = _.include(['textarea', 'datepicker'], attr.type) ? attr.type : 'text';
+        return 'directives/form-field/' + templateName + '.html';
       },
       scope: {
         type: '@',
         ngModel: "=",
         errors: '=',
         ngRequired: '=',
-        placeholder: '@'
+        placeholder: '@',
+        rows: '=',
+        cols: '='
       }
     };
   });

@@ -4,7 +4,7 @@
  * Service for auth modal windows
  */
 angular.module('app')
-  .factory('AuthModal', function($modal) {
+  .factory('AuthModal', function ($modal) {
     var map = {
       signIn: {
         templateUrl: 'components/auth/sign-in/modal.html',
@@ -24,7 +24,7 @@ angular.module('app')
       }
     };
 
-    function showModal(type) {
+    return function (type) {
       $modal
         .open({
           templateUrl: map[type].templateUrl,
@@ -38,7 +38,5 @@ angular.module('app')
           if (reason === 'startRecovery') showModal('startRecovery');
           if (reason === 'finishRecovery') showModal('finishRecovery');
         });
-    }
-
-    return showModal;
+    };
   });

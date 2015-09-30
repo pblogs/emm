@@ -7,7 +7,7 @@ angular.module('app')
   .directive('eDatepicker', function() {
     return {
       restrict: 'E',
-      transclude: true,
+      replace: true,
       templateUrl: "directives/e-datepicker/e-datepicker.html" ,
       scope: {
         ngModel: "=",

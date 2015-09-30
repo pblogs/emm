@@ -1,0 +1,20 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+form ng-submit="submit()"
+  .modal-body.photo-popup
+    .row
+      .col-md-6
+        input type="file" img-cropper-fileread="" image="cropper.sourceImage"
+        .canvas-wrapper ng-if="showCanvas"
+          canvas auto-width="" height="300" id="canvas" image-cropper="" image="cropper.sourceImage" cropped-image="cropper.croppedImage" crop-width="(bounds.right-bounds.left) || 200" crop-height="(bounds.top-bounds.bottom) || 200" min-width="50" min-height="50" keep-aspect="false" crop-area-bounds="bounds"
+
+      .col-md-6
+        form-field placeholder="Title" ng-model="photo.title" errors="errors.title"
+        form-field type="textarea" placeholder="Description" ng-model="photo.description" errors="errors.description" rows="5"
+
+        select ng-model="photo.album_id"
+          option ng-repeat="album in albums" value="{{album.id}}" {{ album.title }}
+
+  .modal-footer.text-right
+    button.btn.e-btn.btn-default type="button" ng-click="back()" Back
+    button.btn.e-btn.btn-primary type="submit" Publish

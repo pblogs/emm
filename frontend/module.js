@@ -11,5 +11,6 @@ angular.module('app', [
   'angular-loading-bar',
   'ngAnimate',
   'cgNotify',
-  'angularFileUpload'
+  'angularFileUpload',
+  'angular-img-cropper'
 ]);

@@ -14,12 +14,11 @@ Rails.application.routes.draw do
       get :by_alias, on: :collection, to: 'users#show'
       resource :password, only: :update, controller: 'users/passwords'
       resources :tiles, only: [:index, :update]
+      resources :albums, except: [:new, :edit]
     end
-    resources :albums, except: [:new, :edit] do
+    resources :albums, only: [] do
       resources :records, only: [:index, :update]
-      resources :photos, except: [:edit, :new, :index]
-      resources :texts, except: [:edit, :new, :index]
-      resources :videos, except: [:edit, :new, :index]
+      resources :photos, :texts, :videos, except: [:edit, :new, :index]
     end
   end
 

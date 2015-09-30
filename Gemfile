@@ -19,6 +19,7 @@ gem 'uglifier'
 gem 'autoprefixer-rails'
 
 gem 'carrierwave'
+gem 'carrierwave-base64'
 gem 'mini_magick'
 
 gem 'mandrill_mailer'
@@ -30,8 +31,6 @@ gem 'factory_girl_rails'
 gem 'faker'
 # a set of strategies for cleaning your database
 gem 'database_cleaner'
-
-gem 'angularjs-file-upload-rails'
 
 gem 'kaminari'
 
@@ -54,6 +53,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-animate'
   gem 'rails-assets-angular-loading-bar'
 end
+
+# File uploading front-end
+gem 'angularjs-file-upload-rails'
+gem 'es5-shim-rails'
 
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
