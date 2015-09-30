@@ -25,7 +25,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:resource).permit(:title, :description, :cover, :location_name, :latitude, :longitude,
-                                     :start_date, :end_date, :image)
+    params.require(:resource).permit(:title, :description, :image)
   end
 end

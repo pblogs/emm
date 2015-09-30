@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
 
     can [:index, :show], User
+    can [:index, :show], Album
     can [:index], Tile
     can [:index], Record
 

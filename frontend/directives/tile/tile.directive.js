@@ -12,7 +12,7 @@ angular.module('app')
 
     return {
       restrict: 'E',
-      transclude: true,
+      replace: true,
       controller: controller,
       templateUrl: 'directives/tile/tile.html',
       scope: {

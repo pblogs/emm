@@ -5,8 +5,8 @@
         li
           a href="#"
             .fa.fa-search
-        li
-          a href="#"
+        li ng-if="currentUser.exists()"
+          a href="#" ng-click="MediaTypeSelectModal()"
             .fa.fa-plus
         li.e-dropdown.dropdown dropdown=""
           a href="#" dropdown-toggle=""

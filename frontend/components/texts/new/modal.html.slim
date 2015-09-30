@@ -1,0 +1,15 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+form ng-submit="submit()"
+  .modal-body.text-popup
+    .row
+      .col-xs-12
+        form-field placeholder="Title" ng-model="text.title" errors="errors.title"
+        form-field type="textarea" placeholder="Description" ng-model="text.description" errors="errors.description" rows="5"
+
+        select ng-model="text.album_id"
+          option ng-repeat="album in albums" value="{{album.id}}" {{ album.title }}
+
+  .modal-footer.text-right
+    button.btn.e-btn.btn-default type="button" ng-click="back()" Back
+    button.btn.e-btn.btn-primary type="submit" Publish

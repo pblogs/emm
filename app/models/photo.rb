@@ -12,5 +12,5 @@ class Photo < ActiveRecord::Base
   validates :album, :image, presence: true
 
   # Uploaders
-  mount_uploader :image, PhotoUploader
+  mount_base64_uploader :image, PhotoUploader
 end

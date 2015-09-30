@@ -1,8 +1,9 @@
 class AlbumsController < ApplicationController
-  load_and_authorize_resource
+  load_resource :user
+  load_and_authorize_resource :album, through: :user
 
   def index
-    render_resources(@albums)
+    render_resources(@user.albums)
   end
 
   def show
@@ -27,7 +28,6 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:resource).permit(:title, :description, :cover, :location_name, :latitude, :longitude,
-                                     :start_date, :end_date)
+    params.require(:resource).permit(:title, :description, :cover, :location_name, :latitude, :longitude, :start_date, :end_date)
   end
 end
