@@ -9,6 +9,10 @@ class Tribute < ActiveRecord::Base
   # Validations
   validates :author, :user, :title, :description, presence: true
 
+  validate do
+    errors.add(:user_id, 'Cannot create tribute for self') if user_id == author_id
+  end
+
   # Methods
   def create_tile_on_user_page
     self.create_tile(user: self.user)

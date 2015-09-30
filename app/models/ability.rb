@@ -21,6 +21,8 @@ class Ability
         record.album.user_id == user.id
       end
       can :update, Tile, user_id: user.id
+      can [:index, :show], Tribute, user_id: user.id
+      can :create, Tribute, author_id: user.id
     end
   end
 end
