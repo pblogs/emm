@@ -2,6 +2,14 @@ module AlbumRecord
   extend ActiveSupport::Concern
 
   included do
+    # Relations
+    belongs_to :album, inverse_of: :photos
+    has_one :record, as: :content, dependent: :destroy
+    has_one :tile, as: :content, dependent: :destroy
+    has_many :comments, as: :commentable, dependent: :destroy
+
+    delegate :user_id, to: :album
+
     # Callbacks
     after_create :create_record_for_album
     after_create :create_tile_on_user_page, if: 'album.default?'
