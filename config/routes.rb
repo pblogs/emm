@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     resources :albums, only: [] do
       resources :records, only: [:index, :update]
       resources :photos, :texts, :videos, except: [:edit, :new, :index]
+      resources :photos, :texts, :videos, except: [:edit, :new, :index]
+    end
+    scope ':target_type/:target_id', target_type: /(album|tribute|video|photo|text)/ do
+      resources :comments, only: [:index, :create, :update, :destroy, :show]
     end
   end
 
