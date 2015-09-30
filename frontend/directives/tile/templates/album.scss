@@ -1,0 +1,74 @@
+@import "../../../vendor/variables";
+
+.tile.Album {
+  .album-content-wrapper {
+    border-bottom: 1px solid $e-brown;
+    height: 80%;
+    overflow: hidden;
+  }
+
+  .small-title {
+    display: none;
+  }
+
+  .album-title {
+    border-top: 4px solid $e-red;
+    height: 50px;
+    overflow: hidden;
+
+    .big-count {
+      display: inline-block;
+      padding: 8px;
+      background: $e-red;
+      color: $e-white;
+      font-size: 24px;
+      float: left;
+      margin-right: 5px;
+    }
+
+    .title-text {
+      padding-top: 5px;
+      .content-count {
+        font-size: 12px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .title {
+        font-size: 18px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .description {
+    .description-content {
+      max-height: 140px;
+      overflow: hidden;
+    }
+
+    .e-link {
+      text-decoration: underline;
+    }
+  }
+
+  .small {
+    .description {
+      display: none;
+    }
+
+    .large-title {
+      .title-text {
+        display: none;
+      }
+    }
+
+    .small-title {
+      font-size: 18px;
+      display: block;
+    }
+  }
+}

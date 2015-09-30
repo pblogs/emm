@@ -4,5 +4,6 @@
  *= require angular-notify
  *= require animate.css
  *= require angular-loading-bar
+ *= require angular-gridster
  *= require_tree ../
  */

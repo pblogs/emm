@@ -1,16 +1,18 @@
 .row
-  .col-sm-6.col-md-6.col-lg-4
-    .tile
-      img.img-responsive.e-profile-photo ng-src="{{user.avatar.url | imageFilter:'avatar'}}"
-
-  .col-sm-6.col-md-6.col-lg-4
-    .tile.e-profile-info
-      h4.e-title
-        | ({{user.birthday | date : 'yyyy'}} - )
-      h3.e-title
-        | {{user.first_name + ' ' + user.last_name}}
-
-  .col-sm-4.col-md-3.col-lg-2 ng-repeat="tile in tilesLoader.items"
-    tile tile="tile"
-
-collection-next-page-btn collection="tilesLoader"
+  div gridster="gridsterOptions"
+    ul
+      li.static-tile data-gridster-item="" data-sizex="2" data-sizey="2" data-row="0" data-col="0"
+        .tile
+          .content-wrapper
+            img.img-responsive.e-profile-photo ng-src="{{user.avatar.url | imageFilter:'avatar'}}" draggable="false"
+      li.static-tile data-gridster-item="" data-sizex="2" data-sizey="1" data-row="0" data-col="2"
+        .tile
+          .content-wrapper
+            h4.e-title
+              | ({{user.birthday | date : 'yyyy'}} - )
+            h3.e-title
+              | {{user.first_name + ' ' + user.last_name}}
+      li data-gridster-item="" ng-repeat="tile in tilesLoader.items" data-sizex="getTileSize(tile).x" data-sizey="getTileSize(tile).y"
+        tile tile="tile"
+.text-center
+  collection-next-page-btn collection="tilesLoader"

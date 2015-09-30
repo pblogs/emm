@@ -1,0 +1,23 @@
+h4.e-brown Life events
+.row.album-content-wrapper
+  .col-sm-6
+    .image-wrapper
+      img.img-responsive ng-src="{{content.cover.url | imageFilter:'album'}}"
+    .album-title.large-title
+      .big-count 68
+      .title-text
+        .content-count.e-brown
+          | 64 photos,
+          |  4 videos
+        .title.e-brown
+          | {{content.title}}
+
+  .col-sm-6
+    .small-title.e-brown {{content.title}}
+    .description
+      .e-brown.description-content "{{content.description}}"
+      .e-brown.m-t-lg
+        | On
+        |  {{content.start_date | date: 'longDate'}}
+        |  at
+        a.e-link href="#"  {{content.location_name}}
