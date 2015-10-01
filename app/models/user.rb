@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
 
   # Uploaders
   mount_uploader :avatar, AvatarUploader
+  mount_uploader :background, BackgroundUploader
 
   private
 
