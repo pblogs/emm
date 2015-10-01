@@ -11,7 +11,7 @@ angular.module('app')
         // There may already be another signed in user, so we need to reload current user to get those who confirmed email
         CurrentUser.reload();
         Notification.show('Your email was successfully confirmed!', 'success');
-        $state.go('app.main');
+        $state.go('app.user', {id: CurrentUser.id()});
       })
       .catch(function (response) {
         Notification.showValidationErrors(response.data.errors);
