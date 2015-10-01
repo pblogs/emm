@@ -7,9 +7,9 @@
 
   button.e-btn.btn-primary.file-input-btn type="button" ng-show="!sourceImage"
     i.fa.fa-upload>
-    | Choose image
+    | Choose {{pictureName || 'image'}}
     input type="file" accept="image/*" img-cropper-fileread="" image="sourceImage"
 
   button.e-btn.btn-danger.file-remove-btn type="button" ng-show="sourceImage" ng-click="removeImage()"
     i.fa.fa-times-circle>
-    | Remove image
+    | Remove {{pictureName || 'image'}}

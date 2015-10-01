@@ -1,0 +1,37 @@
+@import "../../../vendor/variables";
+
+@media (max-width: 767px) {
+  .settings-tabs-container  {
+    margin-bottom: 15px;
+
+    .nav-pills {
+      padding-bottom: 15px;
+      border-bottom: 1px solid $e-brown;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .settings-page-container {
+    border-left: 1px solid $e-brown;
+    padding-left: 20px;
+  }
+}
+
+.nav-pills.e-nav-pills {
+  li {
+    a {
+      color: $e-brown;
+      border-radius: 0;
+
+      &:focus, &:hover {
+        background: $e-light-brown;
+        color: $e-brown;
+      }
+    }
+    &.active a {
+      background: $e-light-brown;
+      color: $e-brown;
+    }
+  }
+}

@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
   end
 
   # Uploaders
-  mount_uploader :avatar, AvatarUploader
-  mount_uploader :background, BackgroundUploader
+  mount_base64_uploader :avatar, AvatarUploader
+  mount_base64_uploader :background, BackgroundUploader
 
   private
 

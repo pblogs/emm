@@ -1,10 +1,10 @@
 .e-container
   h3.e-title Settings
   .row.m-t-sm
-    .col-md-3
-      ul.nav.nav-pills.nav-stacked.e-nav-vertical
+    .col-sm-3.settings-tabs-container
+      ul.nav.nav-pills.nav-stacked.e-nav-pills
         li ui-sref-active="active"
-          a.e-link href="#" ui-sref=".security" Security
+          a.e-link ui-sref="app.userEdit.general" Security
 
-    .col-md-9.e-b-l
+    .col-sm-9.settings-page-container
       div ui-view=""

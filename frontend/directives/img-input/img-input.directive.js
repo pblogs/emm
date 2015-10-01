@@ -36,7 +36,8 @@ angular.module('app')
       templateUrl: 'directives/img-input/img-input.html',
       scope: {
         croppedImage: '=selectedImage',
-        height: '=?'
+        height: '=?',
+        pictureName: '@?'
       },
       controller: controller
     };
