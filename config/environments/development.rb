@@ -34,4 +34,10 @@ Rails.application.configure do
   config.assets.digest = false
   config.assets.compress = false
   config.assets.debug = true
+
+  # Bullet gem (N+1 queries detector) config
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.rails_logger = true
+  end
 end
