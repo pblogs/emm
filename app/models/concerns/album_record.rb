@@ -3,7 +3,7 @@ module AlbumRecord
 
   included do
     # Relations
-    belongs_to :album, inverse_of: :photos
+    belongs_to :album, inverse_of: name.downcase.pluralize, :counter_cache => true
     has_one :record, as: :content, dependent: :destroy
     has_one :tile, as: :content, dependent: :destroy
     has_many :comments, as: :commentable, dependent: :destroy

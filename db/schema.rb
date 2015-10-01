@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925134515) do
+ActiveRecord::Schema.define(version: 20151001142104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20150925134515) do
     t.float    "longitude"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "photos_count",  default: 0
+    t.integer  "videos_count",  default: 0
+    t.integer  "texts_count",   default: 0
   end
 
   add_index "albums", ["created_at"], name: "index_albums_on_created_at", using: :btree
@@ -139,6 +142,7 @@ ActiveRecord::Schema.define(version: 20150925134515) do
     t.date     "birthday"
     t.string   "avatar"
     t.string   "page_alias"
+    t.string   "background"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -73,12 +73,6 @@ RSpec.describe AlbumsController, type: :controller do
       expect(@album.reload.title).to eq new_title
     end
 
-    it 'should not update another user album' do
-      album = create(:album)
-      put :update, user_id: @user.id, id: album.id, resource: { title: new_title }, user_token: @user_token
-      expect(response).to be_forbidden
-    end
-
     it 'access denied' do
       put :update, user_id: @user.id, id: @album.id, resource: { title: new_title }
       expect(response).to be_forbidden
@@ -93,12 +87,6 @@ RSpec.describe AlbumsController, type: :controller do
 
     it 'access denied' do
       delete :destroy, user_id: @user.id, id: album.id
-      expect(response).to be_forbidden
-    end
-
-    it 'should not delete another user album' do
-      album = create(:album)
-      delete :destroy, user_id: @user.id, user_token: @user_token, id: album.id
       expect(response).to be_forbidden
     end
   end
