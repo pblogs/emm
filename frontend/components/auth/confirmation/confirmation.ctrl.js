@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('ConfirmationCtrl', function ($scope, $auth, $stateParams, $state, $http, CurrentUser, Notification) {
+  .controller('ConfirmationCtrl', function ($scope, $auth, $stateParams, $state, $http, CurrentUser, Notification, $modal) {
 
     $http.get('api/confirmation', {params: {confirmation_token: $stateParams.token}})
       .then(function (response) {
@@ -12,6 +12,12 @@ angular.module('app')
         CurrentUser.reload();
         Notification.show('Your email was successfully confirmed!', 'success');
         $state.go('app.user', {id: CurrentUser.id()});
+        $modal
+          .open({
+            templateUrl: 'components/users/avatar-popup/modal.html',
+            controller: 'UserAvatarPopupCtrl',
+            windowClass: 'e-modal'
+          });
       })
       .catch(function (response) {
         Notification.showValidationErrors(response.data.errors);

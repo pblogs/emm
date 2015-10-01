@@ -1,0 +1,16 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+form ng-submit="submit()"
+  .modal-header
+    h3.modal-title.text-center Upload your profile photo and background
+  .modal-body
+    .row ng-if="showCanvas"
+      .col-sm-6
+        img-input selected-image="user.avatar" height="150" picture-name="avatar"
+        .e-red ng-repeat="error in errors.avatar" {{error}}
+        .m-b-sm.visible-xs
+      .col-sm-6
+        img-input selected-image="user.background" height="150" picture-name="background"
+        .e-red ng-repeat="error in errors.background" {{error}}
+  .modal-footer.text-right
+    button.btn.e-btn.btn-primary type="submit" Save
