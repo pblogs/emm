@@ -24,7 +24,7 @@ angular.module('app')
       }
     };
 
-    return function (type) {
+    function showModal(type) {
       $modal
         .open({
           templateUrl: map[type].templateUrl,
@@ -38,5 +38,7 @@ angular.module('app')
           if (reason === 'startRecovery') showModal('startRecovery');
           if (reason === 'finishRecovery') showModal('finishRecovery');
         });
-    };
+    }
+
+    return showModal;
   });

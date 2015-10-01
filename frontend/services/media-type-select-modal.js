@@ -9,7 +9,7 @@ angular.module('app')
     return function () {
       $modal
         .open({
-          templateUrl: 'components/app/select-media-type/modal.html',
+          templateUrl: 'components/select-media-type/modal.html',
           controller: 'SelectMediaTypeModalCtrl',
           windowClass: 'e-modal'
         });
