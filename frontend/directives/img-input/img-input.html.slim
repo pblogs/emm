@@ -1,0 +1,15 @@
+.img-input
+  .canvas-placeholder ng-show="!sourceImage" ng-style="{ 'height': ((height || 300) + 'px') }"
+    i.fa.fa-picture-o
+
+  .canvas-wrapper ng-show="sourceImage"
+    canvas auto-width="" height="{{height || 300}}" id="canvas" image-cropper="" image="sourceImage" cropped-image="croppedImage" crop-width="resultImageSize.width" crop-height="resultImageSize.height" min-width="50" min-height="50" keep-aspect="false" crop-area-bounds="bounds"
+
+  button.e-btn.btn-primary.file-input-btn type="button" ng-show="!sourceImage"
+    i.fa.fa-upload>
+    | Choose image
+    input type="file" accept="image/*" img-cropper-fileread="" image="sourceImage"
+
+  button.e-btn.btn-danger.file-remove-btn type="button" ng-show="sourceImage" ng-click="removeImage()"
+    i.fa.fa-times-circle>
+    | Remove image

@@ -1250,7 +1250,12 @@ angular.module('angular-img-cropper', []).directive("imageCropper", ['$document'
           if (newValue != null) {
             var imageObj = new Image();
             imageObj.addEventListener("load", function () {
-
+              var bounds = crop.getBounds();
+              bounds.left = 1;
+              bounds.right = this.width;
+              bounds.top = this.height;
+              bounds.bottom = 1;
+              crop.setBounds(bounds);
               crop.setImage(imageObj);
               var img = crop.getCroppedImage(scope.cropWidth, scope.cropHeight);
               scope.croppedImage = img.src;

@@ -2,13 +2,9 @@
 
 angular.module('app')
   .controller('PhotosNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $timeout, caller) {
-    $scope.photo = {};
+    $scope.photo = {image: null};
     $scope.submit = submit;
     $scope.back = back;
-
-    // Cropper
-    $scope.cropper = {sourceImage: null, croppedImage: null};
-    $scope.bounds = {left: 0, right: 0, top: 0, bottom: 0};
 
     // Display canvas only when modal window is rendered so canvas width could be calculated
     $timeout(function () {
@@ -23,7 +19,6 @@ angular.module('app')
 
     function submit() {
       $scope.errors = {};
-      $scope.photo.image = $scope.cropper.croppedImage;
       Restangular.one('albums', $scope.photo.album_id).all('photos').post($scope.photo)
         .then(function (photo) {
           Notification.show('Photo was successfully added', 'success');

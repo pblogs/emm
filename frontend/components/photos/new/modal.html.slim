@@ -4,9 +4,9 @@ form ng-submit="submit()"
   .modal-body.photo-popup
     .row
       .col-md-6
-        input type="file" img-cropper-fileread="" image="cropper.sourceImage"
-        .canvas-wrapper ng-if="showCanvas"
-          canvas auto-width="" height="300" id="canvas" image-cropper="" image="cropper.sourceImage" cropped-image="cropper.croppedImage" crop-width="(bounds.right-bounds.left) || 200" crop-height="(bounds.top-bounds.bottom) || 200" min-width="50" min-height="50" keep-aspect="false" crop-area-bounds="bounds"
+        div ng-if="showCanvas"
+          img-input selected-image="photo.image" height="350"
+          .e-red ng-repeat="error in errors.image" {{error}}
 
       .col-md-6
         form-field placeholder="Title" ng-model="photo.title" errors="errors.title"

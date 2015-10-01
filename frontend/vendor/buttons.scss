@@ -19,6 +19,36 @@
       background: $e-green;
     }
   }
+
+  &.btn-danger {
+    border-color: $e-red;
+    color: $e-red;
+
+    &:hover, &:focus {
+      color: $e-white;
+      background: $e-red;
+    }
+  }
+
+  &.btn-warning {
+    border-color: $e-yellow;
+    color: $e-yellow;
+
+    &:hover, &:focus {
+      color: $e-yellow;
+      background: $e-yellow;
+    }
+  }
+
+  &.btn-info {
+    border-color: $e-blue;
+    color: $e-blue;
+
+    &:hover, &:focus {
+      color: $e-blue;
+      background: $e-blue;
+    }
+  }
 }
 
 .e-btn[disabled], .e-btn.disabled {
