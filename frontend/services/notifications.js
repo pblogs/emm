@@ -15,7 +15,7 @@ angular.module('app')
         templateUrl: 'vendor/notify.html',
         classes: normalizeClass(type),
         message: $sce.trustAsHtml(message),
-        position: 'center',
+        position: 'right',
         html: true
       });
     }
