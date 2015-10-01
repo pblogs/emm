@@ -4,27 +4,45 @@
   border-radius: 3px;
   border: none;
   border-bottom: 10px solid;
-  background: $e-black-aa;
-  color: $e-white;
+  background: $e-white;
 
   .cg-notify-close {
     opacity: 1;
-    color: $e-white;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &.alert-success {
     border-color: $e-green;
+    color: $e-green;
+    .cg-notify-close {
+      color: $e-green;
+    }
   }
 
   &.alert-danger {
     border-color: $e-red;
+    color: $e-red;
+    .cg-notify-close {
+      color: $e-red;
+    }
   }
 
   &.alert-info {
     border-color: $e-blue;
+    color: $e-blue;
+    .cg-notify-close {
+      color: $e-blue;
+    }
   }
 
   &.alert-warning {
     border-color: $e-yellow;
+    color: $e-yellow;
+    .cg-notify-close {
+      color: $e-yellow;
+    }
   }
 }
