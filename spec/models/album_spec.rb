@@ -33,4 +33,13 @@ RSpec.describe Album, type: :model do
       expect(user.default_album.tile).to be_nil
     end
   end
+
+  describe 'cached columns' do
+    let(:album) { create(:album, user: user) }
+    %i{ photo video text }.each do |content|
+      it 'should update count column' do
+        expect { create(content, album: album) }.to change { album.send("#{content}s_count") }.by(1)
+      end
+    end
+  end
 end
