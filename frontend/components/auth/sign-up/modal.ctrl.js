@@ -10,8 +10,8 @@ angular.module('app')
     function submit() {
       $scope.errors = {};
       $http.post('/api/registration', {user: $scope.user})
-        .then(function (response) {
-          Notification.show('Check your email: ' + _.result(response.data.resource, 'email'), 'info');
+        .then(function () {
+          Notification.show('Email confirmation sent, please check your email to activate your account.', 'info');
           $modalInstance.close();
         })
         .catch(function (response) {

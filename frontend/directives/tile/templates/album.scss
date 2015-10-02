@@ -1,16 +1,11 @@
 @import "../../../vendor/variables";
 
-.tile.Album {
+.tile.album {
   .album-content-wrapper {
     border-bottom: 1px solid $e-brown;
     height: 80%;
     overflow: hidden;
   }
-
-  .small-title {
-    display: none;
-  }
-
   .album-title {
     border-top: 4px solid $e-red;
     height: 50px;
@@ -50,25 +45,26 @@
       overflow: hidden;
     }
 
-    .e-link {
-      text-decoration: underline;
-    }
-  }
-
-  .small {
-    .description {
-      display: none;
-    }
-
-    .large-title {
-      .title-text {
-        display: none;
+    .avatar-wrapper {
+      width: 35px;
+      vertical-align: middle;
+      display: inline-block;
+      img {
+        border-radius: 50%;
       }
     }
+    .author-name {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 12px;
+      white-space: nowrap;
+      max-width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-    .small-title {
-      font-size: 18px;
-      display: block;
+    .e-link {
+      text-decoration: underline;
     }
   }
 }

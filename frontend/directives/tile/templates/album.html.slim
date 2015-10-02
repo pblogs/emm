@@ -1,0 +1,27 @@
+h4.e-brown Life events
+.row.album-content-wrapper
+  .col-sm-6
+    .image-wrapper
+      img.img-responsive ng-src="{{content.cover.url | imageFilter:'album'}}"
+    .album-title.large-title
+      .big-count ng-bind="content.photos_count + content.videos_count"
+      .title-text
+        .content-count.e-brown
+          span {{content.photos_count}} photos,
+          span< {{content.videos_count}} videos
+        .title.e-brown ng-bind="content.title"
+
+  .col-sm-6
+    .description
+      .e-brown.description-content "{{content.description}}"
+      .e-brown.m-t-lg
+        .avatar-wrapper
+          img.img-responsive ng-src="{{content.user.avatar.thumb.url | imageFilter}}"
+        .author-name<
+          | Added by
+          a.e-link< ui-sref="app.user({id: content.user.id})" {{content.user.first_name + ' ' + content.user.last_name}}
+      .e-brown.m-t-lg ng-if="content.start_date"
+        | On
+        |  {{content.start_date | date: 'longDate'}}
+        |  at
+        a.e-link ng-if="content.start_date" href="#"  {{content.location_name}}
