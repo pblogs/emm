@@ -25,7 +25,7 @@ class Ability
       can :create, Tribute, author_id: user.id
       can [:update], Comment, author_id: user.id
       can [:destroy], Comment do |comment|
-        comment.commentable.user_id == user.id || comment.author_id == user.id
+        comment.commentable.user.id == user.id || comment.author_id == user.id
       end
       can [:create, :show, :index], Comment
     end

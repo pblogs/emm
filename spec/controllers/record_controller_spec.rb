@@ -6,14 +6,14 @@ RSpec.describe RecordsController, type: :controller do
   let(:album) { create(:album, user: @user) }
 
   describe '#index' do
-    let!(:photo) { create_list(:photo, 4, album: album) }
+    let!(:text) { create_list(:text, 2, album: album).first }
 
     it 'should response success' do
       get :index, album_id: album.id, user_token: @user_token
       expect(response).to be_success
     end
 
-    it 'should return correct albums count' do
+    it 'should return correct records count' do
       get :index, album_id: album.id, user_token: @user_token
       expect(json_response['meta']['total']).to eq album.records.count
     end

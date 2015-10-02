@@ -5,7 +5,7 @@ RSpec.describe CommentsController, type: :controller do
 
   let(:target) { create(%i{ photo video text album tribute}.sample) }
   let(:author) { create(:user, :confirmed) }
-  let(:comment) { create(:comment, commentable: target, author: author) }
+  let!(:comment) { create_list(:comment, 2, commentable: target, author: author).first }
   let(:another_user) { create(:user, :confirmed) }
 
 

@@ -4,7 +4,7 @@ class TilesController < ApplicationController
   authorize_resource
 
   def index
-    tiles = @user.tiles.page(params[:page]).per(params[:per_page])
+    tiles = @user.tiles.includes(content: :user).page(params[:page]).per(params[:per_page])
     render_resources(tiles)
   end
 

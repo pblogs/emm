@@ -1,5 +1,5 @@
 class TileSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :weight, :size, :content_type
+  attributes :id, :weight, :size, :content_type
 
   has_one :content
 end

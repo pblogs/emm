@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   load_and_authorize_resource through: :target
 
   def index
-    render_resources(@comments)
+    render_resources(@comments.includes(:author))
   end
 
   def show

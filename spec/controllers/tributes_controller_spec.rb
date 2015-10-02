@@ -4,7 +4,7 @@ RSpec.describe TributesController, type: :controller do
   login_user
 
   let(:author) { create(:user) }
-  let!(:tribute) { create(:tribute, user: @user, author: author) }
+  let!(:tribute) { create_list(:tribute, 2, user: @user, author: author).first }
   let(:another_user) { create(:user, :confirmed) }
 
 
