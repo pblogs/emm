@@ -59,11 +59,14 @@ end
 gem 'angularjs-file-upload-rails'
 gem 'es5-shim-rails'
 
+group :development, :test do
+  gem 'bullet'
+end
+
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'quiet_assets'
-  gem 'bullet'
   gem 'guard-livereload', '~> 2.4', require: false
   gem 'capistrano', '3.4.0'
   gem 'capistrano-rails', '1.1.3'

@@ -22,7 +22,7 @@ RSpec.describe Tile, type: :model do
     end
 
     it 'should be ordered from top weight to last' do
-      expect(user.tiles.map(&:weight)).to be_eql [3, 2, 1, 0]
+      expect(user.tiles.pluck(:weight)).to be_eql [3, 2, 1, 0]
     end
   end
 end

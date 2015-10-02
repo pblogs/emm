@@ -8,7 +8,7 @@ module AlbumRecord
     has_one :tile, as: :content, dependent: :destroy
     has_many :comments, as: :commentable, dependent: :destroy
 
-    delegate :user_id, to: :album
+    has_one :user, through: :album
 
     # Callbacks
     after_create :create_record_for_album

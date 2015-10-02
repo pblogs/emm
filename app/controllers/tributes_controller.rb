@@ -6,7 +6,7 @@ class TributesController < ApplicationController
   authorize_resource
 
   def index
-    render_resources(@tributes)
+    render_resources(@tributes.includes(:author))
   end
 
   def show

@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
   authorize_resource
 
   def index
-    render_resources(@album.records)
+    render_resources(@album.records.includes(content: :user))
   end
 
   def update
