@@ -15,6 +15,13 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    SecureRandom.hex(8) + ".#{file.extension}" if original_filename
+    "image_#{secure_token}.jpg" if original_filename.present?
+  end
+
+  protected
+
+  def secure_token
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.hex(8))
   end
 end
