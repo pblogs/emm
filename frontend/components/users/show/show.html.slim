@@ -9,7 +9,7 @@
         .tile
           .content-wrapper
             h4.e-title
-              | ({{user.birthday | date : 'yyyy'}} - )
+              | ({{user.birthday | date : 'longDate'}} - )
             h3.e-title
               | {{user.first_name + ' ' + user.last_name}}
       li data-gridster-item="" ng-repeat="tile in tilesLoader.items" data-sizex="getTileSize(tile).x" data-sizey="getTileSize(tile).y"
