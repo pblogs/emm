@@ -1,4 +1,4 @@
-.app
+.app-wrapper ng-style="getBackground()"
   nav.navbar.e-navbar
     .container
       ul.nav.navbar-nav.navbar-right.e-menu
@@ -17,9 +17,9 @@
             li ng-if="!currentUser.exists()"
               a href="#" ng-click="AuthModal('signIn')" Sign In
             li ng-if="currentUser.exists()"
-              a href="#" ui-sref="app.user({id: currentUser.id})" My profile
+              a href="#" ui-sref="app.user.show({userId: currentUser.id})" My profile
             li ng-if="currentUser.exists()"
-              a href="#" ui-sref="app.userEdit.general" Settings
+              a href="#" ui-sref="app.user.edit.general({userId: currentUser.id})" Settings
             li ng-if="currentUser.exists()"
               a href="#" ng-click="logout()" Logout
 
