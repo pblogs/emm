@@ -1,3 +1,7 @@
 class VideoSerializer < ContentSerializer
-  attributes :preview, :video_id
+  attributes :preview_url, :video_id
+
+  def preview_url
+    object.preview
+  end
 end

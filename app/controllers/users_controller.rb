@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update(user_params)
-    render_resource_or_errors(@user)
+    render_resource_or_errors(@user, serializer: PrivateUserSerializer)
   end
 
   def destroy
@@ -24,6 +24,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:resource).permit(:email, :first_name, :last_name, :birthday, :avatar, :background)
+    params.require(:resource).permit(:email, :first_name, :last_name, :birthday, :avatar, :remove_avatar, :background, :remove_background)
   end
 end

@@ -2,7 +2,7 @@ h4.e-brown Life events
 .row.album-content-wrapper
   .col-sm-6
     .image-wrapper
-      img.img-responsive ng-src="{{content.cover.url | imageFilter:'album'}}"
+      img.img-responsive ng-src="{{content.cover_url.original | imageFilter:'album'}}"
     .album-title.large-title
       .big-count ng-bind="content.photos_count + content.videos_count"
       .title-text
@@ -16,7 +16,7 @@ h4.e-brown Life events
       .e-brown.description-content "{{content.description}}"
       .e-brown.m-t-lg
         .avatar-wrapper
-          img.img-responsive ng-src="{{content.user.avatar.thumb.url | imageFilter}}"
+          img.img-responsive ng-src="{{content.user.avatar_url.thumb | imageFilter}}"
         .author-name<
           | Added by
           a.e-link< ui-sref="app.user({id: content.user.id})" {{content.user.first_name + ' ' + content.user.last_name}}
