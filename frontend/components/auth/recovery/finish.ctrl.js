@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('FinishRecoveryModalCtrl', function ($scope, $modalInstance, $state, $stateParams, $http, $auth, Notification) {
+  .controller('FinishRecoveryModalCtrl', function ($scope, $modalInstance, $state, $stateParams, $http, $auth, CurrentUser, Notification) {
     $scope.submit = submit;
     $scope.user = {
       reset_password_token: $stateParams.token

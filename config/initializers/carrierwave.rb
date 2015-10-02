@@ -24,8 +24,12 @@ module CarrierWave
   module Uploader
     module Serialization
       extend ActiveSupport::Concern
+
       def as_json(options=nil)
-        serializable_hash
+        return nil unless self.present?
+        self.versions.each_with_object({original: self.url}) do |(version_name, version), result|
+          result[version_name] = version.url
+        end
       end
     end
   end

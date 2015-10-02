@@ -1,0 +1,11 @@
+.image-form-field
+  .image-preview ng-show="object[fieldUrl]"
+    img ng-src="{{object[fieldUrl].original}}" ng-style="{ 'height': ((height || 300) + 'px') }"
+    button.e-btn.btn-danger.image-remove-btn type="button" ng-click="removeImage()"
+      i.fa.fa-times-circle>
+      | Remove {{pictureName || 'image'}}
+
+  .image-select ng-show="!object[fieldUrl]"
+    img-input selected-image="object[field]" height="height" picture-name="{{pictureName}}" on-remove="removeImage"
+
+  .e-red ng-repeat="error in errors" {{error}}

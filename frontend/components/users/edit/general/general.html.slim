@@ -14,12 +14,11 @@ form.m-b-lg name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
     .col-md-6
       .row
         .col-sm-6
-          img-input selected-image="user.avatar" height="134" picture-name="avatar"
-          .e-red ng-repeat="error in errors.avatar" {{error}}
+          image-form-field object="user" field-name="avatar" errors="errors.avatar" height="134" picture-name="avatar"
           .m-b-sm.visible-xs
+
         .col-sm-6
-          img-input selected-image="user.background" height="134" picture-name="background"
-          .e-red ng-repeat="error in errors.background" {{error}}
+          image-form-field object="user" field-name="background" errors="errors.background" height="134" picture-name="background"
     .col-xs-12.visible-sm.visible-xs
       .text-right.m-t-sm
         button.btn.e-btn.btn-primary type="submit" ng-disabled="userInfoForm.$invalid" Save

@@ -1,3 +1,7 @@
 class PhotoSerializer < ContentSerializer
-  attributes :image
+  attributes :image_url
+
+  def image_url
+    object.image
+  end
 end
