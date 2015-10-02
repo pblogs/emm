@@ -39,16 +39,25 @@ angular.module('app')
       })
 
       // User states
-
       .state('app.user', {
-        url: '/users/{id:[0-9]+}',
-        templateUrl: 'components/users/show/show.html',
-        controller: 'UsersShowCtrl',
+        url: '/users/{userId:[0-9]+}',
+        template: '<div ui-view=""></div>',
+        controller: function(user, Background) {
+          Background.set(user)
+        },
         resolve: {
-          user: loadResource('users')
+          user: function(Restangular, $stateParams, Handle404) {
+            return Restangular.one('users', $stateParams.userId).get()
+              .catch(Handle404);
+          }
         }
       })
-      .state('app.userEdit', {
+      .state('app.user.show', {
+        url: '/profile',
+        templateUrl: 'components/users/show/show.html',
+        controller: 'UsersShowCtrl'
+      })
+      .state('app.user.edit', {
         abstract: true,
         url: '/settings',
         templateUrl: 'components/users/edit/edit.html',
@@ -59,8 +68,8 @@ angular.module('app')
           }
         }
       })
-      .state('app.userEdit.general', {
-        url: '/security',
+      .state('app.user.edit.general', {
+        url: '/general',
         templateUrl: 'components/users/edit/general/general.html',
         controller: 'UsersEditGeneralCtrl'
       });
