@@ -1,10 +1,12 @@
 div gridster="gridsterOptions"
   ul
     li.static-tile data-gridster-item="" data-sizex="2" data-sizey="2" data-row="0" data-col="0"
+      .drag-handle.hidden
       .tile
         .content-wrapper
           img.img-responsive.e-profile-photo ng-src="{{user.avatar_url.original | imageFilter:'avatar'}}" draggable="false"
     li.static-tile data-gridster-item="" data-sizex="2" data-sizey="1" data-row="0" data-col="2"
+      .drag-handle.hidden
       .tile
         .content-wrapper
           h4.e-title
@@ -12,6 +14,7 @@ div gridster="gridsterOptions"
           h3.e-title
             | {{user.first_name + ' ' + user.last_name}}
     li data-gridster-item="tile" ng-repeat="tile in tilesLoader.items"
-      tile tile="tile"
-.text-center
+      tile tile="tile" editable="user.id === currentUser.id" on-remove="destroyTile"
+
+.text-center.m-t-lg
   collection-next-page-btn collection="tilesLoader"

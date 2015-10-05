@@ -6,5 +6,5 @@ class Video < ActiveRecord::Base
   validates :album, :video_id, :preview, presence: true
 
   # Uploaders
-  mount_uploader :preview, PhotoUploader
+  mount_base64_uploader :preview, PhotoUploader
 end
