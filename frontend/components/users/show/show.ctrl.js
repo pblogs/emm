@@ -10,8 +10,12 @@ angular.module('app')
       maxSizeX: 2,
       maxSizeY: 2,
       mobileBreakPoint: 749,
-      draggable: {
-        enabled: false
+      outerMargin: false,
+      maxRows: 1000,
+      resizable: {
+        stop: function(event, $element, widget) {
+          console.log(widget);
+        }
       }
     };
     $scope.loadTiles = loadTiles;
@@ -24,13 +28,16 @@ angular.module('app')
     function setTileSize(tile) {
       switch (tile.size) {
         case 'small':
-          tile.size = {x: 1, y: 1};
+          tile.sizeX = 1;
+          tile.sizeY = 1;
           break;
         case 'medium':
-          tile.size = {x: 1, y: 2};
+          tile.sizeX = 1;
+          tile.sizeY = 2;
           break;
         case 'large':
-          tile.size = {x: 2, y: 2};
+          tile.sizeX = 2;
+          tile.sizeY = 2;
           break;
       }
       return tile;
