@@ -12,9 +12,16 @@ angular.module('app')
       mobileBreakPoint: 749,
       outerMargin: false,
       maxRows: 1000,
+      draggable: {
+        enabled: $scope.user.id === $scope.currentUser.id
+      },
       resizable: {
+        enabled: $scope.user.id === $scope.currentUser.id,
+        handles: ['e', 's','se'],
         stop: function(event, $element, widget) {
-          console.log(widget);
+          var updateData = Restangular.one('users', user.id).one('tiles', widget.id);
+          updateData.size = getTileSize({x: widget.sizeX, y: widget.sizeY});
+          updateData.put();
         }
       }
     };
@@ -31,7 +38,7 @@ angular.module('app')
           tile.sizeX = 1;
           tile.sizeY = 1;
           break;
-        case 'medium':
+        case 'middle':
           tile.sizeX = 1;
           tile.sizeY = 2;
           break;
@@ -39,7 +46,17 @@ angular.module('app')
           tile.sizeX = 2;
           tile.sizeY = 2;
           break;
+        case 'vertical':
+          tile.sizeX = 1;
+          tile.sizeY = 2;
       }
       return tile;
+    }
+
+    function getTileSize(sizes) {
+      if (sizes.x == 1 && sizes.y == 1) { return 'small'; }
+      if (sizes.x == 2 && sizes.y == 1) { return 'middle'; }
+      if (sizes.x == 2 && sizes.y == 2) { return 'large'; }
+      if (sizes.x == 1 && sizes.y == 2) { return 'vertical'; }
     }
   });

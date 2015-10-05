@@ -5,7 +5,7 @@ class Tile < ActiveRecord::Base
   belongs_to :content, polymorphic: true # Album | Photo | Video | Text | Tribute
 
   # Enums
-  enum size: [:small, :middle, :large]
+  enum size: [:small, :middle, :large, :vertical]
 
   # Validations
   validates :user, :weight, :size, presence: true
