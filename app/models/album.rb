@@ -32,8 +32,8 @@ class Album < ActiveRecord::Base
     end
   end
 
-  def create_tile_on_user_page
-    self.create_tile(user: self.user)
+  def create_tile_on_user_page(size = :small)
+    self.create_tile(size: size, user: self.user)
   end
 
   def check_for_default

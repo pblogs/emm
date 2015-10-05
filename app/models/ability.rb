@@ -20,7 +20,7 @@ class Ability
       can :update, Record do |record|
         record.album.user_id == user.id
       end
-      can :update, Tile, user_id: user.id
+      can [:update, :create, :destroy], Tile, user_id: user.id
       can [:index, :show], Tribute, user_id: user.id
       can :create, Tribute, author_id: user.id
       can [:update], Comment, author_id: user.id
