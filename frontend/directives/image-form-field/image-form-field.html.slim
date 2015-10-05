@@ -1,7 +1,7 @@
 .image-form-field
   .image-preview ng-show="object[fieldUrl]"
     img ng-src="{{object[fieldUrl].original}}" ng-style="{ 'height': ((height || 300) + 'px') }"
-    button.e-btn.btn-danger.image-remove-btn type="button" ng-click="removeImage()"
+    .btn.e-btn.btn-danger.image-remove-btn ng-click="removeImage()"
       i.fa.fa-times-circle>
       | Remove {{pictureName || 'image'}}
 
