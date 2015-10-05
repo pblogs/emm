@@ -13,12 +13,13 @@ angular.module('app')
     };
 
     function set(user) {
-      if (user.background_url) {
+      bg = undefined;
+      if (user && user.background_url) {
         bg =  {'background-image': 'url(' + user.background_url.original + ')'}
       }
     }
 
     function get() {
-        return undefined || bg;
+        return bg;
     }
   });
