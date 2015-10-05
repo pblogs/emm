@@ -39,8 +39,8 @@ angular.module('app')
           tile.sizeY = 1;
           break;
         case 'middle':
-          tile.sizeX = 1;
-          tile.sizeY = 2;
+          tile.sizeX = 2;
+          tile.sizeY = 1;
           break;
         case 'large':
           tile.sizeX = 2;
@@ -54,9 +54,9 @@ angular.module('app')
     }
 
     function getTileSize(sizes) {
-      if (sizes.x == 1 && sizes.y == 1) { return 'small'; }
-      if (sizes.x == 2 && sizes.y == 1) { return 'middle'; }
-      if (sizes.x == 2 && sizes.y == 2) { return 'large'; }
-      if (sizes.x == 1 && sizes.y == 2) { return 'vertical'; }
+      if (sizes.x == 1 && sizes.y == 1)  return 'small';
+      if (sizes.x == 2 && sizes.y == 1)  return 'middle';
+      if (sizes.x == 2 && sizes.y == 2)  return 'large';
+      if (sizes.x == 1 && sizes.y == 2)  return 'vertical';
     }
   });
