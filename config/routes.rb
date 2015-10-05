@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get :by_alias, on: :collection, to: 'users#show'
       resource :password, only: :update, controller: 'users/passwords'
       resources :tributes, only: [:create, :show, :index]
-      resources :tiles, only: [:index, :update]
+      resources :tiles, only: [:index, :update, :destroy]
       resources :albums, except: [:new, :edit]
     end
     resources :albums, only: [] do
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
     scope ':target_type/:target_id', target_type: /(album|tribute|video|photo|text)/ do
       resources :comments, only: [:index, :create, :update, :destroy, :show]
+      resources :tiles, only: :create
     end
   end
 
