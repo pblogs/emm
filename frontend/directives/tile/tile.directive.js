@@ -17,7 +17,7 @@ angular.module('app')
       },
       controller: function($scope) {
         $scope.content = $scope.tile.content;
-        $scope.getTemplate = 'directives/tile/templates/' + $scope.tile.content_type + '.html'
+        $scope.getTemplate = 'directives/tile/templates/' + $scope.tile.content_type + '.html';
       }
     };
   });

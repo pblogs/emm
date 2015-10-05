@@ -44,15 +44,15 @@ angular.module('app')
     }
 
     function updateTileSize(tile, size) {
-      tile.size = size;
-      tile.put()
+      var updateData = Restangular.one('users', user.id).one('tiles', tile.id);
+      updateData.size = size;
+      updateData.put()
         .then(function(tileFromServer) {
           _.assign(tile, setGridsterTileSize(tileFromServer));
         });
     }
 
     function destroyTile(tile) {
-      console.log(tile);
       tile.remove()
         .then(function () {
           _.pull($scope.tilesLoader.items, tile);

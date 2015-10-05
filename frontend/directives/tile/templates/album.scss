@@ -3,13 +3,25 @@
 .tile.album {
   .album-content-wrapper {
     border-bottom: 1px solid $e-brown;
-    height: 80%;
+    height: 85%;
     overflow: hidden;
+
+    &.small {
+      padding: 0 15px;
+      height: 100%;
+
+      .small-album img{
+        margin-top: -20px;
+      }
+    }
   }
+
+
   .album-title {
     border-top: 4px solid $e-red;
     height: 50px;
     overflow: hidden;
+  }
 
     .big-count {
       display: inline-block;
@@ -37,7 +49,6 @@
         overflow: hidden;
       }
     }
-  }
 
   .description {
     .description-content {
