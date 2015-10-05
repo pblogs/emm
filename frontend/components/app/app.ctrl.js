@@ -8,9 +8,13 @@ angular.module('app')
     $scope.getBackground = getBackground;
     $scope.currentUser = currentUser;
 
-
+    var setBg = true;
     function getBackground() {
-        return Background.get();
+      if (setBg) {
+        Background.set(currentUser);
+        setBg = false;
+      }
+      return Background.get();
     }
 
     // When user logs in/out we reload CurrentUser service and all bindings will be updated

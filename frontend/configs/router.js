@@ -50,6 +50,9 @@ angular.module('app')
             return Restangular.one('users', $stateParams.userId).get()
               .catch(Handle404);
           }
+        },
+        onExit: function(Background, currentUser) {
+          Background.set(currentUser);
         }
       })
       .state('app.user.show', {
