@@ -18,20 +18,21 @@ angular.module('app')
     loadTiles();
 
     function loadTiles() {
-      $scope.tilesLoader = Restangular.one('users', user.id).all('tiles').toCollection(10);
+      $scope.tilesLoader = Restangular.one('users', user.id).all('tiles').toCollection(10, {}, setTileSize);
     }
 
-    $scope.getTileSize = function(tile) {
+    function setTileSize(tile) {
       switch (tile.size) {
-        case "small" :
-          return {x: 1, y: 1};
+        case 'small':
+          tile.size = {x: 1, y: 1};
           break;
-        case "medium" :
-          return {x: 1, y: 2};
+        case 'medium':
+          tile.size = {x: 1, y: 2};
           break;
-        case "large" :
-          return {x: 2, y: 2};
+        case 'large':
+          tile.size = {x: 2, y: 2};
           break;
       }
+      return tile;
     }
   });

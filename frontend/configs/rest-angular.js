@@ -49,7 +49,7 @@ angular.module('app')
     }
 
     // Use this method on Restangular collection to request object page by page using "nextPage" method
-    function toCollection(itemsPerPage, params) {
+    function toCollection(itemsPerPage, params, itemProcessor) {
       var page = 1,
         itemsPerPageIn = itemsPerPage || 10,
         paramsIn = params,
@@ -69,8 +69,12 @@ angular.module('app')
 
         result.nextPagePromise = toRequest.getList(params);
         result.nextPagePromise.then(function (collectionData) {
+          var totalCount = collectionData.total;
+          if (itemProcessor) {
+            collectionData = _.map(collectionData, itemProcessor);
+          }
           result.items = result.items.concat(collectionData);
-          if (result.items.length >= collectionData.total || collectionData.length === 0)
+          if (result.items.length >= totalCount || collectionData.length === 0)
             result.allReceived = true;
           else
             page++;
