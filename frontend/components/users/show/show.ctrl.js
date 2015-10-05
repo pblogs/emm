@@ -3,6 +3,7 @@
 angular.module('app')
   .controller('UsersShowCtrl', function ($scope, Restangular, $window, user) {
     $scope.loadTiles = loadTiles;
+    $scope.destroyTile = destroyTile;
 
     $scope.user = user;
     var winSize = getWindowSize();
@@ -17,15 +18,14 @@ angular.module('app')
       outerMargin: false,
       maxRows: 1000,
       draggable: {
-        enabled: $scope.user.id === $scope.currentUser.id
+        enabled: $scope.user.id === $scope.currentUser.id,
+        handle: '.drag-handle'
       },
       resizable: {
         enabled: $scope.user.id === $scope.currentUser.id,
         handles: ['e', 's', 'se'],
         stop: function (event, $element, widget) {
-          var updateData = Restangular.one('users', user.id).one('tiles', widget.id);
-          updateData.size = getTileSize({x: widget.sizeX, y: widget.sizeY});
-          updateData.put();
+          updateTileSize(widget, getTileSize({x: widget.sizeX, y: widget.sizeY}));
         }
       }
     };
@@ -41,6 +41,22 @@ angular.module('app')
     
     function loadTiles() {
       $scope.tilesLoader = Restangular.one('users', user.id).all('tiles').toCollection(10, {}, setGridsterTileSize);
+    }
+
+    function updateTileSize(tile, size) {
+      tile.size = size;
+      tile.put()
+        .then(function(tileFromServer) {
+          _.assign(tile, setGridsterTileSize(tileFromServer));
+        });
+    }
+
+    function destroyTile(tile) {
+      console.log(tile);
+      tile.remove()
+        .then(function () {
+          _.pull($scope.tilesLoader.items, tile);
+        });
     }
     
     function setGridsterTileSize(tile) {

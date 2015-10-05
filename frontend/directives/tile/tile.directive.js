@@ -11,7 +11,9 @@ angular.module('app')
       replace: true,
       templateUrl:  'directives/tile/tile.html',
       scope: {
-        tile: '='
+        tile: '=',
+        editable: '=',
+        onRemove: '='
       },
       controller: function($scope) {
         $scope.content = $scope.tile.content;
