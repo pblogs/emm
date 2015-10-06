@@ -16,8 +16,13 @@
     }
   }
 
+  .vertical {
+    padding: 0 15px;
+  }
+
   .album-title {
-    border-top: 4px solid $e-red;
+    border-top: 4px solid;
+    border-color: $e-red;
     height: 50px;
     overflow: hidden;
   }
@@ -25,7 +30,7 @@
   .big-count {
     display: inline-block;
     padding: 8px;
-    background: $e-red;
+    background-color: $e-red;
     color: $e-white;
     font-size: 24px;
     float: left;
@@ -55,12 +60,13 @@
 
   .description {
     .description-content {
-      max-height: 140px;
+      height: 140px;
       overflow: hidden;
     }
 
     .avatar-wrapper {
       width: 35px;
+      max-height: 35px;
       vertical-align: middle;
       display: inline-block;
       img {
