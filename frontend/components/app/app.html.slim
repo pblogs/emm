@@ -1,6 +1,10 @@
-.app-wrapper ng-style="getBackground()"
+.app-wrapper ng-style="Background.get()"
   nav.navbar.e-navbar
     .container
+      .navbar-header
+        /button.navbar-toggle
+        a ui-sref="app.main" class="navbar-brand" Emmortal
+
       ul.nav.navbar-nav.navbar-right.e-menu
         li
           a href="#"
@@ -17,9 +21,9 @@
             li ng-if="!currentUser.exists()"
               a href="#" ng-click="AuthModal('signIn')" Sign In
             li ng-if="currentUser.exists()"
-              a href="#" ui-sref="app.user.show({userId: currentUser.id})" My profile
+              a ui-sref="app.user.show({userId: currentUser.id})" My profile
             li ng-if="currentUser.exists()"
-              a href="#" ui-sref="app.user.edit.general({userId: currentUser.id})" Settings
+              a ui-sref="app.user.edit.general({userId: currentUser.id})" Settings
             li ng-if="currentUser.exists()"
               a href="#" ng-click="logout()" Logout
 

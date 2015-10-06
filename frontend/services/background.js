@@ -1,25 +1,26 @@
 'use strict';
 
-/**
- * Service for the current user
- */
 angular.module('app')
-  .factory('Background', function () {
-    var bg;
+  .factory('Background', function (CurrentUser) {
+    var currentUser, displayingUser;
+
+    CurrentUser.get()
+      .then(function (user) {
+        currentUser = user;
+      });
 
     return {
-      set: set,
-      get: get
-    };
+      get: function () {
+        var bgUrl = _.get(displayingUser || currentUser, 'background_url.original');
+        return bgUrl ? {'background-image': 'url(' + bgUrl + ')'} : {};
+      },
 
-    function set(user) {
-      bg = undefined;
-      if (user && user.background_url) {
-        bg =  {'background-image': 'url(' + user.background_url.original + ')'}
+      set: function set(user) {
+        displayingUser = CurrentUser.id() === user.id ? currentUser : user;
+      },
+
+      reset: function() {
+        displayingUser = undefined;
       }
-    }
-
-    function get() {
-        return bg;
-    }
+    };
   });

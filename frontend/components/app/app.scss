@@ -26,6 +26,18 @@ html, body {
   border: none;
   margin-bottom: 40px;
 
+  .navbar-header {
+    float: left;
+
+    .navbar-brand {
+      padding: 10px 15px;
+      color: #fff;
+      font-size: 18px;
+      height: auto;
+      float: left;
+    }
+  }
+
   .e-menu {
     li a{
       padding: 10px 15px;

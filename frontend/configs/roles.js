@@ -5,26 +5,23 @@
  */
 angular.module('app')
   .run(function Roles(Permission, $auth, CurrentUser, $q) {
-    Permission.defineRole('anonymous', function() {
+
+    Permission.defineRole('anonymous', function () {
       return !$auth.isAuthenticated();
     });
 
-    _.each(['member', 'admin'], function(role) {
-      Permission.defineRole(role, function() {
-        if (!$auth.isAuthenticated()) {
-          return false;
-        }
+    _.forEach(['member', 'admin'], function (role) {
+      Permission.defineRole(role, function () {
+        if (!$auth.isAuthenticated()) return false;
 
         var deferred = $q.defer();
-        CurrentUser.get().then(function(user) {
-          if (user.role === role) {
-            deferred.resolve();
-          } else {
+        CurrentUser.get('roles')
+          .then(function (user) {
+            user.role === role ? deferred.resolve() : deferred.reject();
+          })
+          .catch(function () {
             deferred.reject();
-          }
-        }, function() {
-          deferred.reject();
-        });
+          });
 
         return deferred.promise;
       });

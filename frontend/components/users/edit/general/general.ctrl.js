@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('UsersEditGeneralCtrl', function ($scope, $http, Notification, CurrentUser, Background) {
+  .controller('UsersEditGeneralCtrl', function ($scope, $http, Notification, CurrentUser) {
     $scope.user = $scope.currentUser.clone();
     $scope.submit = submit;
 
@@ -12,7 +12,6 @@ angular.module('app')
         .then(function (responce) {
           $scope.user = responce.data.resource;
           CurrentUser.reload();
-          Background.set(responce.data.resource);
           Notification.show('Changes was successfully saved!', 'success')
         })
         .catch(function (response) {

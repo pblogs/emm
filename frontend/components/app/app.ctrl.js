@@ -4,21 +4,16 @@ angular.module('app')
   .controller('AppCtrl', function ($scope, CurrentUser, $auth, $state, AuthModal, MediaTypeSelectModal, currentUser, Background) {
     $scope.AuthModal = AuthModal;
     $scope.MediaTypeSelectModal = MediaTypeSelectModal;
+    $scope.Background = Background;
     $scope.logout = logout;
-    $scope.getBackground = getBackground;
     $scope.currentUser = currentUser;
 
-    var setBg = true;
-    function getBackground() {
-      if (setBg) {
-        Background.set(currentUser);
-        setBg = false;
-      }
-      return Background.get();
-    }
+    console.log('app ctrl currentUser', currentUser);
 
     // When user logs in/out we reload CurrentUser service and all bindings will be updated
-    $scope.$watch($auth.isAuthenticated, CurrentUser.reload);
+    $scope.$watch($auth.isAuthenticated, function(newVal, oldVal) {
+      if (newVal != oldVal) CurrentUser.reload();
+    });
 
     function logout() {
       $auth.logout();
