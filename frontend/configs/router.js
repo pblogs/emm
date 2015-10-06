@@ -42,16 +42,16 @@ angular.module('app')
       .state('app.user', {
         url: '/users/{userId:[0-9]+}',
         template: '<div ui-view=""></div>',
-        controller: function(user, Background) {
+        controller: function (user, Background) {
           Background.set(user);
         },
         resolve: {
-          user: function(Restangular, $stateParams, Handle404) {
+          user: function (Restangular, $stateParams, Handle404) {
             return Restangular.one('users', $stateParams.userId).get()
               .catch(Handle404);
           }
         },
-        onExit: function(Background) {
+        onExit: function (Background) {
           Background.reset();
         }
       })
@@ -64,6 +64,9 @@ angular.module('app')
         abstract: true,
         url: '/settings',
         templateUrl: 'components/users/edit/edit.html',
+        onEnter: function (Handle404, currentUser, user) {
+          if (currentUser.id !== user.id) Handle404();
+        },
         data: {
           permissions: {
             except: ['anonymous'],

@@ -8,8 +8,6 @@ angular.module('app')
     $scope.logout = logout;
     $scope.currentUser = currentUser;
 
-    console.log('app ctrl currentUser', currentUser);
-
     // When user logs in/out we reload CurrentUser service and all bindings will be updated
     $scope.$watch($auth.isAuthenticated, function(newVal, oldVal) {
       if (newVal != oldVal) CurrentUser.reload();
