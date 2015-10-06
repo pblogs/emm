@@ -17,7 +17,7 @@ angular.module('app')
       $scope.errors = {};
       $http.put($scope.user.getRestangularUrl(), {resource: $scope.user})
         .then(function (responce) {
-          $scope.user = responce.data.resource;
+          _.assign($scope.user, responce.data.resource);
           CurrentUser.reload();
           Notification.show('Changes was successfully saved!', 'success');
           $scope.$close();

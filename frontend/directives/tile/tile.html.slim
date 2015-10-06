@@ -1,5 +1,5 @@
 .tile.thumbnail.e-draggable class="{{tile.content_type}}"
-  .tile-edit-buttons.pointer ng-if="editable"
+  .tile-edit-buttons ng-if="editable"
     i.fa.fa-times ng-click="onRemove(tile)" tooltip="Remove tile" tooltip-placement="bottom"
     i.fa.fa-bars.drag-handle
   .content-wrapper ng-include="getTemplate"

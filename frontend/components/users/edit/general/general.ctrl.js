@@ -10,7 +10,7 @@ angular.module('app')
       var url = password ? $scope.user.getRestangularUrl() + '/password' : $scope.user.getRestangularUrl();
       $http.put(url, {resource: $scope.user})
         .then(function (responce) {
-          $scope.user = responce.data.resource;
+          _.assign($scope.user, responce.data.resource);
           _.assign(user, responce.data.resource);
           CurrentUser.reload();
           Notification.show('Changes was successfully saved!', 'success')
