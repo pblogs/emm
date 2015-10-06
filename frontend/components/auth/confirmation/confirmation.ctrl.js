@@ -11,13 +11,17 @@ angular.module('app')
         // There may already be another signed in user, so we need to reload current user to get those who confirmed email
         CurrentUser.reload();
         Notification.show('Your email was successfully confirmed!', 'success');
-        $state.go('app.user', {id: CurrentUser.id()});
         $modal
           .open({
             templateUrl: 'components/users/avatar-popup/modal.html',
             controller: 'UserAvatarPopupCtrl',
             windowClass: 'e-modal'
-          });
+          })
+          .result.then(goToUserProfile).catch(goToUserProfile);
+
+        function goToUserProfile() {
+          $state.go('app.user.show', {userId: CurrentUser.id()});
+        }
       })
       .catch(function (response) {
         Notification.showValidationErrors(response.data.errors);

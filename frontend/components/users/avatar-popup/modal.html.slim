@@ -6,11 +6,9 @@ form ng-submit="submit()"
   .modal-body
     .row ng-if="showCanvas"
       .col-sm-6
-        img-input selected-image="user.avatar" height="150" picture-name="avatar"
-        .e-red ng-repeat="error in errors.avatar" {{error}}
-        .m-b-sm.visible-xs
+        image-form-field object="user" field-name="avatar" errors="errors.avatar" height="150" picture-name="avatar"
       .col-sm-6
-        img-input selected-image="user.background" height="150" picture-name="background"
-        .e-red ng-repeat="error in errors.background" {{error}}
+        image-form-field object="user" field-name="background" errors="errors.background" height="150" picture-name="background"
   .modal-footer.text-right
+    button.btn.e-btn.btn-default type="button" ng-click="$dismiss()" Skip
     button.btn.e-btn.btn-primary type="submit" Save

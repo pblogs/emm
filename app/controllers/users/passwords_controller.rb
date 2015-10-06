@@ -4,7 +4,7 @@ class Users::PasswordsController < ApplicationController
   def update
     authorize! :update, @user
     @user.update_with_password update_params
-    render_resource_or_errors @user
+    render_resource_or_errors(@user, serializer: PrivateUserSerializer)
   end
 
   private

@@ -5,7 +5,7 @@ angular.module('app')
     $scope.submit = submit;
 
     CurrentUser.get().then(function (user) {
-      $scope.user = user;
+      $scope.user = user.clone();
     });
 
     // Display canvas only when modal window is rendered so canvas width could be calculated
@@ -16,7 +16,8 @@ angular.module('app')
     function submit() {
       $scope.errors = {};
       $http.put($scope.user.getRestangularUrl(), {resource: $scope.user})
-        .then(function () {
+        .then(function (responce) {
+          $scope.user = responce.data.resource;
           CurrentUser.reload();
           Notification.show('Changes was successfully saved!', 'success');
           $scope.$close();
