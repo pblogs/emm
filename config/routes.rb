@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :tributes, only: [:create, :show, :index]
       resources :tiles, only: [:index, :update, :destroy]
       resources :albums, except: [:new, :edit]
+      resources :pages, only: [:index, :show]
     end
     resources :albums, only: [] do
       resources :records, only: [:index, :update]

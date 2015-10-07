@@ -27,10 +27,12 @@ class Album < ActiveRecord::Base
   # Uploaders
   mount_base64_uploader :cover, AlbumUploader
 
-  def create_tile_on_user_page(size = :small)
-    self.create_tile(size: size, user: self.user)
+  # Methods 
+  def create_tile_on_user_page(page_id=nil)
+    page_id = page_id || self.user.pages.last.id
+    self.create_tile(page_id: page_id)
   end
-
+  
   private
 
   def only_one_default_album

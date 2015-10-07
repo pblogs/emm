@@ -1,7 +1,7 @@
-p.text-center.m-t-10 ng-show="!collectionLoader.busy && collectionLoader.items.length === 0" {{ emptyText || 'Nothing to display...' }}
+.text-center.m-t-10 ng-show="!collectionLoader.busy && collectionLoader.items.length === 0" {{ emptyText || 'Nothing to display...' }}
 
-p.text-center.m-t-10 ng-show="collectionLoader.busy && !collectionLoader.allReceived"
+.text-center.m-t-10 ng-show="collectionLoader.busy && !collectionLoader.allReceived"
   a.btn.btn-warning href="#" Loading...
 
-p.text-center.m-t-10 ng-hide="collectionLoader.busy || collectionLoader.allReceived"
+.text-center.m-t-10 ng-hide="collectionLoader.busy || collectionLoader.allReceived"
   a.btn.btn-default href="#" ng-click="collectionLoader.nextPage()" Load More...

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006081437) do
+ActiveRecord::Schema.define(version: 20151007132957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(version: 20151006081437) do
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["created_at"], name: "index_comments_on_created_at", using: :btree
 
+  create_table "pages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "weight",     default: 0
+    t.boolean  "default",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "pages", ["created_at"], name: "index_pages_on_created_at", using: :btree
+  add_index "pages", ["user_id"], name: "index_pages_on_user_id", using: :btree
+  add_index "pages", ["weight"], name: "index_pages_on_weight", using: :btree
+
   create_table "photos", force: :cascade do |t|
     t.integer  "album_id"
     t.string   "title"
@@ -92,20 +104,20 @@ ActiveRecord::Schema.define(version: 20151006081437) do
   add_index "texts", ["created_at"], name: "index_texts_on_created_at", using: :btree
 
   create_table "tiles", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "content_id"
     t.string   "content_type"
-    t.integer  "weight",       default: 0
-    t.integer  "size",         default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "size",                default: 0
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "page_id"
+    t.integer  "row"
+    t.integer  "column"
+    t.string   "set_for_screen_size"
   end
 
   add_index "tiles", ["content_id"], name: "index_tiles_on_content_id", using: :btree
   add_index "tiles", ["content_type"], name: "index_tiles_on_content_type", using: :btree
   add_index "tiles", ["created_at"], name: "index_tiles_on_created_at", using: :btree
-  add_index "tiles", ["user_id"], name: "index_tiles_on_user_id", using: :btree
-  add_index "tiles", ["weight"], name: "index_tiles_on_weight", using: :btree
 
   create_table "tributes", force: :cascade do |t|
     t.integer  "user_id"

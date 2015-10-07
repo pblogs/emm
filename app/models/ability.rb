@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
 
     can [:index, :show], User
+    can [:index, :show], Page
     can [:index], Album
     can [:show], Album do |album|
       album.for_all?
