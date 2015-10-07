@@ -1,3 +1,9 @@
+/*
+ * This is rewritten version of "Angular-img-cropper" library by AllanBishop (https://github.com/AllanBishop/angular-img-cropper) with removed jQuery dependencies.
+ * Source taken from this live example: http://jsbin.com/fukeqe/9/edit?html,css,js,output
+ * Default size of crop area is changed to match the whole picture (lines 1259-1264; added by @shabliyartem)
+ */
+
 angular.module('angular-img-cropper', []).directive("imageCropper", ['$document', '$window', 'imageCropperDataShare', function ($document, $window, imageCropperDataShare) {
   return {
     scope: {

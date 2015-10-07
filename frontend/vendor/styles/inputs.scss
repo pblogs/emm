@@ -1,0 +1,21 @@
+@import "variables";
+
+input.form-control, textarea.form-control {
+  border-radius: 0;
+  border: 1px solid $e-brown;
+  color: $e-brown;
+  &:focus {
+    box-shadow: 0 0 3px $e-brown;
+    border-color: $e-brown;
+  }
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.has-error {
+  input.form-control, textarea.form-control {
+    color: $e-red;
+  }
+}

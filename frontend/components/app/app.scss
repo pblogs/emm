@@ -1,4 +1,4 @@
-@import "../../vendor/variables";
+@import "../../vendor/styles/variables";
 
 html, body {
   width: 100%;
@@ -11,7 +11,7 @@ html, body {
 
 .app-wrapper {
   width: 100%;
-  background-image: asset_url('components/app/bg.jpg');
+  background-image: asset_url('vendor/images/bg.jpg');
   min-height: 100%;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -51,5 +51,3 @@ html, body {
     }
   }
 }
-
-

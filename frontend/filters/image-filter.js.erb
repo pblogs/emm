@@ -3,8 +3,8 @@
 angular.module('app')
   .filter('imageFilter', function() {
     var images = {
-      avatar: "<%= asset_path('vendor/no_avatar.jpg') %>",
-      album: "<%= asset_path('vendor/no_cover.jpg') %>"
+      avatar: "<%= asset_path('vendor/images/no_avatar.jpg') %>",
+      album: "<%= asset_path('vendor/images/no_cover.jpg') %>"
     };
 
     return function(url, type) {

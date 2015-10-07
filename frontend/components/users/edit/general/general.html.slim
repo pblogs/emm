@@ -1,5 +1,5 @@
-h3.e-title.m-b-lg Personal information
-form.m-b-lg name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
+h3.e-title.m-b-20 Personal information
+form.m-b-20 name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
   .row
     .col-md-6
       .row
@@ -15,15 +15,15 @@ form.m-b-lg name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
       .row
         .col-sm-6
           image-form-field object="user" field-name="avatar" errors="errors.avatar" height="134" picture-name="avatar"
-          .m-b-sm.visible-xs
+          .m-b-10.visible-xs
 
         .col-sm-6
           image-form-field object="user" field-name="background" errors="errors.background" height="134" picture-name="background"
     .col-xs-12.visible-sm.visible-xs
-      .text-right.m-t-sm
+      .text-right.m-t-10
         button.btn.e-btn.btn-primary type="submit" ng-disabled="userInfoForm.$invalid" Save
 
-h3.e-title.m-b-lg Change password
+h3.e-title.m-b-20 Change password
 form name="userPasswordForm" ng-submit="submit('password')" novalidate="novalidate"
   .row
     form-field.col-sm-4 type="password" placeholder="Current password" ng-required="true" ng-model="user.current_password" errors="errors.current_password"

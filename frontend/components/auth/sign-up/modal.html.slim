@@ -16,11 +16,11 @@ form name="signUpForm" ng-submit="submit()" novalidate="novalidate"
 
     e-datepicker ng-model="user.birthday" ng-required="true" datepicker-mode="'year'"
 
-    .m-t-sm.text-center
+    .m-t-10.text-center
       | By clicking Sign Up, you agree to our
       a.e-link< href="#" Terms and conditions
   .modal-footer.text-center
     button.btn.e-btn.btn-primary type="submit" ng-disabled="signUpForm.$invalid" Sign Up
-    p.m-t-md
+    p.m-t-15
       | Already have an account? Please,
       a.e-link< href="javascript:;" ng-click="$dismiss('signIn')" Sign In

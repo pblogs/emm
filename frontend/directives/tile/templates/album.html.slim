@@ -1,6 +1,6 @@
 h4.e-brown Life events
 .row.album-content-wrapper ng-class="{ 'small': tile.size == 'small'}"
-  div ng-class="{ 'small-album': tile.size == 'small', 'col-sm-4': tile.size == 'middle', 'col-sm-6': tile.size == 'large', 'p-r-l-md': tile.size == 'vertical'}"
+  div ng-class="{'small-album': tile.size == 'small', 'col-sm-4': tile.size == 'middle', 'col-sm-6': tile.size == 'large', 'p-l-15 p-r-15': tile.size == 'vertical'}"
     .image-wrapper
       img.img-responsive ng-src="{{content.cover_url.original | imageFilter:'album'}}" draggable="false"
     .album-title ng-show="tile.size == 'large' || tile.size == 'vertical'"
@@ -11,17 +11,17 @@ h4.e-brown Life events
           span< {{content.videos_count}} videos
         .title.e-brown ng-bind="content.title"
 
-  div ng-class="{ 'hidden': tile.size == 'small', 'col-sm-8': tile.size == 'middle', 'col-sm-6': tile.size == 'large', 'p-r-l-md': tile.size == 'vertical'}"
-    .title.f-24.e-brown.font-bold ng-bind="content.title" ng-show="tile.size == 'middle'"
+  div ng-class="{ 'hidden': tile.size == 'small', 'col-sm-8': tile.size == 'middle', 'col-sm-6': tile.size == 'large', 'p-l-15 p-r-15': tile.size == 'vertical'}"
+    .title-alt.e-brown.font-bold ng-bind="content.title" ng-show="tile.size == 'middle'"
     .description
       .e-brown.description-content ng-show="tile.size == 'large'" "{{content.description}}"
-      .e-brown.m-t-lg
+      .e-brown.m-t-20
         .avatar-wrapper
           img.img-responsive ng-src="{{content.user.avatar_url.thumb | imageFilter}}" draggable="false"
         .author-name<
           | Added by
           a.e-link< ui-sref="app.user({id: content.user.id})" {{content.user.first_name + ' ' + content.user.last_name}}
-      .e-brown.m-t-lg ng-if="content.start_date" ng-show="tile.size == 'large'"
+      .e-brown.m-t-20 ng-if="content.start_date" ng-show="tile.size == 'large'"
         | On
         |  {{content.start_date | date: 'longDate'}}
         |  at

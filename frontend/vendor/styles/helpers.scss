@@ -1,0 +1,93 @@
+@import "variables";
+
+// Colours
+
+.e-black-a {
+  color: $e-black-a
+}
+
+.e-white {
+  color: $e-white
+}
+
+.e-black {
+  color: $e-black
+}
+
+.e-brown {
+  color: $e-brown
+}
+
+.e-green {
+  color: $e-green
+}
+
+.e-red {
+  color: $e-red
+}
+
+.e-grey {
+  color: $e-grey
+}
+
+$margins: (0, 5, 10, 15, 20, 25, 30, 40, 50, -10);
+
+@each $margin in $margins {
+  .m-t-#{$margin} {
+    margin-top: #{$margin}px !important;
+  }
+  .m-b-#{$margin} {
+    margin-bottom: #{$margin}px !important;
+  }
+  .m-l-#{$margin} {
+    margin-left: #{$margin}px !important;
+  }
+  .m-r-#{$margin} {
+    margin-right: #{$margin}px !important;
+  }
+}
+
+// Padding helper classes
+
+$paddings: (0, 5, 10, 15, 20, 25, 30, 40, 50, -5, -10, -15, -20, -25, -30, -40, -50);
+
+@each $padding in $paddings {
+  .p-t-#{$padding} {
+    padding-top: #{$padding}px !important;
+  }
+  .p-b-#{$padding} {
+    padding-bottom: #{$padding}px !important;
+  }
+  .p-l-#{$padding} {
+    padding-left: #{$padding}px !important;
+  }
+  .p-r-#{$padding} {
+    padding-right: #{$padding}px !important;
+  }
+}
+
+// Text-aligns
+
+$aligns: (left, center, right);
+
+@each $align in $aligns {
+  .text-#{$align} {
+    text-align: $align;
+  }
+}
+
+// Font weights
+
+$weights: (lighter, normal, bold);
+
+@each $weight in $weights {
+  .font-#{$weight} {
+    font-weight: $weight;
+  }
+}
+
+// Cursor
+
+.pointer {
+  cursor: pointer;
+}

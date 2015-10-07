@@ -1,4 +1,4 @@
-@import "../../../vendor/variables";
+@import "../../../vendor/styles/variables";
 
 .tile.album {
   .album-content-wrapper {
@@ -10,12 +10,11 @@
       padding: 0 15px;
       height: 100%;
 
-      .small-album img{
+      .small-album img {
         margin-top: -20px;
       }
     }
   }
-
 
   .album-title {
     border-top: 4px solid $e-red;
@@ -23,32 +22,36 @@
     overflow: hidden;
   }
 
-    .big-count {
-      display: inline-block;
-      padding: 8px;
-      background: $e-red;
-      color: $e-white;
-      font-size: 24px;
-      float: left;
-      margin-right: 5px;
+  .big-count {
+    display: inline-block;
+    padding: 8px;
+    background: $e-red;
+    color: $e-white;
+    font-size: 24px;
+    float: left;
+    margin-right: 5px;
+  }
+
+  .title-text {
+    padding-top: 5px;
+    .content-count {
+      font-size: 12px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
-    .title-text {
-      padding-top: 5px;
-      .content-count {
-        font-size: 12px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-
-      .title {
-        font-size: 18px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
+    .title {
+      font-size: 18px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
+  }
+
+  .title-alt {
+    font-size: 24px;
+  }
 
   .description {
     .description-content {

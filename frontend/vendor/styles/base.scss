@@ -1,0 +1,25 @@
+@import "variables";
+
+* {
+  font-family: 'Oxygen', sans-serif;
+}
+
+.e-link {
+  color: $e-brown;
+
+  &:hover, &:active, &:focus {
+    color: $e-brown;
+  }
+}
+
+.e-container {
+  padding: 50px 35px;
+  color: $e-brown;
+  background: $e-white;
+}
+
+.e-title {
+  margin-left: 15px;
+  color: $e-brown;
+  margin-top: 0;
+}
