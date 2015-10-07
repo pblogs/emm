@@ -8,6 +8,7 @@ angular.module('app')
     $scope.user = user;
     var winSize = getWindowSize();
     var columnsForWindowSize = {lg: 6, md: 5, sm: 4};
+    $scope.canEditTiles = $scope.user.id === $scope.currentUser.id;
     $scope.gridsterOptions = {
       columns: columnsForWindowSize[winSize],
       minSizeX: 1,
@@ -18,11 +19,11 @@ angular.module('app')
       outerMargin: false,
       maxRows: 1000,
       draggable: {
-        enabled: $scope.user.id === $scope.currentUser.id,
+        enabled: $scope.canEditTiles,
         handle: '.drag-handle'
       },
       resizable: {
-        enabled: $scope.user.id === $scope.currentUser.id,
+        enabled: $scope.canEditTiles,
         handles: ['e', 's', 'se'],
         // When resize is finished
         stop: function (event, $element, tile) {
@@ -39,6 +40,14 @@ angular.module('app')
       function (newVal, oldVal) {
         if (newVal != oldVal) winResizeHandler();
       });
+
+    $scope.$watch('currentUser.id', function (newVal, oldVal) {
+      if (newVal != oldVal) {
+        $scope.canEditTiles = $scope.user.id === $scope.currentUser.id;
+        $scope.gridsterOptions.draggable.enabled = $scope.canEditTiles;
+        $scope.gridsterOptions.resizable.enabled = $scope.canEditTiles;
+      }
+    });
     
     function loadTiles() {
       $scope.tilesLoader = Restangular.one('users', user.id).all('tiles').toCollection(10, {}, gridsterizeTile);

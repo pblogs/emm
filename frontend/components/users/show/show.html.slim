@@ -14,7 +14,7 @@ div gridster="gridsterOptions"
           h3.e-title
             | {{user.first_name + ' ' + user.last_name}}
     li data-gridster-item="tile" ng-repeat="tile in tilesLoader.items"
-      tile tile="tile" editable="user.id === currentUser.id" on-remove="destroyTile"
+      tile tile="tile" editable="canEditTiles" on-remove="destroyTile"
 
 .text-center.m-t-20
   collection-next-page-btn collection="tilesLoader"

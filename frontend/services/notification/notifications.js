@@ -12,7 +12,7 @@ angular.module('app')
 
     function showNotification(message, type) {
       notify({
-        templateUrl: 'vendor/notify.html',
+        templateUrl: 'services/notification/notify.html',
         classes: normalizeClass(type),
         message: $sce.trustAsHtml(message),
         position: 'right',
