@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
     self.albums.find_by_default(true)
   end
 
+  #todo (dummy method)
+  def has_friend_access?(user_id)
+    true if user_id
+  end
+
   # Uploaders
   mount_base64_uploader :avatar, AvatarUploader
   mount_base64_uploader :background, BackgroundUploader

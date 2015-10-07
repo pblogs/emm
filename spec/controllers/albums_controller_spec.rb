@@ -3,15 +3,23 @@ require 'rails_helper'
 RSpec.describe AlbumsController, type: :controller do
   login_user
 
-  let!(:album) { create(:album, user: @user) }
+  let!(:album) { create(:album, :public, user: @user) }
+  let!(:private_album) { create(:album, user: @user) }
+  let(:another_user) { create(:user, :confirmed) }
 
   describe '#index' do
     it 'should response success' do
-      get :index, user_id: @user.id, user_token: @user_token
+      get :index, user_id: @user.id
       expect(response).to be_success
     end
 
-    it 'should return correct albums count' do
+    it 'should return correct albums count for anonymous' do
+      create(:album, user: @user)
+      get :index, user_id: @user.id
+      expect(json_response['meta']['total']).to eq @user.albums.by_privacy('for_all').count
+    end
+
+    it 'should return correct albums count for owner' do
       get :index, user_id: @user.id, user_token: @user_token
       expect(json_response['meta']['total']).to eq @user.albums.count
     end
@@ -45,7 +53,12 @@ RSpec.describe AlbumsController, type: :controller do
 
   describe '#show' do
     it 'should response success' do
-      get :show, id: album.id, user_token: @user_token, user_id: @user.id
+      get :show, id: album.id, user_id: @user.id
+      expect(response).to be_success
+    end
+
+    it 'should response success with another user' do
+      get :show, id: album.id, user_id: @user.id, user_token: another_user.jwt_token
       expect(response).to be_success
     end
 
@@ -53,6 +66,11 @@ RSpec.describe AlbumsController, type: :controller do
       get :show, id: album.id, user_token: @user_token, user_id: @user.id
       album = Album.find(json_response['resource']['id'])
       expect(json_response['resource'].keys).to contain_exactly(*serialized(album).keys)
+    end
+
+    it 'should access denied for anonymous' do
+      get :show, id: private_album.id, user_id: @user.id
+      expect(response).to be_forbidden
     end
   end
 

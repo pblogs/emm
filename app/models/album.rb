@@ -9,8 +9,11 @@ class Album < ActiveRecord::Base
   has_many :records, inverse_of: :album # no need to dependent destroy - record will be destroyed by it's content
   has_many :comments, as: :commentable, dependent: :destroy
 
+  enum privacy: { hidden: 0, for_friends: 1, for_all: 2 }
+
   # Validations
   validates :user, :title, presence: true
+  validates :privacy, inclusion: { in: %w(for_friends for_all) }, unless: :default?
   validate :only_one_default_album, if: :default?
 
   # Callbacks
@@ -19,6 +22,7 @@ class Album < ActiveRecord::Base
 
   # Scopes
   default_scope { order(created_at: :asc) }
+  scope :by_privacy, -> (privacy) { where(privacy: Album.privacies[privacy]) }
 
   # Uploaders
   mount_uploader :cover, AlbumUploader
