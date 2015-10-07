@@ -1,9 +1,17 @@
 class AlbumsController < ApplicationController
   load_resource :user
   load_and_authorize_resource :album, through: :user
+  skip_load_resource :index
 
   def index
-    render_resources(@user.albums)
+    if @user == current_user
+      albums = @user.albums
+    else
+      privacy = @user.has_friend_access?(current_user) ? 'for_friends' : 'for_all'
+      albums = @user.albums.by_privacy(privacy)
+    end
+
+    render_resources(albums)
   end
 
   def show
@@ -28,6 +36,7 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:resource).permit(:title, :description, :cover, :location_name, :latitude, :longitude, :start_date, :end_date)
+    params.require(:resource).permit(:title, :description, :cover, :location_name, :latitude, :longitude, :start_date,
+                                     :color, :privacy, :end_date)
   end
 end

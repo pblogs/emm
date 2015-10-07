@@ -5,7 +5,10 @@ class Ability
     user ||= User.new
 
     can [:index, :show], User
-    can [:index, :show], Album
+    can [:index], Album
+    can [:show], Album do |album|
+      album.for_all?
+    end
     can [:index], Tile
     can [:index], Record
 
@@ -15,6 +18,9 @@ class Ability
       can :update, User, id: user.id
       can [:show, :create, :update, :destroy], [Photo, Text, Video] do |content|
         content.album.user_id == user.id
+      end
+      can [:show], Album do |album|
+        album.for_all? || album.user.has_friend_access?(user.id)
       end
       can :manage, Album, user_id: user.id
       can :update, Record do |record|
