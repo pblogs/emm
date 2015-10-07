@@ -1,5 +1,10 @@
-h1 MAIN PAGE
-.m-t-5 ng-repeat="user in users"
-  a href="#" ui-sref="app.user.show({userId: user.id})"
-    span> ng-bind="user.id"
-    span ng-bind="user.first_name"
+.main-page
+  h1 Emmortal
+  h2 Save your memories in eternity
+  div gridster="gridsterOptions"
+    ul
+      li data-gridster-item="tile" ng-repeat="tile in tilesLoader.items"
+        tile tile="tile" on-remove="destroyTile"
+
+  .text-center.m-t-20
+    collection-next-page-btn collection="tilesLoader"

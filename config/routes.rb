@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :create, :update, :destroy, :show]
       resources :tiles, only: :create
     end
+    resources :main_page, only: :index
   end
 
   match '/(*path)', via: :all, to: frontend_page('index.htm')
