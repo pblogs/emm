@@ -1,0 +1,15 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+.modal-header
+  h3.modal-title ng-bind="content.title"
+.modal-body
+  .show-modal-text
+    .show-description.m-t-15.e-brown.text-justify.p-b-15
+      | "{{content.description || 'No description...'}}"
+    .tile-comments.m-t-10
+      .row
+        .col-sm-6
+          added-by-at author="content.user" created-at="content.created_at" on-link-follow="$close()"
+          comments
+        .col-sm-6
+          tile-show-additional
