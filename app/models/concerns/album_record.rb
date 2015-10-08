@@ -15,8 +15,9 @@ module AlbumRecord
     after_create :create_tile_on_user_page, if: 'album.default?'
   end
 
-  def create_tile_on_user_page(size=:small)
-    self.create_tile(user: self.album.user, size: size)
+  def create_tile_on_user_page(page=nil)
+    page = page || self.album.user.pages.last
+    self.create_tile(page: page)
   end
 
   private

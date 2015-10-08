@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   # Relations
   has_many :albums, inverse_of: :user, dependent: :destroy
   has_many :tributes, inverse_of: :user, dependent: :destroy
-  has_many :tiles, inverse_of: :user # no need to dependent destroy - tile will be destroyed by it's content
+  has_many :pages, inverse_of: :user, dependent: :destroy
+  has_many :tiles, through: :pages
   has_many :comments, foreign_key: :author_id, dependent: :destroy
 
   # Enums
@@ -19,11 +20,15 @@ class User < ActiveRecord::Base
   validates :page_alias, uniqueness: true, length: {minimum: 5}, format: {with:  /\A[a-z0-9\.\-\_]*\z/, }, exclusion: {in: RESERVED_PAGE_ALIASES}, allow_blank: true
 
   # Callbacks
-  after_create :create_default_album
+  after_create :create_default_album, :create_default_page, :create_default_tiles
 
   # Methods
   def default_album
     self.albums.find_by_default(true)
+  end
+
+  def default_page
+    self.pages.find_by_default(true)
   end
 
   #todo (dummy method)
@@ -38,6 +43,15 @@ class User < ActiveRecord::Base
   private
 
   def create_default_album
-    self.albums.create title: I18n.t('default_album.name'), description: I18n.t('default_album.description'), default: true
+    self.albums.create title: I18n.t('default_album.name'), description: I18n.t('default_album.description'), default: true, privacy: :hidden
+  end
+
+  def create_default_page
+    self.pages.create default: true
+  end
+
+  def create_default_tiles
+    self.default_page.tiles.create widget_type: :avatar, row: 0, col: 0, size: :large
+    self.default_page.tiles.create widget_type: :info, row: 0, col: 2, size: :middle
   end
 end

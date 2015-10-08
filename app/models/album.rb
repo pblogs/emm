@@ -9,7 +9,7 @@ class Album < ActiveRecord::Base
   has_many :records, inverse_of: :album # no need to dependent destroy - record will be destroyed by it's content
   has_many :comments, as: :commentable, dependent: :destroy
 
-  enum privacy: { hidden: 0, for_friends: 1, for_all: 2 }
+  enum privacy: { for_all: 0, for_friends: 1, hidden: 2 }
 
   # Validations
   validates :user, :title, presence: true
@@ -27,10 +27,12 @@ class Album < ActiveRecord::Base
   # Uploaders
   mount_base64_uploader :cover, AlbumUploader
 
-  def create_tile_on_user_page(size = :small)
-    self.create_tile(size: size, user: self.user)
+  # Methods 
+  def create_tile_on_user_page(page=nil)
+    page = page || self.user.pages.last
+    self.create_tile(page: page)
   end
-
+  
   private
 
   def only_one_default_album

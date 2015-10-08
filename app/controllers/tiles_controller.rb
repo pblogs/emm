@@ -1,17 +1,11 @@
 class TilesController < ApplicationController
   before_action :load_target, only: :create
-
-  load_resource :user
-  load_resource :tile, through: :user, only: [:update, :destroy]
+  load_resource :page, except: :create
+  load_resource :tile, through: :page, except: :create
   authorize_resource
 
-  def index
-    tiles = @user.tiles.includes(content: :user).page(params[:page]).per(params[:per_page])
-    render_resources(tiles)
-  end
-
   def create
-    @target.create_tile_on_user_page(Tile.sizes[record_params[:size]])
+    @target.create_tile_on_user_page(Page.find(record_params[:page_id]))
     render_resource_or_errors(@target)
   end
 
@@ -32,6 +26,6 @@ class TilesController < ApplicationController
   end
 
   def record_params
-    params.require(:resource).permit(:weight, :size)
+    params.require(:resource).permit(:size)
   end
 end

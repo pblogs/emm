@@ -5,17 +5,18 @@ class Ability
     user ||= User.new
 
     can [:index, :show], User
+    can [:index, :show], Page
     can [:index], Album
     can [:show], Album do |album|
       album.for_all?
     end
-    can [:index], Tile
     can [:index], Record
 
     if user.admin?
       can :manage, :all
     elsif user.persisted?
       can :update, User, id: user.id
+      can [:update_tiles], Page, user_id: user.id
       can [:show, :create, :update, :destroy], [Photo, Text, Video] do |content|
         content.album.user_id == user.id
       end
@@ -26,7 +27,9 @@ class Ability
       can :update, Record do |record|
         record.album.user_id == user.id
       end
-      can [:update, :create, :destroy], Tile, user_id: user.id
+      can [:update, :create, :destroy], Tile do |tile|
+        tile.page.user_id == user.id
+      end
       can [:index, :show], Tribute, user_id: user.id
       can :create, Tribute, author_id: user.id
       can [:update], Comment, author_id: user.id
