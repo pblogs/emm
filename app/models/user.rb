@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates :page_alias, uniqueness: true, length: {minimum: 5}, format: {with:  /\A[a-z0-9\.\-\_]*\z/, }, exclusion: {in: RESERVED_PAGE_ALIASES}, allow_blank: true
 
   # Callbacks
-  after_create :create_default_album, :create_default_page
+  after_create :create_default_album, :create_default_page, :create_default_tiles
 
   # Methods
   def default_album
@@ -48,5 +48,10 @@ class User < ActiveRecord::Base
 
   def create_default_page
     self.pages.create default: true
+  end
+
+  def create_default_tiles
+    self.default_page.tiles.create widget_type: :avatar, row: 0, col: 0, size: :large
+    self.default_page.tiles.create widget_type: :info, row: 0, col: 2, size: :middle
   end
 end

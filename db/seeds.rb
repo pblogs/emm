@@ -22,7 +22,7 @@ def create_media_for_album(album)
   media = FactoryGirl.create media_type, *traits, album: album
   # Sometimes create tile on personal page for media
   if rand > 0.8 && !album.default?
-    media.create_tile_on_user_page [:small, :middle, :large].sample
+    media.create_tile_on_user_page
   end
 end
 

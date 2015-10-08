@@ -9,15 +9,16 @@ angular.module('app')
       restrict: 'E',
       transclude: true,
       replace: true,
-      templateUrl:  'directives/tile/tile.html',
+      templateUrl: 'directives/tile/tile.html',
       scope: {
         tile: '=',
         editable: '=',
-        onRemove: '='
+        onRemove: '=',
+        user: '='
       },
-      controller: function($scope) {
+      controller: function ($scope) {
         $scope.content = $scope.tile.content;
-        $scope.getTemplate = 'directives/tile/templates/' + $scope.tile.content_type + '.html';
+        $scope.getTemplate = 'directives/tile/templates/' + $scope.tile.widget_type + '/' + ($scope.tile.content_type || 'tile') + '.html';
       }
     };
   });
