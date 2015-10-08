@@ -1,0 +1,29 @@
+.pager {
+  position: fixed;
+  right: 10px;
+  top: 40%;
+  top: calc(50% - 50px);
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  .page {
+    width: 14px;
+    height: 14px;
+    margin: 14px 8px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: .2s ease-out;
+
+    &.active {
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    &:not(.active):hover {
+      opacity: 1;
+      transform: scale(1.2, 1.2);
+    }
+  }
+}

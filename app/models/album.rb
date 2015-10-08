@@ -9,7 +9,7 @@ class Album < ActiveRecord::Base
   has_many :records, inverse_of: :album # no need to dependent destroy - record will be destroyed by it's content
   has_many :comments, as: :commentable, dependent: :destroy
 
-  enum privacy: { hidden: 0, for_friends: 1, for_all: 2 }
+  enum privacy: { for_all: 0, for_friends: 1, hidden: 2 }
 
   # Validations
   validates :user, :title, presence: true

@@ -3,7 +3,7 @@ FactoryGirl.define do
     association :user
     title { Faker::Lorem.sentence(1, false, 5) }
     description { Faker::Lorem.sentence(3, false, 20) }
-    privacy 'for_friends'
+    privacy :for_all
   end
 
   trait :with_dates do
@@ -11,8 +11,8 @@ FactoryGirl.define do
     end_date { Faker::Date.between(start_date, Date.today) }
   end
 
-  trait :public do
-    privacy 'for_all'
+  trait :private do
+    privacy :for_friends
   end
 
   trait :with_location do

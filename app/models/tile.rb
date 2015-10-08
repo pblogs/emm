@@ -7,15 +7,16 @@ class Tile < ActiveRecord::Base
 
   # Enums
   enum size: [:small, :middle, :large, :vertical]
+  enum screen_size: [:lg, :md, :sm]
 
   # Validations
   validates :page, :size, presence: true
 
   # Scopes
-  default_scope { order(row: :asc).order(column: :asc).order(created_at: :asc) } # Order by rows and columns (top left is first). Oldest tiles appears first if rows and columns are not set
+  default_scope { order(row: :asc).order(col: :asc).order(created_at: :asc) } # Order by rows and columns (top left is first). Oldest tiles appears first if rows and columns are not set
 
   # Callbacks
-  before_destroy :remove_empty_page
+  after_destroy :remove_empty_page
 
   private
 

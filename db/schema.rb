@@ -106,13 +106,13 @@ ActiveRecord::Schema.define(version: 20151007132957) do
   create_table "tiles", force: :cascade do |t|
     t.integer  "content_id"
     t.string   "content_type"
-    t.integer  "size",                default: 0
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.integer  "size",         default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "page_id"
     t.integer  "row"
-    t.integer  "column"
-    t.string   "set_for_screen_size"
+    t.integer  "col"
+    t.integer  "screen_size",  default: 0
   end
 
   add_index "tiles", ["content_id"], name: "index_tiles_on_content_id", using: :btree

@@ -13,8 +13,8 @@ div gridster="gridsterOptions"
             | ({{user.birthday | date : 'longDate'}} - )
           h3.e-title
             | {{user.first_name + ' ' + user.last_name}}
-    li data-gridster-item="tile" ng-repeat="tile in tilesLoader.items"
+    li data-gridster-item="tile" ng-repeat="tile in currentPage.tiles"
       tile tile="tile" editable="canEditTiles" on-remove="destroyTile"
 
-.text-center.m-t-15
-  collection-next-page-btn collection="tilesLoader"
+.pager ng-if="pages.length > 1"
+  .page ng-repeat="page in pages" ng-class="{'active': page.id == currentPage.id}" ng-click="loadPage(page)"

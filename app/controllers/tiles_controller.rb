@@ -1,13 +1,8 @@
 class TilesController < ApplicationController
   before_action :load_target, only: :create
-  load_resource :user, except: :create
-  load_resource :tile, through: :user, except: :create
+  load_resource :page, except: :create
+  load_resource :tile, through: :page, except: :create
   authorize_resource
-
-  def index
-    tiles = @user.tiles.includes(content: :user).page(params[:page]).per(params[:per_page])
-    render_resources(tiles)
-  end
 
   def create
     @target.create_tile_on_user_page(record_params[:page])
