@@ -17,5 +17,5 @@ html(lang="en" data-ng-app="app")
 
   body
     #app(ui-view="")
-
+    script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"
     = javascript_include_tag 'manifests/application'

@@ -1,6 +1,6 @@
 .e-datepicker.m-b-10
   p.input-group
-    input.form-control show-button-bar="false" show-weeks="false" ng-model="ngModel" is-open="openDatePicker" datepicker-popup="" max-date="31.12.2199" min-date="01.01.1900" ng-required="ngRequired" type="text" datepicker-mode="datepickerMode"
+    input.form-control show-button-bar="false" show-weeks="false" ng-model="ngModel" is-open="openDatePicker" datepicker-popup="" max-date="31.12.2199" min-date="minDate" ng-required="ngRequired" type="text" datepicker-mode="datepickerMode" ng-disabled="ngDisabled"
     span.input-group-btn
-      button.btn.e-btn ng-click="openDatePicker = !openDatePicker" type="button"
+      button.btn.e-btn ng-click="openDatePicker = !openDatePicker" type="button" ng-disabled="ngDisabled"
         i.glyphicon.glyphicon-calendar

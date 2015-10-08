@@ -5,7 +5,15 @@
     border-radius: 0;
     padding: 10px 0 5px 0;
     width: 100%;
+    color: $e-brown;
+    border: none;
+    transition: background 0.2s ease, color 0.2s ease;
     margin-bottom: 15px;
+
+    &:active {
+      color: $e-white;
+      box-shadow: none;
+    }
 
     i.fa {
       font-size: 40px;

@@ -1,0 +1,8 @@
+.color-picker
+  .select ng-click="showColors = !showColors"
+    span ng-hide="ngModel" Select color
+    span.color-preview> ng-style="{'background-color': ngModel}" ng-if="ngModel"
+    span.color-name ng-bind="colorName()" ng-style="{'color': ngModel}" ng-if="ngModel"
+    .colors-section ng-show="showColors"
+      .e-brown.font-bold.m-l-xs Select a color:
+      .color ng-style="{'background-color': color}" ng-click="selectColor(color)" ng-repeat="color in colors"

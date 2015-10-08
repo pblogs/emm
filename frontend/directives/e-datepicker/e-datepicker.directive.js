@@ -12,7 +12,9 @@ angular.module('app')
       scope: {
         ngModel: "=",
         ngRequired: '=',
-        datepickerMode: "="
+        ngDisabled: '=',
+        datepickerMode: "=",
+        minDate: '='
       }
     };
   });

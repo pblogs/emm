@@ -25,7 +25,7 @@ class Album < ActiveRecord::Base
   scope :by_privacy, -> (privacy) { where(privacy: Album.privacies[privacy]) }
 
   # Uploaders
-  mount_uploader :cover, AlbumUploader
+  mount_base64_uploader :cover, AlbumUploader
 
   private
 
