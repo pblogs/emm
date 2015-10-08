@@ -5,7 +5,7 @@ class TilesController < ApplicationController
   authorize_resource
 
   def create
-    @target.create_tile_on_user_page(record_params[:page])
+    @target.create_tile_on_user_page(Page.find(record_params[:page_id]))
     render_resource_or_errors(@target)
   end
 

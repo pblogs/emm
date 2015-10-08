@@ -28,9 +28,9 @@ class Album < ActiveRecord::Base
   mount_base64_uploader :cover, AlbumUploader
 
   # Methods 
-  def create_tile_on_user_page(page_id=nil)
-    page_id = page_id || self.user.pages.last.id
-    self.create_tile(page_id: page_id)
+  def create_tile_on_user_page(page=nil)
+    page = page || self.user.pages.last
+    self.create_tile(page: page)
   end
   
   private
