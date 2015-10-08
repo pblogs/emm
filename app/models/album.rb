@@ -27,6 +27,10 @@ class Album < ActiveRecord::Base
   # Uploaders
   mount_base64_uploader :cover, AlbumUploader
 
+  def create_tile_on_user_page(size = :small)
+    self.create_tile(size: size, user: self.user)
+  end
+
   private
 
   def only_one_default_album
@@ -34,10 +38,6 @@ class Album < ActiveRecord::Base
       errors.add(:default, I18n.t('activerecord.errors.models.album.default_album.only_one_allowed'))
       false
     end
-  end
-
-  def create_tile_on_user_page(size = :small)
-    self.create_tile(size: size, user: self.user)
   end
 
   def check_for_default
