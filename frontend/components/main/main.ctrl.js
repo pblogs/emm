@@ -15,10 +15,11 @@ angular.module('app').controller('MainCtrl', function ($scope, Restangular, $win
     outerMargin: false,
     maxRows: 1000,
     draggable: {
-      enabled: false,
-      handle: '.drag-handle'
+      enabled: false
     },
-    resizable: false
+    resizable: {
+      enabled: false
+    }
   };
 
   loadTiles();
