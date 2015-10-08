@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('AlbumsNewModalCtrl', function($scope, $timeout, CurrentUser, $modalInstance, Notification, Restangular, MediaTypeSelectModal, caller) {
+  .controller('AlbumsNewModalCtrl', function($scope, $timeout, CurrentUser, $modalInstance, Notification, Restangular, MediaTypeSelectModal, $state, caller) {
     $scope.submit = submit;
     $scope.changeStep = changeStep;
     $scope.back = back;
@@ -38,6 +38,7 @@ angular.module('app')
         .then(function() {
           Notification.show('Album "' + $scope.album.title + '" has been created!', 'success');
           $modalInstance.close();
+          $state.go('app.user.show', {userId: CurrentUser.id()}, {reload: true});
         })
         .catch(function(response) {
           Notification.showValidationErrors(response.data.errors);

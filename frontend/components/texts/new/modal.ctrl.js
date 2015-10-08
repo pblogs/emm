@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('TextsNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, caller) {
+  .controller('TextsNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $state, caller) {
     $scope.text = {};
     $scope.submit = submit;
     $scope.back = back;
@@ -17,7 +17,8 @@ angular.module('app')
       Restangular.one('albums', $scope.text.album_id).all('texts').post($scope.text)
         .then(function (text) {
           Notification.show('Text record was successfully added', 'success');
-          $scope.$close()
+          $scope.$close();
+          $state.go('app.user.show', {userId: CurrentUser.id()}, {reload: true});
         })
         .catch(function (response) {
           $scope.errors = response.data.errors;

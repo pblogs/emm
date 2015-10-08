@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('PhotosNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $timeout, caller) {
+  .controller('PhotosNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $timeout, $state, caller) {
     $scope.photo = {image: null};
     $scope.submit = submit;
     $scope.back = back;
@@ -22,7 +22,8 @@ angular.module('app')
       Restangular.one('albums', $scope.photo.album_id).all('photos').post($scope.photo)
         .then(function (photo) {
           Notification.show('Photo was successfully added', 'success');
-          $scope.$close()
+          $scope.$close();
+          $state.go('app.user.show', {userId: CurrentUser.id()}, {reload: true});
         })
         .catch(function (response) {
           $scope.errors = response.data.errors;
