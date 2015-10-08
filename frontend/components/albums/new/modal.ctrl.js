@@ -8,12 +8,12 @@ angular.module('app')
     $scope.step = 'components/albums/new/step1.html';
     $scope.album = {
       cover: null,
-      privacy: 2,
+      privacy: 'for_all',
       color: '#b4504e',
       start_date: null,
       end_date: null
     };
-    $scope.privacyList = [{label: 'Public', value: 2}, {label: 'Friends', value: 1}];
+    $scope.privacyList = [{label: 'Public', value: 'for_all'}, {label: 'Friends', value: 'for_friends'}];
     Restangular.all('users').getList().then(function(users) {
       $scope.users = users;
     });
