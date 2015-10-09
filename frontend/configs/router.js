@@ -56,7 +56,7 @@ angular.module('app')
         }
       })
       .state('app.user.show', {
-        url: '/profile',
+        url: '/profile?{page:[0-9]+}',
         templateUrl: 'components/users/show/show.html',
         controller: 'UsersShowCtrl'
       })

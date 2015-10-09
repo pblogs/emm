@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('UsersShowCtrl', function ($scope, Restangular, WindowSize, TileSizes, user) {
+  .controller('UsersShowCtrl', function ($scope, Restangular, WindowSize, TileSizes, $state, Handle404, user) {
     $scope.loadPage = loadPage;
     $scope.updateTiles = updateTiles;
     $scope.destroyTile = destroyTile;
@@ -20,7 +20,11 @@ angular.module('app')
       Restangular.one('users', user.id).all('pages').getList()
         .then(function (pages) {
           $scope.pages = pages;
-          loadPage(pages[0]);
+          if ($state.params.page) {
+            var pageToLoad = pages[$state.params.page - 1]; // zero-based pages array
+            pageToLoad == null ? Handle404() : loadPage(pageToLoad);
+          }
+          else loadPage(pages[0]);
         });
     }
 
@@ -29,6 +33,8 @@ angular.module('app')
         .then(function (pageFromServer) {
           _.forEach(pageFromServer.tiles, gridsterizeTile);
           $scope.currentPage = pageFromServer;
+          var pageIdx = _.findIndex($scope.pages, {id: pageFromServer.id});
+          $state.go('app.user.show', {user_id: user.id, page: pageIdx > 0 ? pageIdx + 1 : undefined}, {notify: false});
         });
     }
 
