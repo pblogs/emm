@@ -1,20 +1,27 @@
 .e-close-modal ng-click="$dismiss()"
   .fa.fa-close
+.modal-header.text-center
+  h3.modal-title ng-hide="photo.id" Add new photo
+  h3.modal-title ng-show="photo.id" Edit photo
 form ng-submit="submit()"
   .modal-body.photo-popup
     .row
       .col-md-6
         div ng-if="showCanvas"
-          img-input selected-image="photo.image" height="350"
-          .e-red ng-repeat="error in errors.image" {{error}}
+          image-form-field object="photo" field-name="image" errors="errors.image" height="350" picture-name="photo"
 
       .col-md-6
         form-field placeholder="Title" ng-model="photo.title" errors="errors.title"
         form-field type="textarea" placeholder="Description" ng-model="photo.description" errors="errors.description" rows="5"
-
-        select ng-model="photo.album_id"
-          option ng-repeat="album in albums" value="{{album.id}}" {{ album.title }}
+        .row
+          .col-sm-4
+            select e-select="" ng-options="album.id as album.title for album in albums" ng-model="photo.album_id"
 
   .modal-footer.text-right
-    button.btn.e-btn.btn-default type="button" ng-click="back()" Back
-    button.btn.e-btn.btn-primary type="submit" Publish
+    span ng-if="!photo.id"
+      button.btn.e-btn.btn-default type="button" ng-click="back()" Back
+      button.btn.e-btn.btn-primary type="submit" Publish
+
+    span ng-if="photo.id"
+      button.btn.e-btn.btn-default type="button" ng-click="$dismiss('close')" Cancel
+      button.btn.e-btn.btn-primary type="submit" Save
