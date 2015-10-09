@@ -1,10 +1,7 @@
 .main-page
   h1 Emmortal
   h2 Save your memories in eternity
-  div gridster="gridsterOptions"
-    ul
-      li data-gridster-item="tile" ng-repeat="tile in tilesLoader.items"
-        tile tile="tile" on-remove="destroyTile"
+  grid tiles="tilesLoader.items"
 
   .text-center.m-t-20
     collection-next-page-btn collection="tilesLoader"

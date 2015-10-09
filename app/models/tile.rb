@@ -16,9 +16,6 @@ class Tile < ActiveRecord::Base
   validates :page, :size, presence: true
   validates :content, presence: true, if: :media?
 
-  # Scopes
-  default_scope { order(row: :asc).order(col: :asc).order(created_at: :asc) } # Order by rows and columns (top left is first). Oldest tiles appears first if rows and columns are not set
-
   # Callbacks
   before_create :check_for_free_space_on_page
   after_destroy :remove_empty_page

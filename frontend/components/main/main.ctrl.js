@@ -34,7 +34,7 @@ angular.module('app').controller('MainCtrl', function ($scope, Restangular, $win
 
   function loadTiles() {
     //('retailers').getList(params)
-    $scope.tilesLoader = Restangular.all('main_page').toCollection(10, {}, gridsterizeTile);
+    $scope.tilesLoader = Restangular.all('main_page').toCollection(24, {}, gridsterizeTile);
   }
 
   function gridsterizeTile(tile) {
