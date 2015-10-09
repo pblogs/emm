@@ -1,7 +1,8 @@
 .e-close-modal ng-click="$dismiss()"
   .fa.fa-close
 .modal-header.text-center
-  h3.modal-title Create new text entry
+  h3.modal-title ng-hide="text.id" Create new text entry
+  h3.modal-title ng-show="text.id" Edit text entry
 form ng-submit="submit()"
   .modal-body.text-popup
     .row
@@ -9,9 +10,15 @@ form ng-submit="submit()"
         form-field placeholder="Title" ng-model="text.title" errors="errors.title"
         form-field type="textarea" placeholder="Description" ng-model="text.description" errors="errors.description" rows="5"
 
-        select ng-model="text.album_id"
-          option ng-repeat="album in albums" value="{{album.id}}" {{ album.title }}
+    .row
+      .col-sm-4
+        select e-select="" ng-options="album.id as album.title for album in albums" ng-model="text.album_id"
 
   .modal-footer.text-right
-    button.btn.e-btn.btn-default type="button" ng-click="back()" Back
-    button.btn.e-btn.btn-primary type="submit" Publish
+    span ng-if="!text.id"
+      button.btn.e-btn.btn-default type="button" ng-click="back()" Back
+      button.btn.e-btn.btn-primary type="submit" Publish
+
+    span ng-if="text.id"
+      button.btn.e-btn.btn-default type="button" ng-click="$dismiss('close')" Cancel
+      button.btn.e-btn.btn-primary type="submit" Save

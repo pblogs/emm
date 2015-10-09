@@ -1,4 +1,4 @@
-grid tiles="currentPage.tiles" editable="canEditTiles" on-resize="updateTiles" on-reorder="updateTiles" on-remove="destroyTile" user="user"
+grid tiles="currentPage.tiles" on-edit="editTile" editable="canEditTiles" on-resize="updateTiles" on-reorder="updateTiles" on-remove="destroyTile" user="user"
 
 .pager ng-if="pages.length > 1"
   .page ng-repeat="page in pages" ng-class="{'active': page.id == currentPage.id}" ng-click="loadPage(page)"

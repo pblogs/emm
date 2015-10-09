@@ -12,6 +12,7 @@ angular.module('app')
       scope: {
         tile: '=',
         editable: '=',
+        onEdit: '=',
         onRemove: '=',
         user: '='
       },

@@ -25,6 +25,6 @@ class TextsController < ApplicationController
   private
 
   def text_params
-    params.require(:resource).permit(:title, :description)
+    params.require(:resource).permit(:album_id, :title, :description)
   end
 end
