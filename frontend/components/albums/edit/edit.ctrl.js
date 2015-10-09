@@ -3,12 +3,12 @@
 angular.module('app')
   .controller('AlbumsEditModalCtrl', function($scope, $timeout, CurrentUser, Notification, Restangular, content) {
     $scope.submit = submit;
+    $scope.step = 1;
     $scope.changeStep = changeStep;
     $scope.step = 'components/albums/new/step1.html';
     $scope.album = _.cloneDeep(content);
     $scope.privacyList = [{label: 'Public', value: 'for_all'}, {label: 'Friends', value: 'for_friends'}];
     if ($scope.album.location_name) $scope.album.location = { description: $scope.album.location_name };
-
     Restangular.all('users').getList().then(function(users) {
       $scope.users = users;
     });
@@ -18,8 +18,10 @@ angular.module('app')
       $scope.showCanvas = true;
     }, 100);
 
+    changeStep(1);
+
     function changeStep(i) {
-      $scope.step = 'components/albums/new/step' + i + '.html';
+      $scope.step = i;
     }
 
     function submit() {

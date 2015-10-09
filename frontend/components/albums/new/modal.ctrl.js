@@ -5,7 +5,7 @@ angular.module('app')
     $scope.submit = submit;
     $scope.changeStep = changeStep;
     $scope.back = back;
-    $scope.step = 'components/albums/new/step1.html';
+    $scope.step = 1;
     $scope.album = {
       cover: null,
       privacy: 'for_all',
@@ -24,7 +24,7 @@ angular.module('app')
     }, 100);
 
     function changeStep(i) {
-      $scope.step = 'components/albums/new/step' + i + '.html';
+      $scope.step = i;
     }
 
     function submit() {
@@ -41,6 +41,7 @@ angular.module('app')
           $state.go('app.user.show', {userId: CurrentUser.id()}, {reload: true});
         })
         .catch(function(response) {
+          $scope.errors = response.data.errors;
           Notification.showValidationErrors(response.data.errors);
         })
     }

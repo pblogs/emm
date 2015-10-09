@@ -8,13 +8,13 @@ form ng-submit="submit()"
     .row
       .col-md-6
         div ng-if="showCanvas"
-          image-form-field object="photo" field-name="image" errors="errors.image" height="350" picture-name="photo"
+          image-form-field object="photo" field-name="image" errors="errors.image" height="360" picture-name="photo"
 
       .col-md-6
         form-field placeholder="Title" ng-model="photo.title" errors="errors.title"
-        form-field type="textarea" placeholder="Description" ng-model="photo.description" errors="errors.description" rows="5"
+        e-description ng-model="photo.description" errors="errors.description"
         .row
-          .col-sm-4
+          .col-sm-5
             select e-select="" ng-options="album.id as album.title for album in albums" ng-model="photo.album_id"
 
   .modal-footer.text-right
@@ -24,4 +24,4 @@ form ng-submit="submit()"
 
     span ng-if="photo.id"
       button.btn.e-btn.btn-default type="button" ng-click="$dismiss('close')" Cancel
-      button.btn.e-btn.btn-primary type="submit" Save
+      button.btn.e-btn.btn-primary type="submit" ng-disabled="!photo.image_url && !photo.image" Save
