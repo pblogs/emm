@@ -1,0 +1,9 @@
+.added-by-at
+  .tile-info.m-t-10
+    .e-brown
+      | Added by
+      a.e-link.font-bold< href="#" ui-sref="app.user.show({userId: author.id})" ng-click="onLinkFollow()" {{author.first_name + ' ' + author.last_name}}
+      span.m-l-5.m-r-5 ng-show="createdAt" |
+      span {{createdAt | date:'MMMM d, y'}}
+      .pull-right
+        like

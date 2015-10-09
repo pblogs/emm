@@ -1,0 +1,13 @@
+@import "variables";
+
+.tile-show-modal {
+  .modal-header, .modal-body {
+    padding: 15px;
+  }
+}
+
+.show-description {
+  border-bottom: 1px solid $e-brown;
+  max-height: 200px;
+  overflow-y: auto;
+}
