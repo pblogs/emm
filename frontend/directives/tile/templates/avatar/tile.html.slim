@@ -1,2 +1,2 @@
-img.img-responsive.e-profile-photo(ng-src="{{user.avatar_url.original | imageFilter:'avatar'}}"
+img.tile-img(ng-src="{{user.avatar_url.original | imageFilter:'avatar'}}"
                                     draggable="false" ui-sref="app.user.edit.general({userId: user.id})")

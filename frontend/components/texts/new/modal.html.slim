@@ -8,9 +8,7 @@ form ng-submit="submit()"
     .row
       .col-xs-12
         form-field placeholder="Title" ng-model="text.title" errors="errors.title"
-        div.m-b-10 ng-class="{'has-error': errors.description.length}"
-          text-angular ng-model="text.description"
-          .e-red ng-repeat="error in errors.description" {{error}}
+        e-description ng-model="text.description" errors="errors.description"
 
     .row
       .col-sm-4
