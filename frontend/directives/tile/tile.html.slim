@@ -1,5 +1,6 @@
 .tile.thumbnail.pointer class="{{tile.content_type}}"
   .tile-edit-buttons ng-if="editable"
     i.fa.fa-times ng-click="onRemove(tile)" tooltip="Remove tile" tooltip-placement="bottom"
-    i.fa.fa-bars.drag-handle
+    i.fa.fa-pencil ng-click="onEdit(tile)" tooltip="Edit tile" tooltip-placement="bottom"
+    i.fa.fa-arrows.drag-handle
   .content-wrapper ng-click="showTile(tile)" ng-include="getTemplate"

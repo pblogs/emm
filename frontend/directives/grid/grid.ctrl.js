@@ -75,6 +75,7 @@ angular.module('app')
         tiles: '=',
         editable: '=',   // Is it allowed to resize, drag and remove tiles
         onResize: '=?',  // Required if editable == true
+        onEdit: '=?', // Required if editable == true
         onReorder: '=?', // Required if editable == true
         onRemove: '=?',  // Required if editable == true
         user: '=?'       // User to display on avatar/info tiles

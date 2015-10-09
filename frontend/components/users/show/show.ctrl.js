@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('app')
-  .controller('UsersShowCtrl', function ($scope, Restangular, WindowSize, TileSizes, $state, Handle404, user) {
+  .controller('UsersShowCtrl', function ($scope, Restangular, WindowSize, TileSizes, $state, $modal, Handle404, user) {
     $scope.loadPage = loadPage;
+    $scope.editTile = editTile;
     $scope.updateTiles = updateTiles;
     $scope.destroyTile = destroyTile;
 
@@ -36,6 +37,23 @@ angular.module('app')
           var pageIdx = _.findIndex($scope.pages, {id: pageFromServer.id});
           $state.go('app.user.show', {user_id: user.id, page: pageIdx > 0 ? pageIdx + 1 : undefined}, {notify: false});
         });
+    }
+
+    function editTile(tile) {
+      $modal
+        .open({
+          templateUrl: 'components/' + tile.content_type + 's/new/modal.html',
+          controller: _.capitalize(tile.content_type) + 'sEditModalCtrl',
+          windowClass: 'e-modal',
+          size: 'lg',
+          resolve: {
+            content: function () {
+              return tile.content;
+            }
+          }
+        }).result.then(function(response) {
+          _.assign(tile.content, response);
+        })
     }
 
     function updateTiles() {
