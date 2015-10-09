@@ -22,5 +22,6 @@
 
 .modal-footer.text-right
   span.btn.e-btn.btn-default ng-click="changeStep(1)" Back
-  span.btn.e-btn.btn-primary ng-click="submit()" Publish
+  span.btn.e-btn.btn-primary ng-if="!album.id" ng-click="submit()" Publish
+  span.btn.e-btn.btn-primary ng-if="album.id" ng-click="submit()" Save
 

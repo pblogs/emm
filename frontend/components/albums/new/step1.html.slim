@@ -16,7 +16,8 @@
           color-picker ng-model="album.color"
 
 .modal-footer.text-right
-  button.btn.e-btn.btn-default type="button" ng-click="back()" Back
+  button.btn.e-btn.btn-default ng-if="!album.id" type="button" ng-click="back()" Back
+  button.btn.e-btn.btn-default ng-if="album.id" type="button" ng-click="$dismiss('close')" Cancel
   button.btn.e-btn.btn-primary type="button" ng-click="changeStep(2)" ng-disabled="!album.title"
     span> Next
     .fa.fa-chevron-right

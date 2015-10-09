@@ -1,5 +1,6 @@
 .e-close-modal ng-click="$dismiss()"
   .fa.fa-close
 .modal-header
-  h3.modal-title.text-center Create new album
+  h3.modal-title.text-center ng-if="!album.id" Create new album
+  h3.modal-title.text-center ng-if="album.id" Edit album
 div ng-include="step"
