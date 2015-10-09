@@ -2,7 +2,8 @@ class Page < ActiveRecord::Base
 
   # Relations
   belongs_to :user, inverse_of: :pages
-  has_many :tiles, inverse_of: :page # no need to dependent destroy - tile will be destroyed by it's content
+  has_many :tiles, -> { order(row: :asc).order(col: :asc).order(created_at: :asc) }, inverse_of: :page
+  # no need to dependent destroy - tile will be destroyed by it's content
 
   # Validations
   validates :user, :weight, presence: true
