@@ -18,6 +18,15 @@ html, body {
   background-size: cover;
 }
 
+.ta-editor {
+  min-height: 300px;
+  height: auto;
+  overflow: auto;
+  font-family: inherit;
+  font-size: 100%;
+  margin:20px 0 0 0;
+}
+
 .e-navbar {
   background: $e-black-a;
   height: 40px;

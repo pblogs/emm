@@ -33,6 +33,7 @@ gem 'faker'
 gem 'database_cleaner'
 
 gem 'kaminari'
+gem 'sanitize'
 
 source 'https://rails-assets.org' do
   # General libs
@@ -53,6 +54,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-animate'
   gem 'rails-assets-angular-loading-bar'
   gem 'rails-assets-angular-gridster'
+  gem 'rails-assets-textAngular'
 end
 
 # File uploading front-end

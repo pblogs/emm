@@ -4,8 +4,7 @@
   h3.modal-title ng-bind="content.title"
 .modal-body
   .show-modal-text
-    .show-description.m-t-15.e-brown.text-justify.p-b-15
-      | "{{content.description || 'No description...'}}"
+    .show-description.m-t-15.e-brown.text-justify.p-b-15 ta-bind='' ng-model="content.description"
     .tile-comments.m-t-10
       .row
         .col-sm-6
