@@ -13,5 +13,7 @@ angular.module('app', [
   'cgNotify',
   'gridster',
   'angularFileUpload',
-  'angular-img-cropper'
+  'angular-img-cropper',
+  'textAngular',
+  'ngSanitize'
 ]);

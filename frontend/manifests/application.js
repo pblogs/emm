@@ -14,6 +14,8 @@
  *= require es5-shim/es5-shim-min
  *= require angularjs-file-upload
  *= require angular-gridster
+ *= require rangy
+ *= require textAngular
  *= require ../module
  *= require_tree ../
  */
