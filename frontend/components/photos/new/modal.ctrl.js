@@ -14,7 +14,7 @@ angular.module('app')
     Restangular.one('users', CurrentUser.id()).all('albums').getList()
       .then(function (albums) {
         $scope.albums = albums;
-        $scope.photo.album_id = albums[0].id.toString();
+        $scope.photo.album_id = albums[0].id;
       });
 
     function submit() {
