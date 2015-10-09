@@ -1,19 +1,17 @@
 'use strict';
 
 angular.module('app')
-  .controller('UsersShowCtrl', function ($scope, Restangular, $window, TileSizes, user) {
+  .controller('UsersShowCtrl', function ($scope, Restangular, WindowSize, TileSizes, user) {
     $scope.loadPage = loadPage;
+    $scope.updateTiles = updateTiles;
     $scope.destroyTile = destroyTile;
 
     $scope.user = user;
     $scope.canEditTiles = $scope.user.id === $scope.currentUser.id;
 
     $scope.$watch('currentUser.id', function (newVal, oldVal) {
-      if (newVal != oldVal) {
+      if (newVal != oldVal)
         $scope.canEditTiles = $scope.user.id === $scope.currentUser.id;
-        $scope.gridsterOptions.draggable.enabled = $scope.canEditTiles;
-        $scope.gridsterOptions.resizable.enabled = $scope.canEditTiles;
-      }
     });
 
     loadPages();
@@ -34,20 +32,9 @@ angular.module('app')
         });
     }
 
-    function gridsterizeTile(tile) {
-      tile.sizeX = TileSizes.getGridsterSize(tile.size).sizeX;
-      tile.sizeY = TileSizes.getGridsterSize(tile.size).sizeY;
-      return tile;
-    }
-
-    function serverizeTile(tile) {
-      tile.size = TileSizes.getServerSize(tile.sizeX, tile.sizeY);
-      return tile;
-    }
-
     function updateTiles() {
       _.forEach($scope.currentPage.tiles, serverizeTile);
-      $scope.currentPage.customPUT(null, 'update_tiles', {screen_size: getWindowSize()})
+      $scope.currentPage.customPUT(null, 'update_tiles', {screen_size: WindowSize.get()})
         .then(function (pageFromServer) {
           _.forEach(pageFromServer.tiles, gridsterizeTile);
           $scope.currentPage = pageFromServer;
@@ -61,57 +48,18 @@ angular.module('app')
         });
     }
 
-    // TODO: Move code below into "grid" directive
-
-    var winSize = getWindowSize();
-    var columnsForWindowSize = {lg: 6, md: 5, sm: 4};
-    $scope.gridsterOptions = {
-      columns: columnsForWindowSize[winSize],
-      minSizeX: 1,
-      minSizeY: 1,
-      maxSizeX: 2,
-      maxSizeY: 2,
-      mobileBreakPoint: 719,
-      outerMargin: false,
-      maxRows: 1000,
-      draggable: {
-        enabled: $scope.canEditTiles,
-        handle: '.drag-handle',
-        stop: updateTiles // When dragging is finished
-      },
-      resizable: {
-        enabled: $scope.canEditTiles,
-        stop: updateTiles // When resize is finished
+    function gridsterizeTile(tile) {
+      tile.sizeX = TileSizes.getGridsterSize(tile.size).sizeX;
+      tile.sizeY = TileSizes.getGridsterSize(tile.size).sizeY;
+      if (tile.screen_size != WindowSize.get()) {
+        tile.row = undefined;
+        tile.col = undefined;
       }
-    };
-
-    $scope.$watch(function () {
-        return $window.innerWidth;
-      },
-      function (newVal, oldVal) {
-        if (newVal != oldVal) winResizeHandler();
-      });
-
-    function winResizeHandler() {
-      var newSize = getWindowSize();
-      if (winSize != newSize) {
-        winSize = newSize;
-        var tiles = _.cloneDeep($scope.currentPage.tiles);
-        _.forEach(tiles, function (e) {
-          e.row = undefined;
-          e.col = undefined;
-        });
-        $scope.currentPage.tiles = [];
-        $scope.gridsterOptions.columns = columnsForWindowSize[winSize];
-        $scope.$applyAsync(function () {
-          $scope.currentPage.tiles = tiles;
-        });
-      }
+      return tile;
     }
 
-    function getWindowSize() {
-      if ($window.innerWidth >= 1200) return 'lg';
-      if ($window.innerWidth >= 992 && $window.innerWidth <= 1999) return 'md';
-      if ($window.innerWidth <= 991) return 'sm';
+    function serverizeTile(tile) {
+      tile.size = TileSizes.getServerSize(tile.sizeX, tile.sizeY);
+      return tile;
     }
   });

@@ -7,7 +7,6 @@ angular.module('app')
   .directive('tile', function () {
     return {
       restrict: 'E',
-      transclude: true,
       replace: true,
       templateUrl: 'directives/tile/tile.html',
       scope: {
