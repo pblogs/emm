@@ -75,6 +75,9 @@
     .tile-img {
       max-height: 100%;
     }
+    .image-wrapper .tile-img{
+      max-width: 100%;
+    }
   }
 
   &.middle, &.large {
@@ -83,4 +86,5 @@
       min-width: 0;
     }
   }
+
 }
