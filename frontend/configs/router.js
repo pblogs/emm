@@ -78,6 +78,11 @@ angular.module('app')
         url: '/general',
         templateUrl: 'components/users/edit/general/general.html',
         controller: 'UsersEditGeneralCtrl'
+      })
+      .state('app.user.edit.security', {
+        url: '/security',
+        templateUrl: 'components/users/edit/security/security.html',
+        controller: 'UsersEditSecurityCtrl'
       });
 
     // Page not found

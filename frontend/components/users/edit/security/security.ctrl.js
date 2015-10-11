@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('app')
-  .controller('UsersEditGeneralCtrl', function ($scope, $http, Notification, CurrentUser, user) {
+  .controller('UsersEditSecurityCtrl', function ($scope, $http, Notification, CurrentUser, user) {
     $scope.user = user.clone();
     $scope.submit = submit;
 
     function submit() {
       $scope.errors = {};
-      var url = $scope.user.getRestangularUrl();
+      var url = $scope.user.getRestangularUrl() + '/password';
       $http.put(url, {resource: $scope.user})
         .then(function (responce) {
           _.assign($scope.user, responce.data.resource);

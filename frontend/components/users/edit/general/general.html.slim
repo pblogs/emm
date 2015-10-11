@@ -1,5 +1,5 @@
-h3.e-title.m-b-20 Personal information
-form.m-b-20 name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
+h3.e-title.m-b-20.m-l-0 Personal information
+form name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
   .row
     .col-md-6
       .row
@@ -9,8 +9,6 @@ form.m-b-20 name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
           form-field type="text" placeholder="Last name" ng-required="true" ng-model="user.last_name" errors="errors.second_name"
       form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
       e-datepicker ng-model="user.birthday" ng-required="true" datepicker-mode="'year'"
-      .text-right.hidden-sm.hidden-xs
-        button.btn.e-btn.btn-primary type="submit" ng-disabled="userInfoForm.$invalid" Save
     .col-md-6
       .row
         .col-sm-6
@@ -19,15 +17,6 @@ form.m-b-20 name="userInfoForm" ng-submit="submit()" novalidate="novalidate"
 
         .col-sm-6
           image-form-field object="user" field-name="background" errors="errors.background" height="134" picture-name="background"
-    .col-xs-12.visible-sm.visible-xs
-      .text-right.m-t-10
-        button.btn.e-btn.btn-primary type="submit" ng-disabled="userInfoForm.$invalid" Save
+  .text-right.m-t-10
+    button.btn.e-btn.btn-primary type="submit" ng-disabled="userInfoForm.$invalid" Save
 
-h3.e-title.m-b-20 Change password
-form name="userPasswordForm" ng-submit="submit('password')" novalidate="novalidate"
-  .row
-    form-field.col-sm-4 type="password" placeholder="Current password" ng-required="true" ng-model="user.current_password" errors="errors.current_password"
-    form-field.col-sm-4 type="password" placeholder="New password" ng-required="true" ng-model="user.password" errors="errors.password"
-    form-field.col-sm-4 type="password" placeholder="Password confirmation" ng-required="true" ng-model="user.password_confirmation" errors="errors.password_confirmation"
-    .text-right.col-xs-12
-      button.btn.e-btn.btn-primary type="submit" ng-disabled="userPasswordForm.$invalid" Save
