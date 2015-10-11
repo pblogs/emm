@@ -1,29 +1,29 @@
 @import "../../vendor/styles/variables";
 
 .ta-editor {
-  margin: 10px 0 5px 0 ;
+  margin: 10px 0 5px;
   border-radius: 0;
   border: 1px solid $e-brown;
   color: $e-brown;
   &:focus {
-    box-shadow: 0 0 3px $e-brown!important;
-    border-color: $e-brown!important;
+    box-shadow: 0 0 3px $e-brown;
+    border-color: $e-brown;
   }
 }
 
 .ta-root.focussed > .ta-scroll-window.form-control {
-  border-color: $e-brown!important;
-  outline: none!important;
+  border-color: $e-brown;
+  outline: none;
   box-shadow: 0 0 3px $e-brown;
 }
 
 
 .has-error {
   .ta-editor {
-    border: 1px solid $e-red!important;
+    border: 1px solid $e-red;
     &:focus {
-      box-shadow: 0 0 3px $e-red!important;
-      border-color: $e-red!important;
+      box-shadow: 0 0 3px $e-red;
+      border-color: $e-red;
     }
   }
 }

@@ -3,7 +3,6 @@
 angular.module('app')
   .controller('AlbumsEditModalCtrl', function($scope, $timeout, CurrentUser, Notification, Restangular, content) {
     $scope.submit = submit;
-    $scope.step = 1;
     $scope.changeStep = changeStep;
     $scope.step = 'components/albums/new/step1.html';
     $scope.album = _.cloneDeep(content);

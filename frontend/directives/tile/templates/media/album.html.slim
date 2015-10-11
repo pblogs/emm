@@ -20,7 +20,7 @@ h4.e-brown Life events
           img.img-responsive ng-src="{{content.user.avatar_url.thumb | imageFilter}}" draggable="false"
         .author-name<
           | Added by
-          a.e-link< ui-sref="app.user({id: content.user.id})" {{content.user.first_name + ' ' + content.user.last_name}}
+          a.e-link< ui-sref="app.user.show({userId: content.user.id})" {{content.user.first_name + ' ' + content.user.last_name}}
       .e-brown.m-t-20 ng-show="tile.size == 'large'"
         span ng-show="content.start_date"
           | On
