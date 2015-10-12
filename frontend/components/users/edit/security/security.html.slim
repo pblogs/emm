@@ -1,0 +1,7 @@
+h3.e-title.m-b-20.m-l-0 Change password
+form name="userPasswordForm" ng-submit="submit()" novalidate="novalidate"
+  form-field type="password" placeholder="Current password" ng-required="true" ng-model="user.current_password" errors="errors.current_password"
+  form-field type="password" placeholder="New password" ng-required="true" ng-model="user.password" errors="errors.password"
+  form-field type="password" placeholder="Password confirmation" ng-required="true" ng-model="user.password_confirmation" errors="errors.password_confirmation"
+  .text-right
+    button.btn.e-btn.btn-primary type="submit" ng-disabled="userPasswordForm.$invalid" Save
