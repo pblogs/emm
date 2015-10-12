@@ -1,11 +1,5 @@
 @import "../../vendor/styles/variables";
 
-.static-tile {
-  .gridster-item-resizable-handler {
-    display: none;
-  }
-}
-
 .tile {
   background: $e-white;
   width: 100%;
@@ -17,9 +11,6 @@
 
   &.avatar, &.info {
     cursor: default !important;
-    .edit-button {
-      display: none !important;
-    }
   }
 
   &:hover {
@@ -31,6 +22,7 @@
   .tile-edit-buttons {
     display: none;
     position: absolute;
+    z-index: 1;
     top: 13px;
     right: 18px;
     font-size: 25px;
@@ -59,32 +51,47 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    img {
-      min-width: 100%;
+    position: relative;
+  }
+
+  &.small, &.large {
+    .tile-img {
+      width: 100%;
+      height: 100%;
     }
   }
 
-  &.small {
+  &.middle {
     .tile-img {
-      max-width: 100% !important;
-      min-height: 0 !important;
+      width: 100%;
+      margin-top: -30%;
     }
   }
 
   &.vertical {
     .tile-img {
-      max-height: 100%;
-    }
-    .image-wrapper .tile-img{
-      max-width: 100%;
+      height: 100%;
+      margin-left: -60%;
     }
   }
+}
 
-  &.middle, &.large {
-    .tile-img {
-      max-width: 100%;
-      min-width: 0;
+.gridster-mobile {
+  .tile {
+    img.tile-img {
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
     }
   }
+}
 
+.gridster-item-resizing {
+  .tile {
+    img.tile-img {
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+    }
+  }
 }

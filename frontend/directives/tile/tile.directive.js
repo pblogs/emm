@@ -34,7 +34,7 @@ angular.module('app')
                   return tile.content;
                 }
               }
-            })
+            });
         }
       }
     };

@@ -4,6 +4,6 @@ class PhotoUploader < BaseUploader
   process resize_to_limit: [1280, 1024]
 
   version :small do
-    process resize_to_fill: [354, 354]
+    process resize_to_fill: [352, 352]
   end
 end
