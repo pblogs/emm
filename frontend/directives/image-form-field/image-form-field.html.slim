@@ -6,6 +6,6 @@
       | Remove {{pictureName || 'image'}}
 
   .image-select ng-show="!object[fieldUrl]"
-    img-input selected-image="object[field]" height="height" picture-name="{{pictureName}}" on-remove="removeImage"
+    img-input selected-image="object[field]" height="height" picture-name="{{pictureName}}" on-remove="removeImage" keep-aspect="keepAspect"
 
   .e-red ng-repeat="error in errors" {{error}}

@@ -46,7 +46,8 @@ angular.module('app')
         resultImage: '=selectedImage',
         height: '=?',
         pictureName: '@?',
-        onRemove: '=?'
+        onRemove: '=?',
+        keepAspect: '=?'
       },
       controller: controller
     };

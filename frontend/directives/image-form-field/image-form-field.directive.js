@@ -32,7 +32,8 @@ angular.module('app')
         field: '@fieldName',
         errors: '=?',
         height: '=?',
-        pictureName: '@?'
+        pictureName: '@?',
+        keepAspect: '=?'
       },
       controller: controller
     };

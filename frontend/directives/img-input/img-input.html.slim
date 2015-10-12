@@ -3,7 +3,7 @@
     i.fa.fa-picture-o
 
   .canvas-wrapper ng-show="cropper.sourceImage"
-    canvas auto-width="" height="{{height || 300}}" image-cropper="" image="cropper.sourceImage" cropped-image="resultImage" crop-width="cropper.resultImageSize.width" crop-height="cropper.resultImageSize.height" min-width="50" min-height="50" keep-aspect="false" crop-area-bounds="cropper.bounds"
+    canvas auto-width="" height="{{height || 300}}" image-cropper="" image="cropper.sourceImage" cropped-image="resultImage" crop-width="cropper.resultImageSize.width" crop-height="cropper.resultImageSize.height" min-width="50" min-height="50" keep-aspect="keepAspect" crop-area-bounds="cropper.bounds"
 
   .btn.e-btn.btn-primary.file-input-btn ng-if="!cropper.sourceImage"
     i.fa.fa-upload>

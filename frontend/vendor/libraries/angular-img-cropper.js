@@ -1258,9 +1258,15 @@ angular.module('angular-img-cropper', []).directive("imageCropper", ['$document'
             imageObj.addEventListener("load", function () {
               var bounds = crop.getBounds();
               bounds.left = 1;
-              bounds.right = this.width;
-              bounds.top = this.height;
               bounds.bottom = 1;
+              if (scope.keepAspect) {
+                bounds.right = Math.min(this.width, this.height);
+                bounds.top = Math.min(this.width, this.height);
+              }
+              else {
+                bounds.right = this.width;
+                bounds.top = this.height;
+              }
               crop.setBounds(bounds);
               crop.setImage(imageObj);
               var img = crop.getCroppedImage(scope.cropWidth, scope.cropHeight);
