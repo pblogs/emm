@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('TextsNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $state, caller) {
+  .controller('TextsNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $state, $rootScope, caller) {
     $scope.text = {};
     $scope.submit = submit;
     $scope.back = back;
@@ -18,7 +18,15 @@ angular.module('app')
         .then(function (text) {
           Notification.show('Text record was successfully added', 'success');
           $scope.$close();
-          $state.go('app.user.show', {userId: CurrentUser.id()}, {reload: true});
+          if (text.tile) {
+            if ($state.includes('app.user.show', {user_id: text.user.id})) {
+              $rootScope.$broadcast('tileAdded', _.merge(text.tile, {content: text.plain()}));
+            }
+            else {
+              $state.go('app.user.show', {user_id: text.user.id, page_id: text.tile.page_id});
+            }
+          }
+          //else if (text.record) { go to album and show the record }
         })
         .catch(function (response) {
           $scope.errors = response.data.errors;

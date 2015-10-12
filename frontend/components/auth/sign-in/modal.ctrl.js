@@ -14,7 +14,7 @@ angular.module('app')
             $auth.setToken(token);
             Notification.show('Welcome!', 'success');
             $modalInstance.close();
-            $state.go('app.user.show', {userId: CurrentUser.id()});
+            $state.go('app.user.show', {user_id: CurrentUser.id()});
           }
         })
         .catch(function (response) {

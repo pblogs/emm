@@ -40,14 +40,14 @@ angular.module('app')
 
       // User states
       .state('app.user', {
-        url: '/users/{userId:[0-9]+}',
+        url: '/users/{user_id:int}',
         template: '<div ui-view=""></div>',
         controller: function (user, Background) {
           Background.set(user);
         },
         resolve: {
           user: function (Restangular, $stateParams, Handle404) {
-            return Restangular.one('users', $stateParams.userId).get()
+            return Restangular.one('users', $stateParams.user_id).get()
               .catch(Handle404);
           }
         },
@@ -56,7 +56,7 @@ angular.module('app')
         }
       })
       .state('app.user.show', {
-        url: '/profile?{page:[0-9]+}',
+        url: '/profile?{page:int}{page_id:int}',
         templateUrl: 'components/users/show/show.html',
         controller: 'UsersShowCtrl',
         reloadOnSearch: false

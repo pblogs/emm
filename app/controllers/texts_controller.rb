@@ -9,7 +9,7 @@ class TextsController < ApplicationController
 
   def create
     @text.save
-    render_resource_or_errors(@text)
+    render_resource_or_errors(@text, with_tile: true)
   end
 
   def update

@@ -15,14 +15,27 @@ angular.module('app')
         $scope.canEditTiles = $scope.user.id === $scope.currentUser.id;
     });
 
+    $scope.$on('tileAdded', function (event, tile) {
+      var page = _.find($scope.pages, {id: tile.page_id});
+      if (page) {
+        loadPage(page);
+      }
+      else {
+        $state.params.page_id = tile.page_id;
+        loadPages();
+      }
+    });
+
     loadPages();
 
     function loadPages() {
       Restangular.one('users', user.id).all('pages').getList()
         .then(function (pages) {
           $scope.pages = pages;
-          if ($state.params.page) {
-            var pageToLoad = pages[$state.params.page - 1]; // zero-based pages array
+          if ($state.params.page || $state.params.page_id) {
+            var pageToLoad = $state.params.page_id ?
+              _.find(pages, {id: $state.params.page_id}) :
+              pages[$state.params.page - 1]; // zero-based pages array
             pageToLoad == null ? Handle404() : loadPage(pageToLoad);
           }
           else loadPage(pages[0]);
@@ -35,7 +48,7 @@ angular.module('app')
           _.forEach(pageFromServer.tiles, gridsterizeTile);
           $scope.currentPage = pageFromServer;
           var pageIdx = _.findIndex($scope.pages, {id: pageFromServer.id});
-          $location.search('page', pageIdx > 0 ? pageIdx + 1 : null);
+          $location.search({page: pageIdx > 0 ? pageIdx + 1 : null, page_id: null});
         });
     }
 
@@ -69,6 +82,10 @@ angular.module('app')
       Restangular.one('pages', tile.page_id).one('tiles', tile.id).remove()
         .then(function () {
           _.pull($scope.currentPage.tiles, tile);
+          if ($scope.currentPage.tiles.length == 0 && !$scope.currentPage.default) {
+            if ($state.params.page) $state.params.page--;
+            loadPages();
+          }
         });
     }
 

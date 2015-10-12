@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('PhotosNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $timeout, $state, caller) {
+  .controller('PhotosNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $timeout, $state, $rootScope, caller) {
     $scope.photo = {image: null};
     $scope.submit = submit;
     $scope.back = back;
@@ -23,7 +23,15 @@ angular.module('app')
         .then(function (photo) {
           Notification.show('Photo was successfully added', 'success');
           $scope.$close();
-          $state.go('app.user.show', {userId: CurrentUser.id()}, {reload: true});
+          if (photo.tile) {
+            if ($state.includes('app.user.show', {user_id: photo.user.id})) {
+              $rootScope.$broadcast('tileAdded', _.merge(photo.tile, {content: photo.plain()}));
+            }
+            else {
+              $state.go('app.user.show', {user_id: photo.user.id, page_id: photo.tile.page_id});
+            }
+          }
+          //else if (photo.record) { go to album and show the record }
         })
         .catch(function (response) {
           $scope.errors = response.data.errors;
