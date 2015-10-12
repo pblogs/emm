@@ -20,7 +20,7 @@ angular.module('app')
           .result.then(goToUserProfile).catch(goToUserProfile);
 
         function goToUserProfile() {
-          $state.go('app.user.show', {userId: CurrentUser.id()});
+          $state.go('app.user.show', {user_id: CurrentUser.id()});
         }
       })
       .catch(function (response) {

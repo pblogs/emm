@@ -10,8 +10,7 @@ class AlbumsController < ApplicationController
       privacy = @user.has_friend_access?(current_user) ? 'for_friends' : 'for_all'
       albums = @user.albums.by_privacy(privacy)
     end
-
-    render_resources(albums)
+    render_resources(albums.includes(:tile), with_tile: true)
   end
 
   def show

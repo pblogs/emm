@@ -36,10 +36,10 @@ angular.module('app')
         $scope.album.longitude = $scope.album.location.latlng.lng();
       }
       Restangular.one('users', CurrentUser.id()).all('albums').post($scope.album)
-        .then(function() {
+        .then(function(album) {
           Notification.show('Album "' + $scope.album.title + '" has been created!', 'success');
           $modalInstance.close();
-          $state.go('app.user.show', {userId: CurrentUser.id()}, {reload: true});
+          $state.go('app.user.album', {user_id: photo.user.id, id: album.id});
         })
         .catch(function(response) {
           $scope.errors = response.data.errors;
