@@ -1,0 +1,21 @@
+h2.e-white
+  .e-alpha-title
+    span.text-capitalize> ng-bind="user.first_name"
+    | Life Events
+
+.row
+  .col-md-2.col-sm-4.col-xs-6.m-b-15 ng-repeat="album in albums"
+    .album-view
+      .tile-edit-buttons ng-if="canEditAlbum && album.privacy != 'hidden'"
+        i.fa.fa-times ng-click="removeAlbum(album)"
+        i.fa.fa-thumb-tack ng-style="getPinColor(album)" ng-click="pinAlbum(album)"
+      .image-wrapper
+        img.img-responsive ng-src="{{album.cover_url.thumb | imageFilter:'album'}}" draggable="false"
+      .album-title ng-style="{'border-color': album.color}"
+        .big-count ng-bind="album.photos_count + album.videos_count + album.texts_count" ng-style="{'background-color': album.color}"
+        .title-text
+          .content-count.e-brown
+            span {{album.photos_count}} photos,
+            span< {{album.videos_count}} videos
+          .title.e-brown ng-bind="album.title"
+
