@@ -1,5 +1,7 @@
-.main-page {
-  h1 {
-    text-transform: uppercase;
-  }
+@import "../../vendor/styles/variables";
+
+.main-title {
+  background: $e-black-a;
+  padding: 10px 15px;
+  display: inline-block;
 }

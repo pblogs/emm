@@ -5,7 +5,6 @@ angular.module('app')
     $scope.submit = submit;
     $scope.changeStep = changeStep;
     $scope.back = back;
-    $scope.step = 1;
     $scope.album = {
       cover: null,
       privacy: 'for_all',
@@ -22,6 +21,8 @@ angular.module('app')
     $timeout(function() {
       $scope.showCanvas = true;
     }, 100);
+
+    changeStep(1);
 
     function changeStep(i) {
       $scope.step = i;
