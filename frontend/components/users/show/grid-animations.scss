@@ -1,0 +1,126 @@
+.grid-animated {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+// Appear UP
+.gridInUp {
+  -webkit-animation-name: gridInUp;
+  animation-name: gridInUp;
+}
+@-webkit-keyframes gridInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(200px);
+    transform: translateY(200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes gridInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(200px);
+    transform: translateY(200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+// Disappear UP
+.gridOutUp {
+  -webkit-animation-name: gridOutUp;
+  animation-name: gridOutUp;
+}
+@-webkit-keyframes gridOutUp {
+  from {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+}
+@keyframes gridOutUp {
+  from {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+}
+
+// Appear DOWN
+.gridInDown {
+  -webkit-animation-name: gridInDown;
+  animation-name: gridInDown;
+}
+@-webkit-keyframes gridInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes gridInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+// Disappear DOWN
+.gridOutDown {
+  -webkit-animation-name: gridOutDown;
+  animation-name: gridOutDown;
+}
+@-webkit-keyframes gridOutDown {
+  from {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(200px);
+    transform: translateY(200px);
+  }
+}
+@keyframes gridOutDown {
+  from {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(200px);
+    transform: translateY(200px);
+  }
+}

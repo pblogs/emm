@@ -27,3 +27,13 @@
     }
   }
 }
+
+.page-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  font-size: 100px;
+  margin: -50px 0 0 -50px;
+  color: rgb(255, 255, 255);
+  opacity: 0.7
+}

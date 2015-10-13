@@ -39,7 +39,7 @@ angular.module('app')
         .then(function(album) {
           Notification.show('Album "' + $scope.album.title + '" has been created!', 'success');
           $modalInstance.close();
-          $state.go('app.user.album', {user_id: photo.user.id, id: album.id});
+          $state.go('app.user.album', {user_id: album.user.id, id: album.id});
         })
         .catch(function(response) {
           $scope.errors = response.data.errors;
