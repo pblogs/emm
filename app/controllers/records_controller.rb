@@ -4,7 +4,7 @@ class RecordsController < ApplicationController
   authorize_resource
 
   def index
-    render_resources(@album.records.includes(content: :user))
+    render_resources(@album.records.includes(content: [:user, :tile]).page(params[:page]).per(params[:per_page]), with_tile: true)
   end
 
   def update

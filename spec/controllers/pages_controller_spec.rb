@@ -3,23 +3,21 @@ require 'rails_helper'
 RSpec.describe PagesController, type: :controller do
   login_user
 
-  let(:user) { create(:user, :confirmed) }
-
   describe '#index' do
     it 'responds with success' do
-      get :index, user_id: user.id
+      get :index, user_id: @user.id
       expect(response).to be_success
     end
 
     it 'returns correct pages count' do
-      get :index, user_id: user.id
-      expect(json_response['meta']['total']).to eq user.pages.count
+      get :index, user_id: @user.id
+      expect(json_response['meta']['total']).to eq @user.pages.count
     end
   end
 
   describe '#show' do
     subject do
-      get :show, user_id: user.id, id: user.pages.first.id
+      get :show, user_id: @user.id, id: @user.pages.first.id
     end
 
     it 'should response success' do
@@ -29,14 +27,15 @@ RSpec.describe PagesController, type: :controller do
 
     it 'should respond with content data' do
       subject
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(user.pages.first, nil, nil, with_tiles: true).keys)
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(@user.pages.first, nil, nil, with_tiles: true).keys)
     end
   end
 
   describe '#update_tiles' do
-    let!(:page) { user.pages.create }
-    let!(:texts) { create_list(:text, 3, album: user.default_album) }
+    let!(:page) { @user.pages.create }
     let!(:tiles) do
+      # Generating some tiles
+      create_list(:text, 3, album: @user.default_album)
       Tile.unscoped.where(page_id: page.id).order(:id).pluck(:id).map do |tile_id|
         {
             id: tile_id,
@@ -48,7 +47,7 @@ RSpec.describe PagesController, type: :controller do
     end
 
     subject do
-      put :update_tiles, user_id: user.id, page_id: page.id, resource: {tiles: tiles}, screen_size: 'md', user_token: @user_token
+      put :update_tiles, user_id: @user.id, page_id: page.id, resource: {tiles: tiles}, screen_size: 'md', user_token: @user_token
     end
 
     it 'should response success' do
@@ -65,7 +64,16 @@ RSpec.describe PagesController, type: :controller do
 
     it 'should respond with page data' do
       subject
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(user.pages.first, nil, nil, with_tiles: true).keys)
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(page, nil, nil, with_tiles: true).keys)
+    end
+
+    context 'other user' do
+      let(:other_user) { create(:user, :confirmed) }
+
+      it 'responds unauthorized' do
+        put :update_tiles, user_id: @user.id, page_id: page.id, resource: {tiles: tiles}, screen_size: 'md', user_token: other_user.jwt_token
+        expect(response).to be_forbidden
+      end
     end
   end
 end

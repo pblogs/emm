@@ -55,6 +55,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-angular-loading-bar'
   gem 'rails-assets-angular-gridster'
   gem 'rails-assets-textAngular'
+  gem 'rails-assets-ng-infinite-scroller-origin'
+  gem 'rails-assets-angular-sortable-view'
 end
 
 # File uploading front-end

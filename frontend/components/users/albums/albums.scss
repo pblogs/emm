@@ -4,7 +4,12 @@
   background: $e-white;
   cursor: pointer;
   position: relative;
-  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+
+  a:hover {
+      text-decoration: none;
+    }
 
   &:hover {
     text-decoration: none;

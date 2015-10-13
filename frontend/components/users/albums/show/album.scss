@@ -1,0 +1,11 @@
+@import "../../../../vendor/styles/variables";
+
+.album-inside {
+  .e-container {
+    position: relative;
+  }
+
+  .content {
+    border-top: 1px solid $e-brown;
+  }
+}

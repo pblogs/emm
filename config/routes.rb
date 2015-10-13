@@ -14,7 +14,9 @@ Rails.application.routes.draw do
       get :by_alias, on: :collection, to: 'users#show'
       resource :password, only: :update, controller: 'users/passwords'
       resources :tributes, only: [:create, :show, :index]
-      resources :albums, except: [:new, :edit]
+      resources :albums, except: [:new, :edit] do
+        put :update_records
+      end
       resources :pages, only: [:index, :show] do
         put :update_tiles
       end

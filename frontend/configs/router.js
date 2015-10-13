@@ -66,6 +66,16 @@ angular.module('app')
         templateUrl: 'components/users/albums/index.html',
         controller: 'UsersAlbumsCtrl'
       })
+      .state('app.user.album', {
+        url: '/albums/{album_id:int}',
+        templateUrl: 'components/users/albums/show/album.html',
+        controller: 'UserAlbumCtrl',
+        resolve: {
+          album: function(Restangular, $stateParams) {
+            return Restangular.one('users', $stateParams.user_id).one('albums', $stateParams.album_id).get();
+          }
+        }
+      })
       .state('app.user.edit', {
         abstract: true,
         url: '/settings',
