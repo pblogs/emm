@@ -1,0 +1,46 @@
+@import "../../../vendor/styles/variables";
+
+.album-view {
+  background: $e-white;
+  cursor: pointer;
+  position: relative;
+  display: block;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  .tile-edit-buttons {
+    top: 3px;
+    right: 5px;
+  }
+
+  .album-title {
+    border-top: 5px solid;
+    border-color: $e-red;
+    overflow: hidden;
+
+    .big-count  {
+      font-size: 24px;
+      margin-right: 5px;
+      color: $e-white;
+      padding: 2px 8px;
+      display: inline-block;
+      float: left;
+      text-align: center;
+      background-color: $e-red;
+    }
+    .title-text {
+      .content-count, .title {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .content-count {
+        font-size: 12px;
+      }
+    }
+  }
+}

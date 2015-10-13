@@ -2,8 +2,15 @@
   nav.navbar.e-navbar
     .container
       .navbar-header
-        /button.navbar-toggle
         a ui-sref="app.main" class="navbar-brand" Emmortal
+        ul.nav.navbar-nav.e-menu ng-if="currentUser.exists()"
+          li.e-dropdown.dropdown dropdown=""
+            a href="#" dropdown-toggle=""
+              span> Content
+              .fa.fa-caret-down
+            ul.dropdown-menu.transparent aria-labelledby="single-button" role="menu"
+              li
+                a ui-sref="app.user.albums({user_id: currentUser.id})" Albums
 
       ul.nav.navbar-nav.navbar-right.e-menu
         li

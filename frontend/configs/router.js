@@ -61,6 +61,11 @@ angular.module('app')
         controller: 'UsersShowCtrl',
         reloadOnSearch: false
       })
+      .state('app.user.albums', {
+        url: '/albums',
+        templateUrl: 'components/users/albums/index.html',
+        controller: 'UsersAlbumsCtrl'
+      })
       .state('app.user.edit', {
         abstract: true,
         url: '/settings',
