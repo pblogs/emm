@@ -5,8 +5,9 @@ class TilesController < ApplicationController
   authorize_resource
 
   def create
-    @target.create_tile_on_user_page(Page.find(record_params[:page_id]))
-    render_resource_or_errors(@target)
+    page = Page.find(record_params[:page_id]) if record_params[:page_id]
+    tile = @target.create_tile_on_user_page(page)
+    render_resource_or_errors(tile)
   end
 
   def update
@@ -26,6 +27,6 @@ class TilesController < ApplicationController
   end
 
   def record_params
-    params.require(:resource).permit(:size)
+    params.require(:resource).permit(:size, :page_id)
   end
 end
