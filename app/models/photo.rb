@@ -1,6 +1,7 @@
 class Photo < ActiveRecord::Base
 
   include AlbumRecord
+  include SanitizeDescription
 
   # Validations
   validates :album, :image, presence: true

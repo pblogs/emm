@@ -1,5 +1,7 @@
 class Album < ActiveRecord::Base
 
+  include SanitizeDescription
+
   # Relations
   belongs_to :user, inverse_of: :albums
   has_one :tile, as: :content, dependent: :destroy
