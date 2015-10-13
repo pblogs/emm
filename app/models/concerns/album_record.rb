@@ -1,5 +1,6 @@
 module AlbumRecord
   extend ActiveSupport::Concern
+  include SanitizeDescription
 
   included do
     # Relations
