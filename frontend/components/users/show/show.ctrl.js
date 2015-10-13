@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('UsersShowCtrl', function ($scope, Restangular, WindowSize, TileSizes, $state, $location, $modal, Handle404, user) {
+  .controller('UsersShowCtrl', function ($scope, Restangular, WindowSize, TileSizes, $state, $location, $modal, Handle404, $timeout, user) {
     $scope.loadPage = loadPage;
     $scope.editTile = editTile;
     $scope.updateTiles = updateTiles;
@@ -43,12 +43,19 @@ angular.module('app')
     }
 
     function loadPage(page) {
+      var pageNumber = _.findIndex($scope.pages, {id: page.id}) + 1; // Pages counts from 1
+      var currentPageNumber = ($state.params.page || 1);
+      var scrollDirection = pageNumber == currentPageNumber ?
+        'static' :
+        pageNumber > currentPageNumber ? 'Down' : 'Up';
+      pageLoadingScroll('Out', scrollDirection);
+
       Restangular.one('users', user.id).one('pages', page.id).get()
         .then(function (pageFromServer) {
           _.forEach(pageFromServer.tiles, gridsterizeTile);
           $scope.currentPage = pageFromServer;
-          var pageIdx = _.findIndex($scope.pages, {id: pageFromServer.id});
-          $location.search({page: pageIdx > 0 ? pageIdx + 1 : null, page_id: null});
+          $location.search({page: pageNumber > 1 ? pageNumber : null, page_id: null}); // Do not display ?page=1 in URL
+          pageLoadingScroll('In', scrollDirection);
         });
     }
 
@@ -102,5 +109,19 @@ angular.module('app')
     function serverizeTile(tile) {
       tile.size = TileSizes.getServerSize(tile.sizeX, tile.sizeY);
       return tile;
+    }
+
+    // Set $scope.pageLoadingClass to one of [gridInUp gridOutUp gridInDown gridOutDown] classes and hides body scrollbar during animations
+    function pageLoadingScroll(appear, direction) {
+      // Hide body scrollbar to avoid flickering during animations
+      document.body.style.overflowY = 'hidden';
+      // 1000ms because each In and Out animation takes 500ms
+      $timeout(function () {
+        document.body.style.overflowY = 'initial';
+      }, 1000);
+      // Show loader if page goes out and hide it when new page is arrived
+      $scope.showLoader = (appear == 'Out');
+      // Set proper class to perform animation
+      $scope.pageLoadingClass = 'grid' + appear + direction;
     }
   });
