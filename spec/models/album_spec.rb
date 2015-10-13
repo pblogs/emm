@@ -42,4 +42,21 @@ RSpec.describe Album, type: :model do
       end
     end
   end
+
+  describe 'by_privacy scope' do
+    let!(:album_for_friends) { create(:album, user: user, privacy: :for_friends) }
+    let!(:album_for_all) { create(:album, user: user, privacy: :for_all) }
+
+    context 'privacy for_friends' do
+      it 'should return correct albums' do
+        expect(user.albums.by_privacy(:for_friends).pluck(:id)).to be_eql [album_for_friends.id]
+      end
+    end
+
+    context 'privacy for_all' do
+      it 'should return correct albums' do
+        expect(user.albums.by_privacy(:for_all).pluck(:id)).to be_eql [album_for_all.id]
+      end
+    end
+  end
 end

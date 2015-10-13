@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   enum role: {member: 0, admin: 1}
 
   # Validations
-  RESERVED_PAGE_ALIASES = %w[confirmation recovery settings]
+  RESERVED_PAGE_ALIASES = %w[confirmation recovery users]
   validates :first_name, :last_name, :birthday, presence: true
   validates :page_alias, uniqueness: true, length: {minimum: 5}, format: {with:  /\A[a-z0-9\.\-\_]*\z/, }, exclusion: {in: RESERVED_PAGE_ALIASES}, allow_blank: true
 
