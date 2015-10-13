@@ -1,7 +1,6 @@
 class Video < ActiveRecord::Base
 
   include AlbumRecord
-  include SanitizeDescription
 
   # Validations
   validates :album, :video_id, :preview, presence: true

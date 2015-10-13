@@ -1,6 +1,7 @@
 module SanitizeDescription
   extend ActiveSupport::Concern
   require 'sanitize'
+  require 'sanitize_config'
 
   included do
     # Callbacks
@@ -10,6 +11,6 @@ module SanitizeDescription
   private
 
   def sanitize_description
-    self.description = Sanitize.fragment(description, Sanitize::Config::BASIC)
+    self.description = Sanitize.fragment(description, Sanitize::Config::CUSTOM)
   end
 end
