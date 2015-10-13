@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :tiles, only: :create
     end
     resources :main_page, only: :index
+    resources :videos_information, only: :show, param: :url
   end
 
   match '/(*path)', via: :all, to: frontend_page('index.htm')
