@@ -15,7 +15,7 @@ class Tribute < ActiveRecord::Base
 
   # Methods
   def create_tile_on_user_page(page=nil)
-    page = page || self.album.user.pages.last
+    page = page || self.user.pages.last
     self.create_tile(page: page)
   end
 end
