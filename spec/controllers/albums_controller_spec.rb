@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe AlbumsController, type: :controller do
   login_user
 
-  let!(:album) { create(:album, :public, user: @user) }
-  let!(:private_album) { create(:album, user: @user) }
+  let!(:album) { create(:album, user: @user) }
+  let!(:private_album) { create(:album, :private, user: @user) }
   let(:another_user) { create(:user, :confirmed) }
 
   describe '#index' do
