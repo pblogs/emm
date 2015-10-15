@@ -7,7 +7,7 @@ class VideoInformation
 
   extend ActiveModel::Naming
 
-  attr_accessor :title, :content, :remote_picture_url, :source_url, :kind, :video_id
+  attr_accessor :title, :description, :remote_picture_url, :source_url, :source, :video_id
   attr_reader   :errors
 
   def initialize(source_url)
@@ -18,16 +18,16 @@ class VideoInformation
   def parse
     begin
       video_info = video_info(@source_url)
-      if @kind == :youtube
+      if @source == :youtube
         video_info = video_info['items'].first
         self.video_id           = video_info['id']
         self.title              = video_info['snippet']['title']
-        self.content            = video_info['snippet']['description'].gsub(/\n/, '<br>')
+        self.description            = video_info['snippet']['description'].gsub(/\n/, '<br>')
         self.remote_picture_url = video_info['snippet']['thumbnails']['high']['url']
-      elsif @kind == :vimeo
+      elsif @source == :vimeo
         self.video_id           = video_info['video_id']
         self.title              = video_info['title']
-        self.content            = video_info['description'].gsub(/\n/, '<br>')
+        self.description            = video_info['description'].gsub(/\n/, '<br>')
         self.remote_picture_url = video_info['thumbnail_url']
       end
     rescue => e
@@ -40,10 +40,10 @@ class VideoInformation
     return unless url =~ VIMEO_REGEXP || url =~ YOUTUBE_REGEXP
 
     if url =~ VIMEO_REGEXP
-      @kind = :vimeo
+      @source = :vimeo
       "https://vimeo.com/api/oembed.json?url=#{ url }"
     elsif url =~ YOUTUBE_REGEXP
-      @kind = :youtube
+      @source = :youtube
       "https://www.googleapis.com/youtube/v3/videos?id=#{ Regexp.last_match(7) }&key=#{ ENV['YOUTUBE_API_KEY'] }&fields=items(id,snippet(title,description,thumbnails))&part=snippet"
     end
   end
