@@ -15,6 +15,15 @@ angular.module('app')
     $scope.canEditAlbum = user.id == $scope.currentUser.id;
     getRecords();
 
+    $scope.$on('recordAdded', function (event, record) {
+      if ($scope.recordsLoader.allReceived) {
+        $scope.recordsLoader.items.push(record);
+        $scope.album.records_count++;
+      } else {
+        $scope.album.records_count++;
+      }
+    });
+    
     function updateWeights($item, $partFrom, $partTo, $indexFrom, $indexTo) {
       var changesArray = [$indexFrom, $indexTo],
         updateArray = _.slice($scope.recordsLoader.items , _.min(changesArray), _.max(changesArray) + 1),

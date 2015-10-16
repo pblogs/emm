@@ -1,6 +1,6 @@
 .album-inside
   .e-container
-    .tile-edit-buttons ng-if="canEditAlbum"
+    .tile-edit-buttons ng-if="canEditAlbum && album.privacy !== 'hidden'"
       i.fa.fa-times ng-click="removeAlbum()"
       i.fa.fa-pencil.edit-button ng-click="editAlbum()"
       i.fa.fa-thumb-tack ng-style="getPinColor()" ng-click="pinAlbum()"
@@ -21,7 +21,7 @@
 
     .content.m-t-30
       h3.e-brown.m-t-10.m-b-25 Content ({{album.records_count}})
-      .row.sortable-container sv-root="" sv-part="recordsLoader.items" sv-on-sort="updateWeights($item, $partFrom, $partTo, $indexFrom, $indexTo)"
-        div infinite-scroll="recordsLoader.nextPage()"
+      .row.sortable-container infinite-scroll="recordsLoader.nextPage()"
+        div sv-root="" sv-part="recordsLoader.items" sv-on-sort="updateWeights($item, $partFrom, $partTo, $indexFrom, $indexTo)"
           .col-lg-2.col-md-3.col-sm-4.col-xs-6.m-b-15.text-center ng-repeat="record in recordsLoader.items" sv-element="{containment: '.sortable-container'}"
             record record="record" on-edit="editRecord" on-pin="pinRecord" on-remove="removeRecord" color="album.color" can-edit="canEditAlbum"

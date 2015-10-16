@@ -14,7 +14,7 @@ angular.module('app')
     Restangular.one('users', CurrentUser.id()).all('albums').getList()
       .then(function (albums) {
         $scope.albums = albums;
-        $scope.photo.album_id = albums[0].id;
+        $scope.photo.album_id = $state.params.user_id == CurrentUser.id() && $state.params.album_id ? $state.params.album_id : albums[0].id;
       });
 
     function submit() {
@@ -30,8 +30,11 @@ angular.module('app')
             else {
               $state.go('app.user.show', {user_id: photo.user.id, page_id: photo.tile.page_id});
             }
+          } else  if ($state.includes('app.user.album', {user_id: photo.user.id, album_id: photo.album_id})) {
+            $rootScope.$broadcast('recordAdded', _.merge(photo.record, {content: photo.plain()}));
+          } else {
+            $state.go('app.user.album', {user_id: photo.user.id, album_id: photo.album_id});
           }
-          //else if (photo.record) { go to album and show the record }
         })
         .catch(function (response) {
           $scope.errors = response.data.errors;

@@ -9,7 +9,7 @@ angular.module('app')
     Restangular.one('users', CurrentUser.id()).all('albums').getList()
       .then(function (albums) {
         $scope.albums = albums;
-        $scope.video.album_id = albums[0].id;
+        $scope.video.album_id = $state.params.user_id == CurrentUser.id() && $state.params.album_id ? $state.params.album_id : albums[0].id;
       });
 
     function submit() {
@@ -25,8 +25,11 @@ angular.module('app')
             else {
               $state.go('app.user.show', {user_id: video.user.id, page_id: video.tile.page_id});
             }
+          } else  if ($state.includes('app.user.album', {user_id: video.user.id, album_id: video.album_id})) {
+            $rootScope.$broadcast('recordAdded', _.merge(video.record, {content: video.plain()}));
+          } else {
+            $state.go('app.user.album', {user_id: video.user.id, album_id: video.album_id});
           }
-          //else if (video.record) { go to album and show the record }
         })
         .catch(function (response) {
           $scope.errors = response.data.errors;
