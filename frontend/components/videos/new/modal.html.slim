@@ -1,0 +1,26 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+.modal-header.text-center
+  h3.modal-title ng-hide="video.id" Add new Video
+  h3.modal-title ng-show="video.id" Edit video
+form ng-submit="submit()"
+  .modal-body.video-popup
+    .row
+      .col-md-6
+        .text-center.m-t-50 Video upload will be here...
+
+      .col-md-6
+        form-field placeholder="Title" ng-model="video.title" errors="errors.title"
+        e-description ng-model="video.description" errors="errors.description"
+        .row
+          .col-sm-5
+            select e-select="" ng-options="album.id as album.title for album in albums" ng-model="video.album_id"
+
+  .modal-footer.text-right
+    span ng-if="!video.id"
+      button.btn.e-btn.btn-default type="button" ng-click="back()" Back
+      button.btn.e-btn.btn-primary type="submit" ng-disabled="true" Publish
+
+    span ng-if="video.id"
+      button.btn.e-btn.btn-default type="button" ng-click="$dismiss('close')" Cancel
+      button.btn.e-btn.btn-primary type="submit" ng-disabled="true" Save

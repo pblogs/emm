@@ -1,0 +1,15 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+.modal-body
+  .show-modal-video
+    .row
+      .col-sm-6
+        .show-video-wrapper
+          img.img-responsive ng-src="{{content.preview_url.original}}"
+        .tile-comments
+          comments
+      .col-sm-6
+        h3.e-brown.m-t-0 {{content.title || 'No title...'}}
+        .show-description.m-t-15.e-brown.text-justify.p-b-15 ng-model="content.description" ta-bind=''
+        added-by-at author="content.user" created-at="content.created_at" on-link-follow="$close()"
+        tile-show-additional
