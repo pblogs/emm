@@ -78,6 +78,7 @@ angular.module('app')
             result.allReceived = true;
           else
             page++;
+          result.total = totalCount;
           result.busy = false;
         });
       }

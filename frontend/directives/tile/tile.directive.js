@@ -22,7 +22,7 @@ angular.module('app')
         $scope.showTile = showTile;
 
         function showTile(tile) {
-          if (tile.widget_type != 'media') return false;
+          if (tile.widget_type != 'media' || tile.content_type == 'album') return false;
           $modal
             .open({
               templateUrl: 'components/' + tile.content_type + 's/show/show.html',

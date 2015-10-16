@@ -8,6 +8,8 @@
   border-radius: 0;
   padding: 10px;
   margin: 0;
+  text-decoration: none;
+
 
   &.avatar, &.info {
     cursor: default !important;
@@ -16,6 +18,10 @@
   &:hover {
     .tile-edit-buttons {
       display: block;
+    }
+
+    * {
+      text-decoration: none;
     }
   }
 

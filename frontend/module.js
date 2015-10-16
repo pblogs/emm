@@ -15,5 +15,7 @@ angular.module('app', [
   'angularFileUpload',
   'angular-img-cropper',
   'textAngular',
-  'ngSanitize'
+  'ngSanitize',
+  'infinite-scroll',
+  'angular-sortable-view'
 ]);

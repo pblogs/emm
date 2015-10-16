@@ -14,7 +14,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    render_resource_data(@album)
+    render_resource_data(@album, with_tile: true)
   end
 
   def create
@@ -32,10 +32,24 @@ class AlbumsController < ApplicationController
     render nothing: true
   end
 
+  def update_records
+    @album = @user.albums.find(params[:album_id])
+    authorize! :update_records, @album
+    mass_update_params = records_params.each_with_object({}) do |record, result|
+      result[record[:id]] = {weight: record[:weight].to_i}
+    end
+    Record.mass_update mass_update_params, {album_id: @album.id}
+    render_resource_data(@album.reload)
+  end
+
   private
 
   def album_params
     params.require(:resource).permit(:title, :description, :cover, :location_name, :latitude, :longitude, :start_date,
                                      :color, :privacy, :end_date)
+  end
+
+  def records_params
+    params.require(:resource).require(:records)
   end
 end

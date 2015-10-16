@@ -62,6 +62,7 @@
     .description-content {
       height: 140px;
       overflow: hidden;
+      text-decoration: none;
     }
 
     .avatar-wrapper {
@@ -81,6 +82,11 @@
       max-width: 70%;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-decoration: none;
+
+      a {
+        color: $e-brown;
+      }
     }
 
     .e-link {

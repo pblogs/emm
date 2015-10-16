@@ -16,6 +16,8 @@
  *= require angular-gridster
  *= require rangy
  *= require textAngular
+ *= require ng-infinite-scroller-origin
+ *= require angular-sortable-view
  *= require ../module
  *= require_tree ../
  */

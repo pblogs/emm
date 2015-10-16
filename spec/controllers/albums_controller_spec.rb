@@ -108,4 +108,47 @@ RSpec.describe AlbumsController, type: :controller do
       expect(response).to be_forbidden
     end
   end
+
+  describe '#update_records' do
+    let!(:records) do
+      # Generating some tiles
+      create_list(:text, 3, album: album)
+      Record.unscoped.where(album_id: album.id).order(:id).pluck(:id).map do |record_id|
+        {
+            id: record_id,
+            weight: rand(5)
+        }
+      end
+    end
+
+    subject do
+      put :update_records, user_id: @user.id, album_id: album.id, resource: {records: records}, user_token: @user_token
+    end
+
+    it 'should response success' do
+      subject
+      expect(response).to be_success
+    end
+
+    it 'should update records' do
+      subject
+      requested_record_positions = records.map { |t| [t[:id], t[:weight]] }
+      actual_record_positions = Record.unscoped.where(album_id: album.id).order(:id).map { |t| [t.id, t.weight] }
+      expect(actual_record_positions).to be_eql requested_record_positions
+    end
+
+    it 'should respond with album data' do
+      subject
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(album).keys)
+    end
+
+    context 'other user' do
+      let(:other_user) { create(:user, :confirmed) }
+
+      it 'responds unauthorized' do
+        put :update_records, user_id: @user.id, album_id: album.id, resource: {records: records}, user_token: other_user.jwt_token
+        expect(response).to be_forbidden
+      end
+    end
+  end
 end
