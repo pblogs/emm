@@ -9,7 +9,7 @@ class PhotosController < ApplicationController
 
   def create
     @photo.save
-    render_resource_or_errors(@photo, with_tile: true)
+    render_resource_or_errors(@photo, with_tile: true, with_record: true)
   end
 
   def update

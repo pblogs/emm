@@ -9,7 +9,7 @@ class VideosController < ApplicationController
 
   def create
     @video.save
-    render_resource_or_errors(@video, with_tile: true)
+    render_resource_or_errors(@video, with_tile: true, with_record: true)
   end
 
   def update

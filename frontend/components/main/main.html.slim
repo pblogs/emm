@@ -1,7 +1,5 @@
 .main-page
   .m-b-25.text-center
     h2.e-alpha-title.e-white Save your memories in eternity
-  grid tiles="tilesLoader.items"
-
-  .text-center.m-t-20
-    collection-next-page-btn collection="tilesLoader"
+  div infinite-scroll="tilesLoader.nextPage()"
+    grid tiles="tilesLoader.items"

@@ -5,7 +5,8 @@
   height: 153px;
   display: inline-block;
   position: relative;
-  background: $e-white;
+  padding: 10px;
+  background: $e-black-aaa;
 
   &:hover {
     .tile-edit-buttons {
