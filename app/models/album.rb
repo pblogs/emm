@@ -24,7 +24,7 @@ class Album < ActiveRecord::Base
 
   # Scopes
   default_scope { order(created_at: :asc) }
-  scope :by_privacy, -> (privacy) { where(privacy: Album.privacies[privacy]) }
+  scope :by_privacy, -> (privacy) { where('privacy <= ?', Album.privacies[privacy]) }
 
   # Uploaders
   mount_base64_uploader :cover, AlbumUploader

@@ -21,7 +21,7 @@ class Ability
         content.album.user_id == user.id
       end
       can [:show], Album do |album|
-        album.for_all? || album.user.has_friend_access?(user.id)
+        album.for_all? || (album.for_friends? && album.user.has_friend_access?(user.id))
       end
       can :manage, Album, user_id: user.id
       can :update, Record do |record|

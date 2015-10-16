@@ -1,9 +1,10 @@
 class RecordsController < ApplicationController
-  load_resource :album, through: :current_user
+  load_resource :album
   load_resource :record, through: :album, only: :update
   authorize_resource
 
   def index
+    authorize! :show, @album
     render_resources(@album.records.includes(content: [:user, :tile]).page(params[:page]).per(params[:per_page]), with_tile: true)
   end
 

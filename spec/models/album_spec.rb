@@ -49,7 +49,7 @@ RSpec.describe Album, type: :model do
 
     context 'privacy for_friends' do
       it 'should return correct albums' do
-        expect(user.albums.by_privacy(:for_friends).pluck(:id)).to be_eql [album_for_friends.id]
+        expect(user.albums.by_privacy(:for_friends).pluck(:id)).to be_eql [album_for_friends.id, album_for_all.id]
       end
     end
 
