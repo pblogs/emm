@@ -34,6 +34,7 @@ gem 'database_cleaner'
 
 gem 'kaminari'
 gem 'sanitize'
+gem 'carrierwave-video'
 
 source 'https://rails-assets.org' do
   # General libs
