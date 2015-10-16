@@ -26,6 +26,39 @@ html, body {
   border: none;
   margin-bottom: 25px;
 
+  .user-menu {
+    min-width: 170px;
+
+    .dropdown {
+      width: 100%;
+    }
+
+    a.visible-user {
+      height: 40px;
+      padding: 5px;
+
+      img {
+        max-height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+
+      .username {
+        vertical-align: middle;
+        display: inline-block;
+
+        .name {
+          display: inline-block;
+          max-width: 100px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
   .navbar-header {
     float: left;
 
