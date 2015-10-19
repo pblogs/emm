@@ -3,16 +3,18 @@
     .container
       .navbar-header
         a ui-sref="app.main" class="navbar-brand" Emmortal
-        ul.nav.navbar-nav.e-menu.user-menu ng-if="currentUser.exists()"
+        ul.nav.navbar-nav.e-menu.user-menu ng-if="visibleUser.get().id"
           li.e-dropdown.dropdown dropdown=""
             a.visible-user href="#" dropdown-toggle=""
-              img.img-rounded.img-responsive ng-src="{{visibleUser.avatar_url.thumb | imageFilter: 'avatar'}}"
+              img.img-rounded.img-responsive ng-src="{{visibleUser.get().avatar_url.thumb | imageFilter: 'avatar'}}"
               .username
-                .name> {{visibleUser.first_name + ' ' + visibleUser.last_name}}
+                .name> {{visibleUser.get().first_name + ' ' + visibleUser.get().last_name}}
                 .fa.fa-caret-down
             ul.dropdown-menu.transparent aria-labelledby="single-button" role="menu"
               li
-                a ui-sref="app.user.albums({user_id: visibleUser.id})" Albums
+                a ui-sref="app.user.show({user_id: visibleUser.get().id})" Profile
+              li
+                a ui-sref="app.user.albums({user_id: visibleUser.get().id})" Albums
 
       ul.nav.navbar-nav.navbar-right.e-menu
         li

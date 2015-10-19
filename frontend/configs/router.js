@@ -42,8 +42,9 @@ angular.module('app')
       .state('app.user', {
         url: '/users/{user_id:int}',
         template: '<div ui-view=""></div>',
-        controller: function (user, Background) {
+        controller: function (user, Background, VisibleUser) {
           Background.set(user);
+          VisibleUser.set(user);
         },
         resolve: {
           user: function (Restangular, $stateParams, Handle404) {
@@ -51,8 +52,9 @@ angular.module('app')
               .catch(Handle404);
           }
         },
-        onExit: function (Background) {
+        onExit: function (Background, VisibleUser) {
           Background.reset();
+          VisibleUser.set();
         }
       })
       .state('app.user.show', {
