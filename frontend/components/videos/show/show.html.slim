@@ -1,15 +1,30 @@
 .e-close-modal ng-click="$dismiss()"
   .fa.fa-close
 .modal-body
-  .show-modal-video
+  .show-modal-photo
     .row
       .col-sm-6
-        .show-video-wrapper
+        .show-photo-wrapper
           img.img-responsive ng-src="{{content.preview_url.original}}"
         .tile-comments
-          comments
+          add-comment commentable="content" on-create="addNewComment"
       .col-sm-6
-        h3.e-brown.m-t-0 {{content.title || 'No title...'}}
-        .show-description.m-t-15.e-brown.text-justify.p-b-15 ng-model="content.description" ta-bind=''
-        added-by-at author="content.user" created-at="content.created_at" on-link-follow="$close()"
-        tile-show-additional
+        h3.e-brown.m-t-0 {{content.title || 'No title'}}
+        div ng-hide="showMoreTributes"
+          .show-description.m-t-15.e-brown.text-justify.p-b-15 ng-show="content.description" ng-model="content.description" ta-bind=''
+          .show-description.m-t-15.e-brown.text-justify.p-b-15 ng-hide="content.description" No description for this video
+          added-by-at author="content.user" created-at="content.created_at" on-link-follow="$close()"
+
+        .tile-show-image-video-additional ng-class="{'open tributes animated fadeIn': showMoreTributes}"
+          .row.additional-tabs-menu
+            .col-xs-6.text-center
+              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTributes> ng-class="{'active': showMoreTributes}" ng-click="showMoreTributes = !showMoreTributes"
+                | Tributes
+                .fa< ng-class="{'fa-chevron-up': !showMoreTributes, 'fa-chevron-down': showMoreTributes}"
+            .col-xs-6.text-center
+              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTagged<
+                | Tagged
+                .fa.fa-chevron-down<
+          .tagged-section ng-show="showMoreTagged"
+          .comments-section
+            comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"

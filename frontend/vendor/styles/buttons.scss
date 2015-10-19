@@ -31,6 +31,27 @@
     }
   }
 
+  &.btn-brown {
+    border-color: $e-brown;
+    color: $e-brown;
+
+    &:hover, &:focus, &.active {
+      color: $e-white;
+      background: $e-brown;
+    }
+
+    &.btn-xs {
+      color: $e-white;
+      background: $e-brown;
+      border-radius: 3px;
+
+      &:hover, &:focus, &.active {
+        color: $e-brown;
+        background: $e-white;
+      }
+    }
+  }
+
   &.btn-warning {
     border-color: $e-yellow;
     color: $e-yellow;

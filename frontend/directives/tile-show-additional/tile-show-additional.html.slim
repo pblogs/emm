@@ -1,29 +1,23 @@
 .tile-show-additional
-  .tagged-section
-  .additional-tabs-menu
-    .top-btn.additional-tabs-menu-btn.e-brown.text-center
-      | Tagged
-      span.fa.fa-chevron-down.show-icon
-    .down-btn.additional-tabs-menu-btn.e-brown.text-center
-      | Tributes
-      span.fa.fa-chevron-up.show-icon
+  /.tagged-section
+  .row.additional-tabs-menu
+    .col-xs-6.text-center
+      .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTributes>
+        | Tributes
+        .fa.fa-chevron-up<
+    .col-xs-6.text-center
+      .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTagged<
+        | Tagged
+        .fa.fa-chevron-down<
   .tributes-section
-    .tribute.m-t-10
-      .e-brown.text-justify.tribute-content Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis sodales sapien, vitae venenatis dui euismod quis. Sed placerat scelerisque.
+    .tribute.m-t-10 ng-repeat="comment in comments"
+      .e-brown.text-justify.tribute-content "{{comment.text}}"
       .tribute-footer
         .tile-info.m-t-10
-          .e-brown
+          .e-brown.pull-left.author-info
             | Added by
-            a.e-link.font-bold< href="#" Adam Smith
-            .pull-right
-              like
-    .tribute.m-t-10
-      .e-brown.text-justify.tribute-content Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis sodales sapien, vitae venenatis dui euismod quis. Sed placerat scelerisque.
-      .tribute-footer
-        .tile-info.m-t-10
-          .e-brown
-            | Added by
-            a.e-link.font-bold< href="#" Adam Smith
-            .pull-right
-              like
+            a.e-link.font-bold< ui-sref="app.user.show({user_id: comment.author.id})" ng-click="onLinkFollow()" {{comment.author.first_name + ' ' + comment.author.last_name}}
+          .pull-right
+            like
+
 

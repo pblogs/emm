@@ -8,13 +8,14 @@
 
 .show-description {
   border-bottom: 1px solid $e-brown;
-  max-height: 200px;
+  height: 200px;
   overflow-y: auto;
 }
 
 .show-photo-wrapper {
   width: 100%;
-  height: 300px;
+  height: 315px;
+  margin-bottom: 15px;
   overflow: hidden;
   text-align: center;
   img {

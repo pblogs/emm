@@ -31,7 +31,7 @@ angular.module('app')
               size: 'lg',
               resolve: {
                 content: function() {
-                  return tile.content;
+                  return _.merge(tile.content, {content_type: tile.content_type});
                 }
               }
             });

@@ -1,0 +1,24 @@
+.comment {
+  width: 50%;
+  padding: 5px 10px;
+  display: inline-block;
+  vertical-align: top;
+
+  .comment-content {
+    height: 165px;
+    overflow: hidden;
+    word-break: break-word;
+    text-overflow: ellipsis;
+  }
+
+  .comment-footer {
+    font-size: 12px;
+
+    .author-info {
+      width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

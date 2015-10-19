@@ -1,0 +1,34 @@
+@import "../../../vendor/styles/variables";
+
+.tile-show-image-video-additional {
+  transition: background 0.2s ease;
+
+  &.open.tributes {
+    height: 505px;
+    background: $e-white;
+    overflow: hidden;
+
+    .comments-section {
+      height: 465px;
+      overflow-y: auto;
+      max-height: 100%;
+    }
+  }
+
+  .additional-tabs-menu {
+    display: inline-block;
+    width: 100%;
+    margin: 5px 0;
+    position: relative;
+
+    .additional-btn {
+      display: inline-block;
+      width: 80px;
+    }
+  }
+
+  .comments-section {
+    max-height: 220px;
+    overflow: hidden;
+  }
+}

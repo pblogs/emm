@@ -5,6 +5,11 @@ angular.module('app')
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'directives/tile-show-additional/tile-show-additional.html'
+      templateUrl: 'directives/tile-show-additional/tile-show-additional.html',
+      scope: {
+        comments: "=",
+        onLinkFollow: '&?'
+      }
     }
+
   });

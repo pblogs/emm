@@ -19,6 +19,7 @@ angular.module('app')
         ngRequired: '=',
         placeholder: '@',
         rows: '=',
+        maxlength: '=',
         cols: '='
       }
     };
