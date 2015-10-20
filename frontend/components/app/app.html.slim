@@ -1,21 +1,10 @@
 .app-wrapper ng-style="Background.get()"
-  nav.navbar.e-navbar
+  nav.navbar.e-navbar.navbar-fixed-top
     .container
       .navbar-header
         a ui-sref="app.main" class="navbar-brand" Emmortal
-        ul.nav.navbar-nav.e-menu.user-menu ng-if="visibleUser.get().id"
-          li.e-dropdown.dropdown dropdown=""
-            a.visible-user href="#" dropdown-toggle=""
-              img.img-rounded.img-responsive ng-src="{{visibleUser.get().avatar_url.thumb | imageFilter: 'avatar'}}"
-              .username
-                .name> {{visibleUser.get().first_name + ' ' + visibleUser.get().last_name}}
-                .fa.fa-caret-down
-            ul.dropdown-menu.transparent aria-labelledby="single-button" role="menu"
-              li
-                a ui-sref="app.user.show({user_id: visibleUser.get().id})" Profile
-              li
-                a ui-sref="app.user.albums({user_id: visibleUser.get().id})" Albums
-
+        .user-menu-toggle.pointer.pull-right ng-click="showUserMenu = !showUserMenu" ng-show="visibleUser.get().id"
+          .fa.fa-chevron-down ng-class="{'open':showUserMenu}"
       ul.nav.navbar-nav.navbar-right.e-menu
         li
           a href="#"
@@ -38,4 +27,14 @@
             li ng-if="currentUser.exists()"
               a href="#" ng-click="logout()" Logout
 
-  .container.animated.fadeIn ui-view=""
+  .user-navbar ng-if="visibleUser.get().id && showUserMenu"
+    .user-menu-wrapper.animated ng-class="{slideInDown: showUserMenu, slideOutUp: !showUserMenu}"
+      .container.p-l-0.p-r-0
+        ul.user-menu
+          li
+            a.profile ui-sref="app.user.show({user_id: visibleUser.get().id})"
+              img.img-rounded.img-responsive ng-src="{{visibleUser.get().avatar_url.thumb | imageFilter: 'avatar'}}"
+              .username.m-l-5 {{visibleUser.get().first_name + ' ' + visibleUser.get().last_name}}
+          li
+            a ui-sref="app.user.albums({user_id: visibleUser.get().id})" Albums
+  .container.animated.fadeIn.p-t-100 ui-view=""
