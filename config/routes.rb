@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     end
     resources :main_page, only: :index
     resources :videos_information, only: :show, param: :url
+    resources :relationships, except: [:new, :edit]
+    resources :users_search, only: [:index]
   end
 
   match '/(*path)', via: :all, to: frontend_page('index.htm')

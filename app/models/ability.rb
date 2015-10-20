@@ -21,9 +21,14 @@ class Ability
         content.album.user_id == user.id
       end
       can [:show], Album do |album|
-        album.for_all? || (album.for_friends? && album.user.has_friend_access?(user.id))
+        album.for_all? || (album.for_friends? && album.user.is_friend?(user.id))
       end
       can :manage, Album, user_id: user.id
+      can [:create, :index], Relationship
+      can :update, Relationship, friend_id: user.id
+      can :destroy, Relationship do |relation|
+        (relation.user_id == user.id || relation.friend_id == user.id) && relation.confirmed?
+      end
       can :update, Record do |record|
         record.album.user_id == user.id
       end

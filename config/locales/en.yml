@@ -27,7 +27,9 @@ en:
           default_album:
             only_one_allowed: User can have only one default album
             unable_to_destroy: Cannot delete default album
-
+        relationship:
+          self_relation: 'Cannot be friend with self'
+          wrong_status: 'Wrong status'
         page:
           default_page:
             only_one_allowed: User can have only one default page
