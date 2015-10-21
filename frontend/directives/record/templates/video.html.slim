@@ -1,3 +1,3 @@
-.video-preview
-  img.img-responsive draggable="false" ng-src="{{record.content.preview_url.small}}"
-  i.fa.fa-play-circle-o.play-sign.e-white
+img.img-responsive draggable="false" ng-src="{{record.content.preview_url.small}}" ng-if="record.content.preview_url"
+.video-preview-placeholder ng-if="!record.content.preview_url"
+i.fa.fa-play-circle-o.play-sign.e-white

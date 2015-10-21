@@ -1,0 +1,8 @@
+.video-player
+  .video-iframe ng-if="video.iframeUrl"
+    iframe ng-src="{{video.iframeUrl}}" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" height="230"
+
+  .video-processing-preview ng-if="!video.iframeUrl"
+    .controls
+      i.fa.fa-play.play-btn ng-click="showMsg()"
+      .msg Your video is being processing...

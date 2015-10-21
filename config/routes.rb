@@ -27,15 +27,23 @@ Rails.application.routes.draw do
     resources :albums, only: [] do
       resources :records, only: [:index, :update]
       resources :photos, :texts, :videos, except: [:edit, :new, :index]
+      resources :videos, only: [] do
+        put :update_meta_info
+      end
     end
     scope ':target_type/:target_id', target_type: /(album|tribute|video|photo|text)/ do
       resources :comments, only: [:index, :create, :update, :destroy, :show]
       resources :tiles, only: :create
     end
     resources :main_page, only: :index
-    resources :videos_information, only: :show, param: :url
+
     resources :relationships, except: [:new, :edit]
     resources :users_search, only: [:index]
+    
+    resources :video_informations, only: :show, param: :url
+    resources :video_uploads, only: [:new, :create]
+
+    match '*path', via: :all, to: proc { raise ActionController::RoutingError.new('Not Found') }
   end
 
   match '/(*path)', via: :all, to: frontend_page('index.htm')

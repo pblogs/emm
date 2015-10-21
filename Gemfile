@@ -21,6 +21,7 @@ gem 'autoprefixer-rails'
 gem 'carrierwave'
 gem 'carrierwave-base64'
 gem 'mini_magick'
+gem 'httparty'
 
 gem 'mandrill_mailer'
 gem 'launchy'
@@ -34,7 +35,7 @@ gem 'database_cleaner'
 
 gem 'kaminari'
 gem 'sanitize'
-gem 'carrierwave-video'
+gem 'whenever', require: false
 
 source 'https://rails-assets.org' do
   # General libs

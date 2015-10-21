@@ -20,6 +20,8 @@ set :unicorn_config_path, -> { File.join(current_path, 'config', 'unicorn', 'sta
 
 set :deploy_to, '/home/emmortal/www/emmortal'
 
+set :whenever_environment, 'staging'
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the

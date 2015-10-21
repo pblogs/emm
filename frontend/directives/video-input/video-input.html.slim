@@ -1,0 +1,38 @@
+.video-input
+  .canvas-placeholder ng-style="{ 'height': ((height || 300) + 'px') }"
+    .message-container
+      div ng-show="uploader.queue.length == 0"
+        i.fa.fa-video-camera
+
+      .animated.bounceIn ng-show="uploader.queue.length > 0 && uploader.isUploadPreparing"
+        i.fa.fa-spinner.fa-spin
+        small Preparing your upload...
+
+      div ng-show="uploader.queue.length > 0 && uploader.isUploading"
+        i.fa.fa-spinner.fa-spin
+        small Uploading {{uploader.progress}}%
+
+      .animated.bounceIn ng-show="uploader.queue.length > 0 && uploader.isUploadVerifying"
+        i.fa.fa-spinner.fa-spin
+        small Verifying your upload...
+
+      .animated.bounceIn ng-show="uploader.queue.length > 0 && uploader.queue[0].isCancel"
+        i.fa.fa-times-circle
+        small Uploading was canceled
+
+      .animated.bounceIn ng-show="uploader.queue.length > 0 && uploader.queue[0].isError"
+        i.fa.fa-exclamation-circle
+        small Error while uploading video
+
+  .btn.e-btn.btn-primary.file-input-btn ng-show="uploader.queue.length == 0"
+    i.fa.fa-upload>
+    | Choose video
+    input id="{{fileInputId}}" type="file" accept="video/3gpp,video/mp4,video/x-msvideo,video/x-flv,video/x-m4v,video/*" uploader="uploader" nv-file-select=""
+
+  .btn.e-btn.btn-warning.btn-block ng-show="uploader.queue.length > 0 && (uploader.isUploading || uploader.isUploadPreparing || uploader.isUploadVerifying)" ng-click="uploader.cancelAll()" ng-disabled="uploader.isUploadPreparing || uploader.isUploadVerifying"
+    i.fa.fa-ban>
+    | Cancel
+
+  .btn.e-btn.btn-danger.btn-block ng-show="uploader.queue.length > 0 && !(uploader.isUploading || uploader.isUploadPreparing || uploader.isUploadVerifying)" ng-click="clearUploader()"
+    i.fa.fa-times-circle>
+    | Remove

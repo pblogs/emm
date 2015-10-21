@@ -1,0 +1,12 @@
+.message-container {
+  display: table-cell;
+  vertical-align: middle;
+
+  i.fa, small {
+    display: block;
+  }
+
+  i.fa {
+    margin-bottom: 15px;
+  }
+}

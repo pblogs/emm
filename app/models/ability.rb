@@ -17,9 +17,10 @@ class Ability
     elsif user.persisted?
       can :update, User, id: user.id
       can :manage, Page, user_id: user.id
-      can [:show, :create, :update, :destroy], [Photo, Text, Video] do |content|
+      can [:show, :create, :update, :destroy, :update_meta_info], [Photo, Text, Video] do |content|
         content.album.user_id == user.id
       end
+      can :upload, Video
       can [:show], Album do |album|
         album.for_all? || (album.for_friends? && album.user.is_friend?(user.id))
       end

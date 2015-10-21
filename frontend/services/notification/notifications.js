@@ -10,10 +10,10 @@ angular.module('app')
       showValidationErrors: showValidationErrors
     };
 
-    function showNotification(message, type) {
+    function showNotification(message, type, align) {
       notify({
         templateUrl: 'services/notification/notify.html',
-        classes: normalizeClass(type),
+        classes: normalizeClass(type, align),
         message: $sce.trustAsHtml(message),
         position: 'right',
         html: true
@@ -24,10 +24,10 @@ angular.module('app')
       var text = _.map(errorsHash, function (errors, field) {
         return '<b>' + field + ':</b> ' + errors.join('; ');
       }).join('<br/>');
-      showNotification(text, 'danger');
+      showNotification(text, 'danger', 'left');
     }
 
-    function normalizeClass(type) {
-      return 'alert-' + (type || 'success');
+    function normalizeClass(type, align) {
+      return 'alert-' + (type || 'success') + ' text-' + (align || 'center');
     }
   });

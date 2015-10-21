@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe VideosInformationController, type: :controller do
+RSpec.describe VideoInformationsController, type: :controller do
   login_user
 
   let(:youtube) { 'https://www.youtube.com/watch?v=e5jDspIC4hY' }
