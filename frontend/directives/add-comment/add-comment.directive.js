@@ -8,9 +8,10 @@ angular.module('app')
       templateUrl: 'directives/add-comment/add-comment.html',
       scope: {
         commentable: "=",
-        onCreate: "="
+        onCreate: "=",
+        contentType: "@"
       },
-      controller: function($scope, CurrentUser, $http) {
+      controller: function($scope, CurrentUser, $http, Notification, AuthModal) {
         $scope.comment = {
           author: CurrentUser.id()
         };
@@ -18,13 +19,17 @@ angular.module('app')
 
         function submit() {
           $scope.errors = {};
-          $http.post('api/' + $scope.commentable.content_type + '/' + $scope.commentable.id + '/comments', {resource: $scope.comment})
+          $http.post('api/' + $scope.contentType + '/' + $scope.commentable.id + '/comments', {resource: $scope.comment})
             .then(function(response) {
               $scope.comment.text = '';
               $scope.onCreate(_.result(response.data, 'resource'));
             })
             .catch(function(response) {
               $scope.errors = _.result(response.data, 'errors');
+              if (response.status == 403) {
+                Notification.show('You must Sign In to leave there tribute', 'danger');
+                AuthModal('signIn');
+              }
             });
         }
       }
