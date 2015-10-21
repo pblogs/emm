@@ -1,0 +1,6 @@
+.comments
+  form name="commentForm" ng-submit="submit()"
+    form-field type="textarea" placeholder="Leave tribute" ng-model="comment.text" errors="errors['text']" rows="5" ng-required="true"
+    .pull-left ng-class="{'e-red': comment.text.length > 100, 'e-grey':  comment.text.length < 100 || !comment.text.length}" You have ({{comment.text.length || 0}}/100) characters for this tribute
+    .text-right
+      button.btn.e-btn.btn-primary type="submit" ng-disabled="commentForm.$invalid || comment.text.length > 100" Publish

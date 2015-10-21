@@ -1,0 +1,9 @@
+.comment.m-t-10
+  .e-brown.text-justify.comment-content "{{comment.text}}"
+  .comment-footer
+    .tile-info.m-t-10
+      .e-brown.pull-left.author-info
+        | Added by
+        a.e-link.font-bold< ui-sref="app.user.show({user_id: comment.author.id})" ng-click="onLinkFollow()" {{comment.author.first_name + ' ' + comment.author.last_name}}
+      .pull-right
+        like

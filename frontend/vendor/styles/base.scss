@@ -23,3 +23,7 @@
   color: $e-brown;
   margin-top: 0;
 }
+
+body.modal-open {
+  overflow: hidden!important;
+}
