@@ -48,5 +48,7 @@ Rails.application.configure do
     Bullet.raise = true # raise an error if n+1 query occurs
     Bullet.console = true
     Bullet.rails_logger = true
+    Bullet.add_whitelist :type => :unused_eager_loading, :class_name => 'Relationship', :association => :user
+    Bullet.add_whitelist :type => :unused_eager_loading, :class_name => 'Relationship', :association => :friend
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151013144831) do
+ActiveRecord::Schema.define(version: 20151016125738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,17 @@ ActiveRecord::Schema.define(version: 20151013144831) do
   add_index "records", ["content_type"], name: "index_records_on_content_type", using: :btree
   add_index "records", ["created_at"], name: "index_records_on_created_at", using: :btree
   add_index "records", ["weight"], name: "index_records_on_weight", using: :btree
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "relationships", ["friend_id"], name: "index_relationships_on_friend_id", using: :btree
+  add_index "relationships", ["user_id"], name: "index_relationships_on_user_id", using: :btree
 
   create_table "texts", force: :cascade do |t|
     t.integer  "album_id"

@@ -12,6 +12,14 @@ FactoryGirl.define do
     avatar { File.open(File.join(Rails.root, 'spec', 'fixtures' , 'avatars', "#{rand(1..10)}.jpg")) }
   end
 
+  trait :with_relations do
+    after(:create) do |user|
+      create_list(:relationship, 2, user: user)
+      create_list(:relationship, 2, friend: user)
+      create_list(:relationship, 2, user: user, status: 'accepted')
+    end
+  end
+
   trait :confirmed do
     confirmed_at Time.now
   end
