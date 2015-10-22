@@ -13,12 +13,18 @@ RSpec.describe RelationshipsController, type: :controller do
 
     it 'should return incoming requests' do
       get :index, user_id: user.id, user_token: user.jwt_token, status: 'incoming'
-      expect(json_response['meta']['total']).to eq(user.incoming_requests.count)
+      expect(json_response['resources'].map{ |f| f['friend']['id'] }).to eq(user.incoming_requests.map(&:user_id))
     end
 
     it 'should return outgoing requests' do
       get :index, user_id: user.id, user_token: user.jwt_token, status: 'outgoing'
-      expect(json_response['meta']['total']).to eq(user.outgoing_requests.count)
+      expect(json_response['resources'].map{ |f| f['friend']['id'] }).to eq(user.outgoing_requests.map(&:friend_id))
+    end
+
+    it 'should return users relations' do
+      other_user = create(:user, :confirmed, :with_relations)
+      get :index, user_id: other_user.id, user_token: user.jwt_token, status: 'users'
+      expect(json_response['resources'].map{ |f| f['friend']['id'] }).to eq(other_user.relations.map(&:friend_id))
     end
 
     it 'should return all accepted relations' do

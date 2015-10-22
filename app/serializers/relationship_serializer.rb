@@ -4,6 +4,6 @@ class RelationshipSerializer < ActiveModel::Serializer
   has_one :friend
 
   def friend
-    object.user == current_user ? object.user : object.friend
+    object.user == current_user ? object.friend : object.user
   end
 end

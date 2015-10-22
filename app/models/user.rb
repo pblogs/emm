@@ -48,6 +48,15 @@ class User < ActiveRecord::Base
     Relationship.where("status = #{Relationship.statuses['accepted']} AND (user_id = ? OR friend_id = ?)", id, id)
   end
 
+  def relationships_statuses
+    hash = {}
+    relationships.all.each do |rel|
+      friend_id = rel.user_id == id ? rel.friend_id : rel.user_id
+      hash[friend_id] = { status:  rel.status, relation_id: rel.id, sender: rel.user_id }
+    end
+    hash
+  end
+
   def is_friend?(user_id)
     ids = [id, user_id]
     Relationship.where(user_id: ids, friend_id: ids, status: Relationship.statuses['accepted']).exists?

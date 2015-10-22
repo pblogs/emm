@@ -7,10 +7,14 @@ class RelationshipsController < ApplicationController
         relationships = current_user.incoming_requests
       when 'outgoing'
         relationships = current_user.outgoing_requests
+      when 'users'
+        view_user = User.find(params[:user_id])
+        relationships = view_user.relations
       else
         relationships = current_user.relations
     end
-    render_resources(relationships.includes(:user, :friend).page(params[:page]).per(params[:per]))
+    render_resources(relationships.includes(:user, :friend).page(params[:page]).per(params[:per]),
+                     :scope => view_user || current_user, scope_name: :current_user)
   end
 
   def update
