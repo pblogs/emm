@@ -3,8 +3,12 @@
     .container
       .navbar-header
         a ui-sref="app.main" class="navbar-brand" Emmortal
-        .user-menu-toggle.pointer.pull-right ng-click="showUserMenu = !showUserMenu" ng-show="visibleUser.get().id"
-          .fa.fa-chevron-down ng-class="{'open':showUserMenu}"
+
+        ul.nav.navbar-nav.navbar-left.e-menu ng-click="showUserMenu = !showUserMenu" ng-show="visibleUser.get().id"
+          li
+            a href="#"
+              .fa.fa-chevron-down.user-menu-toggle ng-class="{'open': showUserMenu}"
+
       ul.nav.navbar-nav.navbar-right.e-menu
         li
           a href="#"

@@ -4,6 +4,7 @@ html, body {
   width: 100%;
   height: 100%;
 }
+
 #app {
   width: 100%;
   height: 100%;
@@ -26,26 +27,6 @@ html, body {
   border: none;
   margin: 0;
 
-  .user-menu-toggle {
-    width: 35px;
-    margin: 2px;
-    height: 35px;
-    display: inline-block;
-    border: 2px solid $e-white;
-    border-radius: 50%;
-    color: $e-white;
-
-    .fa {
-      font-size: 18px;
-      padding: 6px;
-      transition: transform 0.3s ease;
-
-      &.open {
-        transform: rotate(180deg);
-      }
-    }
-  }
-
   .navbar-header {
     float: left;
 
@@ -62,11 +43,26 @@ html, body {
     li a {
       padding: 10px 15px;
       color: $e-white;
+      border-color: $e-white;
       font-size: 18px;
 
       &:hover, &:focus {
         color: $e-black;
+        border-color: $e-black;
         background: $e-white;
+      }
+
+      .user-menu-toggle {
+        border: 2px solid;
+        padding: 2px;
+        border-radius: 50%;
+        font-size: 12px;
+        vertical-align: top;
+        transition: transform 0.3s ease;
+
+        &.open {
+          transform: rotate(180deg);
+        }
       }
     }
   }
