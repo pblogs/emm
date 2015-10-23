@@ -23,6 +23,7 @@
       color: $e-white;
       font-size: 24px;
       top: -8px;
+      z-index: 100;
       cursor: pointer;
 
       &:hover {
@@ -39,6 +40,16 @@
       padding: 15px 30px;
       border-bottom: 0;
       color: $e-brown;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .e-modal .modal-dialog .modal-content{
+    .e-close-modal {
+      right: 8px;
+      color: $e-brown;
+      top:12px;
     }
   }
 }

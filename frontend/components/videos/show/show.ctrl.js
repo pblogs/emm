@@ -12,7 +12,7 @@ angular.module('app')
     }
 
     function getComments() {
-      Restangular.one(content.content_type, content.id).all('comments').getList()
+      Restangular.one('video', content.id).all('comments').getList()
         .then(function(comments) {
           $scope.comments = comments;
         })

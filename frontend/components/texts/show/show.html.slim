@@ -4,11 +4,23 @@
   h3.modal-title ng-bind="content.title"
 .modal-body
   .show-modal-text
-    .show-description.m-t-15.e-brown.text-justify.p-b-15 ta-bind='' ng-model="content.description"
+    .show-description.m-t-15.e-brown.text-justify.p-b-15 ta-bind='' ng-model="content.description" ng-class="{'tributes': showMoreTributes}"
     .tile-comments.m-t-10
       .row
         .col-sm-6
           added-by-at author="content.user" created-at="content.created_at" on-link-follow="$close()"
-          add-comment object="content"
-        .col-sm-6
-          tile-show-additional
+          add-comment.m-t-10 commentable="content" on-create="addNewComment" content-type="text"
+        div ng-class="{'col-sm-6': !showMoreTributes}"
+          .tile-show-text-additional.animated ng-class="{'open tributes fadeIn': showMoreTributes}"
+            .row.additional-tabs-menu.m-l-0.m-r-0
+              .col-xs-6.text-center
+                .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTributes> ng-class="{'active': showMoreTributes}" ng-click="showMoreTributes = !showMoreTributes"
+                  | Tributes
+                  .fa< ng-class="{'fa-chevron-down': !showMoreTributes, 'fa-chevron-up': showMoreTributes}"
+              .col-xs-6.text-center
+                .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTagged<
+                  | Tagged
+                  .fa.fa-chevron-down<
+            .tagged-section ng-show="showMoreTagged"
+            .comments-section
+              comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"
