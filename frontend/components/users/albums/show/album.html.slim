@@ -8,16 +8,23 @@
       span.text-capitalize> {{user.first_name}}'s
       | Life Events
     .row
-      .col-md-3.col-sm-4.col-xs-6
-        .img-wrapper
+      .col-md-3.col-sm-4.cover-tagged
+        .cover-wrapper
           img.img-responsive ng-src="{{album.cover_url.thumb | imageFilter: 'album'}}"
         .tagged-people
 
-      .col-md-9.col-sm-8.col-xs-6
-        h2.e-red.m-t-0 ng-bind="album.title" ng-style="{color: album.color}"
-        h5.e-brown
+      .col-md-9.col-sm-8.info-comments
+        h2.e-red.m-t-0.album-title ng-bind="album.title" ng-style="{color: album.color}"
+        h5.e-brown.album-info
           .font-bold.m-b-5 ng-bind="album.start_date | date:'longDate'"
           a.e-link< href="#" ng-bind="album.location_name"
+        .m-t-10
+          .comments-section
+            .comments-wrapper ng-style="{'width': comments.length*260 +'px'}"
+              comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"
+          .add-comment-section.m-t-10.text-right
+            .add-comment-wrapper
+              add-comment commentable="album" content-type="album" on-create="addNewComment"
 
     .content.m-t-30
       h3.e-brown.m-t-10.m-b-25 Content ({{album.records_count}})

@@ -69,7 +69,7 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe '#update' do
-    let(:new_text) { Faker::Lorem.paragraph }
+    let(:new_text) { Faker::Lorem.characters(char_count = 100) }
 
     before(:each) do
       @comment = create(:comment, commentable: target, author: author)

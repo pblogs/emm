@@ -5,7 +5,61 @@
     position: relative;
   }
 
+  .comments-section {
+    width: 100%;
+    height: 200px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    .comments-wrapper {
+
+      .comment {
+        width: 250px;
+        margin-right: 10px;
+        margin-top: 0;
+
+        .comment-content {
+          height: 135px;
+        }
+      }
+    }
+  }
+
+  .add-comment-section {
+    .add-comment-wrapper {
+      width: 50%;
+      display: inline-block;
+    }
+  }
+
   .content {
     border-top: 1px solid $e-brown;
   }
+}
+
+
+
+@media screen and (max-width: 767px) {
+  .album-inside {
+
+    .cover-tagged {
+      text-align: center;
+
+      .cover-wrapper {
+        display: inline-block;
+      }
+    }
+
+    .info-comments {
+      .album-title, .album-info {
+        text-align: center;
+      }
+
+      .add-comment-section {
+        .add-comment-wrapper {
+          width: 100%;
+        }
+      }
+    }
+  }
+
 }

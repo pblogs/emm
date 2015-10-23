@@ -7,7 +7,7 @@
         .show-video-wrapper
           video-player video="content" ng-if="content.video_id"
         .tile-comments
-          add-comment commentable="content" on-create="addNewComment"
+          add-comment commentable="content" content-type="video" on-create="addNewComment"
       .col-sm-6
         h3.e-brown.m-t-0 {{content.title || 'No title'}}
         div ng-hide="showMoreTributes"

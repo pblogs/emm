@@ -11,6 +11,7 @@ class Ability
       album.for_all?
     end
     can [:index], Record
+    can [:show, :index], Comment
 
     if user.admin?
       can :manage, :all
@@ -42,7 +43,7 @@ class Ability
       can [:destroy], Comment do |comment|
         comment.commentable.user.id == user.id || comment.author_id == user.id
       end
-      can [:create, :show, :index], Comment
+      can [:create], Comment
     end
   end
 end

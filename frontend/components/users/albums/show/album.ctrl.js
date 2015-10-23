@@ -10,10 +10,13 @@ angular.module('app')
     $scope.getPinColor = getPinColor;
     $scope.editAlbum = editAlbum;
     $scope.removeAlbum = removeAlbum;
+    $scope.addNewComment = addNewComment;
     $scope.user = user;
     $scope.album = album;
     $scope.canEditAlbum = user.id == $scope.currentUser.id;
+    $scope.comments = [];
     getRecords();
+    getComments();
 
     $scope.$on('recordAdded', function (event, record) {
       if ($scope.recordsLoader.allReceived) {
@@ -23,6 +26,17 @@ angular.module('app')
         $scope.album.records_count++;
       }
     });
+
+    function addNewComment(comment) {
+      $scope.comments.push(comment);
+    }
+
+    function getComments() {
+      Restangular.one('album', $scope.album.id).all('comments').getList()
+        .then(function(comments) {
+          $scope.comments = comments;
+        })
+    }
     
     function updateWeights($item, $partFrom, $partTo, $indexFrom, $indexTo) {
       var changesArray = [$indexFrom, $indexTo],
