@@ -12,6 +12,7 @@ class Ability
     end
     can [:index], Record
     can [:show, :index], Comment
+    can [:index], Relationship
 
     if user.admin?
       can :manage, :all
@@ -26,10 +27,10 @@ class Ability
         album.for_all? || (album.for_friends? && album.user.is_friend?(user.id))
       end
       can :manage, Album, user_id: user.id
-      can [:create, :index], Relationship
-      can :update, Relationship, friend_id: user.id
+      can [:create], Relationship
+      can :update, Relationship, recipient_id: user.id
       can :destroy, Relationship do |relation|
-        (relation.user_id == user.id || relation.friend_id == user.id) && relation.confirmed?
+        (relation.sender_id == user.id || relation.recipient_id == user.id) && relation.confirmed?
       end
       can :update, Record do |record|
         record.album.user_id == user.id

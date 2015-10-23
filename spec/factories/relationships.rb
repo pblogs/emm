@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :relationship do
-    association :user
-    association :friend, factory: :user
+    association :sender, factory: :user
+    association :recipient, factory: :user
   end
 end

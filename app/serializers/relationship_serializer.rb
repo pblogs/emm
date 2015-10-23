@@ -1,9 +1,11 @@
 class RelationshipSerializer < ActiveModel::Serializer
   attributes :id, :status
 
-  has_one :friend
+  has_one :related_user
 
-  def friend
-    object.user == current_user ? object.friend : object.user
+  def related_user
+    return object.recipient if object.sender_id == options[:current_user].id
+    return object.sender if object.recipient_id == options[:current_user].id
+    nil
   end
 end

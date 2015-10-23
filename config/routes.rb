@@ -3,12 +3,12 @@ Rails.application.routes.draw do
     devise_for :users, skip: :all, failure_app: CustomAuthFailure
 
     devise_scope :user do
-      post    'login', to: 'jwt_authentication/sessions#create'
-      post    'registration', to: 'jwt_authentication/registrations#create'
-      post    'passwords', to: 'jwt_authentication/passwords#create'
-      match   'passwords', to: 'jwt_authentication/passwords#update', via: [:patch, :put]
-      get     'confirmation', to: 'jwt_authentication/confirmations#show'
-      post    'resend_confirmation', to: 'jwt_authentication/confirmations#create'
+      post 'login', to: 'jwt_authentication/sessions#create'
+      post 'registration', to: 'jwt_authentication/registrations#create'
+      post 'passwords', to: 'jwt_authentication/passwords#create'
+      match 'passwords', to: 'jwt_authentication/passwords#update', via: [:patch, :put]
+      get 'confirmation', to: 'jwt_authentication/confirmations#show'
+      post 'resend_confirmation', to: 'jwt_authentication/confirmations#create'
     end
     resources :users, only: [:index, :show, :update, :destroy] do
       get :by_alias, on: :collection, to: 'users#show'
@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       end
       resources :pages, only: [:index, :show] do
         put :update_tiles
+      end
+      resources :relationships, only: [:index, :create] do
+        put '/', to: 'relationships#update', on: :collection
+        delete '/', to: 'relationships#destroy', on: :collection
       end
     end
     resources :pages, only: [] do
@@ -37,10 +41,7 @@ Rails.application.routes.draw do
     end
     resources :main_page, only: :index
     resources :likes, only: [:create, :destroy]
-    
-    resources :relationships, except: [:new, :edit]
-    resources :users_search, only: [:index]
-    
+
     resources :video_informations, only: :show, param: :url
     resources :video_uploads, only: [:new, :create]
 
