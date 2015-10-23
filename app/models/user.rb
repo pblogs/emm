@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :tiles, through: :pages
   has_many :comments, foreign_key: :author_id, dependent: :destroy
   has_many :relationships, dependent: :destroy
+  has_many :likes, inverse_of: :user
 
   scope :search_by_filter, -> (query_string) {
     where('first_name ILIKE :text OR last_name ILIKE :text OR email ILIKE :text', text: "%#{query_string}%").references(:tags)

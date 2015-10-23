@@ -44,6 +44,7 @@ class Ability
         comment.commentable.user.id == user.id || comment.author_id == user.id
       end
       can [:create], Comment
+      can [:create, :destroy], Like, user_id: user.id
     end
   end
 end

@@ -36,7 +36,8 @@ Rails.application.routes.draw do
       resources :tiles, only: :create
     end
     resources :main_page, only: :index
-
+    resources :likes, only: [:create, :destroy]
+    
     resources :relationships, except: [:new, :edit]
     resources :users_search, only: [:index]
     
