@@ -7,7 +7,9 @@ form ng-submit="submit()"
   .modal-body.video-popup
     .row
       .col-md-6
-        .text-center.m-t-50 Video upload will be here...
+        video-input height="230" on-uploaded="setUploadedVideo" ng-show="!video.video_id"
+        video-player video="video" ng-if="video.video_id"
+        .e-red ng-repeat="error in errors.video_id" {{ error }}
 
       .col-md-6
         form-field placeholder="Title" ng-model="video.title" errors="errors.title"
@@ -19,8 +21,8 @@ form ng-submit="submit()"
   .modal-footer.text-right
     span ng-if="!video.id"
       button.btn.e-btn.btn-default type="button" ng-click="back()" Back
-      button.btn.e-btn.btn-primary type="submit" ng-disabled="true" Publish
+      button.btn.e-btn.btn-primary type="submit" Publish
 
     span ng-if="video.id"
       button.btn.e-btn.btn-default type="button" ng-click="$dismiss('close')" Cancel
-      button.btn.e-btn.btn-primary type="submit" ng-disabled="true" Save
+      button.btn.e-btn.btn-primary type="submit" Save

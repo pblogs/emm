@@ -31,7 +31,7 @@ class VideoInformation
         self.remote_picture_url = video_info['thumbnail_url']
       end
     rescue => e
-      self.errors.add(:base, e.message)
+      self.errors.add(:source_url, e.message)
     end
     self
   end

@@ -7,6 +7,12 @@ class VideosController < ApplicationController
     render_resource_data(@video)
   end
 
+  def update_meta_info
+    @video = Video.find(params[:video_id])
+    @video.update_meta_info!
+    render_resource_data(@video)
+  end
+
   def create
     @video.save
     render_resource_or_errors(@video, with_tile: true, with_record: true)
@@ -25,6 +31,6 @@ class VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:resource).permit(:title, :description, :preview, :video_id, :source)
+    params.require(:resource).permit(:title, :description, :remote_preview_url, :video_id, :source)
   end
 end

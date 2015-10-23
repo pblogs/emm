@@ -1,11 +1,11 @@
 .e-close-modal ng-click="$dismiss()"
   .fa.fa-close
 .modal-body
-  .show-modal-photo
+  .show-modal-video
     .row
       .col-sm-6
-        .show-photo-wrapper
-          img.img-responsive ng-src="{{content.preview_url.original}}"
+        .show-video-wrapper
+          video-player video="content" ng-if="content.video_id"
         .tile-comments
           add-comment commentable="content" on-create="addNewComment"
       .col-sm-6

@@ -1,0 +1,50 @@
+@import "../../vendor/styles/variables";
+
+.video-processing-preview {
+  height: 230px;
+  background: #000;
+  display: table;
+  width: 100%;
+  position: relative;
+
+  .controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+
+    .play-btn, .msg {
+      display: inline-block;
+      vertical-align: top;
+      height: 40px;
+      background: rgba(23, 35, 34, 0.75);
+      color: #fff;
+      line-height: 40px;
+      border-radius: 5px;
+    }
+
+    .play-btn {
+      width: 65px;
+      font-size: 23px;
+      text-align: center;
+      padding-left: 4px;
+      margin-right: 10px;
+      transition: background-color 40ms;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $vimeo-color;
+      }
+    }
+
+    .msg {
+      width: calc(100% - 75px);
+      padding: 0 10px;
+    }
+  }
+}
+
+.video-iframe iframe {
+  width: 100%;
+}

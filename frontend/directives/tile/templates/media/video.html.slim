@@ -1,2 +1,3 @@
-img.tile-img ng-src="{{ content.preview_url.small }}" draggable="false"
+img.tile-img ng-src="{{ content.preview_url.small }}" draggable="false" ng-if="content.preview_url"
+.video-preview-placeholder ng-if="!content.preview_url"
 i.fa.fa-play-circle-o.play-sign

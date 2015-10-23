@@ -4,9 +4,9 @@ en:
     description: Here will be all your uncategorized records
 
   activerecord:
-#    attributes:
-#      user:
-#        email: E-mail
+    attributes:
+      video:
+        video_id: Video
 
     errors:
       messages:
