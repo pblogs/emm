@@ -1,6 +1,6 @@
 .record.pointer
   .tile-edit-buttons ng-if="canEdit"
-    i.fa.fa-times ng-click="onRemove(record)"
+    i.fa.fa-times ng-click-confirm="onRemove(record)"
     i.fa.fa-pencil.edit-button ng-click="onEdit(record)"
     i.fa.fa-thumb-tack ng-style="getColor()" ng-click="onPin(record)"
     i.fa.fa-arrows.drag-handle sv-handle=""

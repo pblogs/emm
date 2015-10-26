@@ -7,7 +7,7 @@
     .col-md-2.col-sm-3.col-xs-6.m-b-15 ng-repeat="album in albums"
       .album-view
         .tile-edit-buttons ng-if="canEditAlbum && album.privacy != 'hidden'"
-          i.fa.fa-times ng-click="removeAlbum(album)"
+          i.fa.fa-times ng-click-confirm="removeAlbum(album)"
           i.fa.fa-thumb-tack ng-style="getPinColor(album)" ng-click="pinAlbum(album)"
         a ui-sref="app.user.album({user_id: user.id, album_id: album.id})"
           .image-wrapper
