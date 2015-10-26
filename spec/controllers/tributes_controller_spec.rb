@@ -37,6 +37,12 @@ RSpec.describe TributesController, type: :controller do
       expect(json_response['resource'].keys).to contain_exactly(*serialized(tribute).keys)
     end
 
+    it 'should response success if has tile' do
+      tribute.create_tile_on_user_page
+      get :show, id: tribute.id, user_token: @user_token, user_id: @user.id
+      expect(response).to be_success
+    end
+
     it 'access denied for another user' do
       get :show, id: tribute.id, user_token: another_user.jwt_token, user_id: @user.id
       expect(response).to be_forbidden

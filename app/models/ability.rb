@@ -38,7 +38,10 @@ class Ability
       can [:update, :create, :destroy], Tile do |tile|
         tile.page.user_id == user.id
       end
-      can [:index, :show], Tribute, user_id: user.id
+      can [:index], Tribute, user_id: user.id
+      can :show, Tribute do |tribute|
+        tribute.user_id == user.id || tribute.has_tile?
+      end
       can :create, Tribute, author_id: user.id
       can [:update], Comment, author_id: user.id
       can [:destroy], Comment do |comment|

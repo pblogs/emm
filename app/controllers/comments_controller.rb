@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
   before_action :load_target
+  before_action :authorize, only: [:index, :show, :create]
 
-  load_and_authorize_resource through: :target
+  load_resource through: :target
+  authorize_resource only: [:update, :destroy]
 
   def index
     render_resources(@comments.includes(:author))
@@ -35,5 +37,10 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:resource).permit(:commentable_id, :commentable_type, :text)
+  end
+
+  def authorize
+    target = @target.try(:album) || @target
+    authorize! :show, target
   end
 end

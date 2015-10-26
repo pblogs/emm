@@ -19,4 +19,8 @@ class Tribute < ActiveRecord::Base
     page = page || self.user.pages.last
     self.create_tile(page: page)
   end
+
+  def has_tile?
+    tile.present?
+  end
 end

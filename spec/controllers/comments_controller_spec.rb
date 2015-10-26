@@ -3,45 +3,73 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
   login_user
 
-  let(:target) { create(%i{ photo video text album tribute}.sample) }
+
   let(:author) { create(:user, :confirmed) }
   let!(:comment) { create_list(:comment, 2, commentable: target, author: author).first }
   let(:another_user) { create(:user, :confirmed) }
+  let!(:relation) { create(:relationship, :accepted, user: author, friend: @user) }
 
-
-  describe '#index' do
-    it 'should response success' do
-      get :index, target_id: target.id, target_type: target.class.name.underscore, user_token: @user_token
-      expect(response).to be_success
-    end
-
-    it 'should return correct comments count' do
-      get :index, target_id: target.id, target_type: target.class.name.underscore, user_token: @user_token
-      expect(json_response['meta']['total']).to eq target.comments.count
-    end
+  let(:private_albums) do
+    album = create(:album, :private)
+    [album, album.user.albums.first]
   end
 
-  describe '#show' do
-    it 'should response success' do
-      get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
-      expect(response).to be_success
+  %i{ photo video text album tribute}.each do |target_name|
+    let(:target) do
+      obj = create(target_name, user: author)
+      obj.create_tile_on_user_page if target_name == :tribute
+      obj
     end
 
-    it 'should respond with comment data' do
-      get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
-      comment = Comment.find(json_response['resource']['id'])
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(comment).keys)
+    describe "#index comments for #{target_name}" do
+      it 'should response success' do
+        get :index, target_id: target.id, target_type: target.class.name.underscore, user_token: @user_token
+        expect(response).to be_success
+      end
+
+      it 'should return correct comments count' do
+        get :index, target_id: target.id, target_type: target.class.name.underscore, user_token: @user_token
+        expect(json_response['meta']['total']).to eq target.comments.count
+      end
+
+      it 'should not index comments to private albums (default and for friends)' do
+        album = create(:album, :private)
+        private_albums.each do |album|
+          get :index, target_id: album.id, target_type: album.class.name.underscore, user_token: @user_token
+          expect(response).to be_forbidden
+        end
+      end
     end
 
-    # TODO Turn it back when back-end will be fixed to prevent showing comments for private content
-    # it 'access denied' do
-    #   get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id
-    #   expect(response).to be_forbidden
-    # end
+    describe "#show comments for #{target_name}" do
+      it 'should response success' do
+        get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
+        expect(response).to be_success
+      end
+
+      it 'should respond with comment data' do
+        get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
+        comment = Comment.find(json_response['resource']['id'])
+        expect(json_response['resource'].keys).to contain_exactly(*serialized(comment).keys)
+      end
+
+      it 'access denied' do
+        get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id
+        expect(response).to be_forbidden
+      end
+
+      it 'should not show comment from private album (default and for friends)' do
+        private_albums.each do |album|
+          comment = create(:comment_for_album, commentable: album)
+          get :show, target_id: album.id, target_type: album.class.name.underscore, id: comment.id, user_token: @user_token
+          expect(response).to be_forbidden
+        end
+      end
+    end
   end
 
   describe '#create' do
-    let(:create_attributes) { attributes_for(:comment) }
+    let(:create_attributes) { attributes_for(:comment, user: @user) }
 
     it 'should response success' do
       post :create, target_id: target.id, target_type: target.class.name.underscore, user_token: author.jwt_token,
@@ -66,6 +94,14 @@ RSpec.describe CommentsController, type: :controller do
     it 'access denied' do
       post :create, target_id: target.id, target_type: target.class.name.underscore, resource: create_attributes
       expect(response).to be_forbidden
+    end
+
+    it 'should not create comment for private album (default and for friends)' do
+      private_albums.each do |album|
+        post :create, target_id: album.id, target_type: album.class.name.underscore, user_token: author.jwt_token,
+             resource: create_attributes
+        expect(response).to be_forbidden
+      end
     end
   end
 
