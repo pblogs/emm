@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022110557) do
+ActiveRecord::Schema.define(version: 20151023084102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,15 +106,18 @@ ActiveRecord::Schema.define(version: 20151022110557) do
   add_index "records", ["weight"], name: "index_records_on_weight", using: :btree
 
   create_table "relationships", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.integer  "status",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "status",       default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
-  add_index "relationships", ["friend_id"], name: "index_relationships_on_friend_id", using: :btree
-  add_index "relationships", ["user_id"], name: "index_relationships_on_user_id", using: :btree
+  add_index "relationships", ["created_at"], name: "index_relationships_on_created_at", using: :btree
+  add_index "relationships", ["recipient_id"], name: "index_relationships_on_recipient_id", using: :btree
+  add_index "relationships", ["sender_id"], name: "index_relationships_on_sender_id", using: :btree
+  add_index "relationships", ["status"], name: "index_relationships_on_status", using: :btree
+  add_index "relationships", ["updated_at"], name: "index_relationships_on_updated_at", using: :btree
 
   create_table "texts", force: :cascade do |t|
     t.integer  "album_id"
@@ -200,8 +203,8 @@ ActiveRecord::Schema.define(version: 20151022110557) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "source",      default: 0
-    t.integer  "likes_count", default: 0, null: false
     t.integer  "duration"
+    t.integer  "likes_count", default: 0, null: false
   end
 
   add_index "videos", ["album_id"], name: "index_videos_on_album_id", using: :btree

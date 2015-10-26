@@ -14,9 +14,9 @@ FactoryGirl.define do
 
   trait :with_relations do
     after(:create) do |user|
-      create_list(:relationship, 2, user: user)
-      create_list(:relationship, 2, friend: user)
-      create_list(:relationship, 2, user: user, status: 'accepted')
+      create_list(:relationship, 2, sender: user)
+      create_list(:relationship, 2, recipient: user)
+      create_list(:relationship, 2, sender: user, status: 'accepted')
     end
   end
 

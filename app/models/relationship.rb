@@ -1,21 +1,23 @@
 class Relationship < ActiveRecord::Base
-  enum status: { pending: 0, accepted: 1, declined: 2 }
+  enum status: {pending: 0, accepted: 1, declined: 2}
 
-  belongs_to :user#, counter_cache: true
-  belongs_to :friend, class_name: 'User'
+  belongs_to :sender, class_name: 'User'
+  belongs_to :recipient, class_name: 'User'
 
-  validates :user, presence: true
-  validates :friend, presence: true, uniqueness: { scope: :user }
-  validate :not_self
-  validate :validate_status, on: :update
+  validates :sender, presence: true
+  validates :recipient, presence: true, uniqueness: {scope: :sender, message: I18n.t('activerecord.errors.models.relationship.relationship_exists')}
+  validates :status, inclusion: {in: %w[accepted declined]}, on: :update, if: 'status_was != "pending"'
+  validate :not_self, :no_inverse_relation
 
   private
 
-  def validate_status
-    errors.add(:status, I18n.t('activerecord.errors.models.relationship.wrong_status')) if status_was != 'pending'
+  def not_self
+    errors.add(:recipient, I18n.t('activerecord.errors.models.relationship.self_relation')) if sender == recipient
   end
 
-  def not_self
-    errors.add(:friend, I18n.t('activerecord.errors.models.relationship.self_relation')) if user == friend
+  def no_inverse_relation
+    if Relationship.where(recipient_id: sender_id, sender_id: recipient_id).exists?
+      errors.add(:recipient, I18n.t('activerecord.errors.models.relationship.relationship_exists'))
+    end
   end
 end

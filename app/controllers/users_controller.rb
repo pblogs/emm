@@ -2,13 +2,21 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    render_resources @users
+    users = User.search_by_filter(params['filter']).where.not(role: User.roles['admin'])
+    opts = user_signed_in? ? {with_relation: true, current_user_relationships: current_user.relationships} : {}
+    render_resources(users.page(params[:page]).per(params[:per]), opts)
   end
 
   def show
     @user = params[:page_alias] ? User.find_by_page_alias(params[:page_alias]) : User.find(params[:id])
-    serializer = user_signed_in? && current_user.id == @user.id ? PrivateUserSerializer : UserSerializer
-    render_resource_data(@user, serializer: serializer)
+    options = if user_signed_in? && current_user.id == @user.id
+                {serializer: PrivateUserSerializer}
+              elsif user_signed_in?
+                {with_relation: true, current_user: current_user}
+              else
+                {}
+              end
+    render_resource_data(@user, options)
   end
 
   def update
