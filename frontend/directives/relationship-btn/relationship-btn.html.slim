@@ -1,0 +1,30 @@
+.relationship-btn
+  .btn-group.dropdown.e-dropdown.white-dropdown ng-if="user.relationship.relation_to_current_user == 'friends'" dropdown=""
+    button.btn.e-btn.btn-primary.full
+      .fa.fa-check>
+      | Connected
+    button.btn.e-btn.btn-primary.btn-caret.dropdown-toggle dropdown-toggle=""
+      .fa.fa-caret-down
+    ul.uib-dropdown-menu.dropdown-menu aria-labelledby="single-button" role="menu"
+      li
+        a.pointer.e-brown ng-click-confirm="removeRelationship()" Remove from friends
+
+  button.btn.e-btn.btn-warning.full ng-if="user.relationship.relation_to_current_user == 'outgoing_request_pending'"
+    .fa.fa-clock-o>
+    | Request sent
+
+  button.btn.e-btn.btn-info ng-if="!user.relationship" ng-click="createRelationship()"
+    .fa.fa-plus>
+    | Connect
+
+  .btn.e-btn.btn-danger.full ng-if="user.relationship.status == 'declined'"
+    .fa.fa-times>
+    | Declined
+
+  .pending-actions-btn.text-right ng-if="user.relationship.relation_to_current_user == 'incoming_request_pending'"
+    button.btn.e-btn.btn-primary> ng-click="incomingRequestAction('accepted')"
+      .fa.fa-user-plus>
+      | Accept
+    button.btn.e-btn.btn-danger< ng-click-confirm="incomingRequestAction('declined')"
+      .fa.fa-user-times>
+      | Decline

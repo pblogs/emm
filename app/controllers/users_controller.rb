@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     users = User.search_by_filter(params['filter']).where.not(role: User.roles['admin'])
     users.where.not(id: current_user.id) if user_signed_in?
     options = {with_relationship: true, current_user_relationships: current_user.relationships} if user_signed_in?
-    render_resources users.page(params[:page]).per(params[:per]), options || {}
+    render_resources users.page(params[:page]).per(params[:per_page]), options || {}
   end
 
   def show

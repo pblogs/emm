@@ -14,7 +14,7 @@ class RelationshipsController < ApplicationController
         users = @user.related_users
     end
     options = {with_relationship: true, current_user_relationships: current_user.relationships} if user_signed_in?
-    render_resources users.search_by_filter(params['filter']).page(params[:page]).per(params[:per]), options || {}
+    render_resources users.search_by_filter(params['filter']).page(params[:page]).per(params[:per_page]), options || {}
   end
 
   def create

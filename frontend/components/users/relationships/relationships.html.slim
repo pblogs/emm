@@ -1,0 +1,40 @@
+.e-container.relationships-page
+  .h2.e-brown.m-t-0 ng-hide="isMyRelationships" {{user.first_name}}'s Connections
+  .h2.e-brown.m-t-0 ng-show="isMyRelationships" Find Connections
+
+  form-field type="text" placeholder="Type something to search..." ng-model="search.filter" debounce="500"
+
+  ul.nav.nav-pills.nav-justified.e-nav-pills ng-if="isMyRelationships"
+    li ng-class="{active: search.status == ''}"
+      a.e-brown.pointer ng-click="search.status=''" All
+    -['friends', 'incoming', 'outgoing'].each do |status|
+      li ng-class="{active: search.status == '#{status}'}"
+        a.e-brown.pointer ng-click="search.status='#{status}'" #{status.capitalize}
+
+  .users-section.animated.fadeIn
+    div infinite-scroll="friendsLoader.nextPage()"
+      .m-t-15.search-divider.e-brown.p-l-10.animated.fadeIn ng-show="friendsLoader.items.length && isMyRelationships" My Relationships
+      h2.m-t-50.e-brown.text-center.animated.fadeIn ng-show="!friendsLoader.items.length && search.status" No {{search.status}} yet =(
+      .user-field.m-t-25.animated.fadeIn ng-repeat="friend in friendsLoader.items"
+        .media
+          .media-left.media-middle
+            img.media-object.user-img ng-src="{{friend.avatar_url.thumb | imageFilter:'avatar'}}"
+          .media-body.media-middle
+            h3.m-t-0
+              a.e-brown.e-link ui-sref="app.user.show({user_id: friend.id})" {{friend.first_name + ' ' + friend.last_name}}
+            a.e-link href="#" View Relationship Page
+          .media-right.media-middle.btn-section
+            relationship-btn user="friend" ng-if="friend.id !== currentUser.id"
+
+    div ng-if="isMyRelationships" infinite-scroll="usersLoader.nextPage()"
+      .m-t-50.search-divider.e-brown.p-l-10 ng-if="usersLoader.items.length" Global search
+      .user-field.m-t-25.animated.fadeIn ng-repeat="user in usersLoader.items"
+        .media
+          .media-left.media-middle
+            img.media-object.user-img ng-src="{{user.avatar_url.thumb | imageFilter:'avatar'}}"
+          .media-body.media-middle
+            h3.m-t-0
+              a.e-brown.e-link ui-sref="app.user.show({user_id: user.id})" {{user.first_name + ' ' + user.last_name}}
+            a.e-link href="#" View Relationship Page
+          .media-right.media-middle.btn-section
+            relationship-btn user="user" ng-if="user.id !== currentUser.id"

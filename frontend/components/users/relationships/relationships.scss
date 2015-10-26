@@ -1,0 +1,40 @@
+@import "../../../vendor/styles/variables";
+
+.relationships-page {
+
+  .users-section {
+    min-height: 300px;
+
+    .user-field {
+      transition: background 0.2s ease;
+      padding: 10px;
+
+      .media {
+        overflow: visible;
+      }
+
+      &:hover {
+        background: $e-black-aaa;
+      }
+
+      img {
+        width: 80px;
+        border-radius: 50%;
+      }
+    }
+  }
+  .search-divider {
+    font-size: 24px;
+    border-bottom: 1px solid $e-brown;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .user-field {
+    .btn-section {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+}

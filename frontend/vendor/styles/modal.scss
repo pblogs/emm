@@ -39,7 +39,8 @@
     .modal-header {
       padding: 15px 30px;
       border-bottom: 0;
-      color: $e-brown;
+      background: $e-brown;
+      color: $e-white;
     }
   }
 }
@@ -48,7 +49,6 @@
   .e-modal .modal-dialog .modal-content{
     .e-close-modal {
       right: 8px;
-      color: $e-brown;
       top:12px;
     }
   }

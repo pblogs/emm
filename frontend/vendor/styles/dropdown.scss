@@ -1,6 +1,13 @@
 @import "variables";
 
 .dropdown.e-dropdown {
+  &.open .dropdown-toggle {
+    border-width: 0;
+    &.e-btn {
+      border-width: 1px;
+    }
+  }
+
   .dropdown-menu {
     margin-top: 15px;
     background: $e-black-a;
@@ -20,6 +27,32 @@
       top: 0;
       right: 10px;
       margin-top: -10px;
+    }
+  }
+
+  &.white-dropdown {
+    .dropdown-menu {
+      background: $e-white;
+      box-shadow: 0 0 12px $e-black-aa;
+      color: $e-brown;
+
+      &:before {
+        border-bottom: 10px solid $e-black-a;
+        margin-top: -10px;
+        right: 22px;
+      }
+
+      &:after {
+        position: absolute;
+        display: inline-block;
+        content: '';
+        border-bottom: 10px solid $e-white;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        top: 0;
+        right: 22px;
+        margin-top: -10px;
+      }
     }
   }
 }

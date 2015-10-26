@@ -4,14 +4,14 @@
       .navbar-header
         a ui-sref="app.main" class="navbar-brand" Emmortal
 
-        ul.nav.navbar-nav.navbar-left.e-menu ng-click="showUserMenu = !showUserMenu" ng-show="visibleUser.get().id"
+        ul.nav.navbar-nav.navbar-left.e-menu.user-menu-toggle-wrapper ng-click="showUserMenu = !showUserMenu" ng-show="visibleUser.get().id"
           li
             a href="#"
               .fa.fa-chevron-down.user-menu-toggle ng-class="{'open': showUserMenu}"
 
       ul.nav.navbar-nav.navbar-right.e-menu
-        li
-          a href="#"
+        li ng-if="currentUser.exists()"
+          a ui-sref="app.user.relationships({user_id: currentUser.id})"
             .fa.fa-search
         li ng-if="currentUser.exists()"
           a href="#" ng-click="MediaTypeSelectModal()"
@@ -32,7 +32,7 @@
               a href="#" ng-click="logout()" Logout
 
   .user-navbar ng-if="visibleUser.get().id && showUserMenu"
-    .user-menu-wrapper.animated ng-class="{slideInDown: showUserMenu, slideOutUp: !showUserMenu}"
+    .user-menu-wrapper.animated
       .container.p-l-0.p-r-0
         ul.user-menu
           li
@@ -41,4 +41,8 @@
               .username.m-l-5 {{visibleUser.get().first_name + ' ' + visibleUser.get().last_name}}
           li
             a ui-sref="app.user.albums({user_id: visibleUser.get().id})" Albums
-  .container.animated.fadeIn.p-t-100 ui-view=""
+          li
+            a ui-sref="app.user.relationships({user_id: visibleUser.get().id})" Relationships
+          .pull-right.relations-btn-wrapper.m-r-15
+            relationship-btn user="visibleUser.get()" ng-if="visibleUser.get().id !== currentUser.id"
+  .container.animated.fadeIn.p-t-100.p-b-100 ui-view=""

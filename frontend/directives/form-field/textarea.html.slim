@@ -1,3 +1,3 @@
 div.m-b-10 ng-class="{'has-error': errors.length}"
-  textarea.form-control placeholder="{{placeholder}}" maxlength="maxlength" ng-required="ngRequired" ng-model="ngModel" rows="{{rows}}" cols="{{cols}}"
+  textarea.form-control placeholder="{{placeholder}}" maxlength="maxlength" ng-required="ngRequired" ng-model="ngModel" rows="{{rows}}" cols="{{cols}}" ng-change="onChange()"
   .e-red ng-repeat="error in errors" {{error}}

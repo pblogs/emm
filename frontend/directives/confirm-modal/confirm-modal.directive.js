@@ -11,7 +11,7 @@ angular.module('app')
             .open({
               templateUrl: 'directives/confirm-modal/confirm-modal.html',
               size: 'xs',
-              windowClass: 'e-modal'
+              windowClass: 'e-modal confirm-modal'
             });
         }
       },

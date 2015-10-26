@@ -1,6 +1,6 @@
 @import "variables";
 
-.e-btn {
+.e-btn, .open > .dropdown-toggle{
   border-radius: 0;
   border: 1px solid;
   background: $e-white;
@@ -15,7 +15,7 @@
     border-color: $e-green;
     color: $e-green;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.full, &:active {
       color: $e-white;
       background: $e-green;
     }
@@ -25,7 +25,7 @@
     border-color: $e-red;
     color: $e-red;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.full, &:active {
       color: $e-white;
       background: $e-red;
     }
@@ -35,7 +35,7 @@
     border-color: $e-brown;
     color: $e-brown;
 
-    &:hover, &:focus, &.active {
+    &:hover, &:focus, &.active, &.full {
       color: $e-white;
       background: $e-brown;
     }
@@ -45,7 +45,7 @@
       background: $e-brown;
       border-radius: 3px;
 
-      &:hover, &:focus, &.active {
+      &:hover, &:focus, &.active, &.full {
         color: $e-brown;
         background: $e-white;
       }
@@ -56,7 +56,7 @@
     border-color: $e-yellow;
     color: $e-yellow;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.full, &:active {
       color: $e-white;
       background: $e-yellow;
     }
@@ -66,7 +66,7 @@
     border-color: $e-blue;
     color: $e-blue;
 
-    &:hover, &:focus {
+    &:hover, &:focus, &.full, &:active {
       color: $e-white;
       background: $e-blue;
     }
@@ -78,7 +78,7 @@
   color: $e-white;
   border-color: $e-grey;
 
-  &:hover {
+  &:hover, &.full {
     background: $e-grey;
     color: $e-white;
     border-color: $e-grey;
@@ -109,5 +109,11 @@
       cursor: -webkit-grab;
       cursor: -moz-grab;
     }
+  }
+}
+
+.open > .dropdown-toggle {
+  &.e-btn {
+    background-color: $e-white;
   }
 }
