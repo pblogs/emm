@@ -1,5 +1,7 @@
 class Comment < ActiveRecord::Base
 
+  include Likes
+
   # Relations
   belongs_to :author, inverse_of: :comments, class_name: User
   belongs_to :commentable, polymorphic: true # Album | Photo | Video | Text | Tribute

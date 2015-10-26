@@ -1,4 +1,5 @@
 class Tribute < ActiveRecord::Base
+  include Likes
 
   # Relations
   belongs_to :author, class_name: User

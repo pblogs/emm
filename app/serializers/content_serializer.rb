@@ -1,5 +1,5 @@
 class ContentSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :album_id, :created_at, :tile, :record
+  attributes :id, :title, :description, :album_id, :created_at, :tile, :record , :likes_count
 
   has_one :user
 
