@@ -17,6 +17,7 @@ FactoryGirl.define do
       create_list(:relationship, 2, sender: user)
       create_list(:relationship, 2, recipient: user)
       create_list(:relationship, 2, sender: user, status: 'accepted')
+      create_list(:relationship, 2, recipient: user, status: 'accepted')
     end
   end
 
