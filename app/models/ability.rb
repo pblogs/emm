@@ -30,7 +30,7 @@ class Ability
       can [:create], Relationship
       can :update, Relationship, recipient_id: user.id
       can :destroy, Relationship do |relation|
-        (relation.sender_id == user.id || relation.recipient_id == user.id) && relation.confirmed?
+        (relation.sender_id == user.id || relation.recipient_id == user.id) && relation.accepted?
       end
       can :update, Record do |record|
         record.album.user_id == user.id

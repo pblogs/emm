@@ -20,10 +20,7 @@ Rails.application.routes.draw do
       resources :pages, only: [:index, :show] do
         put :update_tiles
       end
-      resources :relationships, only: [:index, :create] do
-        put '/', to: 'relationships#update', on: :collection
-        delete '/', to: 'relationships#destroy', on: :collection
-      end
+      resources :relationships, only: [:index, :create, :update, :destroy]
     end
     resources :pages, only: [] do
       resources :tiles, only: [:update, :destroy]

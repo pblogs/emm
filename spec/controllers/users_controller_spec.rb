@@ -33,7 +33,7 @@ RSpec.describe UsersController, type: :controller do
       get :index, user_token: @user_token
       statuses = json_response['resources']
                      .select { |u| u['id'].in? related_users.map(&:id) }
-                     .map { |u| u['relation_status'] }
+                     .map { |u| u['relationship']['relation_to_current_user'] }
       expect(statuses).to eq(%w[outgoing_request_pending friends outgoing_request_declined])
     end
   end
@@ -61,7 +61,7 @@ RSpec.describe UsersController, type: :controller do
       it 'should respond with user data' do
         get :show, user_token: @user_token, id: new_user.id
         @user.reload
-        expect(json_response['resource'].keys).to contain_exactly(*serialized(@user, UserSerializer, @user, with_relation: true, current_user: @user).keys)
+        expect(json_response['resource'].keys).to contain_exactly(*serialized(@user, UserSerializer, @user, with_relationship: true, current_user: @user).keys)
       end
     end
   end
