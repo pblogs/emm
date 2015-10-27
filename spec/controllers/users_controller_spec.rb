@@ -20,7 +20,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'should apply filter on result' do
       filter_user = create(:user, :confirmed, first_name: 'John', last_name: 'Doe')
-      get :index, filter: 'John'
+      get :index, filter: 'John Doe'
       expect(json_response['resources'][0]['id']).to eq filter_user.id
     end
 

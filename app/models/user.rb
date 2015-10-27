@@ -24,10 +24,14 @@ class User < ActiveRecord::Base
 
   # Callbacks
   after_create :create_default_album, :create_default_page, :create_default_tiles
+  before_save :set_full_name, if: 'first_name_changed? || last_name_changed?'
 
   # Scopes
   scope :search_by_filter, -> (query_string) {
-    where('first_name ILIKE :text OR last_name ILIKE :text OR email ILIKE :text', text: "%#{query_string}%").references(:tags)
+    if query_string.present?
+      query_string = query_string.strip.gsub(/\s+/, ' ')
+      where('full_name ILIKE ? OR email = ?', "%#{query_string}%", query_string).references(:tags)
+    end
   }
 
   # Methods
@@ -56,5 +60,9 @@ class User < ActiveRecord::Base
   def create_default_tiles
     self.default_page.tiles.create widget_type: :avatar, row: 0, col: 0, size: :large
     self.default_page.tiles.create widget_type: :info, row: 0, col: 2, size: :middle
+  end
+
+  def set_full_name
+    self.full_name = "#{self.first_name} #{self.last_name}".strip.gsub(/\s+/, ' ')
   end
 end
