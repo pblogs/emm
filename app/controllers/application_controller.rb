@@ -31,12 +31,12 @@ class ApplicationController < ActionController::API
 
   def render_resources(resources, options = {})
     total = resources.respond_to?(:total_count) ? resources.total_count : resources.length
-    default = { root: :resources, meta: { total: total } }
+    default = { root: :resources, meta: { total: total }, current_user: current_user }
     render({ json: resources }.merge(default).merge(options))
   end
 
   def render_resource_data(resource, options = {})
-    render options.merge({ json: resource, root: :resource })
+    render options.merge({ json: resource, root: :resource, current_user: current_user })
   end
 
   def render_resource_errors(resource)

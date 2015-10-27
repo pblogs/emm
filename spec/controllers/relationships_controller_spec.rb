@@ -37,13 +37,13 @@ RSpec.describe RelationshipsController, type: :controller do
         create(:relationship, sender: @user, recipient: u, status: statuses[i])
       end
       get :index, user_id: some_user.id, user_token: @user_token
-      expect(json_response['resources'][0..2].map { |f| f['relation_status'] }).to eq(%w[outgoing_request_pending friends outgoing_request_declined])
+      expect(json_response['resources'][0..2].map { |f| f['relationship']['relation_to_current_user'] }).to eq(%w[outgoing_request_pending friends outgoing_request_declined])
     end
   end
 
   describe '#create' do
     let(:some_user) { create(:user, :confirmed) }
-    subject { post :create, user_id: some_user.id, user_token: @user_token }
+    subject { post :create, user_id: some_user.id, user_token: @user_token, resource: {} }
 
     it 'should respond success' do
       subject
@@ -67,9 +67,9 @@ RSpec.describe RelationshipsController, type: :controller do
   end
 
   describe '#update' do
-    let(:some_user) { create(:user, :confirmed) }
+    let!(:some_user) { create(:user, :confirmed) }
     let!(:relationship) { create :relationship, sender: some_user, recipient: @user }
-    subject { put :update, user_id: some_user.id, resource: {status: 'accepted'}, user_token: @user_token }
+    subject { put :update, user_id: some_user.id, id: relationship.id, resource: {status: 'accepted'}, user_token: @user_token }
 
     it 'should respond success' do
       subject
@@ -91,7 +91,7 @@ RSpec.describe RelationshipsController, type: :controller do
 
     context 'guest user' do
       it 'response should be forbidden' do
-        put :update, user_id: some_user.id, resource: {status: 'accepted'}
+        put :update, user_id: some_user.id, id: relationship.id, resource: {status: 'accepted'}
         expect(response).to be_forbidden
       end
     end
@@ -99,8 +99,8 @@ RSpec.describe RelationshipsController, type: :controller do
 
   describe '#destroy' do
     let(:some_user) { create(:user, :confirmed) }
-    let!(:relationship) { create :relationship, sender: some_user, recipient: @user }
-    subject { delete :destroy, user_id: some_user.id, user_token: @user_token }
+    let!(:relationship) { create :relationship, sender: some_user, recipient: @user, status: 'accepted' }
+    subject { delete :destroy, user_id: some_user.id, id: relationship.id, user_token: @user_token }
 
     it 'should respond success' do
       subject
@@ -121,7 +121,7 @@ RSpec.describe RelationshipsController, type: :controller do
 
     context 'guest user' do
       it 'response should be forbidden' do
-        delete :destroy, user_id: some_user.id
+        delete :destroy, user_id: some_user.id, id: relationship.id
         expect(response).to be_forbidden
       end
     end

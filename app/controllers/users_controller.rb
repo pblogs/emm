@@ -3,20 +3,17 @@ class UsersController < ApplicationController
 
   def index
     users = User.search_by_filter(params['filter']).where.not(role: User.roles['admin'])
-    opts = user_signed_in? ? {with_relation: true, current_user_relationships: current_user.relationships} : {}
-    render_resources(users.page(params[:page]).per(params[:per]), opts)
+    users.where.not(id: current_user.id) if user_signed_in?
+    options = {with_relationship: true, current_user_relationships: current_user.relationships} if user_signed_in?
+    render_resources users.page(params[:page]).per(params[:per]), options || {}
   end
 
   def show
     @user = params[:page_alias] ? User.find_by_page_alias(params[:page_alias]) : User.find(params[:id])
-    options = if user_signed_in? && current_user.id == @user.id
-                {serializer: PrivateUserSerializer}
-              elsif user_signed_in?
-                {with_relation: true, current_user: current_user}
-              else
-                {}
-              end
-    render_resource_data(@user, options)
+    if user_signed_in?
+      options = current_user.id == @user.id ? {serializer: PrivateUserSerializer} : {with_relationship: true}
+    end
+    render_resource_data(@user, options || {})
   end
 
   def update
