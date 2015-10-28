@@ -41,7 +41,13 @@ RSpec.describe PhotosController, type: :controller do
     it 'should respond with photo data' do
       get :show, id: photo.id, user_token: @user_token, album_id: album.id
       photo = Photo.find(json_response['resource']['id'])
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(photo).keys)
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(photo, nil, @user, with_likes: true).keys)
+    end
+
+    it 'should have like' do
+      like = photo.likes.create(user: @user)
+      get :show, id: photo.id, user_token: @user_token, album_id: album.id
+      expect(json_response['resource']['like']['id']).to eq(like.id)
     end
   end
 

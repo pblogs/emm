@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include ContentLikes
+
   before_action :load_target
   before_action :authorize, only: [:index, :show, :create]
 
@@ -6,11 +8,13 @@ class CommentsController < ApplicationController
   authorize_resource only: [:update, :destroy]
 
   def index
-    render_resources(@comments.includes(:author))
+    comments = @comments.includes(:author)
+
+    render_resources(comments, content_likes: get_likes(comments), with_likes: user_signed_in?)
   end
 
   def show
-    render_resource_data(@comment)
+    render_resource_data(@comment, with_likes: user_signed_in?)
   end
 
   def create

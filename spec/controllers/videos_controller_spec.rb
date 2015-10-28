@@ -41,7 +41,13 @@ RSpec.describe VideosController, type: :controller do
     it 'should respond with video data' do
       get :show, id: video.id, user_token: @user_token, album_id: album.id
       video = Video.find(json_response['resource']['id'])
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(video).keys)
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(video, nil, @user, with_likes: true).keys)
+    end
+
+    it 'should have like' do
+      like = video.likes.create(user: @user)
+      get :show, id: video.id, user_token: @user_token, album_id: album.id
+      expect(json_response['resource']['like']['id']).to eq(like.id)
     end
   end
 

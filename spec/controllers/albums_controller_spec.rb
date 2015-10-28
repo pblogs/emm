@@ -7,6 +7,20 @@ RSpec.describe AlbumsController, type: :controller do
   let!(:private_album) { create(:album, :private, user: @user) }
   let(:another_user) { create(:user, :confirmed) }
 
+  describe 'likes' do
+    let!(:like) { album.likes.create(user: @user) }
+
+    it 'should have like on index' do
+      get :index, user_id: @user.id, user_token: @user_token
+      expect(json_response['resources'].map { |album| album['like']}.compact.count).to eq(@user.likes.count)
+    end
+
+    it 'should have like on show' do
+      get :show, id: album.id, user_id: @user.id, user_token: @user_token
+      expect(json_response['resource']['like']['id']).to eq(like.id)
+    end
+  end
+
   describe '#index' do
     it 'should response success' do
       get :index, user_id: @user.id
@@ -65,7 +79,7 @@ RSpec.describe AlbumsController, type: :controller do
     it 'should respond with album data' do
       get :show, id: album.id, user_token: @user_token, user_id: @user.id
       album = Album.find(json_response['resource']['id'])
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(album).keys)
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(album, nil, @user, with_likes: true).keys)
     end
 
     it 'should access denied for anonymous' do

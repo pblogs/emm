@@ -41,7 +41,13 @@ RSpec.describe TextsController, type: :controller do
     it 'should respond with text data' do
       get :show, id: text.id, user_token: @user_token, album_id: album.id
       text = Text.find(json_response['resource']['id'])
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(text).keys)
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(text, nil, @user, with_likes: true).keys)
+    end
+
+    it 'should have like' do
+      like = text.likes.create(user: @user)
+      get :show, id: text.id, user_token: @user_token, album_id: album.id
+      expect(json_response['resource']['like']['id']).to eq(like.id)
     end
   end
 

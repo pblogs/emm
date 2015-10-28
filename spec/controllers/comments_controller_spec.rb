@@ -5,13 +5,28 @@ RSpec.describe CommentsController, type: :controller do
 
 
   let(:author) { create(:user, :confirmed) }
-  let!(:comment) { create_list(:comment, 2, commentable: target, author: author).first }
+  let!(:comment) { create(:comment, commentable: create(:photo, user: author), author: author) }
   let(:another_user) { create(:user, :confirmed) }
-  let!(:relation) { create(:relationship, :accepted, user: author, friend: @user) }
+  let!(:relation) { create(:relationship, :accepted, sender: author, recipient: @user) }
 
   let(:private_albums) do
     album = create(:album, :private)
     [album, album.user.albums.first]
+  end
+
+  describe 'likes' do
+    let!(:like) { comment.likes.create(user: @user) }
+
+    it 'should have like on index' do
+      get :index, target_id: target.id, target_type: target.class.name.underscore, user_token: @user_token
+      expect(json_response['resources'].map { |comment| comment['like']}.compact.count).to eq(@user.likes.count)
+    end
+
+    it 'should have like on show' do
+      target = comment.commentable
+      get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
+      expect(json_response['resource']['like']['id']).to eq(like.id)
+    end
   end
 
   %i{ photo video text album tribute}.each do |target_name|
@@ -20,6 +35,7 @@ RSpec.describe CommentsController, type: :controller do
       obj.create_tile_on_user_page if target_name == :tribute
       obj
     end
+    let(:comment) { create(:comment, commentable: target, author: author) }
 
     describe "#index comments for #{target_name}" do
       it 'should response success' do
@@ -50,7 +66,7 @@ RSpec.describe CommentsController, type: :controller do
       it 'should respond with comment data' do
         get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
         comment = Comment.find(json_response['resource']['id'])
-        expect(json_response['resource'].keys).to contain_exactly(*serialized(comment).keys)
+        expect(json_response['resource'].keys).to contain_exactly(*serialized(comment, nil, @user, with_likes: true).keys)
       end
 
       it 'access denied' do

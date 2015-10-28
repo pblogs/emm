@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  include ContentLikes
+
   load_resource :user
   load_and_authorize_resource :album, through: :user
   skip_load_resource :index
@@ -10,11 +12,12 @@ class AlbumsController < ApplicationController
       privacy = @user.is_friend?(current_user) ? 'for_friends' : 'for_all'
       albums = @user.albums.by_privacy(privacy)
     end
-    render_resources(albums.includes(:tile), with_tile: true)
+
+    render_resources(albums.includes(:tile), with_tile: true, content_likes: get_likes(albums), with_likes: user_signed_in?)
   end
 
   def show
-    render_resource_data(@album, with_tile: true)
+    render_resource_data(@album, with_tile: true, with_likes: user_signed_in?)
   end
 
   def create

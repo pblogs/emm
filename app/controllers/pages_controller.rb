@@ -1,13 +1,15 @@
 class PagesController < ApplicationController
+  include ContentLikes
+
   load_resource :user
   load_and_authorize_resource :page, through: :user
 
   def index
-    render_resources(@pages)
+    render_resources @pages
   end
 
   def show
-    render_resource_data(@page, with_tiles: true)
+    render_resource_data(@page, content_likes: get_likes(@page.tiles.includes(:content).map(&:content)), with_tiles: true, with_likes: user_signed_in?)
   end
 
   def update_tiles

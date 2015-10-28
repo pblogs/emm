@@ -4,7 +4,7 @@ class VideosController < ApplicationController
   authorize_resource
 
   def show
-    render_resource_data(@video)
+    render_resource_data(@video, with_likes: user_signed_in?)
   end
 
   def update_meta_info

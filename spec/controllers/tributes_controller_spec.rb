@@ -7,6 +7,19 @@ RSpec.describe TributesController, type: :controller do
   let!(:tribute) { create_list(:tribute, 2, user: @user, author: author).first }
   let(:another_user) { create(:user, :confirmed) }
 
+  describe 'likes' do
+    let!(:like) { tribute.likes.create(user: @user) }
+
+    it 'should have like on index' do
+      get :index, user_id: @user.id, user_token: @user_token
+      expect(json_response['resources'].map { |tribute| tribute['like']}.compact.count).to eq(@user.likes.count)
+    end
+
+    it 'should have like on show' do
+      get :show, id: tribute.id, user_token: @user_token, user_id: @user.id
+      expect(json_response['resource']['like']['id']).to eq(like.id)
+    end
+  end
 
   describe '#index' do
     it 'should response success' do
@@ -34,7 +47,7 @@ RSpec.describe TributesController, type: :controller do
     it 'should respond with tribute data' do
       get :show, id: tribute.id, user_token: @user_token, user_id: @user.id
       tribute = Tribute.find(json_response['resource']['id'])
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(tribute).keys)
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(tribute, nil, @user, with_likes: true).keys)
     end
 
     it 'should response success if has tile' do

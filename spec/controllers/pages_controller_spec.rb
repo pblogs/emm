@@ -16,8 +16,14 @@ RSpec.describe PagesController, type: :controller do
   end
 
   describe '#show' do
+    let!(:like) do
+      photo = create(:photo, user: @user)
+      photo.create_tile_on_user_page
+      photo.likes.create(user: @user)
+    end
+
     subject do
-      get :show, user_id: @user.id, id: @user.pages.first.id
+      get :show, user_id: @user.id, id: @user.pages.last.id
     end
 
     it 'should response success' do
@@ -28,6 +34,11 @@ RSpec.describe PagesController, type: :controller do
     it 'should respond with content data' do
       subject
       expect(json_response['resource'].keys).to contain_exactly(*serialized(@user.pages.first, nil, nil, with_tiles: true).keys)
+    end
+
+    it 'should have like on show' do
+      get :show, user_id: @user.id, id: @user.pages.first.id, user_token: @user_token
+      expect(json_response['resource']['tiles'].map { |tile| tile['content'].try(:[], 'like')}.compact.count).to eq(@user.likes.count)
     end
   end
 

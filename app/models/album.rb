@@ -1,5 +1,6 @@
 class Album < ActiveRecord::Base
 
+  include Likes
   include SanitizeDescription
 
   # Relations

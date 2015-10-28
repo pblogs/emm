@@ -1,11 +1,15 @@
 class RecordsController < ApplicationController
+  include ContentLikes
+
   load_resource :album
   load_resource :record, through: :album, only: :update
   authorize_resource
 
   def index
     authorize! :show, @album
-    render_resources(@album.records.includes(content: [:user, :tile]).page(params[:page]).per(params[:per_page]), with_tile: true)
+
+    records = @album.records.includes(content: [:user, :tile]).page(params[:page]).per(params[:per_page])
+    render_resources(records, content_likes: get_likes(records.map(&:content)), with_tile: true, with_likes: user_signed_in?)
   end
 
   def update
