@@ -31,9 +31,34 @@ RSpec.describe TributesController, type: :controller do
       get :index, user_id: @user.id, user_token: @user_token
       expect(json_response['meta']['total']).to eq @user.tributes.count
     end
+  end
+
+  describe '#create' do
+    let(:create_attributes) { attributes_for(:tribute) }
+    let(:receiver) { create(:user) }
+
+    subject do
+      create :relationship, sender: @user, recipient: receiver, status: 'accepted'
+      post :create, user_id: receiver.id, user_token: @user_token, resource: create_attributes
+    end
+
+    it 'should response success' do
+      subject
+      expect(response).to be_success
+    end
+
+    it 'should create tribute' do
+      expect { subject }.to change(Tribute, :count).by 1
+    end
+
+    it 'should respond with tribute data' do
+      subject
+      tribute = Tribute.find(json_response['resource']['id'])
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(tribute, nil, @user, with_likes: true).keys)
+    end
 
     it 'access denied' do
-      get :index, user_id: @user.id
+      post :create, user_id: receiver.id, resource: create_attributes
       expect(response).to be_forbidden
     end
   end
@@ -55,42 +80,61 @@ RSpec.describe TributesController, type: :controller do
       get :show, id: tribute.id, user_token: @user_token, user_id: @user.id
       expect(response).to be_success
     end
+  end
 
-    it 'access denied for another user' do
-      get :show, id: tribute.id, user_token: another_user.jwt_token, user_id: @user.id
-      expect(response).to be_forbidden
+  describe '#update' do
+    let(:update_attributes) { attributes_for(:tribute) }
+    let(:receiver) { create(:user) }
+    let(:tribute) { create(:tribute, author: @user, user: receiver) }
+
+    subject do
+      create :relationship, sender: @user, recipient: receiver, status: 'accepted'
+      put :update, user_id: receiver.id, id: tribute.id, user_token: @user_token, resource: update_attributes
+    end
+
+    it 'should response success' do
+      subject
+      expect(response).to be_success
+    end
+
+    it 'should update tribute' do
+      subject
+      tribute.reload
+      expect([tribute.title, tribute.description]).to eq [update_attributes[:title], update_attributes[:description]]
+    end
+
+    it 'should respond with tribute data' do
+      subject
+      tribute = Tribute.find(json_response['resource']['id'])
+      expect(json_response['resource'].keys).to contain_exactly(*serialized(tribute, nil, @user, with_likes: true).keys)
     end
 
     it 'access denied' do
-      get :show, id: tribute.id, user_id: @user.id
+      put :update, user_id: receiver.id, id: tribute.id, resource: update_attributes
       expect(response).to be_forbidden
     end
   end
 
-  describe '#create' do
-    let(:create_attributes) { attributes_for(:tribute) }
+  describe '#destroy' do
     let(:receiver) { create(:user) }
-    let(:tribute) { create(:tribute, user: receiver, author: @user) }
+    let!(:tribute) { create(:tribute, author: @user, user: receiver) }
+
+    subject do
+      create :relationship, sender: @user, recipient: receiver, status: 'accepted'
+      delete :destroy, user_id: receiver.id, id: tribute.id, user_token: @user_token
+    end
 
     it 'should response success' do
-      post :create, user_id: receiver.id, author_id: @user.id, user_token: @user_token, resource: create_attributes
+      subject
       expect(response).to be_success
     end
 
-    it 'should create tribute' do
-      expect {
-        post :create, user_id: receiver.id, user_token: @user_token, resource: create_attributes
-      }.to change(Tribute, :count).by 1
-    end
-
-    it 'should respond with tribute data' do
-      post :create, user_id: receiver.id, user_token: @user_token, resource: create_attributes
-      tribute = Tribute.find(json_response['resource']['id'])
-      expect(json_response['resource'].keys).to contain_exactly(*serialized(tribute).keys)
+    it 'should destroy tribute' do
+      expect { subject }.to change(Tribute, :count).by -1
     end
 
     it 'access denied' do
-      post :create, user_id: receiver.id, resource: create_attributes
+      delete :destroy, user_id: receiver.id, id: tribute.id
       expect(response).to be_forbidden
     end
   end
