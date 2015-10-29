@@ -1,5 +1,5 @@
-class ContentSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :album_id, :created_at, :tile, :record , :likes_count
+class ContentSerializer < LikableContentSerializer
+  attributes :id, :title, :description, :album_id, :created_at, :tile, :record
 
   has_one :user
 

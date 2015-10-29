@@ -17,6 +17,12 @@ RSpec.describe RecordsController, type: :controller do
       get :index, album_id: album.id, user_token: @user_token
       expect(json_response['meta']['total']).to eq album.records.count
     end
+
+    it 'should have like' do
+      text.likes.create(user: @user)
+      get :index, album_id: album.id, user_token: @user_token
+      expect(json_response['resources'].map { |tile| tile['content']['like']}.compact.count).to eq(@user.likes.count)
+    end
   end
 
   describe '#update' do

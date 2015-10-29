@@ -1,4 +1,6 @@
 class TributesController < ApplicationController
+  include ContentLikes
+
   load_resource except: :create
   load_resource :user, only: :create
   load_resource :tribute, through: :user, only: :create
@@ -6,11 +8,12 @@ class TributesController < ApplicationController
   authorize_resource
 
   def index
-    render_resources(@tributes.includes(:author))
+    tributes = @tributes.includes(:author)
+    render_resources(tributes, content_likes: get_likes(tributes), with_likes: user_signed_in?)
   end
 
   def show
-    render_resource_data(@tribute)
+    render_resource_data(@tribute, with_likes: user_signed_in?)
   end
 
   def create

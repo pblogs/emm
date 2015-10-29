@@ -3,6 +3,9 @@ FactoryGirl.define do
     association :author, factory: :user
     text { Faker::Lorem.characters(char_count = 100) }
 
+    #default commentable
+    association :commentable, factory: :photo
+
     factory :comment_for_photo do
       association :commentable, factory: :photo
     end

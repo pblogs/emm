@@ -4,7 +4,7 @@ class TextsController < ApplicationController
   authorize_resource
 
   def show
-    render_resource_data(@text)
+    render_resource_data(@text, with_likes: user_signed_in?)
   end
 
   def create

@@ -35,3 +35,6 @@ en:
           default_page:
             only_one_allowed: User can have only one default page
             unable_to_destroy: Cannot delete default page
+
+        like:
+          already_liked: 'Yo have already like this'

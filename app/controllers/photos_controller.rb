@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   authorize_resource
 
   def show
-    render_resource_data(@photo)
+    render_resource_data(@photo, with_likes: user_signed_in?)
   end
 
   def create
