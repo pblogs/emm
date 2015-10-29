@@ -1,3 +1,3 @@
 div.m-b-20.m-t-20 ng-class="{'has-error': errors.length}"
   text-angular ng-model="ngModel"
-  .e-red ng-repeat="error in errors" {{error}}
+  .e-red ng-repeat="error in errors" ng-bind="error"

@@ -9,7 +9,7 @@
         .tile-comments
           add-comment commentable="content" content-type="photo" on-create="addNewComment"
       .col-sm-6
-        h3.e-brown.m-t-0 {{content.title || 'No title'}}
+        h3.e-brown.m-t-0 ng-bind="::content.title || 'No title'"
         div ng-hide="showMoreTributes"
           .show-description.m-t-15.e-brown.text-justify.p-b-15  ng-show="content.description" ng-model="content.description" ta-bind=''
           .show-description.m-t-15.e-brown.text-justify.p-b-15  ng-hide="content.description" No description for this photo

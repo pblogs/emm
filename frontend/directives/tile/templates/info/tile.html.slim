@@ -1,4 +1,8 @@
 h4.e-title
-  | ({{user.birthday | date : 'longDate'}} - )
+  | (
+  span<> ng-bind="::user.birthday | date : 'longDate'"
+  | - )
 h3.e-title
-  | {{user.first_name + ' ' + user.last_name}}
+  span ng-bind="::user.first_name"
+  span< ng-bind="::user.last_name"
+

@@ -9,7 +9,7 @@ form ng-submit="submit()"
       .col-md-6
         video-input height="230" on-uploaded="setUploadedVideo" ng-show="!video.video_id"
         video-player video="video" ng-if="video.video_id"
-        .e-red ng-repeat="error in errors.video_id" {{ error }}
+        .e-red ng-repeat="error in errors.video_id" ng-bind="error"
 
       .col-md-6
         form-field placeholder="Title" ng-model="video.title" errors="errors.title"

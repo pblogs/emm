@@ -1,15 +1,15 @@
 .e-close-modal ng-click="$dismiss()"
   .fa.fa-close
 .modal-header
-  h3.modal-title.text-center ng-if="!album.id" Create new album
-  h3.modal-title.text-center ng-if="album.id" Edit album
+  h3.modal-title.text-center ng-hide="album.id" Create new album
+  h3.modal-title.text-center ng-show="album.id" Edit album
 .step1 ng-show="step === 1"
   .modal-body.add-album-modal-body
     .row
       .col-md-6.text-center.b-r.e-brown
         div ng-if="showCanvas"
           image-form-field object="album" field-name="cover" pictureName="Album cover" errors="errors.cover" height="350"
-          .e-red ng-repeat="error in errors.image" {{error}}
+          .e-red ng-repeat="error in errors.image" ng-bind="error"
 
       .col-md-6
         form-field placeholder="Album title" ng-model="album.title" errors="errors.title" pictureName="Album cover"

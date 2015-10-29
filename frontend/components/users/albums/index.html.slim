@@ -1,7 +1,7 @@
 .e-container
   h2.e-brown.m-t-0.m-b-25
-    span.text-capitalize> {{user.first_name}}'s
-    | Life Events
+    span.text-capitalize ng-bind="user.first_name"
+    | 's Life Events
 
   .row
     .col-md-2.col-sm-3.col-xs-6.m-b-15 ng-repeat="album in albums"
@@ -16,6 +16,8 @@
             .big-count ng-bind="album.records_count" ng-style="{'background-color': album.color}"
             .title-text
               .content-count.e-brown
-                span {{album.photos_count}} photos,
-                span< {{album.videos_count}} videos
+                span> ng-bind="album.photos_count"
+                | photos,
+                span<> ng-bind="album.videos_count"
+                | videos
               .title.e-brown ng-bind="album.title"

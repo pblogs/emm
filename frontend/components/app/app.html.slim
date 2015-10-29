@@ -38,7 +38,9 @@
           li
             a.profile ui-sref="app.user.show({user_id: visibleUser.get().id})"
               img.img-rounded.img-responsive ng-src="{{visibleUser.get().avatar_url.thumb | imageFilter: 'avatar'}}"
-              .username.m-l-5 {{visibleUser.get().first_name + ' ' + visibleUser.get().last_name}}
+              .username.m-l-5
+                span> ng-bind="visibleUser.get().first_name"
+                span ng-bind="visibleUser.get().last_name"
           li
             a ui-sref="app.user.albums({user_id: visibleUser.get().id})" Albums
           li

@@ -6,9 +6,9 @@ form name="signInForm" ng-submit="submit()" novalidate="novalidate"
   .modal-body
     form-field type="email" placeholder="Email" ng-required="true" ng-model="user.email" errors="errors.email"
     form-field type="password" placeholder="Password" ng-required="true" ng-model="user.password" errors="errors.password"
-    a.e-link href="#" ng-click="$dismiss('startRecovery')" Forgot password?
+    a.e-link.pointer ng-click="$dismiss('startRecovery')" Forgot password?
   .modal-footer.text-right
     button.btn.e-btn.btn-primary type="submit" ng-disabled="signInForm.$invalid" Sign In
     .text-center.m-t-15
       | Don't have an account? Please,
-      a.e-link< href="#" ng-click="$dismiss('signUp')" Sign Up
+      a.e-link.pointer< ng-click="$dismiss('signUp')" Sign Up

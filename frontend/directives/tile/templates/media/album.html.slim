@@ -5,11 +5,13 @@ a ui-sref="app.user.album({user_id: tile.content.user.id, album_id: tile.content
       .image-wrapper
         img.tile-img ng-src="{{content.cover_url.original | imageFilter:'album'}}" draggable="false"
       .album-title ng-show="tile.size == 'large' || tile.size == 'vertical'" ng-style="{'border-color': content.color}"
-        .big-count ng-bind="content.photos_count + content.videos_count" ng-style="{'background-color': content.color}"
+        .big-count ng-bind="::content.records_count" ng-style="{'background-color': content.color}"
         .title-text
           .content-count.e-brown
-            span {{content.photos_count}} photos,
-            span< {{content.videos_count}} videos
+            span> ng-bind="::content.photos_count"
+            | photos,
+            span<> ng-bind="::content.videos_count"
+            |  videos
           .title.e-brown ng-bind="content.title"
 
     div ng-class="{ 'hidden': tile.size == 'small', 'col-sm-8': tile.size == 'middle', 'col-sm-6': tile.size == 'large', 'vertical': tile.size == 'vertical'}"
@@ -21,10 +23,12 @@ a ui-sref="app.user.album({user_id: tile.content.user.id, album_id: tile.content
             img.img-responsive ng-src="{{content.user.avatar_url.thumb | imageFilter}}" draggable="false"
           .author-name<
             | Added by
-            a.e-link< ui-sref="app.user.show({userId: content.user.id})" {{content.user.first_name + ' ' + content.user.last_name}}
+            a.e-link< ui-sref="app.user.show({userId: content.user.id})"
+            span> ng-bind="content.user.first_name"
+            span ng-bind="content.user.last_name"
         .e-brown.m-t-20 ng-show="tile.size == 'large'"
           span ng-show="content.start_date"
             | On
-            |  {{content.start_date | date: 'longDate'}}
+            span ng-bind="content.start_date | date: 'longDate'"
           span< ng-show="content.location_name && content.start_date" at
-          a.e-link ng-if="content.location_name" href="#"  {{content.location_name}}
+          a.e-link.pointer ng-if="content.location_name" ng-bind="content.location_name"
