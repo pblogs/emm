@@ -11,6 +11,7 @@ class Album < ActiveRecord::Base
   has_many :videos, inverse_of: :album, dependent: :destroy
   has_many :records, inverse_of: :album # no need to dependent destroy - record will be destroyed by it's content
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :tags, as: :target, dependent: :destroy
 
   enum privacy: { for_all: 0, for_friends: 1, hidden: 2 }
 

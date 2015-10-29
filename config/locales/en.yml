@@ -31,6 +31,8 @@ en:
           self_relation: 'Cannot be friend with yourself'
           relationship_exists: 'Relationship already exists'
           wrong_status: 'Wrong status'
+        tag:
+          tag_exists: 'This user is already tagged'
         page:
           default_page:
             only_one_allowed: User can have only one default page
