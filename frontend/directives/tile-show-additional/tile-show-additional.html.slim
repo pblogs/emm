@@ -11,12 +11,17 @@
         .fa.fa-chevron-down<
   .tributes-section
     .tribute.m-t-10 ng-repeat="comment in comments"
-      .e-brown.text-justify.tribute-content "{{comment.text}}"
+      .e-brown.text-justify.tribute-content
+        |"
+        span ng-bind="::comment.text"
+        |"
       .tribute-footer
         .tile-info.m-t-10
           .e-brown.pull-left.author-info
             | Added by
-            a.e-link.font-bold< ui-sref="app.user.show({user_id: comment.author.id})" ng-click="onLinkFollow()" {{comment.author.first_name + ' ' + comment.author.last_name}}
+            a.e-link.font-bold< ui-sref="app.user.show({user_id: comment.author.id})" ng-click="onLinkFollow()"
+            span> ng-bind="::comment.author.first_name"
+            span ng-bind="::comment.author.last_name"
           .pull-right
             like
 
