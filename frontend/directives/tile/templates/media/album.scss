@@ -9,9 +9,20 @@
     &.small {
       padding: 0 15px;
       height: 100%;
+      .image-wrapper img {
+        margin-top: -10px;
+      }
+    }
 
-      .small-album img {
-        margin-top: -20px;
+    &.middle {
+      .image-wrapper img {
+        margin-top: 0;
+      }
+    }
+    &.vertical {
+      .image-wrapper img {
+        width: 100%;
+        margin-left: 0;
       }
     }
   }

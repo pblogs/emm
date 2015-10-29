@@ -26,13 +26,12 @@ angular.module('app')
           $modal
             .open({
               templateUrl: 'components/' + tile.content_type + 's/show/show.html',
-              controller: _.capitalize(tile.content_type) + 'sShowModalCtrl',
+              controller: 'ShowModalCtrl',
               windowClass: 'e-modal tile-show-modal',
               size: 'lg',
               resolve: {
-                content: function() {
-                  return _.merge(tile.content, {content_type: tile.content_type});
-                }
+                content: function() { return tile.content; },
+                contentType: function() { return tile.content_type; }
               }
             });
         }

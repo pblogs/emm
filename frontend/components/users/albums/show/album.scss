@@ -5,6 +5,10 @@
     position: relative;
   }
 
+  .album-title {
+    margin-top: 0;
+  }
+
   .comments-section {
     width: 100%;
     height: 200px;
@@ -41,6 +45,9 @@
 @media screen and (max-width: 767px) {
   .album-inside {
 
+    .album-title {
+      margin-top: 30px;
+    }
     .cover-tagged {
       text-align: center;
 

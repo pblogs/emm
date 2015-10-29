@@ -13,7 +13,7 @@
         div ng-hide="showMoreTributes"
           .show-description.m-t-15.e-brown.text-justify.p-b-15 ng-show="content.description" ng-model="content.description" ta-bind=''
           .show-description.m-t-15.e-brown.text-justify.p-b-15 ng-hide="content.description" No description for this video
-          added-by-at author="content.user" created-at="content.created_at" on-link-follow="$close()"
+          added-by-at content="content" on-link-follow="$close()" content-type="contentType"
 
         .tile-show-image-video-additional ng-class="{'open tributes animated fadeIn': showMoreTributes}"
           .row.additional-tabs-menu

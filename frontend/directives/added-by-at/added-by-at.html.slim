@@ -2,10 +2,10 @@
   .tile-info.m-t-10
     .e-brown
       | Added by
-      a.e-link.font-bold.pointer< ui-sref="app.user.show({user_id: author.id})" ng-click="onLinkFollow()"
-        span< ng-bind="author.first_name"
-        span< ng-bind="author.last_name"
-      span.m-l-5.m-r-5 ng-show="createdAt" |
-      span< ng-bind="createdAt | date:'MMMM d, y'"
+      a.e-link.font-bold.pointer< ui-sref="app.user.show({user_id: content.user.id})" ng-click="onLinkFollow()"
+        span< ng-bind="content.user.first_name"
+        span< ng-bind="content.user.last_name"
+      span.m-l-5.m-r-5 ng-show="content.created_at" |
+      span< ng-bind="content.created_at | date:'MMMM d, y'"
       .pull-right
-        like
+        like target="content" type="{{contentType}}"

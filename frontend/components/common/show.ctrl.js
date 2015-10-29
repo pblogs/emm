@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('app')
-  .controller('PhotosShowModalCtrl', function($scope, content, Restangular) {
+  .controller('ShowModalCtrl', function($scope, content, Restangular, contentType) {
     $scope.comments = [];
     $scope.content = content;
+    $scope.contentType = contentType;
     $scope.addNewComment = addNewComment;
     getComments();
 
@@ -12,7 +13,7 @@ angular.module('app')
     }
 
     function getComments() {
-      Restangular.one('photo', content.id).all('comments').getList()
+      Restangular.one(contentType, content.id).all('comments').getList()
         .then(function(comments) {
           $scope.comments = comments;
         })

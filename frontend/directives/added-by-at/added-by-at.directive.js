@@ -7,8 +7,8 @@ angular.module('app')
       replace: true,
       templateUrl: 'directives/added-by-at/added-by-at.html',
       scope: {
-        author: '=',
-        createdAt: '=?',
+        content: "=",
+        contentType: "=",
         onLinkFollow: '&?'
       }
     }
