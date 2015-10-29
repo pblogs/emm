@@ -74,7 +74,6 @@ html, body {
   position: fixed;
   margin-top: 40px;
   z-index: 10;
-  overflow: hidden;
 
   .user-menu-wrapper {
     background: $e-black-pre-a;
@@ -85,6 +84,14 @@ html, body {
     height: 40px;
     list-style-type: none;
     padding: 0;
+
+    .relations-btn-wrapper {
+      padding: 3px 0;
+
+      .dropdown-menu li a{
+        color: $e-brown;
+      }
+    }
 
     li {
       display: inline-block;
@@ -103,7 +110,7 @@ html, body {
         content: '';
       }
 
-      &:last-child:after {
+      &:nth-last-child(2):after {
         display: none;
       }
 

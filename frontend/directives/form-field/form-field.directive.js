@@ -14,13 +14,15 @@ angular.module('app')
       },
       scope: {
         type: '@',
-        ngModel: "=",
+        ngModel: '=',
         errors: '=',
         ngRequired: '=',
         placeholder: '@',
         rows: '=',
         maxlength: '=',
-        cols: '='
+        cols: '=',
+        onChange: '=',
+        debounce: "="
       }
     };
   });

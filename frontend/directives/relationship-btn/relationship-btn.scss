@@ -1,0 +1,29 @@
+@import '../../vendor/styles/variables';
+
+.relationship-btn {
+  width: 100%;
+  .e-btn {
+    width: 150px;
+  }
+
+  .btn-group {
+    width: 150px;
+
+    .e-btn {
+      float:left;
+      width: 130px;
+
+      &.btn-caret {
+        width: 20px;
+        padding: 6px 3px;
+      }
+    }
+  }
+
+  .pending-actions-btn {
+    width: 220px;
+    .e-btn {
+      width: 100px
+    }
+  }
+}

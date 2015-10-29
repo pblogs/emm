@@ -101,6 +101,11 @@ angular.module('app')
         url: '/security',
         templateUrl: 'components/users/edit/security/security.html',
         controller: 'UsersEditSecurityCtrl'
+      })
+      .state('app.user.relationships', {
+        url: '/relationships',
+        templateUrl: 'components/users/relationships/relationships.html',
+        controller: 'UsersRelationshipsCtrl'
       });
 
     // Page not found
