@@ -13,7 +13,7 @@ class Album < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :tags, as: :target, dependent: :destroy
 
-  enum privacy: { for_all: 0, for_friends: 1, hidden: 2 }
+  enum privacy: { for_all: 0, for_friends: 1 }
 
   # Validations
   validates :user, :title, presence: true

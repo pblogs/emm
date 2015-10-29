@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   private
 
   def create_default_album
-    self.albums.create title: I18n.t('default_album.name'), description: I18n.t('default_album.description'), default: true, privacy: :hidden
+    self.albums.create title: I18n.t('default_album.name'), description: I18n.t('default_album.description'), default: true
   end
 
   def create_default_page

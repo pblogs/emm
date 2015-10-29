@@ -9,8 +9,7 @@ RSpec.describe CommentsController, type: :controller do
   let!(:relation) { create(:relationship, :accepted, sender: author, recipient: @user) }
 
   let(:private_albums) do
-    album = create(:album, :private)
-    [album, album.user.albums.first]
+    [create(:album, :private), create(:album, :private)]
   end
 
   describe 'likes' do
@@ -41,7 +40,7 @@ RSpec.describe CommentsController, type: :controller do
         expect(json_response['meta']['total']).to eq target.comments.count
       end
 
-      it 'should not index comments to private albums (default and for friends)' do
+      it 'should not index comments to private albums' do
         album = create(:album, :private)
         private_albums.each do |album|
           get :index, target_id: album.id, target_type: album.class.name.underscore, user_token: @user_token
