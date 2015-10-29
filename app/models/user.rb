@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :tiles, through: :pages
   has_many :comments, foreign_key: :author_id, dependent: :destroy
   has_many :likes, inverse_of: :user
+  has_many :authored_tags, class_name: 'Tag', foreign_key: :author_id, inverse_of: :author, dependent: :destroy
+  has_many :tags, inverse_of: :user, dependent: :destroy
 
   # Enums
   enum role: {member: 0, admin: 1}

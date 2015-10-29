@@ -2,8 +2,7 @@ class RecordsController < ApplicationController
   include ContentLikes
 
   load_resource :album
-  load_resource :record, through: :album, only: :update
-  authorize_resource
+  load_and_authorize_resource :record, through: :album, except: :index
 
   def index
     authorize! :show, @album

@@ -1,11 +1,8 @@
 class TributesController < ApplicationController
   include ContentLikes
-
-  load_resource except: :create
-  load_resource :user, only: :create
-  load_resource :tribute, through: :user, only: :create
-
-  authorize_resource
+  
+  load_resource :user
+  load_and_authorize_resource :tribute, through: :user
 
   def index
     tributes = @tributes.includes(:author)
@@ -17,15 +14,24 @@ class TributesController < ApplicationController
   end
 
   def create
-    authorize! :create, @tribute
-
+    @tribute.author = current_user
     @tribute.save
-    render_resource_or_errors(@tribute)
+    render_resource_or_errors(@tribute, with_likes: user_signed_in?)
+  end
+
+  def update
+    @tribute.update(tribute_params)
+    render_resource_or_errors(@tribute, with_likes: user_signed_in?)
+  end
+
+  def destroy
+    @tribute.destroy
+    render nothing: true
   end
 
   private
 
   def tribute_params
-    params.require(:resource).permit(:title, :description, :user_id)
+    params.require(:resource).permit(:title, :description)
   end
 end

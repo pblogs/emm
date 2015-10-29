@@ -120,6 +120,19 @@ ActiveRecord::Schema.define(version: 20151029080219) do
   add_index "relationships", ["status"], name: "index_relationships_on_status", using: :btree
   add_index "relationships", ["updated_at"], name: "index_relationships_on_updated_at", using: :btree
 
+  create_table "tags", force: :cascade do |t|
+    t.integer  "author_id"
+    t.integer  "user_id"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "tags", ["author_id"], name: "index_tags_on_author_id", using: :btree
+  add_index "tags", ["target_type", "target_id"], name: "index_tags_on_target_type_and_target_id", using: :btree
+  add_index "tags", ["user_id"], name: "index_tags_on_user_id", using: :btree
+
   create_table "texts", force: :cascade do |t|
     t.integer  "album_id"
     t.string   "title"
@@ -206,8 +219,8 @@ ActiveRecord::Schema.define(version: 20151029080219) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "source",      default: 0
-    t.integer  "likes_count", default: 0, null: false
     t.integer  "duration"
+    t.integer  "likes_count", default: 0, null: false
   end
 
   add_index "videos", ["album_id"], name: "index_videos_on_album_id", using: :btree

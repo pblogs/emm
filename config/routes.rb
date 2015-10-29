@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :update, :destroy] do
       get :by_alias, on: :collection, to: 'users#show'
       resource :password, only: :update, controller: 'users/passwords'
-      resources :tributes, only: [:create, :show, :index]
+      resources :tributes, only: [:index, :show, :create, :update, :destroy]
       resources :albums, except: [:new, :edit] do
         put :update_records
       end
@@ -36,6 +36,10 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :create, :update, :destroy, :show]
       resources :tiles, only: :create
     end
+    scope ':target_type/:target_id', target_type: /(albums|photos|videos|texts)/ do
+      resources :tags, only: [:index, :create, :destroy]
+    end
+
     resources :main_page, only: :index
     resources :likes, only: [:create, :destroy]
 

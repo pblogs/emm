@@ -2,8 +2,7 @@ class AlbumsController < ApplicationController
   include ContentLikes
 
   load_resource :user
-  load_and_authorize_resource :album, through: :user
-  skip_load_resource :index
+  load_and_authorize_resource :album, through: :user, except: :index
 
   def index
     if @user == current_user

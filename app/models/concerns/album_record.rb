@@ -9,6 +9,7 @@ module AlbumRecord
     has_one :record, as: :content, dependent: :destroy
     has_one :tile, as: :content, dependent: :destroy
     has_many :comments, as: :commentable, dependent: :destroy
+    has_many :tags, as: :target, dependent: :destroy
 
     has_one :user, through: :album
 

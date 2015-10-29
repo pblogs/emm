@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
   login_user
 
-
   let(:author) { create(:user, :confirmed) }
   let!(:comment) { create(:comment, commentable: create(:photo, user: author), author: author) }
   let(:another_user) { create(:user, :confirmed) }
@@ -20,12 +19,6 @@ RSpec.describe CommentsController, type: :controller do
     it 'should have like on index' do
       get :index, target_id: target.id, target_type: target.class.name.underscore, user_token: @user_token
       expect(json_response['resources'].map { |comment| comment['like']}.compact.count).to eq(@user.likes.count)
-    end
-
-    it 'should have like on show' do
-      target = comment.commentable
-      get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
-      expect(json_response['resource']['like']['id']).to eq(like.id)
     end
   end
 
@@ -52,32 +45,6 @@ RSpec.describe CommentsController, type: :controller do
         album = create(:album, :private)
         private_albums.each do |album|
           get :index, target_id: album.id, target_type: album.class.name.underscore, user_token: @user_token
-          expect(response).to be_forbidden
-        end
-      end
-    end
-
-    describe "#show comments for #{target_name}" do
-      it 'should response success' do
-        get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
-        expect(response).to be_success
-      end
-
-      it 'should respond with comment data' do
-        get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id, user_token: @user_token
-        comment = Comment.find(json_response['resource']['id'])
-        expect(json_response['resource'].keys).to contain_exactly(*serialized(comment, nil, @user, with_likes: true).keys)
-      end
-
-      it 'access denied' do
-        get :show, target_id: target.id, target_type: target.class.name.underscore, id: comment.id
-        expect(response).to be_forbidden
-      end
-
-      it 'should not show comment from private album (default and for friends)' do
-        private_albums.each do |album|
-          comment = create(:comment_for_album, commentable: album)
-          get :show, target_id: album.id, target_type: album.class.name.underscore, id: comment.id, user_token: @user_token
           expect(response).to be_forbidden
         end
       end
