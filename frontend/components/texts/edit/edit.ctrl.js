@@ -10,8 +10,14 @@ angular.module('app')
         $scope.albums = albums;
       });
 
+    Restangular.one('texts', content.id).all('tags').getList()
+      .then(function(tags) {
+        $scope.text.tagged_users =  _.pluck(tags, 'user');
+      });
+
     function submit() {
       $scope.errors = {};
+      $scope.text.replace_tags_attributes = _.map($scope.text.tagged_users, function(user) { return {user_id: user.id}});
       var updateData = Restangular.one('albums', content.album_id).one('texts', $scope.text.id);
       _.assign(updateData, $scope.text);
       updateData.put().then(function(response) {

@@ -6,6 +6,7 @@ module TaggablePermittedParams
 
     params.require(:resource).permit(*allowed_attributes, allowed_hash).tap do |permitted_attrs|
       permitted_attrs[:tags_attributes].each { |ta| ta[:author_id] = current_user.id } if params[:resource][:tags_attributes]
+      permitted_attrs[:replace_tags_attributes] ||= [] if params[:resource].has_key?(:replace_tags_attributes)
       permitted_attrs[:replace_tags_attributes].each { |ta| ta[:author_id] = current_user.id } if params[:resource][:replace_tags_attributes]
     end
   end

@@ -17,5 +17,6 @@ angular.module('app', [
   'textAngular',
   'ngSanitize',
   'infinite-scroll',
+  'ngTagsInput',
   'angular-sortable-view'
 ]);

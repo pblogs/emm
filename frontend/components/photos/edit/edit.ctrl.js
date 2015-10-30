@@ -5,6 +5,11 @@ angular.module('app')
     $scope.photo = _.cloneDeep(content);
     $scope.submit = submit;
 
+    Restangular.one('photos', content.id).all('tags').getList()
+      .then(function(tags) {
+        $scope.photo.tagged_users = _.pluck(tags, 'user');
+      });
+
     // Display canvas only when modal window is rendered so canvas width could be calculated
     $timeout(function () {
       $scope.showCanvas = true;
@@ -17,6 +22,7 @@ angular.module('app')
 
     function submit() {
       $scope.errors = {};
+      $scope.photo.replace_tags_attributes = _.map($scope.photo.tagged_users, function(user) { return {user_id: user.id}});
       var updateData = Restangular.one('albums', content.album_id).one('photos', $scope.photo.id);
       _.assign(updateData, $scope.photo);
       updateData.put().then(function(response) {
@@ -24,6 +30,7 @@ angular.module('app')
         $scope.$close(response.plain());
       }).catch(function (response) {
         $scope.errors = response.data.errors;
+
       });
     }
   });

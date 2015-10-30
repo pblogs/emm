@@ -9,6 +9,8 @@ form ng-submit="submit()"
       .col-md-6
         div ng-if="showCanvas"
           image-form-field object="photo" field-name="image" errors="errors.image" height="360" picture-name="photo"
+        .m-t-20
+          e-tags-input ng-model="photo.tagged_users" errors="errors['tags.user']"
 
       .col-md-6
         form-field placeholder="Title" ng-model="photo.title" errors="errors.title"

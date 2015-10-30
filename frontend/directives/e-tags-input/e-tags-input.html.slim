@@ -1,0 +1,4 @@
+.tags-input-wrapper
+  tags-input ng-model="ngModel" display-property="first_name" placeholder="Type friend name..." class="e-tags-input" add-from-autocomplete-only="true" min-length="1"
+    auto-complete source="getFriends($query)" template="directives/e-tags-input/template.html" min-length="1" load-on-down-arrow="true" debounce-delay="300"
+  .e-red ng-bind="error" ng-repeat="error in errors"

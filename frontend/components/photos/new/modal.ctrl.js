@@ -2,7 +2,10 @@
 
 angular.module('app')
   .controller('PhotosNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $timeout, $state, $rootScope, caller) {
-    $scope.photo = {image: null};
+    $scope.photo = {
+      image: null,
+      tagged_users: []
+    };
     $scope.submit = submit;
     $scope.back = back;
 
@@ -19,6 +22,7 @@ angular.module('app')
 
     function submit() {
       $scope.errors = {};
+      $scope.photo.replace_tags_attributes = _.map($scope.photo.tagged_users, function(user) { return {user_id: user.id}});
       Restangular.one('albums', $scope.photo.album_id).all('photos').post($scope.photo)
         .then(function (photo) {
           Notification.show('Photo was successfully added', 'success');

@@ -1,0 +1,8 @@
+.e-tag-friend.m-t-5
+  .media
+    .media-left.media-middle
+      img.media-object.user-img ng-src="{{data.avatar_url.thumb | imageFilter:'avatar'}}"
+    .media-body.media-middle.m-l-5
+      .e-brown.friend-name
+        span ng-bind="data.first_name"
+        span< ng-bind="data.last_name"

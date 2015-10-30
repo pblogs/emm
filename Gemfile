@@ -59,6 +59,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-textAngular'
   gem 'rails-assets-ngInfiniteScroll'
   gem 'rails-assets-angular-sortable-view'
+  gem 'rails-assets-ng-tags-input'
 end
 
 # File uploading front-end
