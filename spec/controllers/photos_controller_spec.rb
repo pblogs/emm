@@ -60,7 +60,6 @@ RSpec.describe PhotosController, type: :controller do
 
   describe '#update' do
     let(:new_title) { Faker::Lorem.word }
-    let(:another_user) { create(:user) }
 
     before(:each) do
       @photo = create(:photo, :with_tags, album: album)
@@ -77,8 +76,12 @@ RSpec.describe PhotosController, type: :controller do
     end
 
     it 'should update photo tags' do
-      put :update, album_id: album.id, id: @photo.id, user_token: @user_token, resource: ({title: new_title, replace_tags_attributes: [{user_id: another_user.id}]})
-      expect(@photo.reload.tags.pluck(:user_id)).to eq [another_user.id]
+      another_user1 = create(:user)
+      another_user2 = create(:user)
+      @photo.tags.create user: another_user1, author: @user
+      update_params =  {title: new_title, replace_tags_attributes: [{user_id: another_user1.id}, {user_id: another_user2.id}]}
+      put :update, album_id: album.id, id: @photo.id, user_token: @user_token, resource: update_params
+      expect(@photo.reload.tags.pluck(:user_id)).to contain_exactly(another_user1.id, another_user2.id)
     end
 
     it 'access denied' do
