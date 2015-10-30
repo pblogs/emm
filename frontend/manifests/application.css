@@ -6,5 +6,6 @@
  *= require angular-loading-bar
  *= require angular-gridster
  *= require textAngular
+ *= require ng-tags-input
  *= require_tree ../
  */

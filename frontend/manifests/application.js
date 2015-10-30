@@ -18,6 +18,7 @@
  *= require textAngular
  *= require ngInfiniteScroll
  *= require angular-sortable-view
+ *= require ng-tags-input
  *= require ../module
  *= require_tree ../
  */

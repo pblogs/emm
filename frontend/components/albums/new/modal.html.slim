@@ -6,10 +6,13 @@
 .step1 ng-show="step === 1"
   .modal-body.add-album-modal-body
     .row
-      .col-md-6.text-center.b-r.e-brown
-        div ng-if="showCanvas"
-          image-form-field object="album" field-name="cover" pictureName="Album cover" errors="errors.cover" height="350"
-          .e-red ng-repeat="error in errors.image" ng-bind="error"
+      .col-md-6.b-r.e-brown
+        .text-center
+          div ng-if="showCanvas"
+            image-form-field object="album" field-name="cover" pictureName="Album cover" errors="errors.cover" height="350"
+            .e-red ng-repeat="error in errors.image" ng-bind="error"
+        .m-t-30
+          e-tags-input ng-model="album.tagged_users" errors="errors['tags.user']"
 
       .col-md-6
         form-field placeholder="Album title" ng-model="album.title" errors="errors.title" pictureName="Album cover"
@@ -44,12 +47,6 @@
             e-datepicker ng-model="album.end_date" datepicker-mode="'year'" min-date="album.start_date" ng-disabled="!album.start_date"
       .col-sm-6
         google-map ng-model="album.location.latlng"
-    .peoples.m-t-15
-      .e-brown.font-bold Tag People
-      input.form-control type="text" placeholder="Tag people" disabled=""
-      .row.m-t-10.m-b-10
-        .col-sm-2.m-t-5.text-center ng-repeat="user in users"
-          img.img-responsive.img-circle ng-src="{{user.avatar_url.thumb | imageFilter: 'avatar'}}"
 
   .modal-footer.text-right
     span.btn.e-btn.btn-default ng-click="changeStep(1)" Back

@@ -10,7 +10,8 @@ angular.module('app')
       privacy: 'for_all',
       color: '#b4504e',
       start_date: null,
-      end_date: null
+      end_date: null,
+      tagged_users: []
     };
     $scope.privacyList = [{label: 'Public', value: 'for_all'}, {label: 'Friends', value: 'for_friends'}];
     Restangular.all('users').getList().then(function(users) {
@@ -30,6 +31,7 @@ angular.module('app')
 
     function submit() {
       $scope.errors = {};
+      $scope.album.replace_tags_attributes = _.map($scope.album.tagged_users, function(user) { return {user_id: user.id}});
       if (_.isObject($scope.album.location)) {
         $scope.album.location_name = $scope.album.location.description;
         $scope.album.latitude = $scope.album.location.latlng.lat();

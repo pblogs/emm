@@ -2,7 +2,9 @@
 
 angular.module('app')
   .controller('TextsNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $state, $rootScope, caller) {
-    $scope.text = {};
+    $scope.text = {
+      tagged_users: []
+    };
     $scope.submit = submit;
     $scope.back = back;
 
@@ -14,6 +16,7 @@ angular.module('app')
 
     function submit() {
       $scope.errors = {};
+      $scope.text.replace_tags_attributes = _.map($scope.text.tagged_users, function(user) { return {user_id: user.id}});
       Restangular.one('albums', $scope.text.album_id).all('texts').post($scope.text)
         .then(function (text) {
           Notification.show('Text record was successfully added', 'success');

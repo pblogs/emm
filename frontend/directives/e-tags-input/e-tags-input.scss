@@ -1,0 +1,69 @@
+@import "../../vendor/styles/variables";
+
+.e-tag-friend {
+  height: 40px;
+
+  img {
+    width: 40px;
+    border-radius: 50%;
+  }
+}
+
+
+.tags-input-wrapper {
+  .e-tags-input {
+
+    .host {
+      margin: 0;
+    }
+    .tags {
+      border-radius: 0;
+      border: 1px solid $e-brown;
+      color: $e-brown;
+      padding: 3px;
+      min-height: 37px;
+      &:focus, &.focused {
+        box-shadow: 0 0 3px $e-brown;
+        border-color: $e-brown;
+      }
+
+      .input.invalid-tag {
+        color: $e-red;
+      }
+
+      .tag-item {
+        border: 1px solid $e-brown;
+        background: $e-brown;
+        color: $e-white;
+        border-radius: 0;
+
+        .remove-button {
+          color: $e-white;
+        }
+
+        &.selected{
+          background: $e-red;
+          border: 1px solid $e-red;
+        }
+      }
+    }
+
+    .autocomplete {
+      border-radius: 0;
+
+      .suggestion-item.selected {
+        background: $e-brown;
+
+        .e-tag-friend .friend-name {
+          color: $e-white;
+        }
+      }
+    }
+  }
+
+  .ng-invalid .tags{
+    border: 1px solid $e-red;
+    color: $e-red;
+    box-shadow: none;
+  }
+}

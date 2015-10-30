@@ -2,7 +2,9 @@
 
 angular.module('app')
   .controller('VideosNewModalCtrl', function ($scope, Restangular, CurrentUser, Notification, MediaTypeSelectModal, $timeout, $state, $rootScope, caller) {
-    $scope.video = {};
+    $scope.video = {
+      tagged_users: []
+    };
     $scope.setUploadedVideo = setUploadedVideo;
     $scope.submit = submit;
     $scope.back = back;
@@ -21,6 +23,7 @@ angular.module('app')
 
     function submit() {
       $scope.errors = {};
+      $scope.video.replace_tags_attributes = _.map($scope.video.tagged_users, function(user) { return {user_id: user.id}});
       Restangular.one('albums', $scope.video.album_id).all('videos').post($scope.video)
         .then(function (video) {
           Notification.show('Video was successfully added', 'success');
