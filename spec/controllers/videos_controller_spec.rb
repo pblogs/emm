@@ -8,6 +8,7 @@ RSpec.describe VideosController, type: :controller do
 
   describe '#create' do
     let(:create_attributes) { attributes_for(:video) }
+    let(:another_user) { create(:user) }
 
     it 'should response success' do
       post :create, album_id: album.id, user_token: @user_token, resource: create_attributes
@@ -24,6 +25,12 @@ RSpec.describe VideosController, type: :controller do
       post :create, album_id: album.id, user_token: @user_token, resource: create_attributes
       video = Video.find(json_response['resource']['id'])
       expect(json_response['resource'].keys).to contain_exactly(*serialized(video).keys)
+    end
+
+    it 'should create video with tags' do
+      expect {
+        post :create, album_id: album.id, user_token: @user_token, resource: create_attributes.merge({tags_attributes: [{user_id: another_user.id}]})
+      }.to change(Tag, :count).by 1
     end
 
     it 'access denied' do
@@ -53,9 +60,10 @@ RSpec.describe VideosController, type: :controller do
 
   describe '#update' do
     let(:new_title) { Faker::Lorem.word }
+    let(:another_user) { create(:user) }
 
     before(:each) do
-      @video = create(:video, album: album)
+      @video = create(:video, :with_tags, album: album)
     end
 
     it 'response should be success' do
@@ -66,6 +74,11 @@ RSpec.describe VideosController, type: :controller do
     it 'changes video title' do
       put :update, album_id: album.id, id: @video.id, resource: { title: new_title }, user_token: @user_token
       expect(@video.reload.title).to eq new_title
+    end
+
+    it 'should update tags' do
+      put :update, album_id: album.id, id: @video.id, user_token: @user_token, resource: ({title: new_title, replace_tags_attributes: [{user_id: another_user.id}]})
+      expect(@video.reload.tags.pluck(:user_id)).to eq [another_user.id]
     end
 
     it 'access denied' do

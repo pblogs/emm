@@ -2,6 +2,7 @@ class Album < ActiveRecord::Base
 
   include Likes
   include SanitizeDescription
+  include Taggable
 
   # Relations
   belongs_to :user, inverse_of: :albums
@@ -11,13 +12,12 @@ class Album < ActiveRecord::Base
   has_many :videos, inverse_of: :album, dependent: :destroy
   has_many :records, inverse_of: :album # no need to dependent destroy - record will be destroyed by it's content
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :tags, as: :target, dependent: :destroy
 
-  enum privacy: { for_all: 0, for_friends: 1 }
+  enum privacy: {for_all: 0, for_friends: 1}
 
   # Validations
   validates :user, :title, presence: true
-  validates :privacy, inclusion: { in: %w(for_friends for_all) }, unless: :default?
+  validates :privacy, inclusion: {in: %w(for_friends for_all)}, unless: :default?
   validate :only_one_default_album, if: :default?
 
   # Callbacks
@@ -36,7 +36,7 @@ class Album < ActiveRecord::Base
     page = page || self.user.pages.last
     self.create_tile(page: page)
   end
-  
+
   private
 
   def only_one_default_album

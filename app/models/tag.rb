@@ -11,6 +11,7 @@ class Tag < ActiveRecord::Base
   validate :not_existing
 
   def not_existing
+    return if self.target.blank?
     errors.add(:user, I18n.t('activerecord.errors.models.tag.tag_exists')) if self.target.tags.find_by_user_id(self.user_id).present?
   end
 end

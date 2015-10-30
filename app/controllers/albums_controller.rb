@@ -1,5 +1,6 @@
 class AlbumsController < ApplicationController
   include ContentLikes
+  include TaggablePermittedParams
 
   load_resource :user
   load_and_authorize_resource :album, through: :user, except: :index
@@ -47,8 +48,7 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:resource).permit(:title, :description, :cover, :location_name, :latitude, :longitude, :start_date,
-                                     :color, :privacy, :end_date)
+    taggable_permitted_params(:title, :description, :cover, :location_name, :latitude, :longitude, :start_date, :color, :privacy, :end_date)
   end
 
   def records_params

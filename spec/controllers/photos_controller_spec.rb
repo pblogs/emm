@@ -8,6 +8,7 @@ RSpec.describe PhotosController, type: :controller do
 
   describe '#create' do
     let(:create_attributes) { attributes_for(:photo) }
+    let(:another_user) { create(:user) }
 
     it 'should response success' do
       post :create, album_id: album.id, user_token: @user_token, resource: create_attributes
@@ -24,6 +25,12 @@ RSpec.describe PhotosController, type: :controller do
       post :create, album_id: album.id, user_token: @user_token, resource: create_attributes
       photo = Photo.find(json_response['resource']['id'])
       expect(json_response['resource'].keys).to contain_exactly(*serialized(photo).keys)
+    end
+
+    it 'should create photo with tags' do
+      expect {
+        post :create, album_id: album.id, user_token: @user_token, resource: create_attributes.merge({tags_attributes: [{user_id: another_user.id}]})
+      }.to change(Tag, :count).by 1
     end
 
     it 'access denied' do
@@ -53,9 +60,10 @@ RSpec.describe PhotosController, type: :controller do
 
   describe '#update' do
     let(:new_title) { Faker::Lorem.word }
+    let(:another_user) { create(:user) }
 
     before(:each) do
-      @photo = create(:photo, album: album)
+      @photo = create(:photo, :with_tags, album: album)
     end
 
     it 'response should be success' do
@@ -66,6 +74,11 @@ RSpec.describe PhotosController, type: :controller do
     it 'changes photo name' do
       put :update, album_id: album.id, id: @photo.id, resource: { title: new_title }, user_token: @user_token
       expect(@photo.reload.title).to eq new_title
+    end
+
+    it 'should update photo tags' do
+      put :update, album_id: album.id, id: @photo.id, user_token: @user_token, resource: ({title: new_title, replace_tags_attributes: [{user_id: another_user.id}]})
+      expect(@photo.reload.tags.pluck(:user_id)).to eq [another_user.id]
     end
 
     it 'access denied' do

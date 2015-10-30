@@ -1,4 +1,6 @@
 class TextsController < ApplicationController
+  include TaggablePermittedParams
+
   load_resource :album, through: :current_user
   load_resource :text, through: :album
   authorize_resource
@@ -25,6 +27,6 @@ class TextsController < ApplicationController
   private
 
   def text_params
-    params.require(:resource).permit(:album_id, :title, :description)
+    taggable_permitted_params(:album_id, :title, :description)
   end
 end

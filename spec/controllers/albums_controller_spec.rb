@@ -12,7 +12,7 @@ RSpec.describe AlbumsController, type: :controller do
 
     it 'should have like on index' do
       get :index, user_id: @user.id, user_token: @user_token
-      expect(json_response['resources'].map { |album| album['like']}.compact.count).to eq(@user.likes.count)
+      expect(json_response['resources'].map { |album| album['like'] }.compact.count).to eq(@user.likes.count)
     end
 
     it 'should have like on show' do
@@ -59,6 +59,12 @@ RSpec.describe AlbumsController, type: :controller do
       expect(json_response['resource'].keys).to contain_exactly(*serialized(album).keys)
     end
 
+    it 'should create album with tags' do
+      expect {
+        post :create, user_id: @user.id, user_token: @user_token, resource: create_attributes.merge({tags_attributes: [{user_id: another_user.id}]})
+      }.to change(Tag, :count).by 1
+    end
+
     it 'access denied' do
       post :create, user_id: @user.id, resource: create_attributes
       expect(response).to be_forbidden
@@ -92,21 +98,26 @@ RSpec.describe AlbumsController, type: :controller do
     let(:new_title) { Faker::Lorem.word }
 
     before(:each) do
-      @album = create(:album, user: @user)
+      @album = create(:album, :with_tags, user: @user)
     end
 
     it 'response should be success' do
-      put :update, user_id: @user.id, id: @album.id, resource: { title: new_title }, user_token: @user_token
+      put :update, user_id: @user.id, id: @album.id, resource: {title: new_title}, user_token: @user_token
       expect(response).to be_success
     end
 
     it 'changes album name' do
-      put :update, user_id: @user.id, id: @album.id, resource: { title: new_title }, user_token: @user_token
+      put :update, user_id: @user.id, id: @album.id, resource: {title: new_title}, user_token: @user_token
       expect(@album.reload.title).to eq new_title
     end
 
+    it 'should update album tags' do
+      put :update, user_id: @user.id, id: @album.id, user_token: @user_token, resource: ({title: new_title, replace_tags_attributes: [{user_id: another_user.id}]})
+      expect(@album.reload.tags.pluck(:user_id)).to eq [another_user.id]
+    end
+
     it 'access denied' do
-      put :update, user_id: @user.id, id: @album.id, resource: { title: new_title }
+      put :update, user_id: @user.id, id: @album.id, resource: {title: new_title}
       expect(response).to be_forbidden
     end
   end

@@ -20,4 +20,10 @@ FactoryGirl.define do
     latitude { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
   end
+
+  trait :with_tags do
+    after(:create) do |album|
+      create_list(:tag, 3, target: album, author: album.user)
+    end
+  end
 end

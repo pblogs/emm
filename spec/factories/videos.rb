@@ -7,4 +7,5 @@ FactoryGirl.define do
   end
 
   # trait :with_text
+  # trait :with_tags
 end

@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  include TaggablePermittedParams
+
   load_resource :album, through: :current_user
   load_resource :video, through: :album
   authorize_resource
@@ -31,6 +33,6 @@ class VideosController < ApplicationController
   private
 
   def video_params
-    params.require(:resource).permit(:title, :description, :remote_preview_url, :video_id, :source)
+    taggable_permitted_params(:title, :description, :remote_preview_url, :video_id, :source)
   end
 end

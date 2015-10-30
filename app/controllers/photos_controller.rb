@@ -1,4 +1,6 @@
 class PhotosController < ApplicationController
+  include TaggablePermittedParams
+
   load_resource :album, through: :current_user
   load_resource :photo, through: :album
   authorize_resource
@@ -25,6 +27,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:resource).permit(:album_id, :title, :description, :image)
+    taggable_permitted_params(:album_id, :title, :description, :image)
   end
 end
