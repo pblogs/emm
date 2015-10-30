@@ -23,13 +23,12 @@ angular.module('app')
           $modal
             .open({
               templateUrl: 'components/' + record.content_type + 's/show/show.html',
-              controller: _.capitalize(record.content_type) + 'sShowModalCtrl',
+              controller: 'ShowModalCtrl',
               windowClass: 'e-modal record-show-modal',
               size: 'lg',
               resolve: {
-                content: function() {
-                  return record.content;
-                }
+                content: function() { return record.content; },
+                contentType: function() { return record.content_type; }
               }
             });
         }
