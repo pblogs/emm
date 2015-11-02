@@ -23,6 +23,6 @@
                   .fa< ng-class="{'fa-chevron-down': !showTags, 'fa-chevron-up': showTags}"
             .tagged-section.animated.fadeIn ng-show="showTags"
               .tags-wrapper
-                tags-view target-id="content.id" target-type="text" on-link-follow="$close()"
+                tags-view tags="tags" on-link-follow="$close()"
             .comments-section ng-hide="showTags"
               comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"

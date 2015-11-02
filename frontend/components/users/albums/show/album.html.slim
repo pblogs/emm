@@ -24,11 +24,15 @@
           .comments-section
             .comments-wrapper ng-style="{'width': comments.length*260 +'px'}"
               comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"
+
     .row.m-t-10
-      h4.e-brown.p-l-15 Tagged people
+      h4.e-brown.p-l-15 ng-show="tags.length"
+        | Width
+        span<> ng-bind="tags.length"
+        | friends:
       .col-md-7.col-sm-6
-        .tags-wrapper
-          tags-view target-id="album.id" target-type="album"
+        .tags-wrapper ng-if="tags.length"
+          tags-view tags="tags"
 
       .col-md-5.col-sm-6
         .add-comment-section.m-t-10.text-right

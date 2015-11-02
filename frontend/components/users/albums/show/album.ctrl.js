@@ -16,8 +16,18 @@ angular.module('app')
     $scope.album = album;
     $scope.canEditAlbum = user.id == $scope.currentUser.id;
     $scope.comments = [];
+    $scope.tags = [];
+
     getRecords();
     getComments();
+    getTags();
+
+    function getTags() {
+      Restangular.one('albums', album.id).all('tags').getList()
+        .then(function(tags) {
+          $scope.tags = tags;
+        })
+    }
 
     $scope.$on('recordAdded', function (event, record) {
       if ($scope.recordsLoader.allReceived) {
@@ -156,6 +166,7 @@ angular.module('app')
           }
         }).result.then(function(response) {
           _.assign($scope.album, response);
+          getTags();
         })
     }
   });
