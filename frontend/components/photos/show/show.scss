@@ -31,4 +31,14 @@
     max-height: 220px;
     overflow: hidden;
   }
+
+  .tagged-section .tags-wrapper.video-tags .tags-view {
+    height: 235px;
+  }
+}
+
+@media screen and (max-width: 991px) and (min-width: 768px) {
+  .tile-show-image-video-additional .tagged-section .tags-wrapper .tags-view ul li {
+      width: 65px;
+  }
 }

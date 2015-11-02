@@ -9,13 +9,18 @@
     margin-top: 0;
   }
 
+  .tags-wrapper {
+    .tags-view {
+      height: 170px;
+    }
+  }
+
   .comments-section {
     width: 100%;
     height: 200px;
     overflow-y: hidden;
     overflow-x: auto;
     .comments-wrapper {
-
       .comment {
         width: 250px;
         margin-right: 10px;
@@ -28,19 +33,10 @@
     }
   }
 
-  .add-comment-section {
-    .add-comment-wrapper {
-      width: 50%;
-      display: inline-block;
-    }
-  }
-
   .content {
     border-top: 1px solid $e-brown;
   }
 }
-
-
 
 @media screen and (max-width: 767px) {
   .album-inside {
@@ -60,13 +56,6 @@
       .album-title, .album-info {
         text-align: center;
       }
-
-      .add-comment-section {
-        .add-comment-wrapper {
-          width: 100%;
-        }
-      }
     }
   }
-
 }

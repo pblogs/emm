@@ -1,0 +1,14 @@
+@import "../../vendor/styles/variables";
+
+.tags-view {
+  overflow-y: auto;
+  ul {
+    margin-bottom: 0;
+    li {
+      border: none;
+      display: inline-block;
+      width: 70px;
+      padding: 10px;
+    }
+  }
+}

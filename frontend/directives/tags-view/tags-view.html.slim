@@ -1,0 +1,5 @@
+.tags-view
+  ul.list-group
+    li.list-group-item ng-repeat="tag in tags"
+      a.pointer ui-sref="app.user.show({user_id: tag.user.id})" tooltip="{{tag.user.first_name + ' ' + tag.user.last_name}}" tooltip-placement="bottom" ng-click="onLinkFollow()"
+        img.img-responsive.img-circle ng-src="{{tag.user.avatar_url.thumb | imageFilter: 'avatar'}}"
