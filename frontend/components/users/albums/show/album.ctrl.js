@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-  .controller('UserAlbumCtrl', function($scope, Restangular, $stateParams, $modal, Notification, $state, $http, album, user) {
+  .controller('UserAlbumCtrl', function($scope, Restangular, $stateParams, $modal, Notification, $state, $http, MediaModal, album, user) {
     $scope.updateWeights = updateWeights;
     $scope.editRecord = editRecord;
     $scope.pinAlbum = pinAlbum;
@@ -11,6 +11,7 @@ angular.module('app')
     $scope.editAlbum = editAlbum;
     $scope.removeAlbum = removeAlbum;
     $scope.addNewComment = addNewComment;
+    $scope.openMediaPopup = openMediaPopup;
     $scope.user = user;
     $scope.album = album;
     $scope.canEditAlbum = user.id == $scope.currentUser.id;
@@ -26,6 +27,10 @@ angular.module('app')
         $scope.album.records_count++;
       }
     });
+
+    function openMediaPopup(mediaType) {
+      MediaModal(mediaType, {caller: 'SelectMediaTypeModal'});
+    }
 
     function addNewComment(comment) {
       $scope.comments.push(comment);
