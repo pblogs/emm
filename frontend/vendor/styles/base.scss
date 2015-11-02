@@ -34,3 +34,14 @@ body.modal-open {
     padding: 20px 10px;
   }
 }
+
+#loading-bar .bar {
+  height: 4px;
+  background: $e-white;
+}
+
+#loading-bar-spinner .spinner-icon {
+  border: 4px solid transparent;
+  border-top-color:  $e-white;
+  border-left-color: $e-white;
+}
