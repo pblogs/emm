@@ -18,13 +18,15 @@
         .tile-show-image-video-additional ng-class="{'open tributes animated fadeIn': showMoreTributes}"
           .row.additional-tabs-menu
             .col-xs-6.text-center
-              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTributes> ng-class="{'active': showMoreTributes}" ng-click="showMoreTributes = !showMoreTributes"
+              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTributes> ng-class="{'active': showMoreTributes}" ng-click="showMoreTributes = !showMoreTributes; showTags = false"
                 | Tributes
-                .fa< ng-class="{'fa-chevron-up': !showMoreTributes, 'fa-chevron-down': showMoreTributes}"
+                .fa< ng-class="{'fa-chevron-down': !showMoreTributes, 'fa-chevron-up': showMoreTributes}"
             .col-xs-6.text-center
-              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTagged<
+              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTagged< ng-class="{'active': showTags}" ng-click="showTags = !showTags; showMoreTributes = false"
                 | Tagged
-                .fa.fa-chevron-down<
-          .tagged-section ng-show="showMoreTagged"
-          .comments-section
+                .fa< ng-class="{'fa-chevron-down': !showTags, 'fa-chevron-up': showTags}"
+          .tagged-section.animated.fadeIn ng-show="showTags"
+            .tags-wrapper.video-tags
+              tags-view target-id="content.id" target-type="video" on-link-follow="$close()"
+          .comments-section ng-hide="showTags"
             comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"

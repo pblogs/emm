@@ -2,8 +2,8 @@
 
 .show-modal-text {
   .show-description.tributes {
-      width: 48%;
-    }
+    width: 48%;
+  }
 
   .tile-show-text-additional {
     max-height: 235px;
@@ -23,6 +23,14 @@
       .comments-section {
         overflow-y: auto;
         max-height: 465px;
+      }
+    }
+
+    .tagged-section {
+      .tags-wrapper {
+        .tags-view {
+          height: 230px;
+        }
       }
     }
   }
@@ -51,6 +59,14 @@
           max-height: 500px;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) and (min-width: 768px) {
+  .show-modal-text {
+    .tile-show-text-additional .tagged-section .tags-wrapper .tags-view ul li {
+      width: 65px;
     }
   }
 }
