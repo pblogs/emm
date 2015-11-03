@@ -29,7 +29,7 @@ angular.module('app')
       }
 
       function showMsg() {
-        Notification.show('Your video was successfully uploaded, but is not ready yet to be played.<br>You could continue your work and return later.', 'info', 'left');
+        Notification.show('This video was successfully uploaded but is still being processed.<br> Check back shortly.', 'info', 'left');
       }
     }
 
