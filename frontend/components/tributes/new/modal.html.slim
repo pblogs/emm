@@ -1,0 +1,13 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+.modal-header.text-center
+  h3.modal-title Create new tribute
+form ng-submit="submit()"
+  .modal-body.text-popup
+    .m-b-15
+      e-autocomplete ng-model="user" errors="errors.user"
+    e-description ng-model="description" errors="errors.description"
+
+  .modal-footer.text-right
+    button.btn.e-btn.btn-default type="button" ng-click="back()" Back
+    button.btn.e-btn.btn-primary type="submit" ng-disabled="!user.id" Publish

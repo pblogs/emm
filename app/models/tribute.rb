@@ -8,7 +8,7 @@ class Tribute < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
 
   # Validations
-  validates :author, :user, :title, :description, presence: true
+  validates :author, :user, :description, presence: true
 
   validate do
     errors.add(:user_id, 'Cannot create tribute for self') if user_id == author_id

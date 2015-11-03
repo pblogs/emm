@@ -1,0 +1,3 @@
+.m-b-5#friendAutocomplete ng-class="{'has-error': errors.length}"
+  input.form-control type="text" ng-model="ngModel" placeholder="Type something to search..." typeahead-popup-template-url="directives/e-autocomplete/template.html" ng-model-options="{debounce: 300}" typeahead="user as (user.first_name + ' ' + user.last_name) for user in getFriends(ngModel)" typeahead-append-to-element-id="#friendAutocomplete"
+  .e-red ng-repeat="error in errors" ng-bind="error"

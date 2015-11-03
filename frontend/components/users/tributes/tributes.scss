@@ -1,0 +1,33 @@
+@import "../../../vendor/styles/variables";
+
+.tribute-view {
+  height: 245px;
+  .tribute-description {
+    height: 180px;
+    overflow-y: auto;
+  }
+  .tribute-author  {
+    max-width: 100px;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: bottom;
+    text-overflow: ellipsis;
+  }
+}
+
+.tribute-page {
+  .tribute-description {
+    min-height: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .comment-section {
+    border-top: 1px solid $e-brown;
+
+    .comment {
+      width: 100%;
+    }
+  }
+}

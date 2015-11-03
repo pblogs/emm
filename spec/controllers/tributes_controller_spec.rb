@@ -100,7 +100,7 @@ RSpec.describe TributesController, type: :controller do
     it 'should update tribute' do
       subject
       tribute.reload
-      expect([tribute.title, tribute.description]).to eq [update_attributes[:title], update_attributes[:description]]
+      expect([tribute.description]).to eq [update_attributes[:description]]
     end
 
     it 'should respond with tribute data' do

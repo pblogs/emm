@@ -63,6 +63,21 @@ angular.module('app')
         controller: 'UsersShowCtrl',
         reloadOnSearch: false
       })
+      .state('app.user.tributes', {
+        url: '/tributes',
+        templateUrl: 'components/users/tributes/index.html',
+        controller: 'UsersTributesCtrl'
+      })
+      .state('app.user.tribute', {
+        url: '/tributes/{tribute_id:int}',
+        templateUrl: 'components/users/tributes/tribute/tribute.html',
+        controller: 'UsersTributeCtrl',
+        resolve: {
+          tribute: function(Restangular, $stateParams) {
+            return Restangular.one('users', $stateParams.user_id).one('tributes', $stateParams.tribute_id).get();
+          }
+        }
+      })
       .state('app.user.albums', {
         url: '/albums',
         templateUrl: 'components/users/albums/index.html',
