@@ -1,4 +1,6 @@
 class RelationshipsController < ApplicationController
+  include ContentLikes
+
   load_resource :user
   load_and_authorize_resource
 

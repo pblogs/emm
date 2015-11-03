@@ -219,8 +219,8 @@ ActiveRecord::Schema.define(version: 20151029080219) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "source",      default: 0
-    t.integer  "duration"
     t.integer  "likes_count", default: 0, null: false
+    t.integer  "duration"
   end
 
   add_index "videos", ["album_id"], name: "index_videos_on_album_id", using: :btree

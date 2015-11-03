@@ -4,6 +4,18 @@ FactoryGirl.define do
     title { Faker::Lorem.sentence(1, false, 5) }
     description { Faker::Lorem.sentence(3, false, 20) }
     privacy :for_all
+
+    factory :album_with_tags do
+      after(:create) do |album|
+        friend = create(:user, :confirmed)
+        create(:relationship, sender: album.user, recipient: friend, status: 'accepted')
+        %i{ video photo text }.each do |content_name|
+          create(:tag, target: create(content_name, album: album), author: album.user, user: friend)
+        end
+        create(:tag, target: album, author: album.user, user: friend)
+        album
+      end
+    end
   end
 
   trait :with_dates do

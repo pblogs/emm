@@ -23,18 +23,21 @@ module UserRelations
 
   def incoming_friends
     User.joins('INNER JOIN relationships ON sender_id = users.id')
+        .select('users.*, relationships.id AS relationship_id')
         .where('relationships.recipient_id = ?', self.id)
         .where('relationships.status = ?', Relationship.statuses[:pending])
   end
 
   def outgoing_friends
     User.joins('INNER JOIN relationships ON recipient_id = users.id')
+        .select('users.*, relationships.id AS relationship_id')
         .where('relationships.sender_id = ?', self.id)
         .where('relationships.status = ?', Relationship.statuses[:pending])
   end
 
   def friends
     User.joins('INNER JOIN relationships ON sender_id = users.id OR recipient_id = users.id')
+        .select('users.*, relationships.id AS relationship_id')
         .where('sender_id = :user_id OR recipient_id = :user_id', user_id: self.id)
         .where.not('users.id' => self.id)
         .where('relationships.status = ?', Relationship.statuses[:accepted])
@@ -42,6 +45,7 @@ module UserRelations
 
   def related_users
     User.joins('LEFT JOIN relationships AS rel ON rel.sender_id = users.id OR rel.recipient_id = users.id')
+        .select('users.*, rel.id AS relationship_id')
         .where.not('users.id' => self.id)
         .where('rel.sender_id = :user_id OR rel.recipient_id = :user_id', user_id: self.id)
         .where('rel.status IN (0, 1)')
