@@ -1,0 +1,8 @@
+.e-tag-friend.e-autocomplete-dropdown ng-show="isOpen() && !moveInProgress"
+  .media.friend.pointer ng-repeat="match in matches track by $index" ng-class="{active: isActive($index)}" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)"
+    .media-left.media-middle
+      img.media-object.user-img ng-src="{{match.model.avatar_url.thumb | imageFilter:'avatar'}}"
+    .media-body.media-middle.m-l-5
+      .e-brown.friend-name
+        span ng-bind="match.model.first_name"
+        span< ng-bind="match.model.last_name"

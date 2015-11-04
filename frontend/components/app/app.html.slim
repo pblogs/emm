@@ -45,6 +45,8 @@
             a ui-sref="app.user.albums({user_id: visibleUser.get().id})" Albums
           li
             a ui-sref="app.user.relationships({user_id: visibleUser.get().id})" Relationships
+          li
+            a ui-sref="app.user.tributes({user_id: visibleUser.get().id})" Tributes
           .pull-right.relations-btn-wrapper.m-r-15
             relationship-btn user="visibleUser.get()" ng-if="visibleUser.get().id !== currentUser.id"
   .container.animated.fadeIn.p-t-100.p-b-100 ui-view=""

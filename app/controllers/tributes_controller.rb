@@ -5,7 +5,7 @@ class TributesController < ApplicationController
   load_and_authorize_resource :tribute, through: :user
 
   def index
-    tributes = @tributes.includes(:author)
+    tributes = @tributes.includes(:author).page(params[:page]).per(params[:per_page])
     render_resources(tributes, content_likes: get_likes(tributes), with_likes: user_signed_in?)
   end
 
@@ -32,6 +32,6 @@ class TributesController < ApplicationController
   private
 
   def tribute_params
-    params.require(:resource).permit(:title, :description)
+    params.require(:resource).permit(:description)
   end
 end

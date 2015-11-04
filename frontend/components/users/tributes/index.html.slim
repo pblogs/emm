@@ -1,0 +1,30 @@
+.e-container.tributes-page
+  h2.e-brown.m-t-0
+    span> ng-bind="user.first_name + ' ' + user.last_name"
+    span Tributes
+  .m-t-30.m-b-30.e-brown.text-center.animated.fadeIn ng-hide="tributesLoader.items.length"
+    h3 ng-hide="canEdit"
+      span> ng-bind="user.first_name + ' ' + user.last_name"
+      | doesn't have tributes
+    h3 ng-show="canEdit" You don't have tributes
+
+  div infinite-scroll="tributesLoader.nextPage()"
+    .row
+      .col-sm-4.col-md-4.col-xs-6.m-b-30 ng-repeat="tribute in tributesLoader.items"
+        .tribute-view
+          .e-brown.tribute-description
+            span<> ng-model="tribute.description" ta-bind=""
+          .pull-right
+            a.btn.btn-xs.e-btn.btn-brown.m-t-10.m-r-15 ui-sref="app.user.tribute({user_id: user.id, tribute_id: tribute.id})" Show more
+          .clearfix
+          .added-by-at
+            .tile-info.m-t-10
+              .e-brown
+                span.hidden-md Added by
+                a.e-link.font-bold.pointer.tribute-author< ui-sref="app.user.show({user_id: tribute.author.id})" ng-click="onLinkFollow()"
+                  span< ng-bind="tribute.author.first_name"
+                  span< ng-bind="tribute.author.last_name"
+                span.m-l-5.m-r-5.hidden-sm ng-show="tribute.created_at" |
+                span.hidden-sm< ng-bind="::tribute.created_at | date:'MMMM d, y'"
+                .pull-right
+                  like target="tribute" type="tribute"

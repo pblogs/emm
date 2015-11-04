@@ -1,0 +1,30 @@
+.e-container.tribute-page
+  h2.e-brown.m-t-0
+    span Tribute for
+    span< ng-bind="user.first_name + ' ' + user.last_name"
+  .row
+    .col-lg-3.col-md-4.col-sm-4.text-center
+      .inline
+        img.img-responsive ng-src="{{user.avatar_url.original}}"
+    .col-lg-9.col-md-8.col-sm-8
+      .tribute-description ng-model="tribute.description" ta-bind=""
+      .added-by-at
+        .tile-info.m-t-20
+          .e-brown
+            span.hidden-md Added by
+            a.e-link.font-bold.pointer.tribute-author< ui-sref="app.user.show({user_id: tribute.author.id})" ng-click="onLinkFollow()"
+              span< ng-bind="tribute.author.first_name"
+              span< ng-bind="tribute.author.last_name"
+            span.m-l-5.m-r-5.hidden-sm ng-show="tribute.created_at" |
+            span.hidden-sm< ng-bind="::tribute.created_at | date:'MMMM d, y'"
+            .pull-right
+              like target="tribute" type="tribute"
+
+  .row
+    .col-lg-offset-3.col-lg-5.col-md-offset-4.col-md-5.col-sm-offset-4.col-sm-8.add-comment-section.m-t-20.text-right
+      .add-comment-wrapper
+        add-comment commentable="tribute" content-type="tribute" on-create="addNewComment"
+
+  .row.comment-section.m-t-20  ng-if="comments.length"
+    .col-lg-3.col-md-3.col-sm-4.col-xs-2.m-b-10 ng-repeat="comment in comments"
+      comment.animated.fadeIn comment="comment"  on-link-follow="$close()"
