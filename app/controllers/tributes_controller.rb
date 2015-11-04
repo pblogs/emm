@@ -10,7 +10,7 @@ class TributesController < ApplicationController
   end
 
   def show
-    render_resource_data(@tribute, with_likes: user_signed_in?)
+    render_resource_data(@tribute, with_likes: user_signed_in?, with_tile: true)
   end
 
   def create

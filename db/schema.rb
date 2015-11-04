@@ -220,8 +220,8 @@ ActiveRecord::Schema.define(version: 20151104155732) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "source",      default: 0
-    t.integer  "likes_count", default: 0, null: false
     t.integer  "duration"
+    t.integer  "likes_count", default: 0, null: false
     t.integer  "original_id"
   end
 

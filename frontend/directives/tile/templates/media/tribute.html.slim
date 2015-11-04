@@ -1,2 +1,6 @@
-h4.e-brown {{ content.title }}
-.e-brown {{ content.description }}
+a.pointer ui-sref="app.user.tribute({user_id: content.user_id, tribute_id: content.id})"
+  h4.e-brown
+    | Tribute from
+    span< ng-bind="::content.author.first_name"
+    span< ng-bind="::content.author.last_name"
+  .e-brown ng-model="content.description" ta-bind=""

@@ -1,7 +1,14 @@
 .e-container.tribute-page
+  .tile-edit-buttons
+    i.fa.fa-times ng-click-confirm="removeTribute()" ng-if="canPinRemoveTribute"
+    i.fa.fa-pencil.edit-button ng-click="editTribute()" ng-if="canEditTribute"
+    i.fa.fa-thumb-tack ng-click="pinTribute()" ng-class="{'e-red': tribute.tile.id}" ng-if="canPinRemoveTribute"
+
   h2.e-brown.m-t-0
     span Tribute for
-    span< ng-bind="user.first_name + ' ' + user.last_name"
+    span<> ng-bind="::user.first_name"
+    span ng-bind="::user.last_name"
+
   .row
     .col-lg-3.col-md-4.col-sm-4.text-center
       .inline
@@ -13,8 +20,8 @@
           .e-brown
             span.hidden-md Added by
             a.e-link.font-bold.pointer.tribute-author< ui-sref="app.user.show({user_id: tribute.author.id})" ng-click="onLinkFollow()"
-              span< ng-bind="tribute.author.first_name"
-              span< ng-bind="tribute.author.last_name"
+              span< ng-bind="::tribute.author.first_name"
+              span< ng-bind="::tribute.author.last_name"
             span.m-l-5.m-r-5.hidden-sm ng-show="tribute.created_at" |
             span.hidden-sm< ng-bind="::tribute.created_at | date:'MMMM d, y'"
             .pull-right

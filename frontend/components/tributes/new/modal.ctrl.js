@@ -11,8 +11,9 @@ angular.module('app')
         $scope.errors.user = ['Required'];
       } else {
         Restangular.one('users', $scope.user.id).all('tributes').post({description: $scope.description || ''})
-          .then(function() {
+          .then(function(resource) {
             Notification.show('Tribute for ' + $scope.user.first_name + ' ' + $scope.user.last_name + ' was successfully created', 'success');
+            $state.go('app.user.tribute', {user_id: $scope.user.id, tribute_id: resource.id});
             $scope.$close();
           })
           .catch(function(response) {

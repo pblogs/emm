@@ -2,9 +2,15 @@
 
 .tribute-view {
   height: 245px;
+
+  .tile-edit-buttons {
+    top: 3px;
+  }
+
   .tribute-description {
     height: 180px;
     overflow-y: auto;
+    word-break: break-all;
   }
   .tribute-author  {
     max-width: 100px;
@@ -17,10 +23,12 @@
 }
 
 .tribute-page {
+  position: relative;
   .tribute-description {
     min-height: 250px;
     max-height: 300px;
     overflow-y: auto;
+    word-break: break-all;
   }
 
   .comment-section {

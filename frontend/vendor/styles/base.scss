@@ -45,3 +45,12 @@ body.modal-open {
   border-top-color:  $e-white;
   border-left-color: $e-white;
 }
+
+a:focus {
+  text-decoration: none;
+}
+
+*::selection {
+  background: $e-brown;
+  color: $e-white;
+}

@@ -12,10 +12,13 @@
     .row
       .col-sm-4.col-md-4.col-xs-6.m-b-30 ng-repeat="tribute in tributesLoader.items"
         .tribute-view
+          .tile-edit-buttons
+            i.fa.fa-times ng-click-confirm="removeTribute(tribute)" ng-if="canEdit"
+            i.fa.fa-thumb-tack ng-click="pinTribute(tribute)" ng-class="{'e-red': tribute.tile.id}" ng-if="canEdit"
           .e-brown.tribute-description
             span<> ng-model="tribute.description" ta-bind=""
           .pull-right
-            a.btn.btn-xs.e-btn.btn-brown.m-t-10.m-r-15 ui-sref="app.user.tribute({user_id: user.id, tribute_id: tribute.id})" Show more
+            a.btn.btn-xs.e-btn.btn-brown.m-t-10 ui-sref="app.user.tribute({user_id: user.id, tribute_id: tribute.id})" Show more
           .clearfix
           .added-by-at
             .tile-info.m-t-10
