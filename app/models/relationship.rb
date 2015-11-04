@@ -3,6 +3,7 @@ class Relationship < ActiveRecord::Base
 
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User'
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :sender, :status, presence: true
   validates :recipient, presence: true, uniqueness: {scope: :sender, message: I18n.t('activerecord.errors.models.relationship.relationship_exists')}

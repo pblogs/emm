@@ -30,16 +30,16 @@ RSpec.describe User, type: :model do
     end
 
     it 'should return correct incoming_friends count' do
-      expect(user.incoming_friends.count).to eq user.incoming_relationships.where(status: Relationship.statuses['pending']).count
+      expect(user.incoming_friends.count(:all)).to eq user.incoming_relationships.where(status: Relationship.statuses['pending']).count
     end
 
     it 'should return correct outgoing_friends count' do
-      expect(user.outgoing_friends.count).to eq user.outgoing_relationships.where(status: Relationship.statuses['pending']).count
+      expect(user.outgoing_friends.count(:all)).to eq user.outgoing_relationships.where(status: Relationship.statuses['pending']).count
     end
 
     it 'should return correct friends count' do
       friends_count = user.incoming_relationships.where(status: Relationship.statuses['accepted']).count + user.outgoing_relationships.where(status: Relationship.statuses['accepted']).count
-      expect(user.friends.count).to eq friends_count
+      expect(user.friends.count(:all)).to eq friends_count
     end
 
     describe 'relation_to() and is_friend?()' do

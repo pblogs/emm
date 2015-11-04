@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
 
   # Relations
   belongs_to :author, inverse_of: :comments, class_name: User
-  belongs_to :commentable, polymorphic: true # Album | Photo | Video | Text | Tribute
+  belongs_to :commentable, polymorphic: true # Album | Photo | Video | Text | Tribute | Relationship
 
   # Validations
   validates :author, :commentable, :text, presence: true

@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :birthday, :avatar_url, :background_url
+  attributes :id, :first_name, :last_name, :birthday, :avatar_url, :background_url, :relationship_id
 
   has_one :relationship, serializer: RelationshipSerializer
 
@@ -13,6 +13,15 @@ class UserSerializer < ActiveModel::Serializer
 
   def include_relationship?
     options[:with_relationship]
+  end
+
+  def include_relationship_id?
+    object.try(:relationship_id)
+  end
+
+  #incoming/outgoing/friends/related_users return relationship_id between two users
+  def relationship_id
+    object.relationship_id
   end
 
   # Relation to current user

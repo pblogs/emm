@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe RelationshipsController, type: :controller do
   login_user
+  let(:some_user) { create(:user, :confirmed, :with_relations) }
 
   describe '#index' do
-    let(:some_user) { create(:user, :confirmed, :with_relations) }
-
     it 'should respond success' do
       get :index, user_id: some_user.id
       expect(response).to be_success
@@ -42,7 +41,6 @@ RSpec.describe RelationshipsController, type: :controller do
   end
 
   describe '#create' do
-    let(:some_user) { create(:user, :confirmed) }
     subject { post :create, user_id: some_user.id, user_token: @user_token, resource: {} }
 
     it 'should respond success' do
@@ -67,7 +65,6 @@ RSpec.describe RelationshipsController, type: :controller do
   end
 
   describe '#update' do
-    let!(:some_user) { create(:user, :confirmed) }
     let!(:relationship) { create :relationship, sender: some_user, recipient: @user }
     subject { put :update, user_id: some_user.id, id: relationship.id, resource: {status: 'accepted'}, user_token: @user_token }
 
@@ -82,11 +79,11 @@ RSpec.describe RelationshipsController, type: :controller do
     end
 
     it "should increase current user's friends count" do
-      expect { subject }.to change { @user.friends.count }.by 1
+      expect { subject }.to change { @user.friends.count(:all) }.by 1
     end
 
     it "should increase some user's friends count" do
-      expect { subject }.to change { some_user.friends.count }.by 1
+      expect { subject }.to change { some_user.friends.count(:all) }.by 1
     end
 
     context 'guest user' do
@@ -98,7 +95,6 @@ RSpec.describe RelationshipsController, type: :controller do
   end
 
   describe '#destroy' do
-    let(:some_user) { create(:user, :confirmed) }
     let!(:relationship) { create :relationship, sender: some_user, recipient: @user, status: 'accepted' }
     subject { delete :destroy, user_id: some_user.id, id: relationship.id, user_token: @user_token }
 

@@ -32,7 +32,7 @@ Rails.application.routes.draw do
         put :update_meta_info
       end
     end
-    scope ':target_type/:target_id', target_type: /(album|tribute|video|photo|text)/ do
+    scope ':target_type/:target_id', target_type: /(album|tribute|video|photo|text|relationship)/ do
       resources :comments, only: [:index, :create, :update, :destroy, :show]
       resources :tiles, only: :create
     end
@@ -42,6 +42,10 @@ Rails.application.routes.draw do
 
     resources :main_page, only: :index
     resources :likes, only: [:create, :destroy]
+
+    resources :relationships, only: [] do
+      resources :records, only: :index, controller: 'relationship_records'
+    end
 
     resources :video_informations, only: :show, param: :url
     resources :video_uploads, only: [:new, :create]
