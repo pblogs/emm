@@ -28,6 +28,6 @@ class Video < ActiveRecord::Base
   private
 
   def clear_uploaded
-    Vimeo.delete_video(self.video_id)
+    Vimeo.delete_video(self.video_id) unless Video.find_by_video_id(self.video_id).present?
   end
 end

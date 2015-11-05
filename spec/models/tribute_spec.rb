@@ -5,12 +5,12 @@ RSpec.describe Tribute, type: :model do
 
   it 'should not create tribute for self' do
     expect{
-      Tribute.create(user: user, author: user, title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph )
+      Tribute.create(user: user, author: user, description: Faker::Lorem.paragraph )
     }.to change(Tribute, :count).by 0
   end
 
   it 'should add validation error' do
-    tribute = Tribute.create(user: user, author: user, title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph )
+    tribute = Tribute.create(user: user, author: user, description: Faker::Lorem.paragraph )
     expect(tribute.errors[:user_id].size).to eq(1)
   end
 end
