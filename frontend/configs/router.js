@@ -47,9 +47,13 @@ angular.module('app')
           VisibleUser.set(user);
         },
         resolve: {
-          user: function (Restangular, $stateParams, Handle404) {
-            return Restangular.one('users', $stateParams.user_id).get()
-              .catch(Handle404);
+          user: function (Restangular, $stateParams, Handle404, currentUser) {
+            if ($stateParams.user_id == currentUser.id) {
+              return currentUser;
+            } else {
+              return Restangular.one('users', $stateParams.user_id).get()
+                .catch(Handle404);
+            }
           }
         },
         onExit: function (Background, VisibleUser) {
@@ -121,6 +125,29 @@ angular.module('app')
         url: '/relationships',
         templateUrl: 'components/users/relationships/relationships.html',
         controller: 'UsersRelationshipsCtrl'
+      })
+      .state('app.relationship', {
+        url: '/relationships/{relationship_id:int}/?user_id&friend_id',
+        templateUrl: 'components/users/relationships/show/show.html',
+        controller: 'UsersRelationshipShowCtrl',
+        resolve: {
+          user: function (Restangular, $stateParams, Handle404, currentUser) {
+            if (currentUser.id == $stateParams.user_id) {
+              return currentUser;
+            } else {
+              return Restangular.one('users', $stateParams.user_id).get()
+                .catch(Handle404);
+            }
+          },
+          friend: function (Restangular, $stateParams, Handle404) {
+            return Restangular.one('users', $stateParams.friend_id).get()
+              .catch(Handle404);
+          }
+        },
+        onExit: function (Background, VisibleUser) {
+          Background.reset();
+          VisibleUser.set();
+        }
       });
 
     // Page not found

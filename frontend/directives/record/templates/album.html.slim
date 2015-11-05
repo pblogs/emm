@@ -1,0 +1,4 @@
+a.pointer ui-sref="app.user.album({user_id: record.content.user.id, album_id: record.content.id})"
+  h4.e-brown.text-left.m-t-0 Life Event
+  .image-wrapper
+    img.img-responsive ng-src="{{record.content.cover_url.thumb | imageFilter: 'album'}}"

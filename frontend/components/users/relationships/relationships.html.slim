@@ -33,7 +33,7 @@
               a.e-brown.e-link ui-sref="app.user.show({user_id: friend.id})"
                 span> ng-bind="::friend.first_name"
                 span ng-bind="::friend.last_name"
-            a.e-link.pointer View Relationship Page
+            a.e-link.pointer ui-sref="app.relationship({user_id: user.id, relationship_id: friend.relationship_id, friend_id: friend.id})" View Relationship Page
           .media-right.media-middle.btn-section
             relationship-btn user="friend" ng-if="friend.id !== currentUser.id"
 

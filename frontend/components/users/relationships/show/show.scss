@@ -1,0 +1,96 @@
+@import "../../../../vendor/styles/variables";
+
+.relationship-page {
+  .comments-section {
+    overflow-x: auto;
+    padding: 10px 0;
+    height: 240px;
+
+    .comment {
+      width: 200px;
+    }
+  }
+
+  .add-comment-section {
+    min-height: 220px;
+  }
+
+  .friends-section {
+    overflow-x: auto;
+    padding: 15px 0;
+    border-bottom: 1px solid $e-brown;
+
+    .friends-wrapper {
+      height: 50px;
+    }
+    .friend {
+      width: 50px;
+      float: left;
+      img {
+        transition: border 0.2s ease;
+        border: 0 solid $e-red;
+      }
+      &.active img{
+        border: 2px solid $e-red;
+      }
+    }
+  }
+
+  .records-section {
+    border-top: 1px solid $e-brown;
+    min-height: 200px;
+
+    .record-wrapper {
+      display: inline-block;
+      position: relative;
+
+      .pin-btn.tile-edit-buttons {
+        top: 5px;
+        right: 5px;
+      }
+    }
+  }
+}
+
+
+.relationship-duet {
+  position: relative;
+  padding-top: 350px;
+
+  .red-circle {
+    width: 45%;
+    padding-top: 45%;
+    position: absolute;
+    left: 28%;
+    content: '';
+    display: inline-block;
+    top: 0;
+    z-index: 1;
+    border: 2px solid $e-red;
+    border-radius: 50%;
+  }
+
+  .relation-avatar-wrapper {
+    width: 45%;
+    z-index: 30;
+    position: absolute;
+    top: 0;
+
+    &.user {
+      left: 0;
+    }
+
+    &.friend {
+      right: 0;
+    }
+
+    img {
+      transition: border 0.2s ease;
+      border: 0 solid $e-red;
+    }
+
+    &.active img{
+      border: 2px solid $e-red;
+    }
+  }
+}
