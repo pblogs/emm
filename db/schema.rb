@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103131748) do
+ActiveRecord::Schema.define(version: 20151104155732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20151103131748) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "likes_count", default: 0, null: false
+    t.integer  "original_id"
   end
 
   add_index "photos", ["album_id"], name: "index_photos_on_album_id", using: :btree
@@ -140,6 +141,7 @@ ActiveRecord::Schema.define(version: 20151103131748) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "likes_count", default: 0, null: false
+    t.integer  "original_id"
   end
 
   add_index "texts", ["album_id"], name: "index_texts_on_album_id", using: :btree
@@ -220,6 +222,7 @@ ActiveRecord::Schema.define(version: 20151103131748) do
     t.integer  "source",      default: 0
     t.integer  "likes_count", default: 0, null: false
     t.integer  "duration"
+    t.integer  "original_id"
   end
 
   add_index "videos", ["album_id"], name: "index_videos_on_album_id", using: :btree

@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
 
     resources :relationships, only: [] do
-      resources :records, only: :index, controller: 'relationship_records'
+      resources :records, only: [:index, :create], controller: 'relationship_records'
     end
 
     resources :video_informations, only: :show, param: :url

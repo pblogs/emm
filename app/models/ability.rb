@@ -71,10 +71,10 @@ class Ability
       end
       # Tags
       can [:create], Tag do |tag| # author of taggable resource can tag users on it
-        tag.taggable.user_id == user.id
+        tag.target.user_id == user.id
       end
-      can [:destroy], Tag do |tag| # author of taggable resource can untag users from it OR tagged person can untag himself
-        tag.taggable.user_id == user.id || tag.user_id == user.id
+      can [:destroy, :pin_record], Tag do |tag| # author of taggable resource can untag users from it OR tagged person can untag himself
+        tag.author_id == user.id || tag.user_id == user.id
       end
       # Likes
       can [:create, :destroy], Like # registered user can like if he can see resource itself (load_and_authorize_target in controllers)

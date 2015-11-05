@@ -8,8 +8,8 @@ RSpec.describe TilesController, type: :controller do
   let(:tile) { text.tile }
 
   %W(album tribute video photo text).each do |content_type|
-    describe '#create' do
-      let(:content) { create(content_type, user: @user) }
+    describe "#create for #{content_type}" do
+      let!(:content) { create(content_type, user: @user) }
 
       context 'owner user' do
         subject do
