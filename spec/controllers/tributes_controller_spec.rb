@@ -4,7 +4,11 @@ RSpec.describe TributesController, type: :controller do
   login_user
 
   let(:author) { create(:user) }
-  let!(:tribute) { create_list(:tribute, 2, user: @user, author: author).first }
+  let!(:tribute) do
+    tributes = create_list(:tribute, 2, user: @user, author: author)
+    tributes.each { |tribute| tribute.create_tile_on_user_page }
+    tributes.first
+  end
   let(:another_user) { create(:user, :confirmed) }
 
   describe 'likes' do
@@ -30,6 +34,11 @@ RSpec.describe TributesController, type: :controller do
     it 'should return correct tributes count' do
       get :index, user_id: @user.id, user_token: @user_token
       expect(json_response['meta']['total']).to eq @user.tributes.count
+    end
+
+    it 'should return tiles' do
+      get :index, user_id: @user.id, user_token: @user_token
+      expect(json_response['resources'].map { |tribute| tribute['tile'] }.count).to eq @user.tributes.count
     end
   end
 
@@ -76,7 +85,6 @@ RSpec.describe TributesController, type: :controller do
     end
 
     it 'should response success if has tile' do
-      tribute.create_tile_on_user_page
       get :show, id: tribute.id, user_token: @user_token, user_id: @user.id
       expect(response).to be_success
     end
