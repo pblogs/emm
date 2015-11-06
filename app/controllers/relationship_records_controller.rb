@@ -80,6 +80,8 @@ class RelationshipRecordsController < ApplicationController
         types[name].concat(ids)
       end
     end
-    types.collect { |type, values| "(tags.target_type = '#{type}' AND tags.target_id IN (#{values.join(', ')}))" }.join(' OR ')
+    rel_ids_query = rel_ids.join(', ')
+    types.collect { |type, values| "(tags.target_type = '#{type}' AND tags.target_id IN (#{values.join(', ')}))" }
+      .join(' OR ') + " AND tags.author_id IN (#{rel_ids_query}) AND tags.user_id IN (#{rel_ids_query})"
   end
 end

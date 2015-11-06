@@ -29,7 +29,7 @@ class Ability
     # Likes
     # nobody can see likes
     # Relationships
-    can [:index], Relationship # anybody can see user's friends
+    can [:index, :show], Relationship # anybody can see user's friends
     # Tributes
     can [:index, :show], Tribute # anybody can see user's tributes
 

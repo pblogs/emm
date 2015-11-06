@@ -4,9 +4,10 @@ RSpec.describe CommentsController, type: :controller do
   login_user
 
   let(:author) { create(:user, :confirmed) }
-  let!(:comment) { create(:comment, commentable: create(:photo, user: author), author: author) }
+  let(:target) { create(:photo, user: author) }
   let(:another_user) { create(:user, :confirmed) }
   let!(:relation) { create(:relationship, :accepted, sender: author, recipient: @user) }
+  let!(:comment) { create(:comment, commentable: target, author: author) }
 
   let(:private_albums) do
     [create(:album, :private), create(:album, :private)]
@@ -21,15 +22,20 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
-  %i{ photo video text album tribute}.each do |target_name|
-    let(:target) do
-      obj = create(target_name, user: author)
-      obj.create_tile_on_user_page if target_name == :tribute
-      obj
-    end
-    let(:comment) { create(:comment, commentable: target, author: author) }
-
+  %i{ photo video text album tribute relationship }.each do |target_name|
     describe "#index comments for #{target_name}" do
+      let(:target) do
+        if target_name == :relationship
+          obj = create(target_name, sender: author, status: 'accepted')
+        else
+          obj = create(target_name, user: author)
+        end
+
+        obj.create_tile_on_user_page if target_name == :tribute
+        obj
+      end
+      let(:comment) { create(:comment, commentable: target, author: author) }
+
       it 'should response success' do
         get :index, target_id: target.id, target_type: target.class.name.underscore, user_token: @user_token
         expect(response).to be_success
@@ -95,7 +101,7 @@ RSpec.describe CommentsController, type: :controller do
     end
 
     it 'response should be success' do
-      put :update, id: comment.id, target_id: target.id, target_type: target.class.name.underscore, user_token: author.jwt_token,
+      put :update, id: @comment.id, target_id: target.id, target_type: target.class.name.underscore, user_token: author.jwt_token,
           resource: { text: new_text }
       expect(response).to be_success
     end
