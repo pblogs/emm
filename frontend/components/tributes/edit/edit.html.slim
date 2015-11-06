@@ -1,0 +1,13 @@
+.e-close-modal ng-click="$dismiss()"
+  .fa.fa-close
+.modal-header.text-center
+  h3.modal-title
+    | Edit tribute for
+    span< ng-bind="::user.first_name"
+    span< ng-bind="::user.last_name"
+form ng-submit="submit()"
+  .modal-body.text-popup
+    e-description ng-model="tribute.description" errors="errors.description"
+
+  .modal-footer.text-right
+    button.btn.e-btn.btn-primary type="submit" Save
