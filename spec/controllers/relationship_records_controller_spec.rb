@@ -29,6 +29,13 @@ RSpec.describe RelationshipRecordsController, type: :controller do
       expect(json_response['resources'].first.keys).to contain_exactly(*serialized(tag, TagContentSerializer).keys)
     end
 
+    it 'should respond right records count' do
+      create_list(:tag, 5, target: album, author: album.user)
+      subject
+      tag = Tag.find(json_response['resources'].first['id'])
+      expect(json_response['resources'].count).to eq(album.user.friends.last.tags.count)
+    end
+
     it 'should have likes' do
       album.records.last.content.likes.create(user: @user)
       subject
