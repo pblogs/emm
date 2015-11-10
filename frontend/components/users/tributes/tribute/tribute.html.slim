@@ -33,5 +33,5 @@
         add-comment commentable="tribute" content-type="tribute" on-create="addNewComment"
 
   .row.comment-section.m-t-20  ng-if="comments.length"
-    .col-lg-3.col-md-3.col-sm-4.col-xs-2.m-b-10 ng-repeat="comment in comments"
+    .col-lg-3.col-md-3.col-sm-4.m-b-10 ng-repeat="comment in comments"
       comment.animated.fadeIn comment="comment"  on-link-follow="$close()"
