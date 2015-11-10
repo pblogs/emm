@@ -46,10 +46,16 @@
 }
 
 @media screen and (max-width: 767px) {
-  .e-modal .modal-dialog .modal-content{
-    .e-close-modal {
-      right: 8px;
-      top:12px;
+  .e-modal .modal-dialog {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+
+    .modal-content {
+      .e-close-modal {
+        right: 8px;
+        top: 12px;
+      }
     }
   }
 }

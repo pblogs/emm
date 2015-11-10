@@ -5,7 +5,7 @@ html(lang="en" data-ng-app="app")
     meta(charset="utf-8")
     title Emmortal
     meta(name="description" content="Emmortal web site")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
 
     = favicon_link_tag 'components/app/images/apple-touch-icon-144x144-precomposed.png', rel: 'apple-touch-icon-precomposed', sizes: '144x144', type: 'image/png'
     = favicon_link_tag 'components/app/images/apple-touch-icon-114x114-precomposed.png', rel: 'apple-touch-icon-precomposed', sizes: '114x114', type: 'image/png'

@@ -10,7 +10,7 @@
 
   div infinite-scroll="tributesLoader.nextPage()"
     .row
-      .col-sm-4.col-md-4.col-xs-6.m-b-30 ng-repeat="tribute in tributesLoader.items"
+      .col-sm-4.col-md-4.m-b-30 ng-repeat="tribute in tributesLoader.items"
         .tribute-view
           .tile-edit-buttons
             i.fa.fa-times ng-click-confirm="removeTribute(tribute)" ng-if="canEdit"
