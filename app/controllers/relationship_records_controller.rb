@@ -6,7 +6,7 @@ class RelationshipRecordsController < ApplicationController
     relationship = Relationship.find(params[:relationship_id])
     sql_str = allowed_records_query(relationship)
     tags = sql_str.blank? ? Tag.none : Tag.where(sql_str).includes(:target).page(params[:page]).per(params[:per_page])
-    render_resources(tags, each_serializer: TagContentSerializer, content_likes: get_likes(tags.map(&:target)), with_likes: user_signed_in?)
+    render_resources(tags, each_serializer: TagContentSerializer, content_likes: get_likes(tags.map(&:target)), with_likes: user_signed_in?, skip_content: true)
   end
 
   def create
@@ -81,7 +81,7 @@ class RelationshipRecordsController < ApplicationController
       end
     end
     rel_ids_query = rel_ids.join(', ')
-    types.collect { |type, values| "(tags.target_type = '#{type}' AND tags.target_id IN (#{values.join(', ')}))" }
-      .join(' OR ') + " AND tags.author_id IN (#{rel_ids_query}) AND tags.user_id IN (#{rel_ids_query})"
+    str = types.collect { |type, values| "(tags.target_type = '#{type}' AND tags.target_id IN (#{values.join(', ')}))" } .join(' OR ')
+     '(' + str + ')' + " AND (tags.author_id IN (#{rel_ids_query}) AND tags.user_id IN (#{rel_ids_query}))"
   end
 end

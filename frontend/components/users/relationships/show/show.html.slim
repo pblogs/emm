@@ -1,0 +1,41 @@
+.e-container.relationship-page
+  h2.e-brown.m-t-0 ng-show="user.id == currentUserId" My relationships
+  h2.e-brown.m-t-0 ng-hide="user.id == currentUserId"
+    span ng-bind="user.first_name"
+    | 's Relationships
+  .friends-section
+    .friends-wrapper ng-style="{width: 60*userFriends.length + 'px'}"
+      .friend.m-r-5.pointer.animated.fadeIn ng-class="{active: friend.id == userFriend.id}" ng-repeat="userFriend in userFriends" ng-click="selectFriend(userFriend)"
+        img.img-responsive.img-circle ng-src="{{userFriend.avatar_url.thumb | imageFilter:'avatar'}}" draggable="false"
+
+  .row.m-t-30
+    .col-lg-4.col-md-5.col-sm-5.col-xs-12
+      h2.e-brown.m-t-0.text-center
+        span> ng-bind="user.first_name"
+        | and
+        span< ng-bind="friend.first_name"
+        span< ng-hide="friend.first_name" ...
+
+      .relationship-duet.m-t-30
+        .red-circle.animated.fadeIn ng-show="friend.id"
+        .relation-avatar-wrapper.pointer.m-r-5.user  ng-class="{active: selectedId == user.id}" ng-click="getFriends(user)"
+          img.img-responsive.img-circle ng-src="{{user.avatar_url.original | imageFilter:'avatar'}}" draggable="false"
+        .relation-avatar-wrapper.pointer.m-l-5.friend  ng-class="{active: selectedId == friend.id}" ng-click="getFriends(friend)" ng-show="friend.id"
+          img.img-responsive.img-circle ng-src="{{friend.avatar_url.original | imageFilter:'avatar'}}" draggable="false"
+    .col-lg-8.col-md-7.col-sm-7.col-xs-12
+      .comments-section
+        .comments-wrapper ng-style="{'width': comments.length*210 +'px'}"
+          comment.animated.fadeIn.m-r-10 comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"
+      .add-comment-section.m-t-10.text-right
+        .add-comment-wrapper.animated.fadeIn ng-if="relationship.id"
+          add-comment commentable="relationship" content-type="relationship" on-create="addNewComment"
+
+  .m-t-50.records-section infinite-scroll="recordsLoader.nextPage()"
+    h2.text-center.e-brown.animated.fadeIn.m-t-50 ng-show="relationship.id && !recordsLoader.items.length" This relationship doesn't have any records
+    h2.text-center.e-brown.animated.fadeIn.m-t-50 ng-hide="relationship.id" Select friend to view your mutual records
+    .row.m-t-15
+      .col-lg-2.col-md-3.col-sm-4.col-xs-6.m-b-15.text-center.fadeIn.animated.text-center ng-repeat="record in recordsLoader.items"
+        .record-wrapper
+          .tile-edit-buttons.pin-btn ng-if="(user.id ==  currentUserId || friend.id == currentUserId) && record.target_type != 'Album'"
+            i.fa.fa-thumb-tack ng-class="{'e-red': record.tile.id}" ng-click="pinRecord(record)"
+          record record="record"

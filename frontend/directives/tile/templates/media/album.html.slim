@@ -3,7 +3,7 @@ h4.e-brown Life event
   div ng-class="{ 'small-album': tile.size == 'small', 'col-sm-4': tile.size == 'middle', 'col-sm-6': tile.size == 'large', 'vertical': tile.size == 'vertical'}"
     a ui-sref="app.user.album({user_id: tile.content.user.id, album_id: tile.content.id})"
       .image-wrapper
-        img.tile-img ng-src="{{content.cover_url.original | imageFilter:'album'}}" draggable="false"
+        img.tile-img ng-src="{{content.cover_url.thumb | imageFilter:'album'}}" draggable="false"
       .album-title ng-show="tile.size == 'large' || tile.size == 'vertical'" ng-style="{'border-color': content.color}"
         .big-count ng-bind="::content.records_count" ng-style="{'background-color': content.color}"
         .title-text

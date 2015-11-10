@@ -1,9 +1,10 @@
 class TagContentSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :author_id, :target_type, :has_tile
+  attributes :id, :user_id, :author_id, :target_type
 
   has_one :target
+  has_one :tile
 
-  def has_tile
-    object.target.tile.present?
+  def tile
+    object.target.tile
   end
 end
