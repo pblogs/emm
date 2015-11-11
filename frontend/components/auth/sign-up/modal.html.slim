@@ -18,7 +18,7 @@ form name="signUpForm" ng-submit="submit()" novalidate="novalidate"
 
     .m-t-10.text-center
       | By clicking Sign Up, you agree to our
-      a.e-link.pointer< Terms and conditions
+      a.e-link.pointer< ng-click="termsModal()" Terms and conditions
   .modal-footer.text-center
     button.btn.e-btn.btn-primary type="submit" ng-disabled="signUpForm.$invalid" Sign Up
     p.m-t-15

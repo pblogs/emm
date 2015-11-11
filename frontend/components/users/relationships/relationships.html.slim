@@ -9,9 +9,12 @@
   ul.nav.nav-pills.nav-justified.e-nav-pills ng-if="isMyRelationships"
     li ng-class="{active: search.status == ''}"
       a.e-brown.pointer ng-click="search.status=''" All
-    -['friends', 'incoming', 'outgoing'].each do |status|
-      li ng-class="{active: search.status == '#{status}'}"
-        a.e-brown.pointer ng-click="search.status='#{status}'" #{status.capitalize}
+    li ng-class="{active: search.status == 'friends'}"
+      a.e-brown.pointer ng-click="search.status='friends'" Relationships
+    li ng-class="{active: search.status == 'incoming'}"
+      a.e-brown.pointer ng-click="search.status='incoming'" Incoming
+    li ng-class="{active: search.status == 'outgoing'}"
+      a.e-brown.pointer ng-click="search.status='outgoing'" Outgoing
 
   .users-section.animated.fadeIn
     div infinite-scroll="friendsLoader.nextPage()"
