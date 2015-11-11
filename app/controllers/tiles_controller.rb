@@ -6,7 +6,7 @@ class TilesController < ApplicationController
 
   def create
     page = Page.find(record_params[:page_id]) if record_params[:page_id]
-    tile = @target.create_tile_on_user_page(page)
+    tile = @target.class.name == 'Relationship' ? @target.show_tile_on_user_page(current_user, page) :  @target.create_tile_on_user_page(page)
     render_resource_or_errors(tile)
   end
 

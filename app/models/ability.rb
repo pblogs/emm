@@ -92,6 +92,8 @@ class Ability
       can [:destroy], Tribute do |tribute| # tribute's author OR tributed user can destroy comment
         tribute.user_id == user.id || tribute.author_id == user.id
       end
+      #Newsfeed
+      can :index, :news_feed
     end
   end
 end

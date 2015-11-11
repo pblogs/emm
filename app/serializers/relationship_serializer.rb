@@ -2,6 +2,16 @@ class RelationshipSerializer < ActiveModel::Serializer
   attributes :id, :sender_id, :recipient_id, :status, :relation_to_current_user
 
   has_one :related_user
+  has_one :recipient
+  has_one :sender
+
+  def include_sender?
+    options[:news_feed]
+  end
+
+  def include_recipient?
+    options[:news_feed]
+  end
 
   def include_related_user?
     options[:with_related_user]

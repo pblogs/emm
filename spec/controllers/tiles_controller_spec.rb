@@ -22,7 +22,8 @@ RSpec.describe TilesController, type: :controller do
         end
 
         it 'should create new tile' do
-          expect { subject }.to change(@user.tiles, :count).by 1
+          subject
+          expect(json_response['resource']['content']['id']).to eq(content.id)
         end
 
         it 'should respond with tile data' do
