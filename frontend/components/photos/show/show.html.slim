@@ -5,7 +5,7 @@
     .row
       .col-sm-6
         .show-photo-wrapper
-          img.img-responsive ng-src="{{content.image_url.original}}"
+          image-show img = "content.image_url.original"
         .tile-comments
           add-comment commentable="content" content-type="photo" on-create="addNewComment"
       .col-sm-6
