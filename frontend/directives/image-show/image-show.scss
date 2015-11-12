@@ -1,0 +1,71 @@
+.image-show-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  display: table;
+
+  .img-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+    img {
+      max-height: 315px;
+    }
+  }
+
+  &:hover {
+    &:after {
+      transform: scale(1.5);
+    }
+  }
+
+  &:after {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    font-size: 45px;
+    content: '\f065';
+    font-family: FontAwesome;
+    color: #fff;
+    height: 64px;
+    width: 64px;
+    background: rgba(0, 0, 0, 0.24);
+    border-radius: 4px;
+    margin-top: -32px;
+    margin-right: -32px;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
+}
+
+.image-modal {
+  background: rgba(0,0,0,0.75);
+
+  .modal-dialog {
+    width: 90%;
+    height: 90%;
+    margin: 3% auto;
+
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      background: none;
+      display: table;
+
+      .modal-body {
+        padding: 0;
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+
+        img {
+          display: inline-block;
+          max-height: 650px;
+        }
+      }
+    }
+  }
+}
