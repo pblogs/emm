@@ -16,8 +16,9 @@ angular.module('app')
         onRemove: '=',
         user: '='
       },
-      controller: function ($scope, $modal) {
+      controller: function ($scope, $modal, MediaTypeSelectModal) {
         $scope.content = $scope.tile.content;
+        $scope.MediaTypeSelectModal = MediaTypeSelectModal;
         $scope.getTemplate = 'directives/tile/templates/' + $scope.tile.widget_type + '/' + ($scope.tile.content_type || 'tile') + '.html';
         $scope.showTile = showTile;
 
