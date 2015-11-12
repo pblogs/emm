@@ -9,10 +9,22 @@ angular.module('app')
 
     $scope.user = user;
     $scope.canEditTiles = $scope.user.id === $scope.currentUser.id;
+    var contentTooltip = {
+      col: 2,
+      row: 1,
+      size: 'middle',
+      widget_type: 'content-tooltip'
+    };
 
     $scope.$watch('currentUser.id', function (newVal, oldVal) {
       if (newVal != oldVal)
         $scope.canEditTiles = $scope.user.id === $scope.currentUser.id;
+    });
+
+    $scope.$watch('currentPage.tiles.length', function (newValue, oldValue) {
+      if (newValue < oldValue && (!$scope.currentPage.tiles.length || !_.includes(_.pluck($scope.currentPage.tiles, 'widget_type'), 'media') && $scope.canEditTiles)) {
+        $scope.currentPage.tiles.push(contentTooltip);
+      }
     });
 
     $scope.$on('tileAdded', function (event, tile) {
@@ -54,6 +66,9 @@ angular.module('app')
         .then(function (pageFromServer) {
           _.forEach(pageFromServer.tiles, gridsterizeTile);
           $scope.currentPage = pageFromServer;
+          if ((!$scope.currentPage.tiles.length || !_.includes(_.pluck($scope.currentPage.tiles, 'widget_type'), 'media')) && $scope.canEditTiles) {
+            $scope.currentPage.tiles.push(contentTooltip);
+          }
           $location.search({page: pageNumber > 1 ? pageNumber : null, page_id: null}); // Do not display ?page=1 in URL
           pageLoadingScroll('In', scrollDirection);
         });

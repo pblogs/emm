@@ -21,6 +21,7 @@ angular.module('app')
           handle: '.drag-handle',
           // When dragging is finished
           stop: function (event, $element, tile) {
+            if (tile.widget_type == 'content-tooltip') return;
             if ($scope.onResize) $scope.onResize(tile);
           }
         },
@@ -28,6 +29,7 @@ angular.module('app')
           enabled: $scope.editable,
           // When resize is finished
           stop: function (event, $element, tile) {
+            if (tile.widget_type == 'content-tooltip') return;
             if ($scope.onResize) $scope.onResize(tile);
           }
         }
