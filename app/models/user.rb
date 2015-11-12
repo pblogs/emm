@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :likes, inverse_of: :user
   has_many :authored_tags, class_name: 'Tag', foreign_key: :author_id, inverse_of: :author, dependent: :destroy
   has_many :tags, inverse_of: :user, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   # Enums
   enum role: {member: 0, admin: 1}
@@ -48,6 +49,10 @@ class User < ActiveRecord::Base
   # Uploaders
   mount_base64_uploader :avatar, AvatarUploader
   mount_base64_uploader :background, BackgroundUploader
+
+  def refresh_unread_notifications_count
+    update(unread_notifications_count: notifications.not_viewed.count)
+  end
 
   private
 

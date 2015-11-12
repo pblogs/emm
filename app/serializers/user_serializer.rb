@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :birthday, :avatar_url, :background_url, :relationship_id
+  attributes :id, :first_name, :last_name, :birthday, :avatar_url, :background_url, :relationship_id, :unread_notifications_count
 
   has_one :relationship, serializer: RelationshipSerializer
 

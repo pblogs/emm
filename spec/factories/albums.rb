@@ -8,7 +8,8 @@ FactoryGirl.define do
     factory :album_with_tags do
       after(:create) do |album|
         friend = create(:user, :confirmed)
-        create(:relationship, sender: album.user, recipient: friend, status: 'accepted')
+        relationship = create(:relationship, sender: album.user, recipient: friend)
+        relationship.update(status: 'accepted')
         %i{ video photo text }.each do |content_name|
           create(:tag, target: create(content_name, album: album), author: album.user, user: friend)
         end

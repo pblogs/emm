@@ -6,6 +6,7 @@ class Tile < ActiveRecord::Base
   belongs_to :page, inverse_of: :tiles
   delegate :user, to: :page, allow_nil: true # belongs to user through page
   belongs_to :content, polymorphic: true # Album | Photo | Video | Text | Tribute
+  has_many :notifications, as: :content, dependent: :delete_all
 
   default_scope { where(visible: true) }
 
@@ -21,6 +22,7 @@ class Tile < ActiveRecord::Base
   # Callbacks
   before_create :check_for_free_space_on_page
   after_destroy :remove_empty_page
+  after_create :create_notifications, if: -> { self.content_type == 'Tribute' }
 
   def self.preload(items, options = {})
     items.group_by(&:content_type).each do |type, records|
@@ -53,5 +55,9 @@ class Tile < ActiveRecord::Base
 
   def remove_empty_page
     self.page.destroy if !self.page.default? && self.page.tiles.count == 0
+  end
+
+  def create_notifications
+    self.notifications.create(event: 'tribute_pin', user_id: content.author_id)
   end
 end

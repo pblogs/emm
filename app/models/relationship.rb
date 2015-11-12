@@ -1,4 +1,6 @@
 class Relationship < ActiveRecord::Base
+  include Notifications
+
   enum status: {pending: 0, accepted: 1, declined: 2}
 
   belongs_to :sender, class_name: 'User'
@@ -12,6 +14,8 @@ class Relationship < ActiveRecord::Base
   validate :not_self, :no_inverse_relation
 
   after_update :create_tiles, if: :accepted?
+  after_update :create_status_notifications
+  before_create :set_notification_users
 
   def show_tile_on_user_page(user, page)
     tile = self.tiles.joins(:page).find_by('pages.user_id = ?', user.id).present?
@@ -19,7 +23,15 @@ class Relationship < ActiveRecord::Base
   end
 
   private
+  
+  def create_status_notifications
+    self.notifications.create(event: "#{self.class.name.downcase}_#{status}", user_id: sender_id)
+  end
 
+  def set_notification_users
+    @notification_users_ids = [recipient_id]
+  end
+  
   def create_tiles
     [sender, recipient].each do |owner|
       self.tiles.create(page: owner.pages.last, widget_type: :media, visible: false)
