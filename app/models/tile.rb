@@ -7,6 +7,8 @@ class Tile < ActiveRecord::Base
   delegate :user, to: :page, allow_nil: true # belongs to user through page
   belongs_to :content, polymorphic: true # Album | Photo | Video | Text | Tribute
 
+  default_scope { where(visible: true) }
+
   # Enums
   enum widget_type: [:media, :avatar, :info]
   enum size: [:small, :middle, :large, :vertical]
@@ -19,6 +21,19 @@ class Tile < ActiveRecord::Base
   # Callbacks
   before_create :check_for_free_space_on_page
   after_destroy :remove_empty_page
+
+  def self.preload(items, options = {})
+    items.group_by(&:content_type).each do |type, records|
+      targets = records.map(&:content)
+      associations = {
+        Relationship: [:sender, :recipient]
+      }
+      %i{Video Photo Text Album}.map {|target| associations[target] = [:user]}
+      associations = associations.merge(options).fetch(type.try(:to_sym), [])
+
+      ActiveRecord::Associations::Preloader.new.preload(targets, associations)
+    end
+  end
 
   private
 

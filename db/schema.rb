@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104155732) do
+ActiveRecord::Schema.define(version: 20151109160041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20151104155732) do
     t.integer  "col"
     t.integer  "screen_size",  default: 0
     t.integer  "widget_type",  default: 0
+    t.boolean  "visible",      default: true
   end
 
   add_index "tiles", ["content_id"], name: "index_tiles_on_content_id", using: :btree
