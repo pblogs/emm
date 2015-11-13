@@ -3,6 +3,7 @@ require 'factory_girl_rails'
 ### Helpers
 
 def create_stuff_for_user(user, opts={})
+  author = FactoryGirl.create :user, :confirmed
   # Add media to default album
   5.times { create_media_for_album(user.default_album) }
   # Create album with medias
@@ -12,6 +13,13 @@ def create_stuff_for_user(user, opts={})
   if opts[:create_big_album]
     album = FactoryGirl.create :album, :with_dates, :with_location, user: user
     30.times { create_media_for_album(album) }
+  end
+  5.times do
+    author =
+    tribute = FactoryGirl.create(:tribute, user: user)
+    rand(1..10).times do
+      FactoryGirl.create(:like, target: tribute)
+    end
   end
 end
 
