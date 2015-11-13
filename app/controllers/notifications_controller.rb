@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    notifications = @notifications.includes(:content).order(viewed: :asc).page(params[:page]).per(params[:per_page])
+    notifications = @notifications.includes(:content).order(viewed: :asc).order(created_at: :desc).page(params[:page]).per(params[:per_page])
     Notification.preload(notifications)
     render_resources(notifications, notifications: true)
   end

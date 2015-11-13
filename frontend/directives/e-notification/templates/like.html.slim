@@ -1,0 +1,17 @@
+div ng-click="viewNotification()"
+  .avatar-wrapper.pull-left
+    img.img-responsive.img-rounded ng-src="{{notification.content.user.avatar_url.thumb | imageFilter: 'avatar'}}"
+  .pull-right.e-notification-icon
+    .fa.e-red.fa-heart
+  .e-notification-info
+    .user-name
+      a.e-link ui-sref="app.user.show({user_id: notification.content.user.id})"
+        strong> ng-bind="::notification.content.user.first_name + ' ' + notification.content.user.last_name"
+    .action
+      span> liked your
+      a.e-link.e-brown.pointer ng-click="showPost()" ng-if="!notification.content.target.title && notification.content.target_type != 'Album' && notification.content.target_type != 'Tribute'" ng-bind="::notification.content.target_type"
+      span ng-if="notification.content.target.title && notification.content.target_type != 'Album' && notification.content.target_type != 'Tribute'"
+        span> ng-bind="::notification.content.target_type"
+        a.e-link.e-brown.pointer ng-click="showPost()" '{{::notification.content.target.title}}'
+      a.e-link.e-brown.pointer ui-sref="app.user.album({user_id: notification.content.target.user.id, album_id: notification.content.target.id})" ng-if="notification.content.target_type == 'Album'" ng-bind="::notification.content.target_type"
+      a.e-link.e-brown.pointer ui-sref="app.user.tribute({user_id: notification.content.target.user_id, tribute_id: notification.content.target.id})" ng-if="notification.content.target_type == 'Tribute'" ng-bind="::notification.content.target_type"

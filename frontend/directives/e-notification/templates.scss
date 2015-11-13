@@ -1,0 +1,71 @@
+@import "../../vendor/styles/variables";
+
+.e-notification {
+  min-height: 50px;
+
+  color: $e-brown;
+  border-bottom: 1px solid $e-black-aaa;
+  transition: background 0.3s ease;
+
+  &.not-seen {
+    background: $e-light-brown;
+  }
+
+  &.seen {
+    background: $e-white;
+  }
+
+  &.comment {
+    width: 100%;
+    padding: 0;
+  }
+
+  .avatar-wrapper {
+    width: 50px;
+    padding: 5px;
+  }
+
+  .e-notification-info {
+    padding: 5px;
+  }
+
+  .e-link {
+    color: $e-brown!important;
+    padding: 0!important;
+    font-size: 14px!important;
+    text-decoration: underline;
+
+    &:hover {
+      color: $e-brown!important;
+      background: none!important;
+    }
+  }
+
+  .e-notification-comment-text {
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .e-notification-icon {
+    padding: 8px;
+    width:45px;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .action, .user-name {
+    white-space: nowrap;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .user-name .e-link {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+div ng-click="viewNotification()"
+  .avatar-wrapper.pull-left
+    img.img-responsive.img-rounded ng-src="{{notification.content.author.avatar_url.thumb | imageFilter: 'avatar'}}"
+  .pull-right.e-notification-icon
+    .fa.e-blue.fa-comment
+  .e-notification-info
+    .user-name
+      a.e-link ui-sref="app.user.show({user_id: notification.content.author.id})"
+        strong> ng-bind="::notification.content.author.first_name + ' ' + notification.content.author.last_name"
+    .action
+      span> commented your
+      a.e-link.e-brown.pointer ng-click="showPost()" ng-if="!notification.content.commentable.title && notification.content.commentable_type != 'Album' && notification.content.commentable_type != 'Tribute'" ng-bind="::notification.content.commentable_type"
+      span ng-if="notification.content.commentable.title && notification.content.commentable_type != 'Album' && notification.content.commentable_type != 'Tribute'"
+        span> ng-bind="::notification.content.commentable_type"
+        a.e-link.e-brown.pointer ng-click="showPost()"
+          | '
+          span ng-bind="::notification.content.commentable.title"
+          | '
+      a.e-link.e-brown.pointer ui-sref="app.user.album({user_id: notification.content.commentable.user.id, album_id: notification.content.commentable.id})" ng-if="notification.content.commentable_type == 'Album'" ng-bind="::notification.content.commentable_type"
+      a.e-link.e-brown.pointer ui-sref="app.user.tribute({user_id: notification.content.commentable.user_id, tribute_id: notification.content.commentable.id})" ng-if="notification.content.commentable_type == 'Tribute'" ng-bind="::notification.content.commentable_type"
+      .e-notification-comment-text
+        |"
+        span ng-bind="::notification.content.text"
+        |"
