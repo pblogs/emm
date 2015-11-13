@@ -6,6 +6,7 @@ FactoryGirl.define do
     email { "user_#{SecureRandom.uuid}@example.com" }
     password 'password'
     password_confirmation 'password'
+    before(:create) { |user| user.skip_confirmation! }
   end
 
   trait :with_avatar do

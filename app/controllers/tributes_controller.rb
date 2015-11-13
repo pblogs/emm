@@ -5,7 +5,7 @@ class TributesController < ApplicationController
   load_and_authorize_resource :tribute, through: :user
 
   def index
-    tributes = @tributes.includes(:author, :tile).page(params[:page]).per(params[:per_page])
+    tributes = @tributes.includes(:author, :tile).order(likes_count: :desc).page(params[:page]).per(params[:per_page])
     render_resources(tributes, content_likes: get_likes(tributes), with_likes: user_signed_in?, with_tile: true)
   end
 
