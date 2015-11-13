@@ -6,11 +6,11 @@ class RelationshipSerializer < ActiveModel::Serializer
   has_one :sender
 
   def include_sender?
-    options[:news_feed]
+    options[:news_feed] || options[:notifications]
   end
 
   def include_recipient?
-    options[:news_feed]
+    options[:news_feed] || options[:notifications]
   end
 
   def include_related_user?

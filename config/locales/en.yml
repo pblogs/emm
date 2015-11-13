@@ -39,4 +39,4 @@ en:
             unable_to_destroy: Cannot delete default page
 
         like:
-          already_liked: 'Yo have already like this'
+          already_liked: 'You have already like this'

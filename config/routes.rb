@@ -50,6 +50,11 @@ Rails.application.routes.draw do
 
     resources :video_informations, only: :show, param: :url
     resources :video_uploads, only: [:new, :create]
+    resources :notifications, only: [:index, :update, :mass_update] do
+      collection do
+        post :mass_update
+      end
+    end
 
     match '*path', via: :all, to: proc { raise ActionController::RoutingError.new('Not Found') }
   end
