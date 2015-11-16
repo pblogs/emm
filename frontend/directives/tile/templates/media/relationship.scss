@@ -1,0 +1,30 @@
+.relationship-wrapper {
+  height: 100%;
+
+  &.simple {
+    .images {
+      padding: 35px 0;
+    }
+  }
+
+  .images {
+    display: inline-block;
+    width: 45%;
+    padding: 10px 0;
+
+    img {
+      max-width: 90px;
+
+      &:last-child {
+        margin-left: -20%;
+        box-shadow: -4px 0 5px rgba(0,0,0,0.7);
+      }
+    }
+  }
+
+  .texts {
+    width: 55%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

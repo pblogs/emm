@@ -148,6 +148,11 @@ angular.module('app')
           Background.reset();
           VisibleUser.set();
         }
+      })
+      .state('app.newsfeed', {
+        url: '/newsfeed',
+        templateUrl: 'components/newsfeed/index.html',
+        controller: 'NewsfeedCtrl'
       });
 
     // Page not found

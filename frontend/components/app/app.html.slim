@@ -46,6 +46,8 @@
             li ng-if="currentUser.exists()"
               a ui-sref="app.user.show({user_id: currentUser.id})" My profile
             li ng-if="currentUser.exists()"
+              a ui-sref="app.newsfeed({user_id: currentUser.id})" Newsfeed
+            li ng-if="currentUser.exists()"
               a ui-sref="app.user.edit.general({user_id: currentUser.id})" Settings
             li ng-if="currentUser.exists()"
               a href="#" ng-click="logout()" Logout
