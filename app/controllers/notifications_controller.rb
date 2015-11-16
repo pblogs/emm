@@ -2,9 +2,9 @@ class NotificationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    notifications = @notifications.includes(:content).page(params[:page]).per(params[:per_page])
+    notifications = @notifications.includes(:content).order(viewed: :asc).page(params[:page]).per(params[:per_page])
     Notification.preload(notifications)
-    render_resources(notifications.includes(:content), notifications: true)
+    render_resources(notifications, notifications: true)
   end
 
   def update
@@ -14,7 +14,12 @@ class NotificationsController < ApplicationController
 
   def mass_update
     current_user.notifications.not_viewed.update_all(viewed: true)
+    current_user.refresh_unread_notifications_count
     render nothing: true
+  end
+
+  def unread_count
+    render json: { new_notifications: current_user.unread_notifications_count }
   end
 
   private

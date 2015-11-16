@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index, :update, :mass_update] do
       collection do
         post :mass_update
+        get :unread_count
       end
     end
 

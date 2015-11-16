@@ -62,10 +62,29 @@ RSpec.describe NotificationsController, type: :controller do
       expect(response).to be_success
     end
 
-    it 'should do mass update' do
+    it 'should update notifications' do
       expect {
         subject
-      }.to change(@user.notifications.where(viewed: false), :count).to 0
+      }.to change(@user.notifications.not_viewed, :count).to 0
+    end
+
+    it 'should refresh unread_notifications_count' do
+      subject
+      expect(@user.unread_notifications_count).to eq(0)
+    end
+  end
+
+  describe '#unread_count' do
+    subject { get :unread_count, user_token: @user_token }
+
+    it 'response should be success' do
+      subject
+      expect(response).to be_success
+    end
+
+    it 'should return valid value' do
+      subject
+      expect(json_response['new_notifications']).to eq(@user.notifications.not_viewed.count)
     end
   end
 end
