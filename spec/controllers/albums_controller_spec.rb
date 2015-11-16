@@ -88,9 +88,9 @@ RSpec.describe AlbumsController, type: :controller do
       expect(json_response['resource'].keys).to contain_exactly(*serialized(album, nil, @user, with_likes: true).keys)
     end
 
-    it 'should access denied for anonymous' do
+    it 'should respond with album with flag "invisible_for_you" for anonymous' do
       get :show, id: private_album.id, user_id: @user.id
-      expect(response).to be_forbidden
+      expect(json_response['resource']['invisible_for_you']).to be_truthy
     end
   end
 

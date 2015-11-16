@@ -9,37 +9,44 @@
       | 's Life Event
       .likes-wrapper.pull-right
         like target="album" type="album"
+
     .row
       .col-md-3.col-sm-4.cover-tagged
         .cover-wrapper
           img.img-responsive ng-src="{{album.cover_url.thumb | imageFilter: 'album'}}"
-        .tagged-people
 
       .col-md-9.col-sm-8.info-comments
         h2.e-red.m-t-0.album-title ng-bind="album.title" ng-style="{color: album.color}"
         h5.e-brown.album-info
           .font-bold.m-b-5 ng-bind="album.start_date | date:'longDate'"
           a.e-link< href="#" ng-bind="album.location_name"
-        .m-t-10
+        .m-t-10 ng-if="!album.invisible_for_you"
           .comments-section
             .comments-wrapper ng-style="{'width': comments.length*260 +'px'}"
               comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"
 
-    .row.m-t-10
+    h3.e-brown.text-center.m-t-50
+      | You must be in relationship with
+      a.e-link.pointer<> ui-sref="app.user.show({user_id: user.id})"
+        span ng-bind="::user.first_name + ' ' + user.last_name"
+      | to view this content
+
+    .row.m-t-10 ng-if="!album.invisible_for_you"
       h4.e-brown.p-l-15 ng-show="tags.length"
-        | Width
+        | With
         span<> ng-bind="tags.length"
-        | friends:
+        span ng-show="tags.length > 1" friends:
+        span ng-show="tags.length == 1" friend:
       .col-md-7.col-sm-6
         .tags-wrapper ng-if="tags.length"
           tags-view tags="tags"
 
-      .col-md-5.col-sm-6
+      .col-md-5.col-sm-6 ng-if="!album.invisible_for_you"
         .add-comment-section.m-t-10.text-right
           .add-comment-wrapper
             add-comment commentable="album" content-type="album" on-create="addNewComment"
 
-    .content.m-t-30
+    .content.m-t-30 ng-if="!album.invisible_for_you"
       h3.e-brown.m-t-10.m-b-25
         | Content (
         span ng-bind="album.records_count"

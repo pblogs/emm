@@ -3,7 +3,8 @@ class AlbumsController < ApplicationController
   include TaggablePermittedParams
 
   load_resource :user
-  load_and_authorize_resource :album, through: :user, except: :index
+  load_and_authorize_resource :album, through: :user, except: [:index, :show]
+  load_resource :album, through: :user, only: :show
 
   def index
     if @user == current_user
@@ -17,7 +18,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    render_resource_data(@album, with_tile: true, with_likes: user_signed_in?)
+    render_resource_data(@album, with_tile: true, with_likes: user_signed_in?, invisible_for_you: !can?(:show, @album))
   end
 
   def create

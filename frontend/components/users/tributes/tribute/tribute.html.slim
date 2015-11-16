@@ -12,7 +12,7 @@
   .row
     .col-lg-3.col-md-4.col-sm-4.text-center
       .inline
-        img.img-responsive ng-src="{{user.avatar_url.original}}"
+        img.img-responsive ng-src="{{user.avatar_url.original | imageFilter: 'avatar'}}"
     .col-lg-9.col-md-8.col-sm-8
       .tribute-description ng-model="tribute.description" ta-bind=""
       .added-by-at
