@@ -31,7 +31,7 @@
           add-comment commentable="relationship" content-type="relationship" on-create="addNewComment"
 
   .m-t-50.records-section infinite-scroll="recordsLoader.nextPage()"
-    h2.text-center.e-brown.animated.fadeIn.m-t-50 ng-show="relationship.id && !recordsLoader.items.length" This relationship doesn't have any records
+    h2.text-center.e-brown.animated.fadeIn.m-t-50 ng-show="relationship.id && !recordsLoader.items.length" There's no content for this relationship yet.
     h2.text-center.e-brown.animated.fadeIn.m-t-50 ng-hide="relationship.id" Select friend to view your mutual records
     .row.m-t-15
       .col-lg-2.col-md-3.col-sm-4.col-xs-6.m-b-15.text-center.fadeIn.animated.text-center ng-repeat="record in recordsLoader.items"

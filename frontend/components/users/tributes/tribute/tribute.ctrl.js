@@ -71,7 +71,6 @@ angular.module('app')
             }
           }
         }).result.then(function(model) {
-          console.log(model);
           _.assign($scope.tribute, model);
         })
     }

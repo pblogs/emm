@@ -18,10 +18,11 @@ angular.module('app')
     $scope.comments = [];
     $scope.tags = [];
 
-    getRecords();
-    getComments();
-    getTags();
-
+    if (!$scope.album.invisible_for_you) {
+      getRecords();
+      getComments();
+      getTags();
+    }
     function getTags() {
       Restangular.one('albums', album.id).all('tags').getList()
         .then(function(tags) {
