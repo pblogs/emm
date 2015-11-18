@@ -1,0 +1,14 @@
+div ng-click="viewNotification()"
+  .avatar-wrapper.pull-left
+    img.img-responsive.img-rounded ng-src="{{notification.content.author.avatar_url.thumb | imageFilter: 'avatar'}}"
+  .pull-right.e-notification-icon
+    .fa.e-yellow.fa-envelope
+  .e-notification-info
+    .user-name
+      a.e-link ui-sref="app.user.show({user_id: notification.content.author.id})"
+        strong> ng-bind="::notification.content.author.first_name + ' ' + notification.content.author.last_name"
+    .action
+      span> wrote
+      a.e-link.e-brown.pointer ui-sref="app.user.tribute({user_id: notification.content.user_id, tribute_id: notification.content.id})" Tribute
+      span< for you
+

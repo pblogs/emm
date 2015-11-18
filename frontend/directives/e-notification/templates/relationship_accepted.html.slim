@@ -1,0 +1,12 @@
+div ng-click="viewNotification()"
+  .avatar-wrapper.pull-left
+    img.img-responsive.img-rounded ng-src="{{notification.content.recipient.avatar_url.thumb | imageFilter: 'avatar'}}"
+  .pull-right.e-notification-icon
+    .fa.e-green.fa-user-plus
+  .e-notification-info
+    .user-name
+      a.e-link ui-sref="app.user.show({user_id: notification.content.recipient.id})"
+        strong> ng-bind="::notification.content.recipient.first_name + ' ' + notification.content.recipient.last_name"
+    .action
+      strong.e-green> accepted
+      span.e-brown your request

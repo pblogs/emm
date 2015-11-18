@@ -15,6 +15,22 @@
       li {
         display: inline-block;
       }
+
+      .notifications-dropdown {
+        position: inherit;
+
+        .dropdown-menu {
+          width: calc(100% - 20px);
+          margin: 10px;
+          &:after, &:before {
+            display: none;
+          }
+
+          .notifications-wrapper {
+            max-height: 75vh;
+          }
+        }
+      }
     }
 
     .user-menu {
@@ -37,4 +53,5 @@
       }
     }
   }
+
 }

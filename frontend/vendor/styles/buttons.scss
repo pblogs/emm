@@ -35,7 +35,7 @@
     border-color: $e-brown;
     color: $e-brown;
 
-    &:hover, &:focus, &.active, &.full {
+    &:hover, &:focus, &.active, &.full, &:disabled, &.disabled {
       color: $e-white;
       background: $e-brown;
     }
@@ -45,7 +45,7 @@
       background: $e-brown;
       border-radius: 3px;
 
-      &:hover, &:focus, &.active, &.full {
+      &:hover, &:focus, &.active, &.full, &:disabled, &.disabled {
         color: $e-brown;
         background: $e-white;
       }

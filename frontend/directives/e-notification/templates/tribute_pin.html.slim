@@ -1,0 +1,12 @@
+div ng-click="viewNotification()"
+  .avatar-wrapper.pull-left
+    img.img-responsive.img-rounded ng-src="{{notification.content.content.user.avatar_url.thumb | imageFilter: 'avatar'}}"
+  .pull-right.e-notification-icon
+    .fa.e-brown.fa-thumb-tack
+  .e-notification-info
+    .user-name
+      a.e-link ui-sref="app.user.show({user_id: notification.content.content.user.id})"
+        strong> ng-bind="::notification.content.content.user.first_name + ' ' + notification.content.content.user.last_name"
+    .action
+      span> pinned your
+      a.e-link.e-brown.text-lowercase.pointer ui-sref="app.user.tribute({user_id: notification.content.content.user_id, tribute_id: notification.content.content.id})" tribute

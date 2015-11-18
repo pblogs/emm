@@ -1,0 +1,14 @@
+div ng-click="viewNotification()"
+  .avatar-wrapper.pull-left
+    img.img-responsive.img-rounded ng-src="{{notification.content.author.avatar_url.thumb | imageFilter: 'avatar'}}"
+  .pull-right.e-notification-icon
+    .fa.e-green.fa-tag
+  .e-notification-info
+    .user-name
+      a.e-link ui-sref="app.user.show({user_id: notification.content.author.id})"
+        strong> ng-bind="::notification.content.author.first_name + ' ' + notification.content.author.last_name"
+    .action
+      span> tagged you on
+      a.e-link.e-brown.pointer ng-click="showPost()" ng-if="notification.content.target_type != 'Album'" ng-bind="::notification.content.target_type"
+      a.e-link.e-brown.pointer ui-sref="app.user.album({user_id: notification.content.target.user.id, album_id: notification.content.target.id})" ng-if="notification.content.target_type == 'Album'" ng-bind="::notification.content.target_type"
+

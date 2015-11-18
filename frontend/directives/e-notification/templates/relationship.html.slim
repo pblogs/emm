@@ -1,0 +1,25 @@
+div ng-click="viewNotification()"
+  .avatar-wrapper.pull-left
+    img.img-responsive.img-rounded ng-src="{{notification.content.sender.avatar_url.thumb | imageFilter: 'avatar'}}"
+  .pull-right.e-notification-icon
+    .fa.e-yellow.fa-user ng-if="notification.content.status == 'pending'"
+    .fa.e-red.fa-user-times ng-if="notification.content.status == 'declined'"
+    .fa.e-green.fa-user-plus ng-if="notification.content.status == 'accepted'"
+  .e-notification-info
+    .user-name
+      a.e-link ui-sref="app.user.show({user_id: notification.content.sender.id})"
+        strong> ng-bind="::notification.content.sender.first_name + ' ' + notification.content.sender.last_name"
+    .action
+      .e-brown> sent to you relationship request
+      span ng-if="notification.content.status == 'declined'"
+        strong.e-red Declined
+      span ng-if="notification.content.status == 'accepted'"
+        strong.e-green Accepted
+    .action-btns.text-center.m-t-5
+      span ng-if="notification.content.status == 'pending'"
+        .btn.e-btn.btn-primary> ng-click="incomingRequestAction('accepted')"
+          .fa.fa-user-plus>
+          | Accept
+        .btn.e-btn.btn-danger< ng-click="incomingRequestAction('declined')"
+          .fa.fa-user-times>
+          | Decline

@@ -2,7 +2,7 @@
   nav.navbar.e-navbar.navbar-fixed-top
     .container
       .navbar-header
-        a ui-sref="app.main" class="navbar-brand" Emmortal
+        a.hidden-xs ui-sref="app.main" class="navbar-brand" Emmortal
 
         ul.nav.navbar-nav.navbar-left.e-menu.user-menu-toggle-wrapper ng-click="showUserMenu = !showUserMenu" ng-show="visibleUser.get().id"
           li
@@ -10,6 +10,25 @@
               .fa.fa-chevron-down.user-menu-toggle ng-class="{'open': showUserMenu}"
 
       ul.nav.navbar-nav.navbar-right.e-menu
+
+        li.e-dropdown.dropdown.notifications-dropdown.white-dropdown dropdown="" ng-if="currentUser.exists()"
+          a href="#" dropdown-toggle=""
+            .fa.fa-bell ng-class="{active: unreadNotifications.count}"
+            .countable.m-r-5 ng-bind="unreadNotifications.count" ng-hide="unreadNotifications.count > 99"
+            .countable.m-r-5 ng-show="unreadNotifications.count > 99" 99+
+          .dropdown-menu aria-labelledby="single-button" role="menu"
+            .notifications-header.m-t-5.e-brown.text-right stop-propagation=""
+              span.m-l-5.pull-left
+                | Notifications (
+                span ng-bind="unreadNotifications.count"
+                | )
+              button.btn.e-btn.btn-xs.btn-brown.m-r-10.m-b-5 ng-click="readAllNotifications()" ng-disabled="!unreadNotifications.count" Read all
+            .notifications-wrapper stop-propagation=""
+              .e-brown.text-center.animated.fadeIn ng-hide="notificationsLoader.items.length" You have not notification yet
+              div infinite-scroll-container="'.notifications-wrapper'" infinite-scroll="notificationsLoader.nextPage()"
+                div ng-repeat="notification in notificationsLoader.items"
+                  e-notification notification="notification" unread-notifications-count="unreadNotifications.count"
+
         li ng-if="currentUser.exists()"
           a ui-sref="app.user.relationships({user_id: currentUser.id})"
             .fa.fa-search

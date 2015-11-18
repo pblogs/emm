@@ -26,6 +26,18 @@ html, body {
   min-height: 0;
   border: none;
   margin: 0;
+  .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: $e-white;
+    color: $e-brown;
+    .countable {
+      color: $e-brown;
+    }
+  }
+
+  .notifications-header {
+    border-bottom: 1px solid $e-black-aaa;
+  }
+
 
   .navbar-header {
     float: left;
@@ -39,6 +51,36 @@ html, body {
     }
   }
 
+  .notifications-dropdown {
+    .countable {
+      position: absolute;
+      color: $e-white;
+      top: 0;
+      right: 0;
+      font-size: 12px;
+    }
+
+    .fa.active {
+      text-shadow: 0 0 3px $e-white;
+    }
+
+    .dropdown-menu {
+      width: 300px;
+
+      .notifications-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+
+
+      li {
+        height: 50px;
+      }
+    }
+
+  }
+
   .e-menu {
     li a {
       padding: 10px 15px;
@@ -47,9 +89,14 @@ html, body {
       font-size: 18px;
 
       &:hover, &:focus {
-        color: $e-black;
-        border-color: $e-black;
+        color: $e-brown;
+        border-color: $e-brown;
         background: $e-white;
+        .countable {
+          color: $e-brown;
+        }
+      }
+        }
       }
 
       .user-menu-toggle {
@@ -65,8 +112,8 @@ html, body {
         }
       }
     }
-  }
-}
+
+
 
 .user-navbar {
   width: 100%;
@@ -139,7 +186,6 @@ html, body {
 
           .username {
             display: inline-block;
-
           }
         }
       }
