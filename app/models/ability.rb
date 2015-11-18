@@ -94,7 +94,7 @@ class Ability
       end
       #Newsfeed
       can :index, :news_feed
-      can [:index, :update, :mass_update], Notification, user_id: user.id
+      can [:index, :update, :mass_update, :unread_count], Notification, user_id: user.id
     end
   end
 end

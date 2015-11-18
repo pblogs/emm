@@ -28,6 +28,19 @@ RSpec.describe NewsFeedsController, type: :controller do
       expect(json_response['resources'].length).to eq per_page
     end
 
+    it 'should return only one notification when two your friends become friends' do
+      #add friend
+      friend = create(:user, :confirmed)
+      create(:relationship, sender: friend, recipient: @user, status: 'accepted')
+
+      #add relationship between your friends
+      rel = create(:relationship, sender: friend, recipient: @user.friends.first)
+      rel.update_attribute(:status, 'accepted')
+
+      get :index, user_token: @user_token
+      expect(json_response['resources'].map{|tile| tile['id']}).to_not include(Tile.unscoped.where(content:rel).first.id)
+    end
+
     it 'returns all tile types' do
       get :index, user_token: @user_token
       expect(json_response['meta']['total']).to eq(9) # 3 contents, 3 albums, 3 relationships

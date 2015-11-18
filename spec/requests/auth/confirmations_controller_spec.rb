@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Confirmation', type: :request do
 
   before(:each) do
-    @user = create(:user, confirmed_at: nil)
+    @user =  User.create(attributes_for(:user))
     MandrillMailer.deliveries.clear
   end
 

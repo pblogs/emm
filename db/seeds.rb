@@ -15,12 +15,12 @@ def create_stuff_for_user(user, opts={})
     30.times { create_media_for_album(album) }
   end
   5.times do
-    author =
     tribute = FactoryGirl.create(:tribute, user: user)
     rand(1..10).times do
       FactoryGirl.create(:like, target: tribute)
     end
   end
+  Notification.all.sample(10).each { |n| n.update_attribute(:viewed, true ) }
 end
 
 def create_media_for_album(album)
