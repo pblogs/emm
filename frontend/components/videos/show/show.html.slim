@@ -18,15 +18,20 @@
         .tile-show-image-video-additional ng-class="{'open tributes animated fadeIn': showMoreTributes}"
           .row.additional-tabs-menu
             .col-xs-6.text-center
-              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTributes> ng-class="{'active': showMoreTributes}" ng-click="showMoreTributes = !showMoreTributes; showTags = false"
-                | Tributes
+              button.e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTributes> ng-disabled="!comments.length" ng-class="{'active': showMoreTributes}" ng-click="showMoreTributes = !showMoreTributes; showTags = false"
+                | Tributes (
+                span ng-bind="comments.length || 0"
+                | )
                 .fa< ng-class="{'fa-chevron-down': !showMoreTributes, 'fa-chevron-up': showMoreTributes}"
             .col-xs-6.text-center
-              .e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTagged< ng-class="{'active': showTags}" ng-click="showTags = !showTags; showMoreTributes = false"
-                | Tagged
+              button.e-brown.text-center.btn-xs.btn-brown.e-btn.pointer.additional-btn.showMoreTagged< ng-disabled="!tags.length" ng-class="{'active': showTags}" ng-click="showTags = !showTags; showMoreTributes = false"
+                | Tagged (
+                span ng-bind="tags.length || 0"
+                | )
                 .fa< ng-class="{'fa-chevron-down': !showTags, 'fa-chevron-up': showTags}"
           .tagged-section.animated.fadeIn ng-show="showTags"
             .tags-wrapper.video-tags
               tags-view tags="tags" on-link-follow="$close()"
-          .comments-section ng-hide="showTags"
+          .comments-section ng-hide="showTags" ng-class="{'without-comments': !comments.length}"
+            h4.e-brown.animated.fadeIn.comments-placeholder ng-show="!comments.length" There are not tributes yet
             comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"

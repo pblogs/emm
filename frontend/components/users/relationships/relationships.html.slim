@@ -35,20 +35,20 @@
             h3.m-t-0
               a.e-brown.e-link ui-sref="app.user.show({user_id: friend.id})"
                 span> ng-bind="::friend.first_name + ' ' + friend.last_name"
-            a.e-link.pointer ui-sref="app.relationship({user_id: user.id, relationship_id: friend.relationship_id, friend_id: friend.id})" View Relationship Page
+            a.e-link.pointer ng-if="friend.relationship.status == 'accepted'" ui-sref="app.relationship({user_id: user.id, relationship_id: friend.relationship_id, friend_id: friend.id})" View Relationship Page
           .media-right.media-middle.btn-section
             relationship-btn user="friend" ng-if="friend.id !== currentUser.id"
 
     div ng-if="isMyRelationships" infinite-scroll="usersLoader.nextPage()"
       .m-t-50.search-divider.e-brown.p-l-10 ng-if="usersLoader.items.length" Global search
-      .user-field.m-t-25.animated.fadeIn ng-repeat="user in usersLoader.items"
+      .user-field.m-t-25.animated.fadeIn ng-repeat="client in usersLoader.items"
         .media
           .media-left.media-middle
-            img.media-object.user-img ng-src="{{user.avatar_url.thumb | imageFilter:'avatar'}}"
+            img.media-object.user-img ng-src="{{client.avatar_url.thumb | imageFilter:'avatar'}}"
           .media-body.media-middle
             h3.m-t-0
-              a.e-brown.e-link ui-sref="app.user.show({user_id: user.id})"
-                span> ng-bind="::user.first_name + ' ' + user.last_name"
-            a.e-link.pointer View Relationship Page
+              a.e-brown.e-link ui-sref="app.user.show({user_id: client.id})"
+                span> ng-bind="::client.first_name + ' ' + client.last_name"
+            a.e-link.pointer ng-if="client.relationship.status == 'accepted'" ui-sref="app.relationship({user_id: user.id, relationship_id: client.relationship.id, friend_id: client.id})" View Relationship Page
           .media-right.media-middle.btn-section
-            relationship-btn user="user" ng-if="user.id !== currentUser.id"
+            relationship-btn user="client" ng-if="client.id !== currentUser.id"

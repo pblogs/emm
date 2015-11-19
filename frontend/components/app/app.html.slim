@@ -22,7 +22,7 @@
                 | Notifications (
                 span ng-bind="unreadNotifications.count"
                 | )
-              button.btn.e-btn.btn-xs.btn-brown.m-r-10.m-b-5 ng-click="readAllNotifications()" ng-disabled="!unreadNotifications.count" Read all
+              button.btn.e-btn.btn-xs.btn-brown.m-r-10.m-b-5 ng-click="readAllNotifications()" ng-disabled="!unreadNotifications.count" Mark all as read
             .notifications-wrapper stop-propagation=""
               .e-brown.text-center.animated.fadeIn ng-hide="notificationsLoader.items.length" You have not notification yet
               div infinite-scroll-container="'.notifications-wrapper'" infinite-scroll="notificationsLoader.nextPage()"

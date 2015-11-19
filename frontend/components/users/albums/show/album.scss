@@ -16,7 +16,7 @@
 
   .tags-wrapper {
     .tags-view {
-      height: 170px;
+      max-height: 170px;
     }
   }
 
@@ -25,6 +25,7 @@
     height: 200px;
     overflow-y: hidden;
     overflow-x: auto;
+
     .comments-wrapper {
       .comment {
         width: 250px;
@@ -35,6 +36,16 @@
           height: 135px;
         }
       }
+    }
+  }
+
+  .add-comment-section {
+    height: 0;
+    transition: height 0.3s ease;
+    overflow: hidden;
+
+    &.open {
+      height: 240px;
     }
   }
 
@@ -61,6 +72,10 @@
       .album-title, .album-info {
         text-align: center;
       }
+    }
+
+    .add-comment-section {
+      height: auto;
     }
   }
 }
