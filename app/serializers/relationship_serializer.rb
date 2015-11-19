@@ -1,5 +1,5 @@
 class RelationshipSerializer < ActiveModel::Serializer
-  attributes :id, :sender_id, :recipient_id, :status, :relation_to_current_user
+  attributes :id, :sender_id, :recipient_id, :status, :relation_to_current_user, :relations_with_current_user
 
   has_one :related_user
   has_one :recipient
@@ -17,12 +17,23 @@ class RelationshipSerializer < ActiveModel::Serializer
     options[:with_related_user]
   end
 
+  def include_relations_with_current_user?
+    options[:news_feed]
+  end
+
+  #when you view newsfeed
+  def relations_with_current_user
+    { relation_with_recipient: current_user.relation_to(recipient_id).try(:status),
+      relation_with_sender: current_user.relation_to(sender_id).try(:status) }
+  end
+
   def related_user
     return object.recipient if object.sender_id == options[:current_user].id
     return object.sender if object.recipient_id == options[:current_user].id
     nil
   end
 
+  #when you view list of own relationships
   def relation_to_current_user
     return nil if options[:current_user].blank?
     if object.sender_id == options[:current_user].id

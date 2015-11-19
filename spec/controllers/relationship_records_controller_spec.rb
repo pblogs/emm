@@ -12,6 +12,14 @@ RSpec.describe RelationshipRecordsController, type: :controller do
       expect(response).to be_success
     end
 
+    it 'should response success without records' do
+      user = create(:user, :confirmed)
+      relationship = create(:relationship, sender: @user, recipient: user)
+      relationship.update_attribute(:status, 'accepted')
+      get :index, relationship_id: relationship.id, user_token: @user_token
+      expect(response).to be_success
+    end
+
     it 'should response success for stranger' do
       get :index, relationship_id: relationship_id
       expect(response).to be_success
