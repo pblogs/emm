@@ -12,7 +12,13 @@
   }
 
   .add-comment-section {
-    min-height: 220px;
+    height: 0;
+    transition: height 0.3s ease;
+    overflow: hidden;
+
+    &.open {
+      height: 240px;
+    }
   }
 
   .friends-section {
@@ -55,7 +61,6 @@
 
 .relationship-duet {
   position: relative;
-  padding-top: 350px;
 
   .red-circle {
     width: 45%;
@@ -91,6 +96,18 @@
 
     &.active img{
       border: 2px solid $e-red;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .relationship-page {
+    .add-comment-section {
+      height: auto;
+    }
+
+    .relationship-duet {
+      padding-top: 350px;
     }
   }
 }

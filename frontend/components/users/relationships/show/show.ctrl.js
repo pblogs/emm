@@ -30,7 +30,7 @@ angular.module('app')
         $scope.recordsLoader = {};
         $scope.comments = [];
       }
-      Restangular.one('users', user.id).all('relationships').getList({status: 'friend'})
+      Restangular.one('users', user.id).all('relationships').getList({status: 'friends'})
         .then(function(friends) {
           $scope.userFriends = friends;
         });

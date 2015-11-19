@@ -18,15 +18,20 @@
 
       .relationship-duet.m-t-30
         .red-circle.animated.fadeIn ng-show="friend.id"
-        .relation-avatar-wrapper.pointer.m-r-5.user  ng-class="{active: selectedId == user.id}" ng-click="getFriends(user)"
+        .relation-avatar-wrapper.pointer.m-r-5.user ng-class="{active: selectedId == user.id}" ng-click="getFriends(user)"
           img.img-responsive.img-circle ng-src="{{user.avatar_url.original | imageFilter:'avatar'}}" draggable="false"
-        .relation-avatar-wrapper.pointer.m-l-5.friend  ng-class="{active: selectedId == friend.id}" ng-click="getFriends(friend)" ng-show="friend.id"
+        .relation-avatar-wrapper.pointer.m-l-5.friend ng-class="{active: selectedId == friend.id}" ng-click="getFriends(friend)" ng-show="friend.id"
           img.img-responsive.img-circle ng-src="{{friend.avatar_url.original | imageFilter:'avatar'}}" draggable="false"
     .col-lg-8.col-md-7.col-sm-7.col-xs-12
-      .comments-section
+      .comments-section ng-class="{'without-comments': !comments.length}"
+        h3.e-brown.animated.fadeIn.text-center.comments-placeholder ng-show="!comments.length" There are not tributes yet
         .comments-wrapper ng-style="{'width': comments.length*210 +'px'}"
           comment.animated.fadeIn.m-r-10 comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"
-      .add-comment-section.m-t-10.text-right
+      .text-right.hidden-xs
+        .btn.e-btn.btn-sm.btn-brown ng-click="tributeBoxShow = !tributeBoxShow"
+          span.animated.fadeIn ng-hide="tributeBoxShow" Leave tribute
+          span.animated.fadeIn ng-show="tributeBoxShow" Hide
+      .add-comment-section.m-t-10.text-right ng-class="{open: tributeBoxShow}"
         .add-comment-wrapper.animated.fadeIn ng-if="relationship.id"
           add-comment commentable="relationship" content-type="relationship" on-create="addNewComment"
 
@@ -36,6 +41,6 @@
     .row.m-t-15
       .col-lg-2.col-md-3.col-sm-4.col-xs-6.m-b-15.text-center.fadeIn.animated.text-center ng-repeat="record in recordsLoader.items"
         .record-wrapper
-          .tile-edit-buttons.pin-btn ng-if="(user.id ==  currentUserId || friend.id == currentUserId) && record.target_type != 'Album'"
+          .tile-edit-buttons.pin-btn ng-if="(user.id == currentUserId || friend.id == currentUserId) && record.target_type != 'Album'"
             i.fa.fa-thumb-tack ng-class="{'e-red': record.tile.id}" ng-click="pinRecord(record)"
           record record="record"

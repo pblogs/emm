@@ -1,0 +1,18 @@
+.comments-section {
+  &.without-comments {
+    width: 100%;
+    display: table;
+    text-align: center;
+
+    .comments-placeholder {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}
+
+.show-modal-video, .show-modal-photo, .show-modal-text {
+  .comments-section.without-comments {
+    height: 230px;
+  }
+}

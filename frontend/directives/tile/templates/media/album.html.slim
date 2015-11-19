@@ -33,4 +33,4 @@ h4.e-brown Life event
           | On
           span ng-bind="content.start_date | date: 'longDate'"
         span<> ng-show="content.location_name && content.start_date" at
-        a.e-link.pointer ng-if="content.location_name" ng-bind="content.location_name"
+        a.e-link.pointer ng-if="content.location_name" ng-bind="content.location_name" href="http://maps.google.com/maps?q= {{content.latitude}},{{content.longitude}}" target="_blank"

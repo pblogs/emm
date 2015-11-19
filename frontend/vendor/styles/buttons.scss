@@ -35,9 +35,16 @@
     border-color: $e-brown;
     color: $e-brown;
 
-    &:hover, &:focus, &.active, &.full, &:disabled, &.disabled {
+    &:hover, &:focus, &.active, &.full{
       color: $e-white;
       background: $e-brown;
+    }
+
+    &:disabled, &.disabled {
+      opacity: .65;
+      background: $e-grey;
+      color: $e-white;
+      cursor: no-drop;
     }
 
     &.btn-xs {
@@ -45,9 +52,33 @@
       background: $e-brown;
       border-radius: 3px;
 
-      &:hover, &:focus, &.active, &.full, &:disabled, &.disabled {
+      &:hover, &:focus, &.active, &.full{
         color: $e-brown;
         background: $e-white;
+      }
+
+      &:disabled, &.disabled {
+        opacity: .65;
+        background: $e-grey;
+        color: $e-white;
+        cursor: no-drop;
+      }
+    }
+    &.btn-sm {
+      color: $e-white;
+      background: $e-brown;
+      border-radius: 3px;
+
+      &:hover, &:focus, &.active, &.full{
+        color: $e-brown;
+        background: $e-white;
+      }
+
+      &:disabled, &.disabled {
+        opacity: .65;
+        background: $e-grey;
+        color: $e-white;
+        cursor: no-drop;
       }
     }
   }

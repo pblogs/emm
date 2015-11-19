@@ -19,30 +19,35 @@
         h2.e-red.m-t-0.album-title ng-bind="album.title" ng-style="{color: album.color}"
         h5.e-brown.album-info
           .font-bold.m-b-5 ng-bind="album.start_date | date:'longDate'"
-          a.e-link< href="#" ng-bind="album.location_name"
+          a.e-link< href="http://maps.google.com/maps?q= {{album.latitude}},{{album.longitude}}" target="_blank" ng-bind="album.location_name"
         .m-t-10 ng-if="!album.invisible_for_you"
-          .comments-section
+          .comments-section ng-class="{'without-comments': !comments.length}"
+            h3.e-brown.animated.fadeIn.comments-placeholder ng-show="!comments.length" There are not tributes yet
             .comments-wrapper ng-style="{'width': comments.length*260 +'px'}"
               comment.animated.fadeIn comment="comment" ng-repeat="comment in comments" on-link-follow="$close()"
 
-    h3.e-brown.text-center.m-t-50
+    h3.e-brown.text-center.m-t-50 ng-if="album.invisible_for_you"
       | You must be in relationship with
       a.e-link.pointer<> ui-sref="app.user.show({user_id: user.id})"
         span ng-bind="::user.first_name + ' ' + user.last_name"
       | to view this content
 
     .row.m-t-10 ng-if="!album.invisible_for_you"
-      h4.e-brown.p-l-15 ng-show="tags.length"
-        | With
-        span<> ng-bind="tags.length"
-        span ng-show="tags.length > 1" friends:
-        span ng-show="tags.length == 1" friend:
       .col-md-7.col-sm-6
+        h4.e-brown.p-l-15.m-t-0 ng-show="tags.length"
+          | With
+          span<> ng-bind="tags.length"
+          span ng-show="tags.length > 1" friends:
+          span ng-show="tags.length == 1" friend:
         .tags-wrapper ng-if="tags.length"
           tags-view tags="tags"
 
-      .col-md-5.col-sm-6 ng-if="!album.invisible_for_you"
-        .add-comment-section.m-t-10.text-right
+      .col-md-5.col-sm-6
+        .text-right.hidden-xs
+          .btn.e-btn.btn-sm.btn-brown ng-click="tributeBoxShow = !tributeBoxShow"
+            span.animated.fadeIn ng-hide="tributeBoxShow" Leave tribute
+            span.animated.fadeIn ng-show="tributeBoxShow" Hide
+        .add-comment-section.m-t-10.text-right ng-class="{open: tributeBoxShow}"
           .add-comment-wrapper
             add-comment commentable="album" content-type="album" on-create="addNewComment"
 
