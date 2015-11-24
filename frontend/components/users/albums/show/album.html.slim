@@ -1,7 +1,7 @@
 .album-inside
   .e-container
     .tile-edit-buttons ng-if="canEditAlbum && album.privacy !== 'hidden'"
-      i.fa.fa-times ng-click-confirm="removeAlbum()"
+      i.fa.fa-trash ng-click-confirm="removeAlbum()"
       i.fa.fa-pencil.edit-button ng-click="editAlbum()"
       i.fa.fa-thumb-tack ng-style="getPinColor()" ng-click="pinAlbum()"
     h3.e-brown.m-b-25.album-title

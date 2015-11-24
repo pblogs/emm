@@ -22,7 +22,7 @@ h4.e-brown Life event
       .e-brown.description-content ng-show="tile.size == 'large'" ta-bind='' ng-model="content.description"
       .e-brown.m-t-20
         .avatar-wrapper
-          img.img-responsive ng-src="{{content.user.avatar_url.thumb | imageFilter}}" draggable="false"
+          img.img-responsive ng-src="{{content.user.avatar_url.thumb | imageFilter:'avatar'}}" draggable="false"
         .author-name<
           | Added by
           a.e-link< ui-sref="app.user.show({userId: content.user.id})"

@@ -5,7 +5,8 @@
   height: 153px;
   display: inline-block;
   position: relative;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 5px;
   background: $e-black-aaa;
 
   &:hover {
@@ -16,7 +17,6 @@
 
   a:hover {
     text-decoration: none;
-
   }
 
   .tile-edit-buttons {

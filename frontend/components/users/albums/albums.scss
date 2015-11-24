@@ -3,6 +3,8 @@
 .album-view {
   background: $e-white;
   cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
   position: relative;
   margin: 0 auto;
   max-width: 300px;

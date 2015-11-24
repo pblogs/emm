@@ -16,6 +16,7 @@
   padding: 50px 35px;
   color: $e-brown;
   background: $e-white;
+  border-radius: 10px;
 }
 
 .e-title {
@@ -53,4 +54,10 @@ a:focus {
 *::selection {
   background: $e-brown;
   color: $e-white;
+}
+
+
+.gridster-item:hover .handle-se {
+  right: 3px;
+  bottom: 3px;
 }
