@@ -1,4 +1,4 @@
-class VideosController < ApplicationController
+class VideosController < ApiController
   include TaggablePermittedParams
 
   load_resource :album, through: :current_user

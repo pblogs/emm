@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < ApiController
   include ContentLikes
 
   before_action :load_and_authorize_target

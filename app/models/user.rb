@@ -54,6 +54,15 @@ class User < ActiveRecord::Base
     update(unread_notifications_count: notifications.not_viewed.count)
   end
 
+  def refresh_content_counter(counter_name)
+    counter_name += '_count'
+    update_attribute(counter_name, albums.sum(counter_name))
+  end
+
+  def refresh_relationships_counter
+    update(relationships_count: self.friends.count(:all))
+  end
+
   private
 
   def create_default_album

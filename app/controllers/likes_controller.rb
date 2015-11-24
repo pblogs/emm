@@ -1,4 +1,4 @@
-class LikesController < ApplicationController
+class LikesController < ApiController
   load_resource through: :current_user, except: :index
 
   def create

@@ -1,4 +1,4 @@
-class NewsFeedsController < ApplicationController
+class NewsFeedsController < ApiController
   include ContentLikes
   authorize_resource class: false
 

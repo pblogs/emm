@@ -36,5 +36,7 @@ module Emmortal
     config.angular_templates.inside_paths << Rails.root.join('frontend')
     config.autoload_paths << Rails.root.join('lib', 'autoload')
     config.active_job.queue_adapter = :sidekiq
+    config.api_only = false
+    config.assets.enabled = true
   end
 end

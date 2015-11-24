@@ -1,4 +1,4 @@
-class NotificationsController < ApplicationController
+class NotificationsController < ApiController
   load_and_authorize_resource
 
   def index

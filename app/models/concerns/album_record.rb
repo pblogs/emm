@@ -15,6 +15,7 @@ module AlbumRecord
     # Callbacks
     after_create :create_record_for_album
     after_create :create_tile_on_user_page, if: 'album.default?'
+    after_save :refresh_user_content_counter
   end
 
   def create_tile_on_user_page(page=nil)
@@ -26,5 +27,9 @@ module AlbumRecord
 
   def create_record_for_album
     self.create_record(album: self.album)
+  end
+
+  def refresh_user_content_counter
+    user.refresh_content_counter(self.class.name.tableize)
   end
 end

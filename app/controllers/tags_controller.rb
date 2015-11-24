@@ -1,4 +1,4 @@
-class TagsController < ApplicationController
+class TagsController < ApiController
   before_action :load_and_authorize_target
   load_and_authorize_resource through: :target
 

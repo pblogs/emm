@@ -226,6 +226,11 @@ ActiveRecord::Schema.define(version: 20151125080830) do
     t.string   "background"
     t.string   "full_name"
     t.integer  "unread_notifications_count", default: 0
+    t.integer  "albums_count",               default: 0
+    t.integer  "relationships_count",        default: 0
+    t.integer  "photos_count",               default: 0
+    t.integer  "videos_count",               default: 0
+    t.integer  "texts_count",                default: 0
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -1,4 +1,4 @@
-class RelationshipRecordsController < ApplicationController
+class RelationshipRecordsController < ApiController
   include ContentLikes
   before_filter :load_tag, only: :create
 

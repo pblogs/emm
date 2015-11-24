@@ -5,7 +5,7 @@ class Album < ActiveRecord::Base
   include Taggable
 
   # Relations
-  belongs_to :user, inverse_of: :albums
+  belongs_to :user, inverse_of: :albums, counter_cache: true
   has_one :tile, as: :content, dependent: :destroy
   has_many :photos, inverse_of: :album, dependent: :destroy
   has_many :texts, inverse_of: :album, dependent: :destroy

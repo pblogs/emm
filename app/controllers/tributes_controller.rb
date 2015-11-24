@@ -1,4 +1,4 @@
-class TributesController < ApplicationController
+class TributesController < ApiController
   include ContentLikes
   
   load_resource :user

@@ -4,6 +4,9 @@ require 'factory_girl_rails'
 
 def create_stuff_for_user(user, opts={})
   author = FactoryGirl.create :user, :confirmed
+  relationship = FactoryGirl.create :relationship, sender: user, recipient: author
+  relationship.update_attribute(:status, 'accepted')
+
   # Add media to default album
   5.times { create_media_for_album(user.default_album) }
   # Create album with medias
