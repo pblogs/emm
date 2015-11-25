@@ -1,5 +1,5 @@
 class ContentSerializer < LikableContentSerializer
-  attributes :id, :title, :description, :album_id, :created_at, :tile, :record
+  attributes :id, :title, :description, :album_id, :created_at, :tile, :record, :comments_count, :tags_count
 
   has_one :user
 

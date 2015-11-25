@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111124558) do
+ActiveRecord::Schema.define(version: 20151125080830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,20 +21,22 @@ ActiveRecord::Schema.define(version: 20151111124558) do
     t.string   "title"
     t.string   "description"
     t.string   "cover"
-    t.boolean  "default",       default: false
+    t.boolean  "default",        default: false
     t.date     "start_date"
     t.date     "end_date"
     t.string   "location_name"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "photos_count",  default: 0
-    t.integer  "videos_count",  default: 0
-    t.integer  "texts_count",   default: 0
-    t.integer  "privacy",       default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "photos_count",   default: 0
+    t.integer  "videos_count",   default: 0
+    t.integer  "texts_count",    default: 0
+    t.integer  "privacy",        default: 0
     t.string   "color"
-    t.integer  "likes_count",   default: 0,     null: false
+    t.integer  "likes_count",    default: 0,     null: false
+    t.integer  "tags_count",     default: 0
+    t.integer  "comments_count", default: 0
   end
 
   add_index "albums", ["created_at"], name: "index_albums_on_created_at", using: :btree
@@ -96,10 +98,12 @@ ActiveRecord::Schema.define(version: 20151111124558) do
     t.string   "title"
     t.string   "description"
     t.string   "image"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "likes_count", default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "likes_count",    default: 0, null: false
     t.integer  "original_id"
+    t.integer  "tags_count",     default: 0
+    t.integer  "comments_count", default: 0
   end
 
   add_index "photos", ["album_id"], name: "index_photos_on_album_id", using: :btree
@@ -123,9 +127,10 @@ ActiveRecord::Schema.define(version: 20151111124558) do
   create_table "relationships", force: :cascade do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "status",       default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "status",         default: 0
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "comments_count", default: 0
   end
 
   add_index "relationships", ["created_at"], name: "index_relationships_on_created_at", using: :btree
@@ -151,10 +156,12 @@ ActiveRecord::Schema.define(version: 20151111124558) do
     t.integer  "album_id"
     t.string   "title"
     t.string   "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "likes_count", default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "likes_count",    default: 0, null: false
     t.integer  "original_id"
+    t.integer  "tags_count",     default: 0
+    t.integer  "comments_count", default: 0
   end
 
   add_index "texts", ["album_id"], name: "index_texts_on_album_id", using: :btree
@@ -182,9 +189,10 @@ ActiveRecord::Schema.define(version: 20151111124558) do
     t.integer  "user_id"
     t.integer  "author_id"
     t.string   "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "likes_count", default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "likes_count",    default: 0, null: false
+    t.integer  "comments_count", default: 0
   end
 
   add_index "tributes", ["author_id"], name: "index_tributes_on_author_id", using: :btree
@@ -232,12 +240,14 @@ ActiveRecord::Schema.define(version: 20151111124558) do
     t.string   "description"
     t.string   "preview"
     t.string   "video_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "source",      default: 0
-    t.integer  "likes_count", default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "source",         default: 0
+    t.integer  "likes_count",    default: 0, null: false
     t.integer  "duration"
     t.integer  "original_id"
+    t.integer  "tags_count",     default: 0
+    t.integer  "comments_count", default: 0
   end
 
   add_index "videos", ["album_id"], name: "index_videos_on_album_id", using: :btree
