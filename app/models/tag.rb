@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
   # Relations
   belongs_to :author, class_name: 'User', inverse_of: :authored_tags
   belongs_to :user, inverse_of: :tags
-  belongs_to :target, polymorphic: true, inverse_of: :tags # Album | Photo | Video | Text
+  belongs_to :target, polymorphic: true, inverse_of: :tags, counter_cache: true # Album | Photo | Video | Text
 
   # Validations
   validates :author, :user, :target, presence: true

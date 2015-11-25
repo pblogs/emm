@@ -1,6 +1,7 @@
 class AlbumSerializer < LikableContentSerializer
   attributes :id, :title, :description, :cover_url, :location_name, :latitude, :longitude, :start_date, :end_date,
-             :created_at, :photos_count, :videos_count, :texts_count, :color, :privacy, :tile, :records_count, :invisible_for_you
+             :created_at, :photos_count, :videos_count, :texts_count, :color, :privacy, :tile, :records_count,
+             :invisible_for_you, :comments_count, :tags_count
 
   has_one :user
 

@@ -1,5 +1,6 @@
 class RelationshipSerializer < ActiveModel::Serializer
-  attributes :id, :sender_id, :recipient_id, :status, :relation_to_current_user, :relations_with_current_user
+  attributes :id, :sender_id, :recipient_id, :status, :relation_to_current_user, :relations_with_current_user,
+             :comments_count
 
   has_one :related_user
   has_one :recipient
