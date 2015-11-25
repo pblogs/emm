@@ -8,7 +8,7 @@ angular.module('app')
 
     return function (mediaType, options) {
       options = options || {};
-      $modal
+      return $modal
         .open({
           templateUrl: 'components/' + mediaType + 's' + '/new/modal.html',
           controller: _.capitalize(mediaType) + 's' + 'NewModalCtrl',

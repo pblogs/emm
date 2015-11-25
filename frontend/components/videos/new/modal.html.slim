@@ -19,7 +19,8 @@ form ng-submit="submit()"
         .row
           .col-sm-5
             select e-select="" ng-options="album.id as album.title for album in albums" ng-model="video.album_id"
-
+          .col-sm-7
+            add-album-btn target="video" albums="albums"
   .modal-footer.text-right
     span ng-if="!video.id"
       button.btn.e-btn.btn-default type="button" ng-click="back()" Back
