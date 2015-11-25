@@ -1,4 +1,4 @@
-class Users::PasswordsController < ApplicationController
+class Users::PasswordsController < ApiController
   load_resource :user
 
   def update

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :admin
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   scope :api do
     devise_for :users, skip: :all, failure_app: CustomAuthFailure
 

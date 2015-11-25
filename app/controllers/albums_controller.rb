@@ -1,4 +1,4 @@
-class AlbumsController < ApplicationController
+class AlbumsController < ApiController
   include ContentLikes
   include TaggablePermittedParams
 

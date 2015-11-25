@@ -1,4 +1,4 @@
-class RelationshipsController < ApplicationController
+class RelationshipsController < ApiController
   include ContentLikes
 
   load_resource :user

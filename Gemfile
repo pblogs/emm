@@ -36,6 +36,8 @@ gem 'database_cleaner'
 gem 'kaminari'
 gem 'sanitize'
 gem 'whenever', require: false
+gem 'rails_admin'
+gem 'devise-bootstrap-views'
 
 source 'https://rails-assets.org' do
   # General libs

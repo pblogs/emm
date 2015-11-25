@@ -1,4 +1,4 @@
-class TilesController < ApplicationController
+class TilesController < ApiController
   before_action :load_target, only: :create
   load_resource :page, except: :create
   load_resource :tile, through: :page, except: :create

@@ -1,4 +1,4 @@
-class MainPageController < ApplicationController
+class MainPageController < ApiController
   include ContentLikes
 
   def index

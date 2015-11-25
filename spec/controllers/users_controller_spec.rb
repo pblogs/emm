@@ -64,6 +64,24 @@ RSpec.describe UsersController, type: :controller do
         expect(json_response['resource'].keys).to contain_exactly(*serialized(@user, UserSerializer, @user, with_relationship: true, current_user: @user).keys)
       end
     end
+
+    describe 'counters' do
+      %W{ video photo text }.each do |content_name|
+        it "should return correct #{ content_name.pluralize } count" do
+          create(content_name, album: @user.default_album)
+          get :show, user_token: @admin_token, id: @user.id
+          expect(json_response['resource']["#{content_name.pluralize}_count"]).to eq(@user.albums.sum("#{content_name.pluralize}_count"))
+        end
+      end
+
+      it 'should return correct relationships count' do
+        relationship = create(:relationship, sender: @user, recipient: new_user)
+        relationship.update(status: 'accepted')
+
+        get :show, user_token: @admin_token, id: @user.id
+        expect(json_response['resource']['relationships_count']).to eq(@user.relationships_count)
+      end
+    end
   end
 
   describe 'Update user' do

@@ -3,8 +3,8 @@ class Relationship < ActiveRecord::Base
 
   enum status: {pending: 0, accepted: 1, declined: 2}
 
-  belongs_to :sender, class_name: 'User'
-  belongs_to :recipient, class_name: 'User'
+  belongs_to :sender, class_name: 'User', counter_cache: true
+  belongs_to :recipient, class_name: 'User', counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :tiles, as: :content, dependent: :destroy
 
@@ -16,6 +16,7 @@ class Relationship < ActiveRecord::Base
   after_update :create_tiles, if: :accepted?
   after_update :create_status_notifications
   before_create :set_notification_users
+  after_save :refresh_members_relationships_counters, if: :accepted?
 
   def show_tile_on_user_page(user, page)
     tile = self.tiles.joins(:page).find_by('pages.user_id = ?', user.id).present?
@@ -23,6 +24,10 @@ class Relationship < ActiveRecord::Base
   end
 
   private
+
+  def refresh_members_relationships_counters
+    [sender, recipient].each { |user| user.refresh_relationships_counter }
+  end
   
   def create_status_notifications
     self.notifications.create(event: "#{self.class.name.downcase}_#{status}", user_id: sender_id)

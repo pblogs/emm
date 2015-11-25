@@ -1,4 +1,4 @@
-class VideoUploadsController < ApplicationController
+class VideoUploadsController < ApiController
   before_action do
     authorize! :upload, Video
   end

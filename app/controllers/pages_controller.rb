@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < ApiController
   include ContentLikes
 
   load_resource :user

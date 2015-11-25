@@ -1,4 +1,4 @@
-class RecordsController < ApplicationController
+class RecordsController < ApiController
   include ContentLikes
 
   load_resource :album
