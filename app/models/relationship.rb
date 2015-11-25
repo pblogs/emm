@@ -34,7 +34,7 @@ class Relationship < ActiveRecord::Base
   
   def create_tiles
     [sender, recipient].each do |owner|
-      self.tiles.create(page: owner.pages.last, widget_type: :media, visible: false)
+      self.tiles.create(page: owner.pages.last, widget_type: :media, visible: false, size: :middle)
     end
   end
 

@@ -1,0 +1,32 @@
+.relationship-wrapper ng-class="{simple: ((!content.relations_with_current_user.relation_with_recipient && content.recipient.id == currentUserId) || (!content.relations_with_current_user.relation_with_sender && content.sender.id == currentUserId)) || (content.relations_with_current_user.relation_with_sender == 'accepted' && content.relations_with_current_user.relation_with_recipient == 'accepted')}"
+  .images.text-center
+    img.img-circle ng-src="{{content.sender.avatar_url.thumb | imageFilter: 'avatar'}}" draggable="false"
+    img.img-circle ng-src="{{content.recipient.avatar_url.thumb | imageFilter: 'avatar'}}" draggable="false"
+  .texts.e-brown.text-center
+
+    a.e-link ui-sref="app.user.show({user_id: content.sender.id})"
+      strong> ng-bind="::content.sender.first_name + ' ' + content.sender.last_name"
+    | and
+    a.e-link ui-sref="app.user.show({user_id: content.recipient.id})"
+      strong<> ng-bind="::content.recipient.first_name + ' ' + content.recipient.last_name"
+    | are now friends
+  .text-center.m-t-10
+    .btn.e-btn.btn-info ng-if="!content.relations_with_current_user.relation_with_recipient && content.recipient.id != currentUserId" ng-click="sendRelationshipRequest(content.recipient.id, 'recipient')"
+      .fa.fa-plus>
+      span> Connect
+      span ng-bind="::content.recipient.first_name + ' ' + content.recipient.last_name"
+
+    .btn.e-btn.btn-info ng-if="!content.relations_with_current_user.relation_with_sender && content.sender.id != currentUserId" ng-click="sendRelationshipRequest(content.sender.id, 'sender')"
+      .fa.fa-plus>
+      span> Connect
+      span ng-bind="::content.sender.first_name + ' ' + content.sender.last_name"
+
+    .e-yellow ng-if="content.relations_with_current_user.relation_with_recipient == 'pending' && content.recipient.id != currentUserId"
+      | Relationship with
+      span<> ng-bind="::content.recipient.first_name + ' ' + content.recipient.last_name"
+      | are pending
+
+    .e-yellow ng-if="content.relations_with_current_user.relation_with_sender == 'pending' && content.sender.id != currentUserId"
+      | Relationship with
+      span<> ng-bind="::content.sender.first_name + ' ' + content.sender.last_name"
+      | are pending
