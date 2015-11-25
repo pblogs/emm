@@ -11,7 +11,7 @@
   }
 
   .modal-content {
-    border-radius: 0;
+    border-radius: 10px;
     box-shadow: none;
     border: none;
     position: relative;
@@ -41,6 +41,7 @@
       border-bottom: 0;
       background: $e-brown;
       color: $e-white;
+      border-radius: 10px 10px 0 0;
     }
   }
 }

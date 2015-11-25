@@ -13,7 +13,7 @@
       .col-sm-4.col-md-4.m-b-30 ng-repeat="tribute in tributesLoader.items"
         .tribute-view
           .tile-edit-buttons
-            i.fa.fa-times ng-click-confirm="removeTribute(tribute)" ng-if="canEdit"
+            i.fa.fa-trash ng-click-confirm="removeTribute(tribute)" ng-if="canEdit"
             i.fa.fa-thumb-tack ng-click="pinTribute(tribute)" ng-class="{'e-red': tribute.tile.id}" ng-if="canEdit"
           .e-brown.tribute-description
             span<> ng-model="tribute.description" ta-bind=""

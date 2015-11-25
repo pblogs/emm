@@ -17,13 +17,18 @@
     &.middle {
       .image-wrapper img {
         margin-top: 0;
+        border-radius: 10px;
       }
     }
     &.vertical {
       .image-wrapper img {
         width: 100%;
         margin-left: 0;
+        border-radius: 10px;
       }
+    }
+    .image-wrapper img {
+      border-radius: 10px;
     }
   }
 
