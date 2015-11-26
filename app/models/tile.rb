@@ -37,6 +37,10 @@ class Tile < ActiveRecord::Base
     end
   end
 
+  def move_to_storage
+    self.update_attribute(:page_id, self.user.storage.id)
+  end
+
   private
 
   def check_for_free_space_on_page
@@ -54,7 +58,7 @@ class Tile < ActiveRecord::Base
   end
 
   def remove_empty_page
-    self.page.destroy if !self.page.default? && self.page.tiles.count == 0
+    self.page.destroy if (!self.page.default? || !self.page.storage?) && self.page.tiles.count == 0
   end
 
   def create_notifications

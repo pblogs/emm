@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :authored_tags, class_name: 'Tag', foreign_key: :author_id, inverse_of: :author, dependent: :destroy
   has_many :tags, inverse_of: :user, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_one :storage, -> { where(storage: true) }, class_name: 'Page'
 
   # Enums
   enum role: {member: 0, admin: 1}
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
   validates :page_alias, uniqueness: true, length: {minimum: 5}, format: {with: /\A[a-z0-9\.\-\_]*\z/, }, exclusion: {in: RESERVED_PAGE_ALIASES}, allow_blank: true
 
   # Callbacks
-  after_create :create_default_album, :create_default_page, :create_default_tiles
+  after_create :create_default_album, :create_pages, :create_default_tiles
   before_save :set_full_name, if: 'first_name_changed? || last_name_changed?'
 
   # Scopes
@@ -69,8 +70,9 @@ class User < ActiveRecord::Base
     self.albums.create title: I18n.t('default_album.name'), description: I18n.t('default_album.description'), default: true
   end
 
-  def create_default_page
+  def create_pages
     self.pages.create default: true
+    self.pages.create storage: true
   end
 
   def create_default_tiles

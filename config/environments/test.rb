@@ -51,5 +51,6 @@ Rails.application.configure do
     Bullet.counter_cache_enable = false
     Bullet.add_whitelist :type => :unused_eager_loading, :class_name => 'Relationship', :association => :user
     Bullet.add_whitelist :type => :unused_eager_loading, :class_name => 'Relationship', :association => :friend
+    Bullet.add_whitelist :type => :n_plus_one_query, :class_name => "User", :association => :storage
   end
 end
