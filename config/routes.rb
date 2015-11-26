@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
     resources :main_page, only: :index
     resources :news_feeds, only: :index
+    resources :storage_records, only: [:index, :create]
     resources :likes, only: [:create, :destroy]
 
     resources :relationships, only: [] do

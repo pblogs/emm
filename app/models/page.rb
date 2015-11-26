@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class Page < Storage
 
   # Relations
   belongs_to :user, inverse_of: :pages
@@ -6,11 +6,11 @@ class Page < ActiveRecord::Base
   # no need to dependent destroy - tile will be destroyed by it's content
 
   # Validations
-  validates :user, :weight, presence: true
+  validates :weight, presence: true
   validate :only_one_default_page, if: :default?
 
   # Scopes
-  default_scope { order(weight: :asc).order(created_at: :asc) }  # Pages with lower weight (and the oldest) appears first
+  default_scope { where(storage: false).order(weight: :asc).order(created_at: :asc) }  # Pages with lower weight (and the oldest) appears first
 
   # Callbacks
   before_create :set_weight
@@ -31,7 +31,7 @@ class Page < ActiveRecord::Base
   end
 
   def check_for_default
-    if self.default? && !self.destroyed_by_association
+    if (self.default? || self.storage?) && !self.destroyed_by_association
       errors.add(:base, I18n.t('activerecord.errors.models.page.default_page.unable_to_destroy'))
       false
     end
