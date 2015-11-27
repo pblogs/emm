@@ -4,11 +4,11 @@ class ContentSerializer < LikableContentSerializer
   has_one :user
 
   def include_comments_count?
-    object.show_comments_count?
+    object.tile.show_comments_count? if object.tile
   end
 
   def include_tags_count?
-    object.show_tags_count?
+    object.tile.show_tags_count? if object.tile
   end
 
   def tile
