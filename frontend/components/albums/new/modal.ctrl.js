@@ -40,8 +40,13 @@ angular.module('app')
       Restangular.one('users', CurrentUser.id()).all('albums').post($scope.album)
         .then(function(album) {
           Notification.show('Album "' + $scope.album.title + '" has been created!', 'success');
-          $modalInstance.close();
-          $state.go('app.user.album', {user_id: album.user.id, album_id: album.id});
+          if (caller == 'SelectMediaTypeModal') {
+            $modalInstance.close();
+            $state.go('app.user.album', {user_id: album.user.id, album_id: album.id});
+          } else {
+            $modalInstance.close(album);
+          }
+
         })
         .catch(function(response) {
           $scope.errors = response.data.errors;

@@ -13,7 +13,9 @@ form ng-submit="submit()"
     .row
       .col-sm-4
         select e-select="" ng-options="album.id as album.title for album in albums" ng-model="text.album_id"
-      .col-sm-8
+      .col-sm-2
+        add-album-btn target="text" albums="albums"
+      .col-sm-6
         e-tags-input ng-model="text.tagged_users" errors="errors['tags.user']"
 
   .modal-footer.text-right
